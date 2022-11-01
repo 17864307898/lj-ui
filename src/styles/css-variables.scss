@@ -1,0 +1,59 @@
+@import './var.scss';
+
+:root {
+  --lj-black: $black;
+  --lj-white: $white;
+  --lj-gray-1: $gray-1;
+  --lj-gray-2: $gray-2;
+  --lj-gray-3: $gray-3;
+  --lj-gray-4: $gray-4;
+  --lj-gray-5: $gray-5;
+  --lj-gray-6: $gray-6;
+  --lj-gray-7: $gray-7;
+  --lj-gray-8: $gray-8;
+  --lj-gray-9: $gray-9;
+  --lj-red: $red;
+  --lj-padding-base: $padding-base;
+  --lj-padding-xs: $padding-xs;
+  --lj-padding-sm: $padding-sm;
+  --lj-padding-md: $padding-md;
+  --lj-padding-lg: $padding-lg;
+  --lj-padding-xl: $padding-xl;
+  --lj-line-height-xs: $line-height-xs;
+  --lj-line-height-sm: $line-height-sm;
+  --lj-line-height-md: $line-height-md;
+  --lj-line-height-lg: $line-height-lg;
+  --lj-border-width-base: $border-width-base;
+  --lj-border-radius-sm: $border-radius-sm;
+  --lj-border-radius-md: $border-radius-md;
+  --lj-border-radius-lg: $border-radius-lg;
+  --lj-border-radius-max: $border-radius-max;
+
+  --main-color: $color-primary;
+  --color-success: $color-success;
+  --color-delete-warning: $color-warning;
+  --color-danger: $color-danger;
+  --color-hover-background: $gray-4;
+  --color-background: $gray-7;
+  --title-font-color: $color-text-primary;
+  --content-font-color: $color-text-regular;
+  --list-title-font-color: $color-text-secondary;
+  --tooltip-font-color: $color-text-secondary;
+  --input-placeholder-color: $gray-1;
+  --border-color-base: $gray-2;
+  --border-color-light: $gray-3;
+  --border-color-lighter: $gray-4;
+  --border-color-extra-light: $gray-5;
+  --avatar-border-color: $gray-6;
+  --table-title-background: $gray-6;
+  --font-size-important-number: $font-size-xl;
+  --font-size-description-title: $font-size-lg;
+  --font-size-title: $font-size-md;
+  --font-size-content: $font-size-sm;
+  --font-size-tooltip: $font-size-xs;
+  --font-bold: $font-weight-bold;
+
+  --main-color-r: 52;
+  --main-color-g: 112;
+  --main-color-b: 255;
+}
