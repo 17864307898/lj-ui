@@ -1,6 +1,6 @@
 <template>
   <!-- table简便封装 -->
-  <div class="lj-table v-flex pa-20">
+  <div class="lj-table v-flex">
     <!-- 搜索区域 -->
     <el-row>
       <slot name="query"></slot>
@@ -68,12 +68,12 @@
     </el-row>
     <el-row>
       <!-- 分页支持自定义 -->
-      <slot v-if="needPagination" name="pagination">
-        <div class="v-flex flex-row jc-end">
+      <slot v-if="needPagination" name="pagination" :pagination="pagination">
+        <div class="v-flex flex-row jc-end pagination-wrap">
           <el-pagination
-            :current-page="pagination.page"
-            :page-size="pagination.page_size"
-            :total="pagination.total_data"
+            :current-page="pagination.pageNo"
+            :page-size="pagination.pageSize"
+            :total="pagination.total"
             v-bind="paginationConfig"
             @current-change="handlePageChange"
             @size-change="handleSizeChange"
@@ -112,9 +112,9 @@
       pagination: {
         type: Object,
         default: () => ({
-          page: 1,
-          page_size: 30,
-          total_data: 0,
+          pageNo: 1,
+          pageSize: 10,
+          total: 0,
         }),
       },
       // 自定义分页信息
@@ -175,31 +175,3 @@
     },
   }
 </script>
-<style lang="scss" scoped>
-  .lj-table {
-    width: 100%;
-    height: 100%;
-    .flex-row {
-      flex-direction: row;
-    }
-    .jc-end {
-      justify-content: flex-end;
-    }
-    .flex-1 {
-      flex: 1;
-      height: 0;
-    }
-    .table-column-content {
-      width: 100%;
-      text-align: left;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-      overflow: hidden;
-    }
-  }
-  .v-flex {
-    display: flex;
-    flex-direction: column;
-  }
-</style>

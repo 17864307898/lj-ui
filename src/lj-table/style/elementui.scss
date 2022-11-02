@@ -1,4 +1,13 @@
 $basecolor: #F9FAFC;
+ul li {
+  &.number {
+    list-style: none;
+    padding-left: 0;
+  }
+  &::before {
+    display: none;
+  }
+}
 
 /*el-scrollbar start*/
 .el-scrollbar{
