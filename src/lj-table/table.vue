@@ -14,26 +14,19 @@
         v-bind="$attrs"
         v-on="$listeners"
       >
-        <!-- 选择列 -->
-        <el-table-column
-          v-if="needSelection"
-          :selectable="selectable"
-          type="selection"
-          width="55"
-        />
-
         <!-- 展示数据 -->
         <el-table-column
           v-for="(col, index) in columns"
           v-bind="col"
           :key="`${index}_${col.prop}`"
           :column-key="col.prop"
+          :selectable="selectable"
           show-overflow-tooltip
         >
           <!-- 允许自定义表头 -->
           <template
             #header="{ column, $index }"
-            v-if="!['selection'].includes(col.type)"
+            v-if="!['selection', 'index'].includes(col.type)"
           >
             <slot
               :$index="$index"
@@ -46,7 +39,7 @@
           <!-- 允许自定义内容 -->
           <template
             #default="{ row, column, $index }"
-            v-if="!['selection'].includes(col.type)"
+            v-if="!['selection', 'index'].includes(col.type)"
           >
             <slot
               :$index="$index"
