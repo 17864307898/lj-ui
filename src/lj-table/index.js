@@ -5,6 +5,3 @@ LjTable.install = (Vue) => {
 }
 
 export default LjTable
-export {
-  LjTable
-}

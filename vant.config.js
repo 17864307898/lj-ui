@@ -18,11 +18,11 @@ module.exports = {
         items: [
           {
             path: 'home',
-            title: '介绍',
+            title: '快速上手',
           },
           {
-            path: 'quickstart',
-            title: '快速上手',
+            path: 'theme',
+            title: '定制主题scss',
           },
         ],
       },
@@ -36,6 +36,15 @@ module.exports = {
           {
             path: 'lj-table',
             title: 'LjTable 表格',
+          },
+        ],
+      },
+      {
+        title: 'API',
+        items: [
+          {
+            path: 'api',
+            title: 'API',
           },
         ],
       },

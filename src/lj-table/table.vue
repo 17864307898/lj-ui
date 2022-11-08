@@ -8,9 +8,10 @@
     <!-- 表格区域 -->
     <el-row class="flex-1">
       <el-table
+        :ref="`table_${tableKey}`"
         class="table"
         :data="dataset"
-        height="100%"
+        :height="height"
         v-bind="$attrs"
         v-on="$listeners"
       >
@@ -26,7 +27,7 @@
           <!-- 允许自定义表头 -->
           <template
             #header="{ column, $index }"
-            v-if="!['selection', 'index'].includes(col.type)"
+            v-if="!['selection', 'index', 'expand'].includes(col.type)"
           >
             <slot
               :$index="$index"
@@ -39,7 +40,7 @@
           <!-- 允许自定义内容 -->
           <template
             #default="{ row, column, $index }"
-            v-if="!['selection', 'index'].includes(col.type)"
+            v-if="!['selection', 'index', 'expand'].includes(col.type)"
           >
             <slot
               :$index="$index"
@@ -78,19 +79,24 @@
 </template>
 
 <script>
+  import Vue from 'vue'
   import { Table, TableColumn, Row, Col, Pagination } from 'element-ui'
-  import { cloneDeep } from 'lodash'
+  import { deepClone } from '../utils'
+
+  Vue.use(Table)
+  Vue.use(TableColumn)
+  Vue.use(Row)
+  Vue.use(Col)
+  Vue.use(Pagination)
 
   export default {
     name: 'lj-table',
-    components: {
-      ElTable: Table,
-      ElTableColumn: TableColumn,
-      ElRow: Row,
-      ElCol: Col,
-      ElPagination: Pagination,
-    },
     props: {
+      // table-key  多个table时需传入
+      tableKey: {
+        type: String,
+        default: () => 'ref',
+      },
       // 表头配置
       columns: {
         type: Array,
@@ -120,15 +126,15 @@
         type: Boolean,
         default: () => true,
       },
-      // 是否可选择
-      needSelection: {
-        type: Boolean,
-        default: () => false,
-      },
       // 当前行是否可选
       selectable: {
         type: Function,
         default: () => true,
+      },
+      // 表格高度 默认100%
+      height: {
+        type: [Number, String],
+        default: () => '100%',
       },
     },
     data() {
@@ -143,7 +149,7 @@
     computed: {
       // 深克隆一份data
       dataset() {
-        return cloneDeep(this.data)
+        return deepClone(this.data)
       },
       // 分页配置
       paginationConfig() {
@@ -164,6 +170,16 @@
       // 每页条数改变
       handleSizeChange(size) {
         this.$emit('size-change', size)
+      },
+      // 获取当前ref实例
+      handleGetRefs() {
+        return new Promise((resovle) => {
+          this.$nextTick(() => {
+            const ref = this.$refs[`table_${this.tableKey}`]
+
+            resovle(ref)
+          })
+        })
       },
     },
   }

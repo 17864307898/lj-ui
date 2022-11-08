@@ -3,7 +3,11 @@
     class="table-wrap"
     :columns="columns"
     :data="dataList"
-  />
+  >
+    <!-- <template #name="{ row }">
+      <el-table-column></el-table-column>
+    </template> -->
+  </lj-table>
 </template>
 
 <script>
@@ -11,6 +15,19 @@
     data() {
       return {
         columns: [
+          {
+            type: 'expand',
+            width: 55,
+          },
+          {
+            type: 'selection',
+            width: 55,
+          },
+          {
+            type: 'index',
+            width: 55,
+            label: '序号',
+          },
           {
             label: '姓名',
             prop: 'name',
@@ -23,7 +40,11 @@
             label: '年龄',
             prop: 'old',
           },
-          
+          {
+            label: '操作',
+            prop: 'action',
+            fixed: 'right',
+          },
         ],
         dataList: [],
       }

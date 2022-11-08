@@ -6,7 +6,7 @@
 
 ```js
   import Vue from 'vue';
-  import { LjTable } from 'tanma-design';
+  import { LjTable } from 'lj-design';
   
   Vue.use(LjTable);
 ```
@@ -16,16 +16,6 @@
 ### 基础用法
 
 <demo-code>./demo/index.vue</demo-code>
-
-### 固定列
-
-<demo-code>./demo/fixed.vue</demo-code>
-
-### 自定义内容
-
-`可以通过prop名称获取到当前行和列的参数 { $index, col, column, row }`
-
-<demo-code>./demo/definedColumn.vue</demo-code>
 
 ## API
 
