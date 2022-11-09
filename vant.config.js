@@ -5,7 +5,7 @@ module.exports = {
       preprocessor: 'sass',
     },
     site: {
-      publicPath: '/lj-design/',
+      publicPath: './', // 本地构建文档路径
     },
   },
   site: {
