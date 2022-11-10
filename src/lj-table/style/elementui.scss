@@ -1,0 +1,81 @@
+$basecolor: #F9FAFC;
+ul li {
+  &.number {
+    list-style: none;
+    padding-left: 0;
+  }
+  &::before {
+    display: none;
+  }
+}
+
+/*el-scrollbar start*/
+.el-scrollbar{
+  height: 100%;
+  width: 100%;
+}
+.el-scrollbar__wrap{
+  overflow-x: hidden;
+}
+/*el-scrollbar end*/
+
+/*el-table---el-scrollbar   start*/
+.el-table__fixed, .el-table__fixed-right
+{
+  height: calc(100% - 12px) !important;
+
+  .el-table__fixed-body-wrapper {
+    height: calc(100% - 60px - 5px) !important;
+  }
+}
+.el-table__fixed::before, .el-table__fixed-right::before
+{
+  background-color: transparent !important;
+}
+/*el-table---el-scrollbar   end*/
+
+/*el-table start*/
+.el-table th
+{
+  background: $basecolor !important;
+}
+.el-table .cell
+{
+  & > div {
+    line-height: inherit;
+  }
+  .v-text-more
+  {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .v-operation
+  {
+    display: flex;
+    justify-content: space-around!important;
+    justify-content: space-evenly;
+    align-items: center;
+
+    span
+    {
+      cursor: pointer;
+    }
+  }
+}
+.el-table__fixed-right-patch {
+  background-color: $basecolor;
+}
+
+.el-table__body-wrapper::-webkit-scrollbar {
+  width: 6px; // 横向滚动条\
+  height: 6px; // 纵向滚动条 必写\
+}
+// 滚动条的滑块\
+.el-table__body-wrapper::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+  border-radius: 3px;
+}
+  
+
