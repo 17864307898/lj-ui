@@ -113,7 +113,7 @@ export default {
     };
   },
   created() {
-    this.dataList = new Array(10).fill(0).map((item, index) => ({
+    this.dataList = new Array(3).fill(0).map((item, index) => ({
       name: `姓名${index + 1}`,
       sex: '男',
       old: 11 + index,
@@ -134,7 +134,7 @@ export default {
       this.handleQuery();
     },
     handleQuery() {
-      this.dataList = new Array(10).fill(0).map((item, index) => ({
+      this.dataList = new Array(2).fill(0).map((item, index) => ({
         name: `姓名${index + 1}`,
         sex: '男',
         old: 11 + index,

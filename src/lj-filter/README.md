@@ -1,4 +1,4 @@
-# LjFilter 表格
+# LjFilter 筛选
 
 ### 介绍
 
@@ -23,24 +23,18 @@
 
 | 参数 | 说明 | 类型 |  默认值 |
 |------|------|-----|---------|
-| columns `具体配置参考下面column配置` | 表头配置 | _array_ | `[]` |
-| data | 数据集 | _array_ | `[]` |
-| needPagination | 是否需要底部分页 | _boolean_ | `true` |
-| customPagination | 自定义分页配置 `具体配置参考element-ui分页配置` <https://element.eleme.io/#/zh-CN/component/pagination> | _object_ | `null` |
-
-### columns配置
-
-| 参数 | 说明 | 类型 |  默认值 |
-|------|------|-----|---------|
-| label | 表头展示文案 | _string_ | - |
-| prop | 对应列内容的字段名 | _string_ | - |
-| - | `其余配置遵循element-ui Table-column配置`  <https://element.eleme.io/#/zh-CN/component/table> |
+| filterShow | 漏斗显示 | _boolean_ | `true` |
+| copyWriting | 筛选文案 | _string_ | `''` |
+| filterChooseList | 筛选选择完的数据 | _array_ | `[]` |
+| tableSelArr | table选择项 | _array_ | `[]` |
 
 ### slots
 
 | name | 说明 | 参数 |
 |------|------|-----|
-| query | 顶部搜索栏 | - |
-| empty | 表格数据为空时展示 | - |
-| pagination | 分页组件,needPagination为true时展示 | `{ pagination }` |
-| - | 每一列均有和当前列prop对应的插槽名称 | `{ $index, col, column, row }` |
+| query | 顶部左侧搜索栏 | - |
+| filterItems | 筛选表单选择数据 | - |
+| reference | 漏洞icon | `{ pagination }` |
+| batchRemove | 批量删除 | - |
+| batchIgnore | batchIgnore | - |
+| right-content | 筛选框右侧内容 | - |
