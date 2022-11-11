@@ -1,0 +1,82 @@
+@import "./style/elementui.scss";
+@import "../style/var.scss";
+
+.form-filter-box {
+  flex: 1;
+  margin-bottom: 15px;
+  position: relative;
+  .form-filter-head {
+    display: flex;
+    margin-bottom: 10px;
+  }
+  .filter-choose-left {
+    display: flex;
+  }
+}
+.form-filter-con {
+  h1 {
+    font-size: 16px;
+  }
+  .box-bottom {
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+.filter-choose-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  .reset {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    .el-icon-error {
+      margin-left: 5px;
+    }
+  }
+  .choose-content {
+    margin-bottom: 20px;
+  }
+  p {
+    font-size: $font-size-sm;
+    margin: 0;
+    color: $color-text-regular;
+    span {
+      margin: 0 5px;
+    }
+  }
+  .el-tag {
+    margin-right: 10px;
+    border-radius: $border-radius-xl;
+    b {
+      color: $color-text-primary;
+      font-weight: 400;
+    }
+    span {
+      b {
+        margin-right: 5px;
+      }
+      b:nth-last-of-type(1) {
+        margin: 0;
+      }
+    }
+  }
+  .el-icon-close:hover, .el-icon-error:hover {
+    font-size: $font-size-md;
+    background: 0;
+    color: $color-primary;
+  }
+  .r_pos {
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+  }
+  .r_pos_bottom {
+    bottom: 5px;
+  }
+}

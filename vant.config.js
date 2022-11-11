@@ -37,6 +37,10 @@ module.exports = {
             path: 'lj-table',
             title: 'LjTable 表格',
           },
+          {
+            path: 'lj-filter',
+            title: 'LjFilter 筛选',
+          },
         ],
       },
       {
