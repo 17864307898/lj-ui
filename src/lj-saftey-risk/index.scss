@@ -1,0 +1,71 @@
+@import "./style/elementui.scss";
+@import "../style/var.scss";
+
+.riskComponents {
+  position: relative;
+  top: 0px;
+  padding: 0 6px;
+  border-radius: 2px;
+  margin-bottom: 0 3px 5px 0;
+  padding: 5px 0;
+  display: inline-block;
+  cursor: pointer;
+  span {
+    min-width: 22px;
+    height: 22px;
+    display: inline-block;
+    text-align: center;
+    line-height: 22px;
+    padding: 0 4px;
+    margin-right: 4px;
+    font-size: $font-size-xs;
+    font-weight: 400;
+    color: $black;
+  }
+  span:hover {
+    background: 0;
+  }
+  .risk_critical {
+    background-color: $superDangerLight;
+    border-bottom: 2px solid $superDanger;
+  }
+  .risk_high {
+    background-color: $highLight;
+    border-bottom: 2px solid $high;
+  }
+  .risk_low {
+    background-color: $lowLight;
+    border-bottom: 2px solid $low;
+  }
+  .risk_mid {
+    background-color: $midLight;
+    border-bottom: 2px solid $mid;
+  }
+  .risk_unknown {
+    background-color: $unknownLight;
+    border-bottom: 2px solid $unknown;
+  }
+  .SafetyRisk {
+    color: $safety;
+    background-color: $safetyLight;
+    // border-bottom: 2px solid $safety;
+    overflow: hidden;
+    padding: 2px 4px;
+    font-size: $font-size-xs;
+    margin: 0;
+    // .i {
+    //   display: block;
+    //   width: auto;
+    //   margin-top: 6px;
+    //   height: 20px;
+    // }
+  }
+  .gray_style {
+    color: #a7a1a1;
+    background-color: rgba(244, 244, 244, 1);
+    border-bottom: 2px solid #dad9e1;
+    &:hover {
+      background-color: rgba(244, 244, 244, 1);
+    }
+  }
+}
