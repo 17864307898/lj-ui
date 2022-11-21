@@ -24,7 +24,7 @@
 | 参数 | 说明 | 类型 |  默认值 |
 |------|------|-----|---------|
 | filterShow | 漏斗显示 | _boolean_ | `true` |
-| copyWriting | 筛选文案 | _string_ | `''` |
+| filterContent | 筛选文案 | _string_ | `{name: '组件', empty: '清空', title: '筛选方式', sure: '筛选', cancel: '取消', reset: '重置', selected: '已选择'}` |
 | filterChooseList | 筛选选择完的数据 | _array_ | `[]` |
 | tableSelArr | table选择项 | _array_ | `[]` |
 
@@ -33,8 +33,17 @@
 | name | 说明 | 参数 |
 |------|------|-----|
 | query | 顶部左侧搜索栏 | - |
-| filterItems | 筛选表单选择数据 | - |
-| reference | 漏洞icon | `{ pagination }` |
+| filterItems | 筛选表单内容 | ` 关闭单个tag：filterClose ；筛选按钮：filterSure；置空：resetData` |
+| reference | 筛选按钮icon | - |
 | batchRemove | 批量删除 | - |
-| batchIgnore | batchIgnore | - |
-| right-content | 筛选框右侧内容 | - |
+| batchIgnore | 批量忽略 | - |
+| right-content | 顶部右侧栏 | - |
+
+### 方法
+
+| name | 说明 | 参数 |
+|------|------|-----|
+| fnReset | 置空 | - |
+| fnEmpty | 清空 | - |
+| fnFilter | 筛选按钮 | - |
+| fnChooseClose | 关闭单个tag | - |

@@ -4,7 +4,7 @@
       <lj-filter
         :filter-choose-list="filterChooseList"
         :filter-show="true"
-        :copy-writing="{name: '组件', resetDoc: '清空', chooseDoc: '已选择'}"
+        :filter-content="{name: '组件', empty: '清空', title: '筛选方式', sure: '筛选', cancel: '取消', reset: '重置', selected: '已选择'}"
         :table-sel-arr="tableSelArr"
       >
         <template #query>
@@ -78,10 +78,6 @@ export default {
         status: 0,
       },
       columns: [
-        {
-          type: 'expand',
-          width: 55,
-        },
         {
           type: 'selection',
           width: 55,

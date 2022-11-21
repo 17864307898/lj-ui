@@ -1,6 +1,7 @@
 <template>
   <div class="form-filter-box">
     <div class="form-filter-head">
+      <!-- query左边输入框内容 -->
       <slot name="query"></slot>
       <el-popover
         v-if="filterShow"
@@ -10,8 +11,8 @@
         width="400"
       >
         <div class="form-filter-con">
-          <h1>筛选方式</h1>
-          <!-- 表单筛选项 start -->
+          <h1>{{filterContent.title || '筛选方式'}}</h1>
+          <!-- filterItems表单筛选项 start -->
           <slot
             :filterClose="filterClose"
             :filterSure="filterSure"
@@ -20,18 +21,19 @@
           ></slot>
           <!-- 表单筛选项 end -->
           <div class="box-bottom">
-            <el-button type="text" @click="resetBtn()">重置</el-button>
+            <el-button type="text" @click="fnReset()">{{filterContent.reset || '重置'}}</el-button>
             <div>
               <el-button size="mini" @click="popoverShow = false"
-                >取消</el-button
+                >{{filterContent.cancel || '取消'}}</el-button
               >
-              <el-button size="mini" type="primary" @click="filterBtn()">
-                筛选
+              <el-button size="mini" type="primary" @click="fnFilter()">
+                {{filterContent.sure || '筛选'}}
               </el-button>
             </div>
           </div>
         </div>
         <div slot="reference">
+          <!-- reference筛选icon -->
           <slot name="reference"><i class="el-icon-ice-cream"></i></slot>
         </div>
       </el-popover>
@@ -44,13 +46,13 @@
             (tableSelArr && tableSelArr.length > 0)
           "
         >
-          {{copyWriting.chooseDoc}}：{{ tableSelArr.length || '' }}
-          <!-- 批量删除 -->
+          {{filterContent.selected}}：{{ tableSelArr.length || '' }}
+          <!-- batchRemove批量删除 -->
           <slot
             v-if="tableSelArr && tableSelArr.length > 0"
             name="batchRemove"
           ></slot>
-          <!-- 批量忽略 -->
+          <!-- batchIgnore批量忽略 -->
           <slot
             v-if="tableSelArr && tableSelArr.length > 0"
             name="batchIgnore"
@@ -62,7 +64,7 @@
           :key="tag.type"
           closable
           :disable-transitions="false"
-          @close="filterChooseClose(tag, index)"
+          @close="fnChooseClose(tag, index)"
         >
           {{ tag.type }} :
           <b v-if="typeof tag.item == 'string'">{{ tag.item }}</b>
@@ -71,14 +73,14 @@
           </span>
         </el-tag>
         <el-tag v-if="filterChooseList && filterChooseList.length > 0">
-          <p class="reset" @click="fnResetFilter">
-            {{copyWriting.resetDoc}}
+          <p class="reset" @click="fnEmpty">
+            {{filterContent.empty}}
             <i class="el-icon-error"></i>
           </p>
         </el-tag>
       </div>
       <!-- 表单筛选tag end -->
-      <!-- 右侧内容 -->
+      <!-- right-content右侧内容 -->
       <p
         class="r_pos"
         :class="{
@@ -117,16 +119,16 @@ Vue.use(Link);
 export default {
   name: 'lj-filter',
   props: {
-    filterShow: {
-      type: Boolean,
-      default: false,
-    },
-    copyWriting: {
-      // 表单筛选项
+    filterContent: {
+      // 表单文案
       type: Object,
       default: () => {
         return {};
       },
+    },
+    filterShow: {
+      type: Boolean,
+      default: false,
     },
     filterChooseList: {
       // 表单筛选项
@@ -157,21 +159,21 @@ export default {
   methods: {
     initData() {},
     // 置空
-    resetBtn() {
+    fnReset() {
       this.resetData += this.resetData;
     },
     // 筛选按钮
-    filterBtn() {
+    fnFilter() {
       this.filterSure += this.filterSure;
       this.popoverShow = false;
     },
     // 关闭哪个
-    filterChooseClose(tag) {
+    fnChooseClose(tag) {
       this.filterClose = tag;
     },
     // 清空
-    fnResetFilter() {
-      this.resetBtn();
+    fnEmpty() {
+      this.fnReset();
     },
   },
 };

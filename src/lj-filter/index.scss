@@ -1,6 +1,10 @@
 @import "./style/elementui.scss";
 @import "../style/var.scss";
 
+.el-scrollbar__wrap{
+  overflow-x: scroll !important;
+}
+
 .form-filter-box {
   flex: 1;
   margin-bottom: 15px;
