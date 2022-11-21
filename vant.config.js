@@ -41,6 +41,14 @@ module.exports = {
             path: 'lj-filter',
             title: 'LjFilter 筛选',
           },
+          {
+            path: 'lj-saftey-risk',
+            title: 'LjSafteyRisk 风险等级',
+          },
+          {
+            path: 'lj-upload',
+            title: 'LjUpload 上传',
+          }
         ],
       },
       {
