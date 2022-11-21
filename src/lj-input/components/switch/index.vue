@@ -1,0 +1,48 @@
+<template>
+  <div class="adapt-input">
+    <el-switch
+      v-model="localValue"
+      v-bind="{ ...$props, ...$attrs }"
+      @change="onchange"
+    />
+  </div>
+</template>
+
+<script>
+  import Vue from 'vue'
+  import { Switch } from 'element-ui'
+
+  Vue.use(Switch)
+
+  export default {
+    name: 'adapt-switch',
+    props: {
+      value: {
+        type: undefined,
+        default: undefined,
+      },
+      placeholder: {
+        type: String,
+        default: '请填写',
+      },
+    },
+    data() {
+      return {
+        localValue: '',
+      }
+    },
+    watch: {
+      value: {
+        handler(val) {
+          this.localValue = val
+        },
+        immediate: true,
+      },
+    },
+    methods: {
+      onchange(val) {
+        this.$emit('adapt-change', val)
+      },
+    },
+  }
+</script>

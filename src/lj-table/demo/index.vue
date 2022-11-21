@@ -3,11 +3,8 @@
     class="table-wrap"
     :columns="columns"
     :data="dataList"
-  >
-    <!-- <template #name="{ row }">
-      <el-table-column></el-table-column>
-    </template> -->
-  </lj-table>
+    :pagination="pagination"
+  />
 </template>
 
 <script>
@@ -47,6 +44,11 @@
           },
         ],
         dataList: [],
+        pagination: {
+          pageNo: 1,
+          pageSize: 20,
+          total: 0,
+        },
       }
     },
     created() {

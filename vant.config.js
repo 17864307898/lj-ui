@@ -29,13 +29,17 @@ module.exports = {
       {
         title: '基础组件',
         items: [
-          {
-            path: 'demo-button',
-            title: 'DemoButton 按钮',
-          },
+          // {
+          //   path: 'demo-button',
+          //   title: 'DemoButton 按钮',
+          // },
           {
             path: 'lj-table',
             title: 'LjTable 表格',
+          },
+          {
+            path: 'lj-input',
+            title: 'LjInput 适配输入框',
           },
         ],
       },
@@ -45,6 +49,15 @@ module.exports = {
           {
             path: 'api',
             title: 'API',
+          },
+        ],
+      },
+      {
+        title: '其他',
+        items: [
+          {
+            path: 'style',
+            title: '通用样式',
           },
         ],
       },

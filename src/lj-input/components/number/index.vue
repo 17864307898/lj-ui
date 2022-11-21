@@ -1,0 +1,55 @@
+<template>
+  <div class="number-input">
+    <el-input-number
+      v-model="localValue"
+      v-bind="{ ...$props, ...$attrs }"
+      @input="oninput"
+    />
+  </div>
+</template>
+
+<script>
+  import Vue from 'vue'
+  import { InputNumber } from 'element-ui'
+
+  Vue.use(InputNumber)
+  export default {
+    name: 'adapt-input-number',
+    props: {
+      value: {
+        type: undefined,
+        default: undefined,
+      },
+      placeholder: {
+        type: String,
+        default: '请填写',
+      },
+    },
+    data() {
+      return {
+        localValue: undefined,
+      }
+    },
+    watch: {
+      value: {
+        handler(val) {
+          this.localValue = val
+        },
+        immediate: true,
+      },
+    },
+    created() {},
+    methods: {
+      oninput(val) {
+        this.$emit('adapt-change', val)
+      },
+    },
+  }
+</script>
+<style lang="scss" scoped>
+  .number-input {
+    & > * {
+      width: 100% !important;
+    }
+  }
+</style>
