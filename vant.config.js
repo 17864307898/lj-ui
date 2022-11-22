@@ -60,7 +60,11 @@ module.exports = {
         items: [
           {
             path: 'api',
-            title: 'API',
+            title: '公用方法',
+          },
+          {
+            path: 'utils',
+            title: '存储方法',
           },
         ],
       },

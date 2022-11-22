@@ -41,3 +41,81 @@ export function onceSession(key, val) {
 
   return _deepClone(target);
 }
+
+/**
+ * 移除对象中为空的属性
+ * @param {*} object
+ * @returns
+ */
+ export function cleanObjectEmpty(object) {
+  Object.entries(object).forEach(([k, v]) => {
+    if (v && typeof v === 'object') {
+      if (Object.prototype.toString.call(v) === '[object Array]') {
+        if (!v.length) {
+          delete object[k]
+        }
+      }
+      cleanObjectEmpty(v)
+    }
+    if (!v && v !== 0) {
+      delete object[k]
+    }
+  })
+  return object
+}
+
+/**
+ * @description 字节单位转换
+ * @param number
+ * @returns {*}
+ */
+ export function byteConvert(bytes) {
+  if (isNaN(bytes)) return ''
+
+  const symbols = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+  let exp = Math.floor(Math.log(bytes)/Math.log(2))
+
+  if (exp < 1) {
+      exp = 0
+  }
+  const i = Math.floor(exp / 10)
+  bytes /= 2 ** (10 * i)
+
+  if (bytes.toString().length > bytes.toFixed(2).toString().length) {
+      bytes = bytes.toFixed(2)
+  }
+
+  return bytes + ' ' + symbols[i]
+}
+
+/**
+ * @description 将url请求参数转为json格式
+ * @param url
+ * @returns {{}|any}
+ */
+export function paramObj(url) {
+  if (!url) return {}
+
+  const search = url.split('?')[1]
+  if (!search) return {}
+
+  return JSON.parse(
+    '{"' +
+      decodeURIComponent(search)
+        .replace(/"/g, '\\"')
+        .replace(/&/g, '","')
+        .replace(/=/g, '":"')
+        .replace(/\+/g, ' ') +
+      '"}'
+  )
+}
+
+/**
+ * @description m到n的随机数
+ * @param m
+ * @param n
+ * @returns {number}
+ */
+export function randomNumber(m, n) {
+  return Math.floor(Math.random() * (m - n) + n)
+}
