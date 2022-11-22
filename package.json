@@ -47,6 +47,7 @@
     "element-ui": "^2.15.10",
     "file-loader": "^6.2.0",
     "vue": "^2.6.11",
+    "vue-eslint-parser": "^9.1.0",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
@@ -66,5 +67,8 @@
   "browserslist": [
     "Android >= 4.0",
     "iOS >= 8"
-  ]
+  ],
+  "dependencies": {
+    "vtip": "^1.0.6"
+  }
 }

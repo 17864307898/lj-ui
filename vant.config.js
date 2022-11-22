@@ -66,6 +66,10 @@ module.exports = {
             path: 'utils',
             title: '存储方法',
           },
+          {
+            path: 'directives',
+            title: '自定义指令',
+          },
         ],
       },
       {
