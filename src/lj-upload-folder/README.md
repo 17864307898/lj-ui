@@ -6,9 +6,9 @@
 
 ```js
   import Vue from 'vue';
-  import { LjUpload } from 'lj-upload';
+  import { LjUploadFolder } from 'lj-upload-folder';
   
-  Vue.use(LjUpload);
+  Vue.use(LjUploadFolder);
 ```
 
 ## 代码演示
@@ -23,7 +23,7 @@
 
 | 参数 | 说明 | 类型 |  默认值 |
 |------|------|-----|---------|
-| uploadParmes | 上传信息 | _object_ | `accept:文件类型;uploadPath:文件路径;maxSize:文件最大值;content:{maxSize:限制文案,againUp:重新上传文案,可加标签;clickUp:点击上传文案,可加标签}` |
+| uploadParmes | 上传信息 | _object_ | `maxSize:文件最大值;content:{maxSize:限制文案,againUp:重新上传文案,可加标签;clickUp:点击上传文案,可加标签}` |
 
 ### 方法
 

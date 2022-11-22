@@ -7,15 +7,13 @@
   display: flex;
   justify-content: center;
 
-  ::v-deep {
-    .el-upload__tip {
-      p {
-        color: $color-text-regular;
-        margin: 0 0 3px 0;
-      }
+  .el-upload__tip {
+    p {
+      color: $color-text-regular;
+      margin: 0 0 3px 0;
     }
   }
-  ::v-deep.el-icon-upload {
+  .el-icon-upload {
     margin-top: 20px !important;
   }
 }

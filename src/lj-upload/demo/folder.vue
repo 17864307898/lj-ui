@@ -1,52 +1,87 @@
 <template>
   <div class="uploadWrap">
-    <div id="clonePieLoading" class="el-upload-dragger">
-      <div class="labelUplaod">
-        <i class="el-icon-upload fileUpload"></i>
-        <div class="el-upload__text">
-          <em v-if="file" class="waring"> 重新上传 </em>
-          <em v-else>点击上传文件夹</em>
-        </div>
-        <input
-          ref="upload"
-          class="upload"
-          type="file"
-          webkitdirectory
-          @change="beforeUpload"
-        />
+    <el-upload
+      ref="upload"
+      :accept="uploadParmes.accept"
+      :action="uploadParmes.uploadPath"
+      class="el-upload-dragger"
+      :file-list="fileList"
+      :on-change="handleSuccess"
+      :on-remove="handleRemove"
+    >
+      <i class="el-icon-upload"></i>
+      <div
+        class="el-upload__text"
+        v-html="
+          file.size
+            ? uploadParmes.content?.againUp
+            : uploadParmes.content?.clickUp
+        "
+      ></div>
+      <div slot="tip" class="el-upload__tip">
+        <p>{{ uploadParmes.content?.maxSize }}</p>
       </div>
-    </div>
-    <p class="uploadName">{{ uploadName }}</p>
+    </el-upload>
   </div>
 </template>
 
 <script>
-// import JSZip from 'jszip'
+import Vue from 'vue';
+import { Upload, Loading, Message } from 'element-ui';
+import JSZip from 'jszip';
+
+Vue.use(Loading, Message);
+Vue.use(Upload);
 
 export default {
-  name: 'lj-design-folder',
-
+  name: 'folder2',
+  props: {
+    uploadParmes: {
+      type: Object,
+      default: () => {
+        return {};
+      },
+    },
+  },
   data() {
     return {
       file: '',
-      uploadName: '',
+      fileList: [],
     };
   },
-
-  mounted() {},
-
-  methods: {
-    beforeUpload(file) {
-      if (!file.target.files || file.target.files.length === 0) {
-        this.$message.warning('请选择非空文件夹');
-        return;
+  created() {
+    this.$nextTick(() => {
+      if (this.uploadParmes.type === 2) {
+        this.$refs.upload.$children[0].$refs.input.webkitdirectory = true;
       }
-      this.file = '';
-      this.uploadName = '';
-      this.buttonType = 'gray';
-      // const zip = new JSZip()
-      // const {files} = file.target
-      // this.readDir(zip, files)
+    });
+  },
+  methods: {
+    handleSuccess(file, fileList) {
+      console.log(file)
+      // 上传前判断大小
+      this.onBeforeUpload(file, fileList);
+      // 如果接口返回成功，给父级传参
+      if (file.response) {
+        this.$emit('uploadInfo', file);
+      }
+      this.file = file;
+      // 重传判断
+      if (fileList && fileList.length > 1) {
+        const { uploadFiles } = this.$refs.upload;
+        const index = uploadFiles.indexOf(fileList[0]);
+        uploadFiles.splice(index, 1);
+      }
+      if (this.uploadParmes.type === 2) {
+        const zip = new JSZip();
+        const { files } = file.target;
+        this.readDir(zip, files);
+
+      }
+    },
+    handleRemove(file) {
+      this.$emit('uploadInfo', {});
+      this.file = file;
     },
     readDir(zip, files) {
       const loading = this.$loading({
@@ -78,40 +113,17 @@ export default {
           // saveAs(content, `${FileName}.zip`)
         });
     },
+    onBeforeUpload(file, fileList) {
+      const isLtSize = file.size < this.uploadParmes.maxSize;
+      if (!isLtSize) {
+        this.$message.error(this.uploadParmes.content?.maxSize+'！');
+        const { uploadFiles } = this.$refs.upload;
+        const index = uploadFiles.indexOf(fileList[0]);
+        uploadFiles.splice(index, 1);
+        this.handleRemove(file);
+        return false;
+      }
+    },
   },
 };
 </script>
-
-<style lang="scss" scoped>
-@import '../../style/var.scss';
-.upload {
-  position: absolute;
-  left: 0;
-  top: 2px;
-  width: 49px;
-  cursor: pointer;
-  opacity: 0;
-  padding: 85px 190px;
-}
-.waring {
-  color: #ffc107;
-}
-.fileUpload {
-  cursor: pointer;
-  font-size: 67px;
-  color: #c0c4cc;
-  margin: 40px 0 16px;
-  line-height: 50px;
-}
-.upload:hover {
-  cursor: pointer;
-}
-.labelUplaod {
-  line-height: 20px;
-}
-.uploadName {
-  line-height: 20px;
-  margin: 10px;
-  color: $color-primary;
-}
-</style>

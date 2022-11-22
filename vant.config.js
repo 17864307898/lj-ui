@@ -51,7 +51,11 @@ module.exports = {
           },
           {
             path: 'lj-upload',
-            title: 'LjUpload 上传',
+            title: 'LjUpload 上传文件',
+          },
+          {
+            path: 'lj-upload-folder',
+            title: 'LjUploadFolder 上传文件夹'
           }
         ],
       },
