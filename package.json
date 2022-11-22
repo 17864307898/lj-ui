@@ -66,5 +66,8 @@
   "browserslist": [
     "Android >= 4.0",
     "iOS >= 8"
-  ]
+  ],
+  "dependencies": {
+    "jszip": "^3.10.1"
+  }
 }
