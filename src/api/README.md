@@ -15,9 +15,9 @@ Vue.prototype.$tools = tools
 import { deepClone } from 'lj-design/es/utils'
 ```
 
-### API
+## API
 
-| 方法名 | 说明 | 参数 | 返回值 |
+<!-- | 方法名 | 说明 | 参数 | 返回值 |
 |--------|------|-----|-------|
 | deepClone | 深拷贝 | `target`_object_ | _object_ |
 | onceSession | 单次缓存,仅在不传入val值时返回当前key值对应的session值,同时清空当前session | `key, val` | _any_ |
@@ -25,9 +25,41 @@ import { deepClone } from 'lj-design/es/utils'
 | byteConvert | 字节单位转换 | `bytes` _number_  _string_ | _string_ |
 | paramObj | 将url请求参数转为json格式 | `url` _string_ | _object_ |
 | randomNumber | m到n的随机数 | `m`_number_ `n`_number_ | _number_ |
-|  countDown|  验证码的倒计时|  `a` this `b`_number_ 倒计时的时长 `c` _String_ 需要倒计时的参数名字|  |
-|  |  |  |  |
-|  |  |  |  |
+|  countDown|  验证码的倒计时|  `a` this `b`_number_ 倒计时的时长 `c` _String_ 需要倒计时的参数名字|  | -->
+### deepClone
+#### 概述
+深拷贝
+#### 参数
+`target` 待拷贝对象 _object_
+
+#### 返回值
+深拷贝对象 _object_
+
+#### 示例
+```javascript
+const a = { a: 1 }
+deepClone(a) // { a: 1 }
+```
+
+### onceSession
+#### 概述
+单次缓存,仅在不传入val值时返回当前key值对应的session值,同时清空当前session
+#### 参数
+`key` session对应key值 _string__\
+`val` session对应value _any_
+
+#### 返回值
+session值 _any_
+> 仅在只传入`key`值时返回对应session值，并清空当前`key`对应的session
+#### 示例
+```javascript
+// 存值
+const a = JSON.stringify({ a: 1 })
+onceSession('test', a)
+
+// 取值
+const val = onceSession('test') // { a: 1 } 同时清空test对应的session
+```
 ### 时间处理
 
 | 方法名 | 说明 | 参数 | 返回值 |
