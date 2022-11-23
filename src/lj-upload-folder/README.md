@@ -1,7 +1,7 @@
 # LjUpload 上传
 
 ### 介绍
-
+LjUploadFolder是一个上传文件夹的组件
 ### 引入
 
 ```js

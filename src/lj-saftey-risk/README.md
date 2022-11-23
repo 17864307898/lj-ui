@@ -1,7 +1,7 @@
 # ljSafteyRisk 漏洞和许可证风险等级
 
 ### 介绍
-
+LjSafteyRisk是一个展示漏洞或许可证风险等级的组件
 ### 引入
 
 ```js

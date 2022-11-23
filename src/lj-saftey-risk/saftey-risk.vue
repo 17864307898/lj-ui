@@ -17,7 +17,7 @@
           effect="dark"
           placement="top"
         >
-          <span :class="[`risk_${key}`, { gray_style: riskList[key] == 0 }]">
+          <span :class="[`risk_${key}`, { gray_style: riskList[key] == 0 }]" @click="handelSafteyRisk(key)">
             {{ riskList[key] }}
           </span>
         </el-tooltip>
@@ -59,5 +59,10 @@ Vue.use(Tooltip);
     data() {
       return {}
     },
+    methods: {
+      handelSafteyRisk(key) {
+        this.$emit('handelRisk', key)
+      }
+    }
   }
 </script>

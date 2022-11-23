@@ -47,9 +47,6 @@ export default {
       uploadName: '',
     };
   },
-
-  mounted() {},
-
   methods: {
     beforeUpload(file) {
       if (!file.target.files || file.target.files.length === 0) {
