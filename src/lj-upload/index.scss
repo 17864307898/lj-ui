@@ -1,0 +1,19 @@
+@import "./style/elementui.scss";
+@import "../style/var.scss";
+
+.uploadWrap {
+  width: 400px;
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+
+  .el-upload__tip {
+    p {
+      color: $color-text-regular;
+      margin: 0 0 3px 0;
+    }
+  }
+  .el-icon-upload {
+    margin-top: 20px !important;
+  }
+}
