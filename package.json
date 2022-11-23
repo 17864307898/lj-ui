@@ -69,7 +69,6 @@
     "iOS >= 8"
   ],
   "dependencies": {
-    "vtip": "^1.0.6",
     "jszip": "^3.10.1"
   }
 }
