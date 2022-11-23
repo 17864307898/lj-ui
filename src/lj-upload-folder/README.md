@@ -6,7 +6,7 @@
 
 ```js
   import Vue from 'vue';
-  import { LjUploadFolder } from 'lj-upload-folder';
+  import { LjUploadFolder } from 'lj-design';
   
   Vue.use(LjUploadFolder);
 ```

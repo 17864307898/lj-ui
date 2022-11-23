@@ -6,7 +6,7 @@
 
 ```js
   import Vue from 'vue';
-  import { LjSafteyRisk } from 'lj-saftey-risk';
+  import { LjSafteyRisk } from 'lj-design';
   
   Vue.use(LjSafteyRisk);
 ```

@@ -6,7 +6,7 @@
 
 ```js
   import Vue from 'vue';
-  import { LjFilter } from 'lj-filter';
+  import { LjFilter } from 'lj-design';
   
   Vue.use(LjFilter);
 ```
