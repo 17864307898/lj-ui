@@ -1,49 +1,55 @@
 <template>
   <div>
-    <div>
-      <lj-filter
-        :filter-choose-list="filterChooseList"
-        :filter-show="true"
-        :filter-content="{name: '组件', empty: '清空', title: '筛选方式', sure: '筛选', cancel: '取消', reset: '重置', selected: '已选择'}"
-        :table-sel-arr="tableSelArr"
-      >
-        <template #query>
-          <div>左边输入框内容</div>
-        </template>
-        <template #reference>
-          <i class="el-icon-ice-cream"></i>
-        </template>
-        <template #filterItems="props">
-          <filter-items
-            :filter-close="props.filterClose"
-            :filter-reset="props.resetData"
-            :filter-sure="props.filterSure"
-            :public-list-data="publicListData"
-            @filterChooseData="filterChooseData"
-          />
-        </template>
-        <template #batchIgnore>
-          <batch-ignore
-            :batch-show="1"
-            :operate-name="'组件'"
-            :row-data="tableSelArr"
-            :type="queryForm.status"
-            @batch-operate="fnBatchIgnoreOrNot"
-          />
-        </template>
-        <template #right-content>
-          <el-switch
-            v-model="queryForm.status"
-            active-color="#cd4443"
-            :active-text="'已忽略' + '(' + ignoreTotal + ')'"
-            :active-value="1"
-            inactive-color="#409eff"
-            inactive-text="未忽略"
-            :inactive-value="0"
-          />
-        </template>
-      </lj-filter>
-    </div>
+    <lj-filter
+      :filter-choose-list="filterChooseList"
+      :filter-show="true"
+      :filter-content="{
+        name: '组件',
+        empty: '清空',
+        title: '筛选方式',
+        sure: '筛选',
+        cancel: '取消',
+        reset: '重置',
+        selected: '已选择',
+      }"
+      :table-sel-arr="tableSelArr"
+    >
+      <template #query>
+        <div>左边输入框内容</div>
+      </template>
+      <template #reference>
+        <i class="el-icon-ice-cream"></i>
+      </template>
+      <template #filterItems="props">
+        <filter-items
+          :filter-close="props.filterClose"
+          :filter-reset="props.resetData"
+          :filter-sure="props.filterSure"
+          :public-list-data="publicListData"
+          @filterChooseData="filterChooseData"
+        />
+      </template>
+      <template #batchIgnore>
+        <batch-ignore
+          :batch-show="1"
+          :operate-name="'组件'"
+          :row-data="tableSelArr"
+          :type="queryForm.status"
+          @batch-operate="fnBatchIgnoreOrNot"
+        />
+      </template>
+      <template #right-content>
+        <el-switch
+          v-model="queryForm.status"
+          active-color="#cd4443"
+          :active-text="'已忽略' + '(' + ignoreTotal + ')'"
+          :active-value="1"
+          inactive-color="#409eff"
+          inactive-text="未忽略"
+          :inactive-value="0"
+        />
+      </template>
+    </lj-filter>
     <lj-table
       class="table-wrap"
       :columns="columns"

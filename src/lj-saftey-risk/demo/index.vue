@@ -1,13 +1,9 @@
 <template>
-  <div>
-    <div>
-      <lj-saftey-risk :type="1" :risk-list="riskList" :risk-data="riskData">
-        <template #detailTarget>
-          <i class="el-icon-arrow-right" @click="handelTarget"></i>
-        </template>
-      </lj-saftey-risk>
-    </div>
-  </div>
+  <lj-saftey-risk :type="1" :risk-list="riskList" :risk-data="riskData" @handelRisk="fnHandelRisk">
+    <template #detailTarget>
+      <i class="el-icon-arrow-right" @click="handelTarget"></i>
+    </template>
+  </lj-saftey-risk>
 </template>
 
 <script>
@@ -43,11 +39,13 @@ export default {
       },
     };
   },
-  created() {},
   methods: {
     handelTarget() {
       console.log('跳');
     },
+    fnHandelRisk(val) {
+      console.log('点击哪一个风险等级', val)
+    }
   },
 };
 </script>

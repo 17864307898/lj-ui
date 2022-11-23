@@ -1,12 +1,12 @@
 # LjFilter 筛选
 
 ### 介绍
-
+LjFilter是一个为筛选table数据的组件，展示筛选框以及筛选项
 ### 引入
 
 ```js
   import Vue from 'vue';
-  import { LjFilter } from 'lj-filter';
+  import { LjFilter } from 'lj-design';
   
   Vue.use(LjFilter);
 ```

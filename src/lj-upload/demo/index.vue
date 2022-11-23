@@ -1,17 +1,10 @@
 <template>
-  <div>
-    <div>
-      <lj-upload :upload-parmes="uploadParmes" @uploadInfo="fnUploadInfo" />
-      <!-- <folder /> -->
-    </div>
-  </div>
+  <lj-upload :upload-parmes="uploadParmes" @uploadInfo="fnUploadInfo" />
 </template>
 
 <script>
-// import folder from './folder.vue';
 
 export default {
-  // components: { folder },
   data() {
     return {
       uploadParmes: {

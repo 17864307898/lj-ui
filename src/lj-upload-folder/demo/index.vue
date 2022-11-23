@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <lj-upload-folder :upload-parmes="uploadParmes" @uploadFolderInfo="fnUploadInfo" />
-  </div>
+  <lj-upload-folder :upload-parmes="uploadParmes" @uploadFolderInfo="fnUploadInfo" />
 </template>
 
 <script>

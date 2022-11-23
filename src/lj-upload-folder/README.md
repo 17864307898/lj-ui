@@ -1,12 +1,12 @@
 # LjUpload 上传
 
 ### 介绍
-
+LjUploadFolder是一个上传文件夹的组件
 ### 引入
 
 ```js
   import Vue from 'vue';
-  import { LjUploadFolder } from 'lj-upload-folder';
+  import { LjUploadFolder } from 'lj-design';
   
   Vue.use(LjUploadFolder);
 ```
