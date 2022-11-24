@@ -21,12 +21,36 @@ LjUploadFolder是一个上传文件的组件
 
 ### props
 
-| 参数 | 说明 | 类型 |  默认值 |
-|------|------|-----|---------|
-| uploadParmes | 上传信息 | _object_ | `accept:文件类型;uploadPath:文件路径;maxSize:文件最大值;content:{maxSize:限制文案,againUp:重新上传文案,可加标签;clickUp:点击上传文案,可加标签}` |
+| 参数 | 说明 | 类型 |  默认值 | 可选值
+|------|------|-----|---------|---------|
+| accept | 接受上传的文件类型（thumbnail-mode 模式下此参数无效） | _string_ | — |
+| action | 文件路径 | _string_| — |
+| name | 文件名称 | _string_ | — |
+| headers | 设置上传的请求头部 | _object_ | — |
+| data | 上传时附带的额外参数 | _object_ | — |
+| credentials | 支持发送 cookie 凭证信息 | _boolean_ | false |
+| showFileList | 是否显示已上传文件列表	 | _boolean_ | true |
+| drag | 是否启用拖拽上传（accept带参数时无效）| _boolean_ | false |
+| limit | 最大允许上传个数 | _number_ | — |
+| disabled | 是否禁用	 | _boolean_ | false |
+| maxSize | 文件最大值 | _number_ | |
+| content | 上传需要的一些文案 |`maxSize`:限制大小; `Exceed`: 限制数量，默认值：当前限制选择 ${limit} 个文件; `errorMsg`: 失败，默认值：上传失败！` | — |
+| listType | 文件列表的类型	 | _string_ | text | text/picture/picture-card |
+| multiple | 是否支持多选文件 | _boolean_ | — |
+| uploadFileList | 回显上传文件 | _object_ | `url`, `name` |
 
+### slot
+
+| name | 说明 | 参数 | 默认值
+|------|------|-----|-----|
+| uploadIcon | 上传文件icon | — | el-icon-upload |
+| uploadText | 上传文件文案 | — | 将文件拖到此处，或点击上传 |
+| uploadTip | 上传文件提示 | — | — |
 ### 方法
 
-| name | 说明 | 参数 |
-|------|------|-----|
-| uploadInfo | 获取上传文件值 | - |
+| name | 说明 | 类型 | 返回值 |
+|------|------|-----|-----|
+| uploadSuccess | 成功获取上传文件 | _object_ | `res`, `file`, `fileList` |
+| uploadRemove |  删除文件，值为上传的文件和文件列表，若返回 false 或者返回 Promise 且被 reject，则停止删除。 | _object_ | `file`, `fileList` |
+| uploadChange |  文件状态改变，添加文件、上传成功和上传失败时都会被调用 | _object_ | `file`, `fileList` |
+| clearFiles | 清空上传 | — | — | 
