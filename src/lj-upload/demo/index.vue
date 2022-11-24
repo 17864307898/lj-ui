@@ -10,14 +10,14 @@
       :limit="uploadParmes.limit"
       @uploadInfo="fnUploadInfo"
     />
-    <ossUpload />
+    <!-- <ossUpload /> -->
   </div>
 </template>
 
 <script>
-import ossUpload from './ossUpload.vue';
+// import ossUpload from './ossUpload.vue';
 export default {
-  components: { ossUpload },
+  // components: { ossUpload },
   data() {
     return {
       uploadParmes: {
