@@ -21,10 +21,11 @@ LjUploadFolder是一个上传文件的组件
 
 ### props
 
-| 参数 | 说明 | 类型 |  默认值 |
-|------|------|-----|---------|
+| 参数 | 说明 | 类型 |  默认值 | 可选值
+|------|------|-----|---------|---------|
 | accept | 接受上传的文件类型（thumbnail-mode 模式下此参数无效） | _string_ | — |
 | action | 文件路径 | _string_| — |
+| name | 文件名称 | _string_ | — |
 | headers | 设置上传的请求头部 | _object_ | — |
 | data | 上传时附带的额外参数 | _object_ | — |
 | credentials | 支持发送 cookie 凭证信息 | _boolean_ | false |
@@ -34,7 +35,9 @@ LjUploadFolder是一个上传文件的组件
 | disabled | 是否禁用	 | _boolean_ | false |
 | maxSize | 文件最大值 | _number_ | |
 | content | 上传需要的一些文案 |`maxSize`:限制大小; `Exceed`: 限制数量，默认值：当前限制选择 ${limit} 个文件; `errorMsg`: 失败，默认值：上传失败！` | — |
+| listType | 文件列表的类型	 | _string_ | text | text/picture/picture-card |
 | multiple | 是否支持多选文件 | _boolean_ | — |
+| uploadFileList | 回显上传文件 | _object_ | `url`, `name` |
 
 ### slot
 

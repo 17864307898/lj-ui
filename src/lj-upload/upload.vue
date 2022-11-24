@@ -5,12 +5,14 @@
       :accept="accept"
       :headers="headers"
       :data="data"
+      :name="name"
       :action="action"
       :with-credentials="withCredentials"
       :show-file-list="showFileList"
       :before-upload="onBeforeUpload"
       :class="drag ? 'upload-demo' : 'el-upload-dragger'"
       :file-list="fileList"
+      :list-type="listType"
       :limit="limit"
       :disabled="disabled"
       :multiple="multiple"
@@ -37,69 +39,91 @@
 
 <script>
 import Vue from 'vue';
-import { Upload } from 'element-ui';
+import { Upload, Message } from 'element-ui';
 
 Vue.use(Upload);
+Vue.use(Message);
 
 export default {
   name: 'lj-upload',
   props: {
-    accept: {
+    uploadFileList: { // 回显上传文件
+      type: Object,
+      default: () => ({})
+    },
+    name: { // 文件名称
       type: String,
       default: '',
     },
-    action: {
+    accept: { //接受上传的文件类型
       type: String,
       default: '',
     },
-    multiple: {
+    action: { //必选参数，上传的地址
+      type: String,
+      default: '',
+    },
+    multiple: { //是否支持多选文件	
       type: Boolean,
       default: false,
     },
-    drag: {
+    listType: { // 文件列表的类型 默认text  text/picture/picture-card
+      type: String,
+      default: '',
+    },
+    drag: { // 是否启用拖拽上传
       type: Boolean,
       default: false,
     },
-    showFileList: {
+    showFileList: { //是否显示已上传文件列表 默认 false
       type: Boolean,
       default: false,
     },
-    withCredentials: {
+    withCredentials: { //支持发送 cookie 凭证信息
       type: Boolean,
       default: false,
     },
-    limit: {
+    limit: { //最大允许上传个数	
       type: Number,
       default: 0,
     },
-    disabled: {
+    disabled: { //是否禁用
       type: Boolean,
       default: false,
     },
-    headers: {
+    headers: { //设置上传的请求头部	
       type: Object,
       default: () => {
         return {};
       },
     },
-    data: {
+    data: { //上传时附带的额外参数	
       type: Object,
       default: () => {
         return {};
       },
     },
-    credentials: {
+    content: { //上传文件文案
       type: Object,
       default: () => {
         return {};
       },
     },
-    content: {
-      type: Object,
-      default: () => {
-        return {};
+  },
+  watch: {
+    uploadFileList: {
+      handler(newVal) {
+        if (newVal && newVal.id) {
+          const params = {
+            name: newVal.fileName,
+            url: newVal.filePath
+          }
+          this.fileList.push(params)
+        }
       },
-    },
+      deep: true, // 深度监听
+      immediate: true
+    }
   },
   data() {
     return {

@@ -1,18 +1,23 @@
 <template>
-  <lj-upload 
+  <div>
+    <lj-upload
       ref="ljuploads"
-      :accept="uploadParmes.accept" 
+      :accept="uploadParmes.accept"
       :action="uploadParmes.accept"
       :maxSize="uploadParmes.maxSize"
       :drag="uploadParmes.drag"
       :content="uploadParmes.content"
       :limit="uploadParmes.limit"
-      @uploadInfo="fnUploadInfo" 
-  />
+      @uploadInfo="fnUploadInfo"
+    />
+    <ossUpload />
+  </div>
 </template>
 
 <script>
+import ossUpload from './ossUpload.vue';
 export default {
+  components: { ossUpload },
   data() {
     return {
       uploadParmes: {
