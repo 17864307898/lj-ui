@@ -11,9 +11,43 @@
     p {
       color: $color-text-regular;
       margin: 0 0 3px 0;
+      font-size: $font-size-xs;
+    }
+  }
+  .el-upload__text{
+    font-size: $font-size-sm;
+    em {
+      font-style: normal;
+      color: $color-primary;
     }
   }
   .el-icon-upload {
     margin-top: 20px !important;
+    font-size: 67px;
+    color: #c0c4cc;
+    margin: 40px 0 16px;
+    line-height: 50px;
+  }
+  .el-upload-dragger {
+    height: auto;
+    padding-bottom: 20px;
+  }
+  .upload-demo {
+    width: 100%;
+    border: 1px dashed #d9d9d9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 20px;
+    .el-upload-dragger {
+      border: 0;
+      padding: 0;
+    }
+    ul {
+      width: 100%;
+      li {
+        text-align: center;
+      }
+    }
   }
 }
