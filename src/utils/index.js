@@ -264,7 +264,7 @@ export function thirteenBitTimestamp(time) {
 
 /** ****************** 字典校验 ****************** */
 
-/* 中文+大小写字母+数字 */
+/* 中文、大小写字母或者数字 */
 export function isName(value) {
   const reg = /^[\u4e00-\u9fa5a-zA-Z0-9]+$/;
   return reg.test(value);

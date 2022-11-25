@@ -38,6 +38,8 @@ LjUploadFolder是一个上传文件的组件
 | listType | 文件列表的类型	 | _string_ | text | text/picture/picture-card |
 | multiple | 是否支持多选文件 | _boolean_ | — |
 | uploadFileList | 回显上传文件 | _object_ | `url`, `name` |
+| ossShow | 是否支持oss上传 | _boolean_ | — |
+| ossUploadPath | oss回调传的参数 | _object_ | `fileUrl`, `dir`, `token` | — |
 
 ### slot
 
