@@ -49,7 +49,8 @@
 <script>
   import Vue from 'vue'
   import { Upload, Message } from 'element-ui'
-  import OSS from './ossUpload'
+  import OSS from './ossUpload.js'
+  // import axios from 'axios'
 
   Vue.use(Upload)
   Vue.use(Message)
@@ -76,6 +77,11 @@
         //必选参数，上传的地址
         type: String,
         default: '',
+      },
+      ossShow: {
+        //是否支持oss上传
+        type: Boolean,
+        default: false,
       },
       ossUploadPath: {
         //设置文件路径
@@ -195,7 +201,7 @@
         })
       },
       handleError() {
-        this.$message({
+        Message({
           message: this.content.errorMsg ? this.content.errorMsg : '上传失败！',
           type: 'error',
           center: true,
@@ -208,30 +214,29 @@
         this.fileList = fileList
       },
       handleExceed() {
-        this.$message.warning(
+        Mmessage.warning(
           this.content.Exceed
             ? this.content.Exceed
             : `当前限制选择 ${this.limit} 个文件`
         )
       },
       async onBeforeUpload(file) {
-        console.log(file)
         let maxSize = this.maxSize ? this.maxSize : 4294967296
         const isLtSize = file.size < maxSize
         if (!isLtSize) {
-          this.$message.error(this.content.maxSize + '！')
+          Message.error(this.content.maxSize + '！')
           return false
         }
-        console.log(this.ossUploadPath.token)
-        const res = await OSS(
-          file.name,
-          this.ossUploadPath.fileUrl,
-          this.ossUploadPath.dir,
-          this.ossUploadPath.token
-        )
-        console.log(res)
-        this.uploadHost = res.host
-        this.$emit('ossUploadData', res)
+        if(this.ossShow) {
+          const res = await OSS(
+            file.name,
+            this.ossUploadPath.fileUrl,
+            this.ossUploadPath.dir,
+            this.ossUploadPath.token
+          )
+          this.uploadHost = res.host
+          this.$emit('ossUploadData', res)
+        }
       },
     },
   }

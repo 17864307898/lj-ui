@@ -2,16 +2,16 @@
   <div>
     <lj-upload
       ref="ljuploads"
-      :accept="uploadParmes.accept"
-      :action="uploadParmes.action"
-      :content="uploadParmes.content"
-      :data="uploadParmes.data"
-      :drag="uploadParmes.drag"
-      :limit="uploadParmes.limit"
-      :list-type="uploadParmes.listType"
-      :max-size="uploadParmes.maxSize"
-      :oss-upload-path="uploadParmes.ossUploadPath"
-      :show-file-list="uploadParmes.showFileList"
+      :accept="uploadParams.accept"
+      :action="uploadParams.action"
+      :content="uploadParams.content"
+      :data="uploadParams.data"
+      :drag="uploadParams.drag"
+      :limit="uploadParams.limit"
+      :max-size="uploadParams.maxSize"
+      :oss-show="uploadParams.ossShow"
+      :oss-upload-path="uploadParams.ossUploadPath"
+      :show-file-list="uploadParams.showFileList"
       @ossUploadData="fnOssUploadData"
       @uploadInfo="fnUploadInfo"
     />
@@ -22,15 +22,14 @@
 export default {
   data() {
     return {
-      uploadParmes: {
-          listType: 'picture-card',
+      uploadParams: {
           accept: '',
           action: '',
           ossShow: false,
           ossUploadPath: {
             fileUrl: 'https://tangram-manage.test.spdx.cn/api/v1/oss/sign',
             dir: 'category-icon/',
-            token: `Bearer ${this.$store.getters['user/token']}`,
+            token: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo4LCJleHAiOjE2Njk0MzM4MzB9.57vdpiFS5QXffEXpOu5FIhBlhfdxDkQYdsNLLIsWHtQ`,
           },
           data: {},
           maxSize: '4294967296',
@@ -46,8 +45,8 @@ export default {
   },
   methods: {
     fnOssUploadData(res) {
-      this.uploadParmes.action = res.host
-      this.uploadParmes.data = res
+      this.uploadParams.action = res.host
+      this.uploadParams.data = res
     },
     fnUploadInfo(file) {
       this.uploadData = file
