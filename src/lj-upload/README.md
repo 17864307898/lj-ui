@@ -1,7 +1,7 @@
 # LjUpload 上传
 
 ### 介绍
-LjUploadFolder是一个上传文件的组件
+LjUploadFolder是一个基于el-upload上传文件的组件
 ### 引入
 
 ```js
@@ -25,21 +25,18 @@ LjUploadFolder是一个上传文件的组件
 |------|------|-----|---------|---------|
 | accept | 接受上传的文件类型（thumbnail-mode 模式下此参数无效） | _string_ | — |
 | action | 文件路径 | _string_| — |
-| name | 文件名称 | _string_ | — |
-| headers | 设置上传的请求头部 | _object_ | — |
+| name | 文件名称 | _string_ | file |
 | data | 上传时附带的额外参数 | _object_ | — |
-| credentials | 支持发送 cookie 凭证信息 | _boolean_ | false |
-| showFileList | 是否显示已上传文件列表	 | _boolean_ | true |
+| show-file-list | 是否显示已上传文件列表	 | _boolean_ | true |
 | drag | 是否启用拖拽上传（accept带参数时无效）| _boolean_ | false |
 | limit | 最大允许上传个数 | _number_ | — |
-| disabled | 是否禁用	 | _boolean_ | false |
-| maxSize | 文件最大值 | _number_ | |
+| max-size | 文件最大值 | _number_ | 4294967296(4G) |
 | content | 上传需要的一些文案 |`maxSize`:限制大小; `Exceed`: 限制数量，默认值：当前限制选择 ${limit} 个文件; `errorMsg`: 失败，默认值：上传失败！` | — |
-| listType | 文件列表的类型	 | _string_ | text | text/picture/picture-card |
-| multiple | 是否支持多选文件 | _boolean_ | — |
+| list-type	 | 文件列表的类型	 | _string_ | text | text/picture/picture-card |
 | uploadFileList | 回显上传文件 | _object_ | `url`, `name` |
 | ossShow | 是否支持oss上传 | _boolean_ | — |
-| ossUploadPath | oss回调传的参数 | _object_ | `fileUrl`, `dir`, `token` | — |
+| ossUploadPath | oss回调传参 | _object_ | `fileUrl`, `dir`, `token` | — |
+| 其余参数遵循 [elementui](https://element.eleme.cn/#/zh-CN/component/installation) 配置 | 可通过配置展示不同需求 | -- | -- |
 
 ### slot
 

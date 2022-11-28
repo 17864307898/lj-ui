@@ -221,33 +221,13 @@ export function formatHistoryTime(time, format) {
 }
 
 /**
- * 10位时间戳转换
+ * 10/13位时间戳转换
  * @param {*} time
  * @returns
  */
-export function tenBitTimestamp(time) {
-  const date = new Date(time * 1000);
-  const y = date.getFullYear();
-  let m = date.getMonth() + 1;
-  m = m < 10 ? '' + m : m;
-  let d = date.getDate();
-  d = d < 10 ? '' + d : d;
-  let h = date.getHours();
-  h = h < 10 ? '0' + h : h;
-  let minute = date.getMinutes();
-  let second = date.getSeconds();
-  minute = minute < 10 ? '0' + minute : minute;
-  second = second < 10 ? '0' + second : second;
-  return y + '年' + m + '月' + d + '日 ' + h + ':' + minute + ':' + second; //组合
-}
-
-/**
- * 13位时间戳转换
- * @param {*} time
- * @returns
- */
-export function thirteenBitTimestamp(time) {
-  const date = new Date(time / 1);
+export function tensBitTimestamp(time) {
+  let timeParams = time.length === 10 ? time * 1000 : time / 1
+  const date = new Date(timeParams);
   const y = date.getFullYear();
   let m = date.getMonth() + 1;
   m = m < 10 ? '' + m : m;

@@ -132,8 +132,7 @@ const val_c = cleanObjectEmpty(b) // 1.15 GB
 | formatDate | 格式化时间 | `dateStr`_string_  _number_ `format` _string_ | 格式化时间_string_ | `format` |  `format`YYYY-MM-DD hh:mm:ss 
 | formatMS | 毫秒转天时分秒 | `mss` _string_ _number_ | _string_ |
 | formatHistoryTime | 毫秒转历史时间（eg: 刚刚） | `time` _string_ _number_ `format` _string_ | _string_ | `format` |  `format`YYYY-MM-DD hh:mm:ss 
-| tenBitTimestamp | 10位时间戳转换 | `time` _string_ _number_ | _string_ |
-| thirteenBitTimestamp | 13位时间戳转换 | `time` _string_ _number_ | _string_ |
+| tensBitTimestamp | 10/13位时间戳转换 | `time` _string_ _number_ | _string_ |
 #### 示例
 ```javascript
     const data1 = 1669191340132,data2=497213,data3=1669191340 format="YYYY-MM-DD hh:mm:ss"
@@ -146,17 +145,15 @@ const val_c = cleanObjectEmpty(b) // 1.15 GB
     const var2 = formatMS(data2) // 8 分 17 秒
     //秒转历史时间
     const var3 = formatHistoryTime(data1) // 4分钟前
-    //10位时间戳转换
-    const var4 = tenBitTimestamp(data3) //2022年11月23日 16:15:40
-    //13位时间戳转换
-    const var5 = thirteenBitTimestamp(data1) //2022年11月22日 10:51:32
+    //10/13位时间戳转换
+    const var4 = tensBitTimestamp(data3) //2022年11月23日 16:15:40
 ```
 
 ### 字典+类型校验
 
 | 方法名 | 校验类型 | 返回值
 |--------|------|------
-| isName | 中文+大小写字母+数字 | _boolean_ |
+| isName | 中文或大小写字母或数字 | _boolean_ |
 | isUserName | 只能是中文 | _boolean_ |
 | isTrimName | 名称前后空格 | _boolean_ |
 | isSpecialSymbolName | 特殊字符名称 | _boolean_ |

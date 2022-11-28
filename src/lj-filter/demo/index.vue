@@ -14,22 +14,22 @@
       }"
       :table-sel-arr="tableSelArr"
     >
-      <template #query>
+      <template #left-query>
         <div>左边输入框内容</div>
       </template>
       <template #reference>
         <i class="el-icon-ice-cream"></i>
       </template>
-      <template #filterItems="props">
+      <template #filter-items="props">
         <filter-items
           :filter-close="props.filterClose"
-          :filter-reset="props.resetData"
+          :filter-reset="props.filterReset"
           :filter-sure="props.filterSure"
           :public-list-data="publicListData"
-          @filterChooseData="filterChooseData"
+          @filterChooseData="fnFilterChooseData"
         />
       </template>
-      <template #batchIgnore>
+      <template #batch-ignore>
         <batch-ignore
           :batch-show="1"
           :operate-name="'组件'"
@@ -122,7 +122,7 @@ export default {
     }));
   },
   methods: {
-    filterChooseData(data) {
+    fnFilterChooseData(data) {
       this.filterChooseList = [];
       this.publicListData.importList.forEach((el) => {
         if (el.id === data.importType) {

@@ -2,7 +2,7 @@
   <div class="form-filter-box">
     <div class="form-filter-head">
       <!-- query左边输入框内容 -->
-      <slot name="query"></slot>
+      <slot name="left-query"></slot>
       <el-popover
         v-if="filterShow"
         v-model="popoverShow"
@@ -11,23 +11,25 @@
         width="400"
       >
         <div class="form-filter-con">
-          <h1>{{filterContent.title || '筛选方式'}}</h1>
+          <h1>{{ filterContent.title || '筛选方式' }}</h1>
           <!-- filterItems表单筛选项 start -->
           <slot
             :filterClose="filterClose"
             :filterSure="filterSure"
-            name="filterItems"
-            :resetData="resetData"
+            name="filter-items"
+            :filterReset="filterReset"
           ></slot>
           <!-- 表单筛选项 end -->
           <div class="box-bottom">
-            <el-button type="text" @click="fnReset()">{{filterContent.reset || '重置'}}</el-button>
+            <el-button type="text" @click="fnReset()">{{
+              filterContent.reset || '重置'
+            }}</el-button>
             <div>
-              <el-button size="mini" @click="popoverShow = false"
-                >{{filterContent.cancel || '取消'}}</el-button
-              >
+              <el-button size="mini" @click="popoverShow = false">{{
+                filterContent.cancel || '取消'
+              }}</el-button>
               <el-button size="mini" type="primary" @click="fnFilter()">
-                {{filterContent.sure || '筛选'}}
+                {{ filterContent.sure || '筛选' }}
               </el-button>
             </div>
           </div>
@@ -46,16 +48,16 @@
             (tableSelArr && tableSelArr.length > 0)
           "
         >
-          {{filterContent.selected}}：{{ tableSelArr.length || '' }}
+          {{ filterContent.selected }}：{{ tableSelArr.length || '' }}
           <!-- batchRemove批量删除 -->
           <slot
             v-if="tableSelArr && tableSelArr.length > 0"
-            name="batchRemove"
+            name="batch-remove"
           ></slot>
           <!-- batchIgnore批量忽略 -->
           <slot
             v-if="tableSelArr && tableSelArr.length > 0"
-            name="batchIgnore"
+            name="batch-ignore"
           ></slot>
         </p>
         <!-- 表单筛选tag start -->
@@ -74,7 +76,7 @@
         </el-tag>
         <el-tag v-if="filterChooseList && filterChooseList.length > 0">
           <p class="reset" @click="fnEmpty">
-            {{filterContent.empty}}
+            {{ filterContent.empty }}
             <i class="el-icon-error"></i>
           </p>
         </el-tag>
@@ -148,7 +150,7 @@ export default {
   data() {
     return {
       popoverShow: false,
-      resetData: 1,
+      filterReset: 1,
       filterSure: 1,
       filterClose: {},
     };
@@ -160,7 +162,7 @@ export default {
     initData() {},
     // 置空
     fnReset() {
-      this.resetData += this.resetData;
+      this.filterReset += this.filterReset;
     },
     // 筛选按钮
     fnFilter() {
