@@ -3,6 +3,7 @@
     class="table-wrap"
     :columns="columns"
     :data="dataList"
+    :pagination="pagination"
   />
 </template>
 
@@ -11,6 +12,19 @@
     data() {
       return {
         columns: [
+          {
+            type: 'expand',
+            width: 55,
+          },
+          {
+            type: 'selection',
+            width: 55,
+          },
+          {
+            type: 'index',
+            width: 55,
+            label: '序号',
+          },
           {
             label: '姓名',
             prop: 'name',
@@ -23,13 +37,22 @@
             label: '年龄',
             prop: 'old',
           },
-          
+          {
+            label: '操作',
+            prop: 'action',
+            fixed: 'right',
+          },
         ],
         dataList: [],
+        pagination: {
+          pageNo: 1,
+          pageSize: 20,
+          total: 0,
+        },
       }
     },
     created() {
-      this.dataList = new Array(10).fill(0).map((item, index) => ({
+      this.dataList = new Array(20).fill(0).map((item, index) => ({
         name: `姓名${index + 1}`,
         sex: '男',
         old: 11 + index,

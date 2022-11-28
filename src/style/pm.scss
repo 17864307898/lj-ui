@@ -1,0 +1,34 @@
+// 修改padding/margin
+$pm: (
+  'p': 'padding',
+  'm': 'margin'
+);
+$direction: (
+  't': 'top',
+  'r': 'right',
+  'b': 'bottom',
+  'l': 'left',
+  'x': '', // x轴
+  'y': '', // y轴
+  'a': '' // 全部四个方向
+);
+$count_list: (0, 4, 6, 8, 10, 12, 15, 16, 18, 20, 24, 30, 40, 50, 60); // 可接收数值列表
+@each $pm_key, $pm_val in $pm {
+  @each $direction_key, $direction_val in $direction {
+    @each $count_item in $count_list {
+      .#{$pm_key}#{$direction_key}-#{$count_item} {
+        @if $direction_key == 'a' {
+          #{$pm_val}: #{$count_item}px;
+        } @else if $direction_key == 'x' {
+          #{$pm_val}-left: #{$count_item}px !important;
+          #{$pm_val}-right: #{$count_item}px !important;
+        } @else if $direction_key == 'y' {
+          #{$pm_val}-top: #{$count_item}px !important;
+          #{$pm_val}-bottom: #{$count_item}px !important;
+        } @else {
+          #{$pm_val}-#{$direction_val}: #{$count_item}px !important;
+        }
+      }
+    }
+  }
+}

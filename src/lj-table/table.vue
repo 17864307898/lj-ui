@@ -1,6 +1,6 @@
 <template>
   <!-- table简便封装 -->
-  <div class="lj-table v-flex pa-20">
+  <div class="lj-table v-flex">
     <!-- 搜索区域 -->
     <el-row>
       <slot name="query"></slot>
@@ -8,32 +8,26 @@
     <!-- 表格区域 -->
     <el-row class="flex-1">
       <el-table
+        :ref="`table_${tableKey}`"
         class="table"
         :data="dataset"
-        height="100%"
+        :height="height"
         v-bind="$attrs"
         v-on="$listeners"
       >
-        <!-- 选择列 -->
-        <el-table-column
-          v-if="needSelection"
-          :selectable="selectable"
-          type="selection"
-          width="55"
-        />
-
         <!-- 展示数据 -->
         <el-table-column
           v-for="(col, index) in columns"
           v-bind="col"
           :key="`${index}_${col.prop}`"
           :column-key="col.prop"
+          :selectable="selectable"
           show-overflow-tooltip
         >
           <!-- 允许自定义表头 -->
           <template
             #header="{ column, $index }"
-            v-if="!['selection'].includes(col.type)"
+            v-if="!['selection', 'index', 'expand'].includes(col.type)"
           >
             <slot
               :$index="$index"
@@ -46,7 +40,7 @@
           <!-- 允许自定义内容 -->
           <template
             #default="{ row, column, $index }"
-            v-if="!['selection'].includes(col.type)"
+            v-if="!['selection', 'index', 'expand'].includes(col.type)"
           >
             <slot
               :$index="$index"
@@ -68,12 +62,12 @@
     </el-row>
     <el-row>
       <!-- 分页支持自定义 -->
-      <slot v-if="needPagination" name="pagination">
-        <div class="v-flex flex-row jc-end">
+      <slot v-if="needPagination" name="pagination" :pagination="pagination">
+        <div class="v-flex flex-row jc-end pagination-wrap">
           <el-pagination
-            :current-page="pagination.page"
-            :page-size="pagination.page_size"
-            :total="pagination.total_data"
+            :current-page="pagination.pageNo"
+            :page-size="pagination.pageSize"
+            :total="pagination.total"
             v-bind="paginationConfig"
             @current-change="handlePageChange"
             @size-change="handleSizeChange"
@@ -85,19 +79,24 @@
 </template>
 
 <script>
+  import Vue from 'vue'
   import { Table, TableColumn, Row, Col, Pagination } from 'element-ui'
-  import { cloneDeep } from 'lodash'
+  import { deepClone } from '../utils'
+
+  Vue.use(Table)
+  Vue.use(TableColumn)
+  Vue.use(Row)
+  Vue.use(Col)
+  Vue.use(Pagination)
 
   export default {
     name: 'lj-table',
-    components: {
-      ElTable: Table,
-      ElTableColumn: TableColumn,
-      ElRow: Row,
-      ElCol: Col,
-      ElPagination: Pagination,
-    },
     props: {
+      // table-key  多个table时需传入
+      tableKey: {
+        type: String,
+        default: () => 'ref',
+      },
       // 表头配置
       columns: {
         type: Array,
@@ -112,9 +111,9 @@
       pagination: {
         type: Object,
         default: () => ({
-          page: 1,
-          page_size: 30,
-          total_data: 0,
+          pageNo: 1,
+          pageSize: 10,
+          total: 0,
         }),
       },
       // 自定义分页信息
@@ -127,15 +126,15 @@
         type: Boolean,
         default: () => true,
       },
-      // 是否可选择
-      needSelection: {
-        type: Boolean,
-        default: () => false,
-      },
       // 当前行是否可选
       selectable: {
         type: Function,
         default: () => true,
+      },
+      // 表格高度 默认100%
+      height: {
+        type: [Number, String],
+        default: () => '100%',
       },
     },
     data() {
@@ -150,7 +149,7 @@
     computed: {
       // 深克隆一份data
       dataset() {
-        return cloneDeep(this.data)
+        return deepClone(this.data)
       },
       // 分页配置
       paginationConfig() {
@@ -172,34 +171,16 @@
       handleSizeChange(size) {
         this.$emit('size-change', size)
       },
+      // 获取当前ref实例
+      handleGetRefs() {
+        return new Promise((resovle) => {
+          this.$nextTick(() => {
+            const ref = this.$refs[`table_${this.tableKey}`]
+
+            resovle(ref)
+          })
+        })
+      },
     },
   }
 </script>
-<style lang="scss" scoped>
-  .lj-table {
-    width: 100%;
-    height: 100%;
-    .flex-row {
-      flex-direction: row;
-    }
-    .jc-end {
-      justify-content: flex-end;
-    }
-    .flex-1 {
-      flex: 1;
-      height: 0;
-    }
-    .table-column-content {
-      width: 100%;
-      text-align: left;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-      overflow: hidden;
-    }
-  }
-  .v-flex {
-    display: flex;
-    flex-direction: column;
-  }
-</style>

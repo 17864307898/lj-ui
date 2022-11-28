@@ -5,7 +5,7 @@ module.exports = {
       preprocessor: 'sass',
     },
     site: {
-      publicPath: '/lj-design/',
+      publicPath: './', // 本地构建文档路径
     },
   },
   site: {
@@ -18,24 +18,70 @@ module.exports = {
         items: [
           {
             path: 'home',
-            title: '介绍',
+            title: '快速上手',
           },
           {
-            path: 'quickstart',
-            title: '快速上手',
+            path: 'theme',
+            title: '定制主题scss',
           },
         ],
       },
       {
         title: '基础组件',
         items: [
-          {
-            path: 'demo-button',
-            title: 'DemoButton 按钮',
-          },
+          // {
+          //   path: 'demo-button',
+          //   title: 'DemoButton 按钮',
+          // },
           {
             path: 'lj-table',
             title: 'LjTable 表格',
+          },
+          {
+            path: 'lj-input',
+            title: 'LjInput 适配输入框',
+          },
+          {
+            path: 'lj-filter',
+            title: 'LjFilter 筛选',
+          },
+          {
+            path: 'lj-saftey-risk',
+            title: 'LjSafteyRisk 风险等级',
+          },
+          {
+            path: 'lj-upload',
+            title: 'LjUpload 上传文件',
+          },
+          {
+            path: 'lj-upload-folder',
+            title: 'LjUploadFolder 上传文件夹'
+          }
+        ],
+      },
+      {
+        title: 'API',
+        items: [
+          {
+            path: 'api',
+            title: '公用方法',
+          },
+          {
+            path: 'utils',
+            title: '存储方法',
+          },
+          {
+            path: 'directives',
+            title: '自定义指令',
+          },
+        ],
+      },
+      {
+        title: '其他',
+        items: [
+          {
+            path: 'style',
+            title: '通用样式',
           },
         ],
       },

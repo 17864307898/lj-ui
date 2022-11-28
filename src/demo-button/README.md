@@ -17,9 +17,7 @@ Vue.use(DemoButton);
 
 ### 基础用法
 
-```html
-<demo-button type="primary" />
-```
+<demo-code>./demo/index.vue</demo-code>
 
 ## API
 

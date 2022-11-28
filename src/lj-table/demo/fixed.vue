@@ -34,6 +34,7 @@
             label: '操作',
             prop: 'action',
             fixed: 'right',
+            minWidth: 55,
           }
         ],
         dataList: [],

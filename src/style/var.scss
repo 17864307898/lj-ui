@@ -1,0 +1,79 @@
+// Color Palette
+$black: #000 !default;
+$white: #fff !default;
+$gray-1: #D3D3D3 !default;
+$gray-2: #C4C4C4 !default;
+$gray-3: #D7D7D7 !default;
+$gray-4: #F9F9F9 !default;
+$gray-5: #F2F2F2 !default;
+$gray-6: #F6F6F6 !default;
+$gray-7: #f4f4f6 !default;
+$gray-8: #E3E3E3 !default;
+$gray-9: #CCCCCC !default;
+$red: #FC5A5A !default;
+
+// Gradient Colors
+$gradient-blue: linear-gradient(227deg, #6468FF 0%, #3470FF 100%) !default;
+
+// Component Colors
+$color-primary: #3470ff !default;
+$color-danger: #f67172 !default;
+$color-success: #3daf30 !default;
+$color-hover: #f9f9f9 !default;
+$color-warning: #e6a23c !default;
+
+$color-text-primary: #333333 !default;
+$color-text-regular: #606266 !default;
+$color-text-secondary: #858598 !default;
+$color-text-placeholder: $gray-1 !default;
+
+$shadow-color-primary: rgba(52, 112, 255, 0.5) !default;
+
+// Padding
+$padding-base: 4px !default;
+$padding-xs: $padding-base * 2 !default;
+$padding-sm: $padding-base * 3 !default;
+$padding-md: $padding-base * 4 !default;
+$padding-lg: $padding-base * 6 !default;
+$padding-xl: $padding-base * 8 !default;
+
+// Font
+$font-size-xs: 12px !default;
+$font-size-sm: 14px !default;
+$font-size-md: 16px !default;
+$font-size-lg: 24px !default;
+$font-size-xl: 30px !default;
+$font-weight-bold: 550 !default;
+$font-weight-normal: 400 !default;
+$line-height-xs: 14px !default;
+$line-height-sm: 18px !default;
+$line-height-md: 20px !default;
+$line-height-lg: 22px !default;
+
+// Animation
+$animation-duration-base: 0.3s !default;
+$animation-duration-fast: 0.2s !default;
+$animation-timing-function-enter: ease-out !default;
+$animation-timing-function-leave: ease-in !default;
+
+// Border
+$border-color: $gray-3 !default;
+$border-width-base: 1px !default;
+$border-radius-sm: 2px !default;
+$border-radius-md: 4px !default;
+$border-radius-lg: 8px !default;
+$border-radius-xl: 24px !default;
+$border-radius-max: 999px !default;
+
+$superDanger: #92302B; //严重
+$superDangerLight:rgba(146, 48, 43, 0.1);
+$high: #D05C43; //高危
+$highLight: rgba(208, 92, 67, 0.1); //高危
+$mid: #EE8F4F; //中危
+$midLight: rgba(238, 143, 79, 0.1); //中危
+$low: #F7DB77; //低危
+$lowLight: rgba(247, 219, 119, 0.2); //低危
+$unknown: #737189; // 未评级
+$unknownLight: rgba(115, 113, 137, 0.1); // 未评级
+$safety: #8CB14A; //安全
+$safetyLight: rgba(140, 177, 74, 0.1); //安全

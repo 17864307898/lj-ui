@@ -1,0 +1,31 @@
+// 常用样式
+@import "./pm.scss";
+
+.v-flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.v-flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.fa-center {
+  align-items: center;
+}
+
+.fj-center {
+  justify-content: center;
+}
+
+.text-1 {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
