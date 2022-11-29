@@ -1,4 +1,5 @@
-// Color Palette
+// Color 调色
+$red: #FC5A5A !default;
 $black: #000 !default;
 $white: #fff !default;
 $gray-1: #D3D3D3 !default;
@@ -10,24 +11,33 @@ $gray-6: #F6F6F6 !default;
 $gray-7: #f4f4f6 !default;
 $gray-8: #E3E3E3 !default;
 $gray-9: #CCCCCC !default;
-$red: #FC5A5A !default;
 
-// Gradient Colors
-$gradient-blue: linear-gradient(227deg, #6468FF 0%, #3470FF 100%) !default;
+//Colors 主色
+$color-primary: #3F91F5 !default;
 
-// Component Colors
-$color-primary: #3470ff !default;
-$color-danger: #f67172 !default;
-$color-success: #3daf30 !default;
+//Colors 辅助色
+$color-danger: #ff4d4f !default;
+$color-success: #13ce66 !default;
 $color-hover: #f9f9f9 !default;
-$color-warning: #e6a23c !default;
+$color-warning: #ffba00 !default;
 
-$color-text-primary: #333333 !default;
-$color-text-regular: #606266 !default;
-$color-text-secondary: #858598 !default;
+//Colors 中性色
+$color-text-primary: #333 !default;
+$color-text-regular: #666 !default;
+$color-text-secondary: #999 !default;
 $color-text-placeholder: $gray-1 !default;
 
-$shadow-color-primary: rgba(52, 112, 255, 0.5) !default;
+// 渐变
+$gradient-blue: linear-gradient(227deg, #6468FF 0%, #3470FF 100%) !default;
+
+// Font 字体大小
+$font-size-xs: 12px;
+$font-size-xs-big: 13px;
+$font-size-sm: 14px;
+$font-size-md: 16px;
+$font-size-lg: 18px;
+$font-size-xl: 22px;
+$font-size-xl-big: 24px;
 
 // Padding
 $padding-base: 4px !default;
@@ -36,19 +46,6 @@ $padding-sm: $padding-base * 3 !default;
 $padding-md: $padding-base * 4 !default;
 $padding-lg: $padding-base * 6 !default;
 $padding-xl: $padding-base * 8 !default;
-
-// Font
-$font-size-xs: 12px !default;
-$font-size-sm: 14px !default;
-$font-size-md: 16px !default;
-$font-size-lg: 24px !default;
-$font-size-xl: 30px !default;
-$font-weight-bold: 550 !default;
-$font-weight-normal: 400 !default;
-$line-height-xs: 14px !default;
-$line-height-sm: 18px !default;
-$line-height-md: 20px !default;
-$line-height-lg: 22px !default;
 
 // Animation
 $animation-duration-base: 0.3s !default;
@@ -65,6 +62,7 @@ $border-radius-lg: 8px !default;
 $border-radius-xl: 24px !default;
 $border-radius-max: 999px !default;
 
+//风险等级颜色
 $superDanger: #92302B; //严重
 $superDangerLight:rgba(146, 48, 43, 0.1);
 $high: #D05C43; //高危

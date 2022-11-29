@@ -2,7 +2,7 @@
 
 ### 介绍
 
-LjInput是一个可根据传入的code值展示不同输入类型的组件
+LjInput是一个可根据传入的code值展示不同输入类型的组件（基于ElementUI下的el-input）
 
 ### 引入
 

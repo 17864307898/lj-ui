@@ -34,7 +34,7 @@ export default {
             token: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo4LCJleHAiOjE2Njk3MDkyODV9.aVevvvPYb3bB6ZSdLoX95WoUh_dXwyWBa9JX8D8CyFI`,
           },
           data: {},
-          maxSize: '4294967296',
+          maxSize: 4294967296,
           showFileList: true,
           drag: true,
           limit: 2,

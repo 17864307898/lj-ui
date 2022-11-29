@@ -11,71 +11,84 @@ lj-design 使用了 `Scss` 对样式进行预处理，并内置了一些样式�
 下面是所有的基础样式变量，组件的颜色变量请参考各个组件的文档：
 
 ```js
-// Color Palette
-$black: #000;
-$white: #fff;
-$gray-1: #D3D3D3;
-$gray-2: #C4C4C4;
-$gray-3: #D7D7D7;
-$gray-4: #F9F9F9;
-$gray-5: #F2F2F2;
-$gray-6: #F6F6F6;
-$gray-7: #f4f4f6;
-$gray-8: #E3E3E3;
-$gray-9: #CCCCCC;
-$red: #FC5A5A;
+// Color 调色
+$red: #FC5A5A !default;
+$black: #000 !default;
+$white: #fff !default;
+$gray-1: #D3D3D3 !default;
+$gray-2: #C4C4C4 !default;
+$gray-3: #D7D7D7 !default;
+$gray-4: #F9F9F9 !default;
+$gray-5: #F2F2F2 !default;
+$gray-6: #F6F6F6 !default;
+$gray-7: #f4f4f6 !default;
+$gray-8: #E3E3E3 !default;
+$gray-9: #CCCCCC !default;
 
-// Gradient Colors
-$gradient-blue: linear-gradient(227deg, #6468FF 0%, #3470FF 100%);
+//Colors 主色
+$color-primary: #3F91F5 !default;
 
-// Component Colors
-$color-primary: #3470ff;
-$color-danger: #f67172;
-$color-success: #3daf30;
-$color-hover: #f9f9f9;
-$color-warning: #e6a23c;
+//Colors 辅助色
+$color-danger: #ff4d4f !default;
+$color-success: #13ce66 !default;
+$color-hover: #f9f9f9 !default;
+$color-warning: #ffba00 !default;
 
-$color-text-primary: #333333;
-$color-text-regular: #606266;
-$color-text-secondary: #858598;
-$color-text-placeholder: $gray-1;
+//Colors 中性色
+$color-text-primary: #333 !default;
+$color-text-regular: #666 !default;
+$color-text-secondary: #999 !default;
+$color-text-placeholder: $gray-1 !default;
 
-$shadow-color-primary: rgba(52, 112, 255, 0.5);
+// 渐变
+$gradient-blue: linear-gradient(227deg, #6468FF 0%, #3470FF 100%) !default;
 
-// Padding
-$padding-base: 4px;
-$padding-xs: $padding-base * 2;
-$padding-sm: $padding-base * 3;
-$padding-md: $padding-base * 4;
-$padding-lg: $padding-base * 6;
-$padding-xl: $padding-base * 8;
-
-// Font
+// Font 字体大小
 $font-size-xs: 12px;
+$font-size-xs-big: 13px;
 $font-size-sm: 14px;
 $font-size-md: 16px;
-$font-size-lg: 24px;
-$font-size-xl: 30px;
-$font-weight-bold: 550;
-$font-weight-normal: 400;
-$line-height-xs: 14px;
-$line-height-sm: 18px;
-$line-height-md: 20px;
-$line-height-lg: 22px;
+$font-size-lg: 18px;
+$font-size-xl: 22px;
+$font-size-xl-big: 24px;
+
+// Padding
+$padding-base: 4px !default;
+$padding-xs: $padding-base * 2 !default;
+$padding-sm: $padding-base * 3 !default;
+$padding-md: $padding-base * 4 !default;
+$padding-lg: $padding-base * 6 !default;
+$padding-xl: $padding-base * 8 !default;
 
 // Animation
-$animation-duration-base: 0.3s;
-$animation-duration-fast: 0.2s;
-$animation-timing-function-enter: ease-out;
-$animation-timing-function-leave: ease-in;
+$animation-duration-base: 0.3s !default;
+$animation-duration-fast: 0.2s !default;
+$animation-timing-function-enter: ease-out !default;
+$animation-timing-function-leave: ease-in !default;
 
 // Border
-$border-color: $gray-3;
-$border-width-base: 1px;
-$border-radius-sm: 2px;
-$border-radius-md: 4px;
-$border-radius-lg: 8px;
-$border-radius-max: 999px;
+$border-color: $gray-3 !default;
+$border-width-base: 1px !default;
+$border-radius-sm: 2px !default;
+$border-radius-md: 4px !default;
+$border-radius-lg: 8px !default;
+$border-radius-xl: 24px !default;
+$border-radius-max: 999px !default;
+
+//风险等级颜色
+$superDanger: #92302B; //严重
+$superDangerLight:rgba(146, 48, 43, 0.1);
+$high: #D05C43; //高危
+$highLight: rgba(208, 92, 67, 0.1); //高危
+$mid: #EE8F4F; //中危
+$midLight: rgba(238, 143, 79, 0.1); //中危
+$low: #F7DB77; //低危
+$lowLight: rgba(247, 219, 119, 0.2); //低危
+$unknown: #737189; // 未评级
+$unknownLight: rgba(115, 113, 137, 0.1); // 未评级
+$safety: #8CB14A; //安全
+$safetyLight: rgba(140, 177, 74, 0.1); //安全
+
 ```
 
 ### 定制方法
