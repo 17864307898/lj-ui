@@ -3,6 +3,7 @@
     <el-cascader
       v-model="localValue"
       v-bind="{ ...$props, ...$attrs }"
+      v-on="$listeners"
       @change="oninput"
     />
   </div>

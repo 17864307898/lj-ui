@@ -52,6 +52,9 @@
         on: {
           'adapt-change': this.change,
           ...this.$listeners,
+          change: (val) => {
+            this.$emit('change', val, this.code)
+          }
         },
       })
     },

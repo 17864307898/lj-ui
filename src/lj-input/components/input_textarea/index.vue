@@ -3,6 +3,7 @@
     <el-input
       v-model="localValue"
       v-bind="{ ...$props, ...$attrs }"
+      v-on="$listeners"
       @input="oninput"
     />
   </div>

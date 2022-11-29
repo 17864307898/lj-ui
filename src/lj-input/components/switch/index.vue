@@ -3,6 +3,7 @@
     <el-switch
       v-model="localValue"
       v-bind="{ ...$props, ...$attrs }"
+      v-on="$listeners"
       @change="onchange"
     />
   </div>

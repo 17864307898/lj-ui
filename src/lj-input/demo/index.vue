@@ -6,7 +6,12 @@
     class="demo-list"
     >
       <span>{{ item.label }}：</span>
-      <lj-input :code="item.code" v-bind="item" />
+      <lj-input
+        v-bind="item"
+        @change="handleChange"
+        @input="handleInput"
+        @blur="handleBlur"
+      />
     </div>
   </div>
 </template>
@@ -138,6 +143,13 @@ export default {
       ]
     }
   },
+  methods: {
+    handleChange() {
+      console.log(arguments)
+    },
+    handleInput() {},
+    handleBlur() {}
+  }
 }
 </script>
 
