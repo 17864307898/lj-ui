@@ -34,9 +34,10 @@ LjUploadFolder是一个基于el-upload上传文件的组件
 | content | 上传需要的一些文案 |`maxSize`:限制大小; `Exceed`: 限制数量，默认值：当前限制选择 ${limit} 个文件; `errorMsg`: 失败，默认值：上传失败！` | — |
 | list-type	 | 文件列表的类型	 | _string_ | text | text/picture/picture-card |
 | uploadFileList | 回显上传文件 | _object_ | `url`, `name` |
+| md5Show | 是否支持md5 | _boolean_ | |
 | ossShow | 是否支持oss上传 | _boolean_ | — |
 | ossUploadPath | oss回调传参 | _object_ | `fileUrl`, `dir`, `token` | — |
-| 其余参数遵循 [elementui](https://element.eleme.cn/#/zh-CN/component/installation) 配置 | 可通过配置展示不同需求 | -- | -- |
+| 其余参数遵循 [elementui](https://element.eleme.cn/#/zh-CN/component/installation) 配置 | 可通过配置展示不同需求 | — | — |
 
 ### slot
 
@@ -51,5 +52,6 @@ LjUploadFolder是一个基于el-upload上传文件的组件
 |------|------|-----|-----|
 | uploadSuccess | 成功获取上传文件 | _object_ | `res`, `file`, `fileList` |
 | uploadRemove |  删除文件，值为上传的文件和文件列表，若返回 false 或者返回 Promise 且被 reject，则停止删除。 | _object_ | `file`, `fileList` |
-| uploadChange |  文件状态改变，添加文件、上传成功和上传失败时都会被调用 | _object_ | `file`, `fileList` |
+| uploadChange |  文件状态改变，添加文件、上传成功和上传失败时都会被调用，props里的md5Show为true则返回md5值 | _object_ | `file`, `fileList`，`md5` |
+| ossUploadData | 读取oss值并传入props里的data | _object_ | `OSSAccessKeyId`,`callback`,`host`,`key`,`policy`,`signature`,`success_action_status`, |
 | clearFiles | 清空上传 | — | — | 

@@ -23,7 +23,16 @@ LjUploadFolder是一个上传文件夹的组件
 
 | 参数 | 说明 | 类型 |  默认值 |
 |------|------|-----|---------|
-| uploadParmes | 上传信息 | _object_ | `maxSize:文件最大值;content:{maxSize:限制文案,againUp:重新上传文案,可加标签;clickUp:点击上传文案,可加标签}` |
+| max-size | 文件最大值 | _number_ | — |
+| content | 上传需要的一些文案 |`maxSize`:限制大小; `Exceed`: 限制数量，默认值：当前限制选择 ${limit} 个文件; `errorMsg`: 失败，默认值：上传失败！` | — |
+
+### slot
+
+| name | 说明 | 参数 | 默认值
+|------|------|-----|-----|
+| uploadIcon | 上传文件icon | — | el-icon-upload |
+| uploadText | 上传文件文案 | — | 将文件拖到此处，或点击上传 |
+| uploadTip | 上传文件提示 | — | — |
 
 ### 方法
 

@@ -1,3 +1,10 @@
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+// @ts-ignore
+const package_json_1 = __importDefault(require('./package.json'));
 module.exports = {
   name: 'lj-design',
   build: {
@@ -12,6 +19,13 @@ module.exports = {
     title: 'lj-design',
     logo: 'https://fastly.jsdelivr.net/npm/@vant/assets/logo.png',
     hideSimulator: true,
+    versions: package_json_1.default.version,
+    links: [
+      {
+        logo: 'https://fastly.jsdelivr.net/npm/@vant/assets/weapp.svg',
+        url: 'http://172.20.4.15:8911/#/',
+      },
+    ],
     nav: [
       {
         title: '开发指南',
@@ -23,6 +37,10 @@ module.exports = {
           {
             path: 'theme',
             title: '定制主题scss',
+          },
+          {
+            path: 'style',
+            title: '通用样式',
           },
         ],
       },
@@ -55,8 +73,8 @@ module.exports = {
           },
           {
             path: 'lj-upload-folder',
-            title: 'LjUploadFolder 上传文件夹'
-          }
+            title: 'LjUploadFolder 上传文件夹',
+          },
         ],
       },
       {
@@ -73,15 +91,6 @@ module.exports = {
           {
             path: 'directives',
             title: '自定义指令',
-          },
-        ],
-      },
-      {
-        title: '其他',
-        items: [
-          {
-            path: 'style',
-            title: '通用样式',
           },
         ],
       },

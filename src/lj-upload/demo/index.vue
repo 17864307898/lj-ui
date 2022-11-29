@@ -8,12 +8,13 @@
       :data="uploadParams.data"
       :drag="uploadParams.drag"
       :limit="uploadParams.limit"
+      :md5-show="uploadParams.md5Show"
       :max-size="uploadParams.maxSize"
       :oss-show="uploadParams.ossShow"
       :oss-upload-path="uploadParams.ossUploadPath"
       :show-file-list="uploadParams.showFileList"
       @ossUploadData="fnOssUploadData"
-      @uploadInfo="fnUploadInfo"
+      @uploadChange="fnUploadInfo"
     />
   </div>
 </template>
@@ -25,11 +26,12 @@ export default {
       uploadParams: {
           accept: '',
           action: '',
-          ossShow: false,
+          md5Show: true,
+          ossShow: true,
           ossUploadPath: {
             fileUrl: 'https://tangram-manage.test.spdx.cn/api/v1/oss/sign',
             dir: 'category-icon/',
-            token: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo4LCJleHAiOjE2Njk0MzM4MzB9.57vdpiFS5QXffEXpOu5FIhBlhfdxDkQYdsNLLIsWHtQ`,
+            token: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo4LCJleHAiOjE2Njk3MDkyODV9.aVevvvPYb3bB6ZSdLoX95WoUh_dXwyWBa9JX8D8CyFI`,
           },
           data: {},
           maxSize: '4294967296',
@@ -49,6 +51,7 @@ export default {
       this.uploadParams.data = res
     },
     fnUploadInfo(file) {
+      console.log(file)
       this.uploadData = file
     },
   },
