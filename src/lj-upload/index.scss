@@ -9,7 +9,7 @@
 
   .el-upload__tip {
     p {
-      color: $color-text-regular;
+      color: $font-color-grade-2;
       margin: 0 0 3px 0;
       font-size: $font-size-xs;
     }
@@ -18,7 +18,7 @@
     font-size: $font-size-sm;
     em {
       font-style: normal;
-      color: $color-primary;
+      color: $font-color-primary;
     }
   }
   .el-icon-upload {

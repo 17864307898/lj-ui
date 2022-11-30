@@ -11,48 +11,56 @@ lj-design 使用了 `Scss` 对样式进行预处理，并内置了一些样式�
 下面是所有的基础样式变量，组件的颜色变量请参考各个组件的文档：
 
 ```js
-// Color 调色
-$red: #FC5A5A !default;
+//Colors 通用 辅助字体颜色、背景颜色、border颜色
 $black: #000 !default;
 $white: #fff !default;
-$gray-1: #D3D3D3 !default;
-$gray-2: #C4C4C4 !default;
-$gray-3: #D7D7D7 !default;
-$gray-4: #F9F9F9 !default;
-$gray-5: #F2F2F2 !default;
-$gray-6: #F6F6F6 !default;
-$gray-7: #f4f4f6 !default;
-$gray-8: #E3E3E3 !default;
-$gray-9: #CCCCCC !default;
 
-//Colors 主色
-$color-primary: #3F91F5 !default;
+//字体颜色
+$font-color-grade-1: #333 !default;
+$font-color-grade-2: #666 !default;
+$font-color-grade-3: #999 !default;
+$font-color-gray: #D7D7D7 !default;
+$font-color-primary: #3F91F5 !default;
+$font-color-danger: #ff4d4f !default;
+$font-color-success: #13ce66 !default;
+$font-color-hover: #f9f9f9 !default;
+$font-color-warning: #ffba00 !default;
+$font-color-placeholder: $font-color-gray !default;
 
-//Colors 辅助色
-$color-danger: #ff4d4f !default;
-$color-success: #13ce66 !default;
-$color-hover: #f9f9f9 !default;
-$color-warning: #ffba00 !default;
+//背景颜色
+$bg-color-gray: #D3D3D3 !default;
+$bg-color-primary: #3F91F5 !default;
+$bg-color-danger: #ff4d4f !default;
+$bg-color-success: #13ce66 !default;
+$bg-color-hover: #f9f9f9 !default;
+$bg-color-warning: #ffba00 !default;
 
-//Colors 中性色
-$color-text-primary: #333 !default;
-$color-text-regular: #666 !default;
-$color-text-secondary: #999 !default;
-$color-text-placeholder: $gray-1 !default;
+//border颜色
+$border-color-gray: #D3D3D3 !default;
+$border-color-primary: #3F91F5 !default;
+$border-color-danger: #ff4d4f !default;
+$border-color-success: #13ce66 !default;
+$border-color-hover: #f9f9f9 !default;
+$border-color-warning: #ffba00 !default;
 
 // 渐变
-$gradient-blue: linear-gradient(227deg, #6468FF 0%, #3470FF 100%) !default;
+$gradient-gray: linear-gradient(227deg, #D3D3D3 0%, #D3D3D3 100%) !default;
+$gradient-primary: linear-gradient(227deg, #4e9af8 0%, #3F91F5 100%) !default;
+$gradient-danger: linear-gradient(227deg, #fa6f72 0%, #ff4d4f 100%) !default;
+$gradient-success: linear-gradient(227deg, #4fd38b 0%, #13ce66 100%) !default;
+$bd-color-hover: linear-gradient(227deg, #c3bebe 0%, #f9f9f9 100%) !default;
+$gradient-warning: linear-gradient(227deg, #fad879 0%, #ffba00 100%) !default;
 
 // Font 字体大小
 $font-size-xs: 12px;
-$font-size-xs-big: 13px;
+$font-size-xb: 13px;
 $font-size-sm: 14px;
 $font-size-md: 16px;
 $font-size-lg: 18px;
 $font-size-xl: 22px;
-$font-size-xl-big: 24px;
+$font-size-lb: 24px;
 
-// Padding
+// Padding大小
 $padding-base: 4px !default;
 $padding-xs: $padding-base * 2 !default;
 $padding-sm: $padding-base * 3 !default;
@@ -66,8 +74,7 @@ $animation-duration-fast: 0.2s !default;
 $animation-timing-function-enter: ease-out !default;
 $animation-timing-function-leave: ease-in !default;
 
-// Border
-$border-color: $gray-3 !default;
+// Border宽以及边角
 $border-width-base: 1px !default;
 $border-radius-sm: 2px !default;
 $border-radius-md: 4px !default;

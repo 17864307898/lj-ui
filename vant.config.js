@@ -23,9 +23,12 @@ module.exports = {
     links: [
       {
         logo: 'https://fastly.jsdelivr.net/npm/@vant/assets/weapp.svg',
-        url: 'http://172.20.4.15:8911/#/',
+        url: 'https://nexus.spdx.cn/repository/npm-group/',
       },
     ],
+    htmlMeta: {
+      'docsearch:version': 'v4',
+    },
     nav: [
       {
         title: '开发指南',

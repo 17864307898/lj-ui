@@ -137,6 +137,6 @@ export default {
 .uploadName {
   line-height: 20px;
   margin: 10px;
-  color: $color-primary;
+  color: $font-color-primary;
 }
 </style>
