@@ -1,21 +1,33 @@
 <template>
-  <lj-upload :upload-parmes="uploadParmes" @uploadInfo="fnUploadInfo" />
+  <div>
+    <lj-upload
+      ref="ljuploads"
+      :accept="uploadParmes.accept"
+      :action="uploadParmes.accept"
+      :maxSize="uploadParmes.maxSize"
+      :drag="uploadParmes.drag"
+      :content="uploadParmes.content"
+      :limit="uploadParmes.limit"
+      @uploadInfo="fnUploadInfo"
+    />
+    <!-- <ossUpload /> -->
+  </div>
 </template>
 
 <script>
-
+// import ossUpload from './ossUpload.vue';
 export default {
+  // components: { ossUpload },
   data() {
     return {
       uploadParmes: {
-        accept: '*',
+        accept: '',
         uploadPath: '/api/file/upload',
         maxSize: '4294967296',
+        drag: true,
         content: {
           maxSize: '请上传小于4G的文件',
-          againUp: `将文件拖到此处，或<em>重新上传</em>`,
-          clickUp: `将文件拖到此处，或<em>点击上传</em>`,
-        }
+        },
       },
       uploadData: {},
     };

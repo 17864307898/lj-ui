@@ -70,6 +70,7 @@
     "iOS >= 8"
   ],
   "dependencies": {
+    "ali-oss": "^6.17.1",
     "jszip": "^3.10.1"
   }
 }
