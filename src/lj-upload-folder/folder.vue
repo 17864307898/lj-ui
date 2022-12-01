@@ -32,7 +32,7 @@ import Vue from 'vue';
 import JSZip from 'jszip';
 import { Loading, Message } from 'element-ui';
 
-Vue.use(Loading, Message);
+Vue.use(Loading);
 
 export default {
   name: 'lj-upload-folder',
@@ -59,7 +59,7 @@ export default {
   methods: {
     beforeUpload(file) {
       if (!file.target.files || file.target.files.length === 0) {
-        this.$message.warning(this.content.maxSize);
+        Message.warning(this.content.maxSize);
         return;
       }
       this.file = '';

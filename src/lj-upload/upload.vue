@@ -54,7 +54,6 @@ import SparkMD5 from 'spark-md5';
 // import axios from 'axios'
 
 Vue.use(Upload);
-Vue.use(Message);
 
 export default {
   name: 'LjUpload',
@@ -237,7 +236,7 @@ export default {
       this.fileList = fileList;
     },
     handleExceed() {
-      Mmessage.warning(
+      Message.warning(
         this.content.Exceed
           ? this.content.Exceed
           : `当前限制选择 ${this.limit} 个文件`
