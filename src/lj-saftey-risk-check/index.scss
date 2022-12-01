@@ -1,0 +1,115 @@
+@import "./style/elementui.scss";
+@import "../style/var.scss";
+
+.level-box {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  h1 {
+    white-space: nowrap;
+    font-size: $font-size-sm;
+    margin: 0;
+  }
+  > div {
+    width: 100%;
+    display: flex;
+    margin-left: 10px;
+    padding-right: 130px;
+    span {
+      position: relative;
+      width: 80%;
+      max-width: 144px;
+      height: 66px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      border: 1px solid rgba(227, 230, 239, 1);
+      box-shadow: 0px 0px 12px 0px rgba(241, 245, 248, 1);
+      border-radius: 2px;
+      font-size: $font-size-xs;
+      color: $font-color-primary;
+      margin-right: 10px;
+      cursor: pointer;
+      b {
+        font-size: $font-size-md;
+        margin-bottom: 5px;
+      }
+    }
+    .isActive {
+      background: #eef2ff;
+    }
+    .isActive::after {
+      content: '';
+      width: 0;
+      height: 0;
+      border: 20px solid transparent;
+      border-right: 20px solid #489bff;
+      transform: rotate(135deg);
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      font-size: 18px;
+    }
+    .el-icon-check {
+      position: absolute;
+      top: 2px;
+      right: 1px;
+      font-size: 14px;
+      color: #fff;
+      z-index: 1;
+    }
+    span:hover {
+      background: #eef2ff;
+    }
+    span:nth-of-type(1) {
+      border-left: 5px solid #595959;
+      b {
+        color: #595959;
+      }
+    }
+    span:nth-of-type(2) {
+      border-left: 5px solid #a02725;
+      b {
+        color: #a02725;
+      }
+    }
+    span:nth-of-type(3) {
+      border-left: 5px solid #e76949;
+      b {
+        color: #e76949;
+      }
+    }
+    span:nth-of-type(4) {
+      border-left: 5px solid #fd8a3d;
+      b {
+        color: #fd8a3d;
+      }
+    }
+    span:nth-of-type(5) {
+      border-left: 5px solid #fbdc64;
+      b {
+        color: #fbdc64;
+      }
+    }
+    span:nth-of-type(6) {
+      border-left: 5px solid #72718b;
+      b {
+        color: #72718b;
+      }
+    }
+    span:nth-of-type(7) {
+      border-left: 5px solid #3da200;
+      b {
+        color: #3da200;
+      }
+    }
+    .is_disabled {
+      cursor: not-allowed;
+      background-color: #ececec;
+      &:hover {
+        background-color: #ececec;
+      }
+    }
+  }
+}
