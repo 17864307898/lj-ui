@@ -12,19 +12,17 @@
 <script>
   import Vue from 'vue'
   import { DatePicker } from 'element-ui'
+  import translateMixin from '../../mixins'
 
   Vue.use(DatePicker)
 
   export default {
     name: 'adapt-date-picker',
+    mixins: [translateMixin],
     props: {
       value: {
         type: undefined,
         default: undefined,
-      },
-      placeholder: {
-        type: String,
-        default: '请填写',
       },
       type: {
         type: String,

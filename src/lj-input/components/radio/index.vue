@@ -42,10 +42,6 @@
         type: String,
         default: 'value',
       },
-      placeholder: {
-        type: String,
-        default: '请选择',
-      },
     },
     data() {
       return {

@@ -42,15 +42,15 @@ module.exports = {
             path: 'style',
             title: '通用样式',
           },
+          {
+            path: 'locale',
+            title: '国际化',
+          }
         ],
       },
       {
         title: '基础组件',
         items: [
-          // {
-          //   path: 'demo-button',
-          //   title: 'DemoButton 按钮',
-          // },
           {
             path: 'lj-table',
             title: 'LjTable 表格',

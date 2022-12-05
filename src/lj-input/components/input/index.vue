@@ -11,20 +11,18 @@
 
 <script>
   import Vue from 'vue'
+  import translateMixin from '../../mixins'
   import { Input } from 'element-ui'
 
   Vue.use(Input)
 
   export default {
     name: 'adapt-input',
+    mixins: [translateMixin],
     props: {
       value: {
         type: undefined,
         default: undefined,
-      },
-      placeholder: {
-        type: String,
-        default: '请填写',
       },
       type: {
         type: String,
