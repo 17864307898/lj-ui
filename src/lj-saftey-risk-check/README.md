@@ -23,17 +23,9 @@ ljSafteyRiskCheck组件是安全风险等级切换使用
 
 | 参数 | 说明 | 类型 |  默认值 |
 |------|------|-----|---------|
-| type | 风险类型 | _number_ | `1：漏洞 2：许可证` |
-| riskList | 风险值 | _object_ | `{"critical": 1,"high": 1,"low": 1,"mid": 1,"unknown": 1}` |
-| riskData | 风险数据 | _arobject_ | `{1: {critical: '严重', high: '高危', mid: '中危',low: '低危',unknown: '未评级',noRisk: '无风险',},2: { critical: '严重',high: '高风险',   mid: '中风险',low: '低风险',unknown: '未知',noRisk: '无风险',}},` |
-
-### slots
-
-| name | 说明 | 参数 |
-|------|------|-----|
-| detailTarget | 详情跳转 | - |
+| labelData | 风险类型 | _object_ | `{'': '全部',4: '严重',3: '高危',2: '中危',1: '低危',0: '未评级','-1': '无风险'},` |
 
 ### 方法
 | name | 说明 | 参数 |
 |------|------|-----|
-| handelRisk | 每个风险等级的click事件 | 对应等级的英文字段 eg: mid|
+| handelRisk | 切换风险等级click事件 | _array_ |

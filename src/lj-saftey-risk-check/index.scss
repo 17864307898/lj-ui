@@ -44,71 +44,71 @@
       width: 0;
       height: 0;
       border: 20px solid transparent;
-      border-right: 20px solid #489bff;
+      border-right: 20px solid $bd-color-primary;
       transform: rotate(135deg);
       position: absolute;
       top: -20px;
       right: -20px;
-      font-size: 18px;
+      font-size: $font-size-lg;
     }
     .el-icon-check {
       position: absolute;
       top: 2px;
       right: 1px;
-      font-size: 14px;
-      color: #fff;
+      font-size: $font-size-sm;
+      color: $white;
       z-index: 1;
     }
     span:hover {
       background: #eef2ff;
     }
     span:nth-of-type(1) {
-      border-left: 5px solid #595959;
+      border-left: 5px solid $font-color-grade-2;
       b {
-        color: #595959;
+        color: $font-color-grade-2;
       }
     }
     span:nth-of-type(2) {
-      border-left: 5px solid #a02725;
+      border-left: 5px solid $superDanger;
       b {
-        color: #a02725;
+        color: $superDanger;
       }
     }
     span:nth-of-type(3) {
-      border-left: 5px solid #e76949;
+      border-left: 5px solid $high;
       b {
-        color: #e76949;
+        color: $high;
       }
     }
     span:nth-of-type(4) {
-      border-left: 5px solid #fd8a3d;
+      border-left: 5px solid $mid;
       b {
-        color: #fd8a3d;
+        color: $mid;
       }
     }
     span:nth-of-type(5) {
-      border-left: 5px solid #fbdc64;
+      border-left: 5px solid $low;
       b {
-        color: #fbdc64;
+        color: $low;
       }
     }
     span:nth-of-type(6) {
-      border-left: 5px solid #72718b;
+      border-left: 5px solid $unknown;
       b {
-        color: #72718b;
+        color: $unknown;
       }
     }
     span:nth-of-type(7) {
-      border-left: 5px solid #3da200;
+      border-left: 5px solid $safety;
       b {
-        color: #3da200;
+        color: $safety;
       }
     }
     .is_disabled {
       cursor: not-allowed;
-      background-color: #ececec;
+      background-color: $disabled;
       &:hover {
-        background-color: #ececec;
+        background-color: $disabled;
       }
     }
   }

@@ -13,25 +13,28 @@
       >
         <b>{{ item.num }}</b>
         {{ item.type }}
-        <i
-          v-if="levelChoose.includes(index)"
-          class="el-icon-check"
-        ></i>
+        <i v-if="levelChoose.includes(index)" class="el-icon-check"></i>
       </span>
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'lj-saftey-risk-check',
-  props: {},
+  props: {
+    labelData: {
+      type: Object,
+      default: () => {
+        return {};
+      },
+    },
+  },
   data() {
     return {
       levelChoose: [0],
       LevelAllList: [
-        { id: '', type: '全部', num: '' },
+        { id: '', type: '全部', num: 0 },
         { id: 4, type: '严重', num: 0 },
         { id: 3, type: '高危', num: 0 },
         { id: 2, type: '中危', num: 0 },
@@ -41,6 +44,15 @@ export default {
       ],
     };
   },
+  mounted() {
+    this.LevelAllList.forEach((item) => {
+      for(let el in this.labelData) {
+        if(el === item.id) {
+          item.type = this.labelData[el]
+        }
+      }
+    });
+  },
   methods: {
     LevelChooseBtn(item, index) {
       // 除全部外，其他安全风险等级数量为0 置灰
@@ -49,7 +61,7 @@ export default {
       }
       if (index <= 0) {
         this.levelChoose = [0];
-        this.$emit('handelRisk', this.levelChoose)
+        this.$emit('handelRisk', this.levelChoose);
         return;
       }
       if (this.levelChoose.includes(index)) {
@@ -67,7 +79,7 @@ export default {
       if (this.levelChoose.length === 0) {
         this.levelChoose.push(0);
       }
-      this.$emit('handelRisk', this.levelChoose)
+      this.$emit('handelRisk', this.levelChoose);
     },
   },
 };
