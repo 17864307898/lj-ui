@@ -11,7 +11,7 @@
         width="400"
       >
         <div class="form-filter-con">
-          <h1>{{ filterContent.title || '筛选方式' }}</h1>
+          <h1>{{ translate('screenMethod') }}</h1>
           <!-- filterItems表单筛选项 start -->
           <slot
             :filterClose="filterClose"
@@ -22,14 +22,14 @@
           <!-- 表单筛选项 end -->
           <div class="box-bottom">
             <el-button type="text" @click="fnReset()">{{
-              filterContent.reset || '重置'
+              translate('reset')
             }}</el-button>
             <div>
               <el-button size="mini" @click="popoverShow = false">{{
-                filterContent.cancel || '取消'
+                translate('cancel')
               }}</el-button>
               <el-button size="mini" type="primary" @click="fnFilter()">
-                {{ filterContent.sure || '筛选' }}
+                {{ translate('screen') }}
               </el-button>
             </div>
           </div>
@@ -76,7 +76,7 @@
         </el-tag>
         <el-tag v-if="filterChooseList && filterChooseList.length > 0">
           <p class="reset" @click="fnEmpty">
-            {{ filterContent.empty }}
+            {{ translate('clear') }}
             <i class="el-icon-error"></i>
           </p>
         </el-tag>
@@ -95,88 +95,74 @@
   </div>
 </template>
 <script>
-import Vue from 'vue';
-import {
-  Form,
-  FormItem,
-  Select,
-  Switch,
-  Popover,
-  Option,
-  Button,
-  Tag,
-  Link,
-} from 'element-ui';
+  import './import'
+  import { translate } from '../utils/translate'
+  const t = translate('ljFilter')
 
-Vue.use(Form);
-Vue.use(FormItem);
-Vue.use(Switch);
-Vue.use(Select);
-Vue.use(Popover);
-Vue.use(Option);
-Vue.use(Button);
-Vue.use(Tag);
-Vue.use(Link);
-
-export default {
-  name: 'lj-filter',
-  props: {
-    filterContent: {
-      // 表单文案
-      type: Object,
-      default: () => {
-        return {};
+  export default {
+    name: 'lj-filter',
+    props: {
+      filterContent: {
+        // 表单文案
+        type: Object,
+        default: () => {
+          return {};
+        },
+      },
+      filterShow: {
+        type: Boolean,
+        default: false,
+      },
+      filterChooseList: {
+        // 表单筛选项
+        type: Array,
+        default: () => {
+          return [];
+        },
+      },
+      tableSelArr: {
+        // table选择项
+        type: Array,
+        default: () => {
+          return [];
+        },
       },
     },
-    filterShow: {
-      type: Boolean,
-      default: false,
+    data() {
+      return {
+        popoverShow: false,
+        filterReset: 1,
+        filterSure: 1,
+        filterClose: {},
+      };
     },
-    filterChooseList: {
-      // 表单筛选项
-      type: Array,
-      default: () => {
-        return [];
+    mounted() {
+      this.initData();
+    },
+    methods: {
+      initData() {},
+      // 置空
+      fnReset() {
+        this.filterReset += this.filterReset
+      },
+      // 筛选按钮
+      fnFilter() {
+        this.filterSure += this.filterSure
+        this.popoverShow = false
+      },
+      // 关闭哪个
+      fnChooseClose(tag) {
+        this.filterClose = tag
+      },
+      // 清空
+      fnEmpty() {
+        this.fnReset()
+      },
+      // 翻译
+      translate(path) {
+        console.log(t(path))
+        return t(path)
       },
     },
-    tableSelArr: {
-      // table选择项
-      type: Array,
-      default: () => {
-        return [];
-      },
-    },
-  },
-  data() {
-    return {
-      popoverShow: false,
-      filterReset: 1,
-      filterSure: 1,
-      filterClose: {},
-    };
-  },
-  mounted() {
-    this.initData();
-  },
-  methods: {
-    initData() {},
-    // 置空
-    fnReset() {
-      this.filterReset += this.filterReset;
-    },
-    // 筛选按钮
-    fnFilter() {
-      this.filterSure += this.filterSure;
-      this.popoverShow = false;
-    },
-    // 关闭哪个
-    fnChooseClose(tag) {
-      this.filterClose = tag;
-    },
-    // 清空
-    fnEmpty() {
-      this.fnReset();
-    },
-  },
-};
+  };
 </script>

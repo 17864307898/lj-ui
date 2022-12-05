@@ -140,6 +140,10 @@ export default {
           activeText: '打开',
           inactiveText: '关闭',
         },
+        {
+          code: 110,
+          label: '未知类型',
+        },
       ]
     }
   },

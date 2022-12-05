@@ -10,16 +10,15 @@
 </template>
 
 <script>
+  import translateMixin from '../../mixins'
+
   export default {
     name: 'adapt-input-textarea',
+    mixins: [translateMixin],
     props: {
       value: {
         type: undefined,
         default: undefined,
-      },
-      placeholder: {
-        type: String,
-        default: '请填写',
       },
       type: {
         type: String,
