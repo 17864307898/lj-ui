@@ -49,7 +49,7 @@
   p {
     font-size: $font-size-sm;
     margin: 0;
-    color: $color-text-regular;
+    color: $font-color-grade-2;
     span {
       margin: 0 5px;
     }
@@ -58,7 +58,7 @@
     margin-right: 10px;
     border-radius: $border-radius-xl;
     b {
-      color: $color-text-primary;
+      color: $font-color-grade-1;
       font-weight: 400;
     }
     span {
@@ -73,7 +73,7 @@
   .el-icon-close:hover, .el-icon-error:hover {
     font-size: $font-size-md;
     background: 0;
-    color: $color-primary;
+    color: $font-color-primary;
   }
   .r_pos {
     position: absolute;

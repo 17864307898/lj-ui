@@ -100,7 +100,7 @@ const val_c = cleanObjectEmpty(b) // 1.15 GB
 
 | 说明 | 参数 | 返回值 | 
 |--------|------|-----|-------|-------|-------|
-| m到n之间的随机数 | `m`_number_ `n`_number_ | _number_	
+| m到n之间的随机数 | `m`_number_ `n`_number_ | _number_	|
 #### 示例
 ```javascript
  const a = 2, b = 9
@@ -142,8 +142,8 @@ const val_c = cleanObjectEmpty(b) // 1.15 GB
 
     //格式化时间
     const var_a1 = formatDate(data1) //2022-11-23 16:15:40
-    const var_a2 = formatDate(data1, YYYY-MM-DD hh:mm:ss) ///2022-11-22 10:51:32
-    const var_a3 = formatDate(data1, YYYY-MM-DD hh:mm) ///2022-11-22 10:51
+    const var_a2 = formatDate(data1, YYYY-MM-DD hh:mm:ss) //2022-11-22 10:51:32
+    const var_a3 = formatDate(data1, YYYY-MM-DD hh:mm) //2022-11-22 10:51
     //毫秒转天时分秒
     const var2 = formatMS(data2) // 8 分 17 秒
     //秒转历史时间

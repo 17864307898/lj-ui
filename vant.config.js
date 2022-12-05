@@ -23,9 +23,12 @@ module.exports = {
     links: [
       {
         logo: 'https://fastly.jsdelivr.net/npm/@vant/assets/weapp.svg',
-        url: 'http://172.20.4.15:8911/#/',
+        url: 'https://nexus.spdx.cn/repository/npm-group/',
       },
     ],
+    htmlMeta: {
+      'docsearch:version': 'v4',
+    },
     nav: [
       {
         title: '开发指南',
@@ -45,6 +48,23 @@ module.exports = {
         ],
       },
       {
+        title: 'API',
+        items: [
+          {
+            path: 'api',
+            title: '公用方法',
+          },
+          {
+            path: 'utils',
+            title: '存储方法',
+          },
+          {
+            path: 'directives',
+            title: '自定义指令',
+          },
+        ],
+      },
+      {
         title: '基础组件',
         items: [
           // {
@@ -60,14 +80,6 @@ module.exports = {
             title: 'LjInput 适配输入框',
           },
           {
-            path: 'lj-filter',
-            title: 'LjFilter 筛选',
-          },
-          {
-            path: 'lj-saftey-risk',
-            title: 'LjSafteyRisk 风险等级',
-          },
-          {
             path: 'lj-upload',
             title: 'LjUpload 上传文件',
           },
@@ -78,19 +90,19 @@ module.exports = {
         ],
       },
       {
-        title: 'API',
+        title: '业务组件',
         items: [
           {
-            path: 'api',
-            title: '公用方法',
+            path: 'lj-filter',
+            title: 'LjFilter 筛选',
           },
           {
-            path: 'utils',
-            title: '存储方法',
+            path: 'lj-saftey-risk',
+            title: 'LjSafteyRisk 风险等级',
           },
           {
-            path: 'directives',
-            title: '自定义指令',
+            path: 'lj-saftey-risk-check',
+            title: 'LjSafteyRiskCheck 风险切换',
           },
         ],
       },

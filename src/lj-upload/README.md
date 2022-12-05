@@ -1,7 +1,7 @@
 # LjUpload 上传
 
 ### 介绍
-LjUploadFolder是一个基于el-upload上传文件的组件
+LjUploadFolder组件可用于上传文件，支持oss、md5（基于ElementUI下的el-upload）
 ### 引入
 
 ```js
