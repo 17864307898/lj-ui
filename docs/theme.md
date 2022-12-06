@@ -14,6 +14,7 @@ lj-design 使用了 `Scss` 对样式进行预处理，并内置了一些样式�
 //Colors 通用 辅助字体颜色、背景颜色、border颜色
 $black: #000 !default;
 $white: #fff !default;
+$disabled: #ececec !default;
 
 //字体颜色
 $font-color-grade-1: #333 !default;
