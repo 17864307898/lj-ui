@@ -104,6 +104,10 @@ module.exports = {
             path: 'lj-saftey-risk-check',
             title: 'LjSafteyRiskCheck 多风险筛选',
           },
+          {
+            path: 'lj-charts',
+            title: 'LjCharts 图表',
+          },
         ],
       },
     ],

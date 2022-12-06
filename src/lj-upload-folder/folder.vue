@@ -111,7 +111,7 @@ export default {
 }
 .upload {
   position: absolute;
-  left: 0px;
+  left: 0;
   top: 2px;
   width: 49px;
   cursor: pointer;

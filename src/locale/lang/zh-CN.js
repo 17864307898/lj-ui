@@ -14,5 +14,18 @@ export default {
     placeholder: '请填写',
     select: '请选择',
   },
-  // 
+  // ljCharts
+  ljCharts: {
+    files: '文件分布',
+    codes: '代码分布',
+    distributeTitle: '语言分布',
+    others: '其他',
+    switchTable: '切换为表格',
+    switchChart: '切换为图表',
+    index: '序号',
+    fileName: '文件名',
+    fileCount: '文件数量',
+    codeCount: '代码行数',
+    fileTitle: '文件类型分布',
+  },
 }

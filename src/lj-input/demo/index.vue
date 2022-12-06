@@ -3,11 +3,10 @@
     <el-form-item
       v-for="(item, index) in list"
       :key="`${item.code}_${index}`"
-      label-width="80px"
+      label-width="110px"
       :label="item.label"
       :prop="item.field"
     >
-      <!-- <span>{{ item.label }}：</span> -->
       <lj-input
         v-model="form[item.field]"
         v-bind="item"

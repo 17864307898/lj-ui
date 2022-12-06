@@ -11,7 +11,21 @@ export default {
   // LjInput
   ljInput: {
     unknown: 'Unsupported type',
-    placeholder: 'please fill in',
-    select: 'please choose',
+    placeholder: 'Please fill in',
+    select: 'Please choose',
+  },
+  // ljCharts
+  ljCharts: {
+    files: 'File distribution',
+    codes: 'Distribution of code',
+    distributeTitle: 'Distribution of language',
+    others: 'others',
+    switchTable: 'Switch to table',
+    switchChart: 'Switch to Chart',
+    index: 'serial number',
+    fileName: 'document name',
+    fileCount: 'Quantity of documents',
+    codeCount: 'Line of code',
+    fileTitle: 'File type distribution',
   },
 }
