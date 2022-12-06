@@ -1,7 +1,7 @@
 # ljSafteyRiskCheck 漏洞和许可证风险等级
 
 ### 介绍
-ljSafteyRiskCheck组件是安全风险等级切换使用
+ljSafteyRiskCheck组件用于安全风险等级筛选使用
 ### 引入
 
 ```js

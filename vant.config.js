@@ -102,7 +102,7 @@ module.exports = {
           },
           {
             path: 'lj-saftey-risk-check',
-            title: 'LjSafteyRiskCheck 风险切换',
+            title: 'LjSafteyRiskCheck 多风险筛选',
           },
         ],
       },
