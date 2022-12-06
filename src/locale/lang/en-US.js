@@ -12,5 +12,6 @@ export default {
   ljInput: {
     unknown: 'Unsupported type',
     placeholder: 'please fill in',
+    select: 'please choose',
   },
 }

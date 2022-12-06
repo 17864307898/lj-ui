@@ -2,6 +2,7 @@
   <div class="adapt-input">
     <el-cascader
       v-model="localValue"
+      :placeholder="(placeholder || translate('select'))"
       v-bind="{ ...$props, ...$attrs }"
       v-on="$listeners"
       @change="oninput"
@@ -12,6 +13,7 @@
 <script>
   import Vue from 'vue'
   import { Cascader, CascaderPanel, MenuItem } from 'element-ui'
+  import translateMixin from '../../mixins'
 
   Vue.use(Cascader)
   Vue.use(CascaderPanel)
@@ -19,6 +21,7 @@
 
   export default {
     name: 'adapt-cascader',
+    mixins: [translateMixin],
     props: {
       value: {
         type: undefined,

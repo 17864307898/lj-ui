@@ -24,7 +24,6 @@ export function translate(name) {
   const prefix = name + '.'
 
   return function (path) {
-    console.log(prefix + path)
     const messages = locale.messages()
     const message = get(messages, prefix + path) || get(messages, path)
 

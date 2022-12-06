@@ -2,6 +2,7 @@
   <div class="adapt-select">
     <el-select
       v-model="localValue"
+      :placeholder="(placeholder || translate('select'))"
       v-bind="{ ...$props, ...$attrs }"
       v-on="$listeners"
       @change="onchange"
@@ -48,7 +49,7 @@
       },
       placeholder: {
         type: String,
-        default: t('placeholder'),
+        default: () => '',
       },
       multiple: {
         type: Boolean,
@@ -81,6 +82,9 @@
       onchange(val) {
         this.$emit('adapt-change', val)
       },
+      translate(path) {
+        return t(path)
+      }
     },
   }
 </script>

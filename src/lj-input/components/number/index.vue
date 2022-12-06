@@ -2,6 +2,7 @@
   <div class="number-input">
     <el-input-number
       v-model="localValue"
+      :placeholder="placeholder || translate('placeholder')"
       v-bind="{ ...$props, ...$attrs }"
       v-on="$listeners"
       @input="oninput"

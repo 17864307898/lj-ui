@@ -2,6 +2,7 @@
   <div class="adapt-input">
     <el-input
       v-model="localValue"
+      :placeholder="placeholder || translate('placeholder')"
       v-bind="{ ...$props, ...$attrs }"
       v-on="$listeners"
       @input="oninput"

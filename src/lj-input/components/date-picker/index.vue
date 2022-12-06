@@ -2,6 +2,7 @@
   <div class="adapt-datetime">
     <el-date-picker
       v-model="localValue"
+      :placeholder="placeholder || translate('placeholder')"
       v-bind="{ ...$props, ...$attrs }"
       v-on="$listeners"
       @change="onchange"

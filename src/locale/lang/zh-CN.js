@@ -12,6 +12,7 @@ export default {
   ljInput: {
     unknown: '不支持的类型',
     placeholder: '请填写',
+    select: '请选择',
   },
   // 
 }

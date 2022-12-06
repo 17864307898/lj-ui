@@ -5,7 +5,7 @@ export default {
   props: {
     placeholder: {
       type: String,
-      default: () => t('placeholder'),
+      default: () => '',
     },
   },
   methods: {
