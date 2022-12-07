@@ -1,8 +1,11 @@
 <template>
   <lj-charts
+    :chart-type="1"
+    :config="[0, 1, 2]"
     :data="data"
-    :type="101"
-    :height="200"
+    source
+    :type="104"
+    :height="240"
   />
 </template>
 
@@ -13,18 +16,7 @@
     props:{},
     data(){
       return {
-        data: [
-          {
-            language: 'test1',
-            num: 20,
-            line: 43,
-          },
-          {
-            language: 'test2',
-            num: 43,
-            line: 20,
-          },
-        ],
+        data: [],
       }
     },
   }

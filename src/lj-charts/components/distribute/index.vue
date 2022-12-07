@@ -1,7 +1,7 @@
 <template>
   <div class="content-wrap">
     <div class="title-wrap">
-      <span class="title">{{ title || translate('distributeTitle') }}</span>
+      <span class="title">{{ title || t('distributeTitle') }}</span>
 
       <!-- 分布类型 -->
       <div class="fr">
@@ -11,7 +11,7 @@
           :type="currentType === 1 ? 'primary' : ''"
           @click="handleClick(1)"
         >
-          {{ translate('files') }}
+          {{ t('files') }}
         </el-button>
 
         <el-button
@@ -20,7 +20,7 @@
           :type="currentType === 2 ? 'primary' : ''"
           @click="handleClick(2)"
         >
-          {{ translate('codes') }}
+          {{ t('codes') }}
         </el-button>
       </div>
     </div>
@@ -28,7 +28,7 @@
     <!-- chart视图 -->
     <div
       v-if="isChart"
-      id="echarts"
+      ref="echarts"
       :style="`height: ${chartHeight}`"
     ></div>
     
@@ -37,6 +37,7 @@
       v-else
       :columns="columns"
       :data="tableList"
+      :need-pagination="false"
       :style="`height: ${chartHeight}`"
     />
 
@@ -50,7 +51,7 @@
 </template>
 
 <script>
-  import { handleOptions, t, formatData } from './handle'
+  import { handleOptions, formatData } from './handle'
   import { handleColumns } from './config'
   import mixins from '../../mixins'
 
@@ -59,16 +60,6 @@
     components:{},
     mixins: [mixins],
     props:{
-      // 标题
-      title: {
-        type: String,
-        default: () => '',
-      },
-      // 数据集
-      data: {
-        type: Array,
-        default: () => undefined,
-      },
       // 自定义颜色
       colors: {
         type: Array,
@@ -78,39 +69,15 @@
     data(){
       return {
         currentType: 1,
-        isChart: true, // 展示为图表
-        tableList: [], // 表格数据
-        tableLoading: false,
       }
     },
     computed: {
-      // 切换文字
-      switchText() {
-        if (this.isChart) return t('switchTable')
-
-        return t('switchChart')
-      },
       // 表格配置
       columns() {
         return handleColumns(this.currentType)
       },
     },
-    watch: {
-      data: {
-        handler(val) {
-          if (val) {
-            this.handleInitChart()
-          }
-        },
-        immediate: true,
-        deep: true,
-      },
-    },
     methods: {
-      // 国际化
-      translate(path) {
-        return t(path)
-      },
       // 类型切换
       handleClick(type = 1) {
         this.currentType = type
@@ -125,30 +92,9 @@
         const option = handleOptions(this.data, this.currentType, this.colors)
         this.handleEcharts(option)
       },
-      // 视图转换
-      handleView() {
-        this.isChart = !this.isChart
-
-        if (this.isChart) {
-          this.handleInitChart()
-
-          return
-        }
-
-        this.handleInitTable()
-      },
-      // 表格试图初始化
-      handleInitTable() {
-        if (this.isChart) return
-
-        this.tableLoading = true
-        
-        if (this.chart) {
-          this.chart.dispose()
-          this.chart = null
-        }
-        this.tableList = formatData(this.data, this.currentType, true)
-        this.tableLoading = false
+      // 数据处理
+      formatData() {
+        return formatData(this.data, this.currentType, true)
       },
     },
   }

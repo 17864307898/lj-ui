@@ -1,6 +1,8 @@
 <script>
   import AdaptDistribute from './components/distribute'
   import AdaptFileType from './components/fileType'
+  import AdaptLicenseRisk from './components/licenseRisk'
+  import AdaptLicenseDistribution from './components/licenseDistribution'
   import config from './config'
 
   export default {
@@ -8,6 +10,8 @@
     components:{
       AdaptDistribute,
       AdaptFileType,
+      AdaptLicenseRisk,
+      AdaptLicenseDistribution,
     },
     props:{
       type: {

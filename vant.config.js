@@ -108,6 +108,10 @@ module.exports = {
             path: 'lj-charts',
             title: 'LjCharts 图表',
           },
+          {
+            path: 'lj-check',
+            title: 'LjCheck 内容检测',
+          },
         ],
       },
     ],
