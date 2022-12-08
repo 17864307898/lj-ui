@@ -160,7 +160,6 @@
       },
       // 翻译
       translate(path) {
-        console.log(t(path))
         return t(path)
       },
     },

@@ -1,6 +1,6 @@
 <template>
   <lj-charts
-    :chart-type="1"
+    :chart-type="2"
     :data="data"
     :type="103"
     :height="220"
@@ -14,19 +14,41 @@
     props:{},
     data(){
       return {
-        data: {
-          indirectCompatibleCount: 37,
-          notCompatibleCount: 86,
-          licenseChangeCount: 122,
-          copyrightChangeCount: 157,
-          highRiskCount: 9,
-          // test
-          severityRisk: 20,
-          highRisk: 9,
-          mediumRisk: 39,
-          lowRisk: 7,
-          noRated: 14,
-        },
+        // data: {
+        //   indirectCompatibleCount: 37,
+        //   notCompatibleCount: 86,
+        //   licenseChangeCount: 122,
+        //   copyrightChangeCount: 157,
+        //   highRiskCount: 9,
+        // },
+        // chart-type为2时传入
+        data: [
+          {
+            "level": 4,
+            "repo": 106,
+            "other": 1
+          },
+          {
+            "other": 0,
+            "level": 3,
+            "repo": 420
+          },
+          {
+            "other": 0,
+            "level": 0,
+            "repo": 110
+          },
+          {
+            "other": 0,
+            "level": 2,
+            "repo": 392
+          },
+          {
+            "other": 0,
+            "level": 1,
+            "repo": 70
+          },
+        ],
       }
     },
   }

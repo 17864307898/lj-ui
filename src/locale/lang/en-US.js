@@ -4,6 +4,15 @@ export default {
   empty: 'no data',
   clear: 'clear',
   details: 'view details',
+  all: 'all',
+  unknown: 'unknown',
+  // 风险等级
+  severityRisk: 'seriousness',
+  highRisk: 'High risk',
+  mediumRisk: 'Medium risk',
+  lowRisk: 'Low risk',
+  noRated: 'No rated',
+  riskFree: 'risk-free',
   // LjFilter
   ljFilter: {
     screen: 'screen',
@@ -49,10 +58,26 @@ export default {
     midRiskFile: 'Medium risk document',
     lowRiskFile: 'Low risk document',
     noRiskFile: 'No permit document',
-    severityRisk: 'seriousness',
-    highRisk: 'High risk',
-    mediumRisk: 'Medium risk',
-    lowRisk: 'Low risk',
-    noRated: 'No rated',
+    /************/
+    riskTrend: 'Trend of risk',
+    vulnerabilityRisk: 'Vulnerability risk',
+  },
+  // ljCheck
+  ljCheck: {
+    codeLines: 'Line of code',
+    fileCount: 'number of files',
+    capacity: 'capacity',
+    participateTesting: 'Participate in homology detection',
+    unParticipateTesting: 'Did not participate in homology testing',
+  },
+  // lj-saftey-risk-check
+  ljSafteyCheck: {
+    riskGrade: 'Safety risk level',
+  },
+  // lj-saftey-risk-check
+  ljSafteyRisk: {
+    highStake: 'High-risk',
+    midRisk: 'Medium risk',
+    lowStake: 'Low risk',
   },
 }

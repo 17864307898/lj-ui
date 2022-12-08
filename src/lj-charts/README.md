@@ -16,12 +16,13 @@ lj-charts 使用配置的方式初始化图表 用简单的方式去开发业务
 ### 目录
 | 图表名 | 其他 |
 |--------|-----|
-| <a href="/#/lj-charts#yu-yan-fen-bu">语言分布</a> |
-| <a href="/#/lj-charts#wen-jian-lei-xing-fen-bu">文件类型分布</a> |
-| <a href="/#/lj-charts#feng-xian-tong-ji">风险统计</a> |
-| <a href="/#/lj-charts#feng-xian-fen-bu">风险分布</a> |
-|| <a href="/#/lj-charts#tong-yi-props">统一props</a> |
-|| <a href="/#/lj-charts#tu-biao-lei-xing">图表类型</a> |
+| <a href="#yu-yan-fen-bu">语言分布</a> |
+| <a href="#wen-jian-lei-xing-fen-bu">文件类型分布</a> |
+| <a href="#feng-xian-tong-ji">风险统计</a> |
+| <a href="#feng-xian-fen-bu">风险分布</a> |
+| <a href="#feng-xian-qu-shi">风险趋势</a> |
+|| <a href="#tu-biao-lei-xing">图表类型</a> |
+|| <a href="#tong-yi-props">统一props</a> |
 
 ## 代码演示
 
@@ -62,6 +63,7 @@ lj-charts 使用配置的方式初始化图表 用简单的方式去开发业务
 |------|------|-----|----------|
 | chartType | 图表类型 `1 许可证 2 漏洞` | _number_`|`_string_ | `1` |
 |  |  |  |  |
+> chartType：传入1时，`data`为`object`；传入2时，`data`为`array`;
 
 ### 风险分布
 
@@ -75,6 +77,10 @@ lj-charts 使用配置的方式初始化图表 用简单的方式去开发业务
 | config | y轴展示数据下标配置，倒序 `['溯源', '组件', '文件']` | _array_ | `[0, 1, 2]`全部展示 |
 | source | 是否开启了溯源 | _boolean_ | `true` |
 |  |  |  |  |
+
+### 风险趋势
+
+<demo-code>./demo/riskTrend.vue</demo-code>
 ### 图表类型
 
 | type | 类型 |
@@ -83,6 +89,7 @@ lj-charts 使用配置的方式初始化图表 用简单的方式去开发业务
 | 102 | 柱状图 |
 | 103 | 饼状统计图 |
 | 104 | 风险分布图 |
+| 105 | 风险趋势图 |
 |  |  |
 ### 统一props
 

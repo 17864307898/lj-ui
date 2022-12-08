@@ -1,8 +1,8 @@
 // 响应式方式
 import Vue from 'vue';
 import { deepAssign } from '../utils/deep-assign.js'
-import defaultMessages from './lang/zh-CN'
-// import defaultMessages from './lang/en-US'
+// import defaultMessages from './lang/zh-CN'
+import defaultMessages from './lang/en-US'
 
 const proto = Vue.prototype;
 const { defineReactive } = Vue.util;

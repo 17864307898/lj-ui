@@ -31,13 +31,14 @@
 </template>
 
 <script>
+  import Vue from 'vue'
+  import {
+    Tooltip,
+  } from 'element-ui'
+  import { translate } from '../utils/translate'
+  const t = translate('ljSafteyRisk')
 
-import Vue from 'vue';
-import {
-  Tooltip,
-} from 'element-ui';
-
-Vue.use(Tooltip);
+  Vue.use(Tooltip)
 
   export default {
     name: 'lj-saftey-risk',
@@ -51,13 +52,31 @@ Vue.use(Tooltip);
         type: Number,
         default: 1,
       },
-      riskData: {
-        type: Object,
-        default: () => ({}),
-      },
     },
     data() {
-      return {}
+      return {
+        // 文案类型映射 1 漏洞 2 许可证
+        riskData: {
+          1: {
+            // 漏洞风险文案映射
+            critical: t('severityRisk'),
+            high: t('highRisk'),
+            mid: t('mediumRisk'),
+            low: t('lowRisk'),
+            unknown: t('noRated'),
+            noRisk: t('riskFree'),
+          },
+          2: {
+            // 许可证风险文案映射
+            critical: t('severityRisk'),
+            high: t('highStake'),
+            mid: t('midRisk'),
+            low: t('lowStake'),
+            unknown: t('unknown'),
+            noRisk: t('riskFree'),
+          },
+        },
+      }
     },
     methods: {
       handelSafteyRisk(key) {

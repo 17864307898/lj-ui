@@ -34,7 +34,7 @@
     "*.{vue,css,less,scss}": "stylelint --fix"
   },
   "peerDependencies": {
-    "axios": "^1.2.0",
+    "axios": "^0.2.0",
     "element-ui": "^2.10.1",
     "vue": "^2.6.11"
   },

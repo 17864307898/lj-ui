@@ -4,6 +4,15 @@ export default {
   clear: '清空',
   empty: '暂无数据',
   details: '查看详情',
+  all: '全部',
+  unknown: '未知',
+  // 风险等级
+  severityRisk: '严重',
+  highRisk: '高危',
+  mediumRisk: '中危',
+  lowRisk: '低危',
+  noRated: '未评级',
+  riskFree: '无风险',
   // LjFilter
   ljFilter: {
     screen: '筛选',
@@ -49,10 +58,26 @@ export default {
     midRiskFile: '中风险文件',
     lowRiskFile: '低风险文件',
     noRiskFile: '无许可证文件',
-    severityRisk: '严重',
-    highRisk: '高危',
-    mediumRisk: '中危',
-    lowRisk: '低危',
-    noRated: '未评级',
+    /************/
+    riskTrend: '风险趋势',
+    vulnerabilityRisk: '漏洞风险',
+  },
+  // ljCheck
+  ljCheck: {
+    codeLines: '代码行数',
+    fileCount: '文件数',
+    capacity: '容量',
+    participateTesting: '参与同源检测',
+    unParticipateTesting: '未参与同源检测',
+  },
+  // lj-saftey-risk-check
+  ljSafteyCheck: {
+    riskGrade: '安全风险等级',
+  },
+  // lj-saftey-risk-check
+  ljSafteyRisk: {
+    highStake: '高风险',
+    midRisk: '中风险',
+    lowStake: '低风险',
   },
 }

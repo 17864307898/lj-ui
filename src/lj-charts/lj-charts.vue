@@ -3,6 +3,7 @@
   import AdaptFileType from './components/fileType'
   import AdaptLicenseRisk from './components/licenseRisk'
   import AdaptLicenseDistribution from './components/licenseDistribution'
+  import AdaptRiskTrend from './components/riskTrend'
   import config from './config'
 
   export default {
@@ -12,6 +13,7 @@
       AdaptFileType,
       AdaptLicenseRisk,
       AdaptLicenseDistribution,
+      AdaptRiskTrend,
     },
     props:{
       type: {

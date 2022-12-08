@@ -3,6 +3,11 @@ import { t } from '../distribute/handle'
 
 export default t
 
+// 风险等级颜色配置
+export const RISK_COLORS = ['rgb(126, 33, 33)', 'rgb(195, 71, 52)', 'rgb(231, 122, 62)', 'rgb(243, 212, 100)', 'rgb(136, 137, 138)']
+// 风险等级文案
+export const RISK_LABELS = ['noRated', 'lowRisk', 'mediumRisk', 'highRisk', 'severityRisk']
+
 const TYPE_MAP = {
   // 许可证
   1: {
@@ -21,10 +26,10 @@ const TYPE_MAP = {
   },
   // 漏洞
   2: {
-    color: ['rgb(126, 33, 33)', 'rgb(195, 71, 52)', 'rgb(231, 122, 62)', 'rgb(243, 212, 100)', 'rgb(136, 137, 138)'],
+    color: RISK_COLORS,
     map: {
-      1: ['severityRisk', 'highRisk', 'mediumRisk', 'lowRisk', 'noRated']
-    }
+      1: RISK_LABELS,
+    },
   },
 }
 
@@ -48,7 +53,6 @@ export const handleOptions = function () {
     tooltip: {
       trigger: 'item',
     },
-    // color: ['rgb(137, 22, 25)', '#eb8c6c', '#eaae4c', '', 'rgb(136, 137, 138)'],
     color,
     legend: {
       orient: 'vertical',
@@ -57,7 +61,6 @@ export const handleOptions = function () {
       itemHeight: 10, //图例的高度
       itemGap: 8, //图例之间的间距
       data: formatData(data, list).map((x) => x.name),
-      //图例的名字需要和饼图的name一致，才会显示图例
     },
     series: [
       {
@@ -94,6 +97,22 @@ export const handleOptions = function () {
 export function formatData(data = {}, list = []) {
   const cloneData = deepClone(data)
 
+  // data为数组时特殊处理
+  if (Array.isArray(cloneData)) {
+    cloneData.sort((x, y) => y.level - x.level)
+    console.log(cloneData)
+
+    const res = cloneData.map((x) => {
+      const { level, repo } = x
+
+      return {
+        name: t(list[level]),
+        value: repo,
+      }
+    })
+    return res
+  }
+  
   const res = Object.entries(cloneData)
     .filter(([key]) => list.includes(key))
     .map(([key, val]) => {

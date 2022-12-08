@@ -90,6 +90,25 @@ export function byteConvert(bytes) {
   return bytes + ' ' + symbols[i];
 }
 
+// /**
+//  * @description 容量
+//  * @param number
+//  * @returns {*}
+//  */
+//  export function capacityNum(num) {
+//   if (num == 0 || !num) return '0 B'
+//   let k = 1024
+//   let sizeStr = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+//   let i = 0
+//   for (let l = 0; l < 7; l++) {
+//     if (num / Math.pow(k, l) < 1) {
+//       break
+//     }
+//     i = l
+//   }
+//   return (num / Math.pow(k, i)).toFixed(2) + ' ' + sizeStr[i]
+// }
+
 /**
  * @description 将url请求参数转为json格式
  * @param url

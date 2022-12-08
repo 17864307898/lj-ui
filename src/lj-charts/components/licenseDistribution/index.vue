@@ -43,7 +43,7 @@
         if (this.title) return this.title
 
         const map = {
-          1: 'licenseRiskStatistics',
+          1: 'licenseRiskDistribution',
           2: 'holeRiskDistribution',
         }
 
@@ -60,3 +60,12 @@
     },
   }
 </script>
+<style lang="scss" scoped>
+  .content-wrap {
+    width: 100%;
+    .title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+  }
+</style>
