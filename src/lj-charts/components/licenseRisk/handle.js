@@ -1,10 +1,11 @@
 import { deepClone } from '../../../utils'
 import { t } from '../distribute/handle'
+import style from '../../../style/var.scss'
 
 export default t
 
 // 风险等级颜色配置
-export const RISK_COLORS = ['rgb(126, 33, 33)', 'rgb(195, 71, 52)', 'rgb(231, 122, 62)', 'rgb(243, 212, 100)', 'rgb(136, 137, 138)']
+export const RISK_COLORS = style['risk-color-list'].split(',')
 // 风险等级文案
 export const RISK_LABELS = ['noRated', 'lowRisk', 'mediumRisk', 'highRisk', 'severityRisk']
 
@@ -100,7 +101,6 @@ export function formatData(data = {}, list = []) {
   // data为数组时特殊处理
   if (Array.isArray(cloneData)) {
     cloneData.sort((x, y) => y.level - x.level)
-    console.log(cloneData)
 
     const res = cloneData.map((x) => {
       const { level, repo } = x

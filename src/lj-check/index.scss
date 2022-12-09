@@ -1,6 +1,7 @@
 @import "../style/var.scss";
 
-$progress-color: mix($bg-color-primary, white, 80%);
+$progress-color: mix($bg-color-primary, white, 80);
+$bg-color: mix($bg-color-primary, white, 10);
 
 .jcnr {
   .line {
@@ -24,7 +25,7 @@ $progress-color: mix($bg-color-primary, white, 80%);
       text-align: center;
       color: #fff;
       line-height: 20px;
-      background: $bg-color-hover;
+      background: $bg-color;
       border-radius: 20px;
       font-size: $font-size-sm;
       overflow: hidden;
@@ -35,7 +36,7 @@ $progress-color: mix($bg-color-primary, white, 80%);
       }
       .fr {
         color: $progress-color;
-        background: $bg-color-hover;
+        // background: $bg-color-hover;
         border-radius: 20px;
       }
     }

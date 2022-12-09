@@ -16,7 +16,7 @@
           class="item"
           :content="t('participateTesting') + handleText(item.key, 1, item.isSize)"
           effect="light"
-          :disabled="!showTrace"
+          :disabled="!showTrace || !item.needTip"
           placement="top"
         >
           <div class="fl" :style="`width: ${handlePercent(item.key)}`">
@@ -29,7 +29,7 @@
           class="item"
           :content="t('unParticipateTesting') + handleText(item.key, 2, item.isSize)"
           effect="light"
-          :disabled="!showTrace"
+          :disabled="!showTrace || !item.needTip"
           placement="top"
         >
           <div class="fr" :style="`width: ${handlePercent(item.key, 2)}`">
@@ -87,24 +87,18 @@
             label: t('codeLines'), // 左侧文案
             key: 'line', // 取值
             isSize: false, // 是否为文件大小
-            completeColor: '',  // 已完成的颜色
-            unCompleteColor: '', // 未完成的颜色
             needTip: true, // 是否需要toolTip
           },
           {
             label: t('fileCount'), // 左侧文案
             key: 'count', // 取值
             isSize: false, // 是否为文件大小
-            completeColor: '',  // 已完成的颜色
-            unCompleteColor: '', // 未完成的颜色
             needTip: true, // 是否需要toolTip
           },
           {
             label: t('capacity'), // 左侧文案
             key: 'size', // 取值
             isSize: true, // 是否为文件大小
-            completeColor: '',  // 已完成的颜色
-            unCompleteColor: '', // 未完成的颜色
             needTip: true, // 是否需要toolTip
           },
         ]
