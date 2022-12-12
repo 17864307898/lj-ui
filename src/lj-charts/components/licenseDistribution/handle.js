@@ -9,7 +9,7 @@ import { t } from "../distribute/handle"
  * @returns 
  */
 export const handleOptions = (data, config = [0, 1, 2], source = true) => {
-  const yAxisData = formatYData(config, source)
+  const yAxisData = formatYData(data, config, source)
 
   const option = {
     tooltip: {
@@ -31,9 +31,9 @@ export const handleOptions = (data, config = [0, 1, 2], source = true) => {
     },
     yAxis: {
       type: 'category',
-      data: yAxisData
+      data: yAxisData.map((x) => t(x))
     },
-    series: formatXData(data, yAxisData.length)
+    series: formatXData(data, yAxisData)
   }
 
   return option
@@ -50,7 +50,7 @@ const defaultXData = {
   emphasis: {
     focus: 'series'
   },
-  data: [3, 2, 1],
+  data: [],
 }
 
 // legend
@@ -73,40 +73,51 @@ const xData = [
   },
 ]
 
+const X_KEY_LIST = ['high', 'mid', 'low', 'no']
+
 const yData = [
   {
-    key: t('licenseSource'),
+    key: 'sourceProjectDistribute',
+    source: true,
   },
-  t('licenseComponent'),
-  t('licenseFile'),
+  {
+    key: 'packageDistribute',
+    source: false,
+  },
+  {
+    key: 'fileDistribute',
+    source: false,
+  },
 ]
 
 // x轴数据展示
-function formatXData(data, max = 1) {
-  const defaultData = deepClone(defaultXData)
+function formatXData(data, yList) {
+  const res = deepClone(data)
+  const list = yList.map((x) => res[x])
+  
+  return xData.map((x, i) => {
+    const defaultData = deepClone(defaultXData)
+    const key = X_KEY_LIST[i]
+    defaultData.data = Object.values(list).map((y) => y[key]).filter((y) => y > 0)
 
-  defaultData.data = defaultData.data.slice(0, max)
-  const list = xData.map((x) => {
     return {
       ...defaultData,
       ...x,
     }
   })
-
-  return list
 }
 
 // y轴数据展示
-function formatYData(config, source) {
+function formatYData(data, config, source) {
+  const res = deepClone(data)
   const list = yData.filter((x, i) => config.includes(i))
 
   return list.filter((x) => {
-    if (typeof x === 'object') {
-      return source
-    } else {
-      return x
-    }
+    const { source: configSource, key } = x
+    const current = res[key]
+    
+    return current && (configSource ? source : true)
   }).map((x) => {
-    return typeof x === 'object' ? x.key : x
+    return x.key
   })
 }

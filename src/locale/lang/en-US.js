@@ -50,9 +50,9 @@ export default {
     copyrightChangeCount: 'Tampering with copyright',
     licenseRiskDistribution: 'License risk distribution',
     holeRiskDistribution: 'Vulnerability risk distribution',
-    licenseFile: 'file',
-    licenseComponent: 'subassembly',
-    licenseSource: 'Traceability project',
+    fileDistribute: 'file',
+    packageDistribute: 'subassembly',
+    sourceProjectDistribute: 'Traceability project',
     // 以下字段名称待定
     highRiskFile: 'High risk document',
     midRiskFile: 'Medium risk document',

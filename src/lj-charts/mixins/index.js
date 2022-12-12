@@ -75,8 +75,7 @@ export default {
         // 移除事件监听及echarts实例
         this.$once('hook:beforeDestroy', () => {
           window.removeEventListener('resize', handleEvents)
-          this.chart && this.chart.dispose()
-          this.chart = null
+          this.handleClearChart()
         })
       })
     },

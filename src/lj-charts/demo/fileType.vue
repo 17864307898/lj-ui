@@ -15,24 +15,24 @@
       return {
         data: [
           {
-            name: 'Ada',
-            count: 3624,
+            type: 'Ada',
+            size: 3624,
           },
           {
-            name: 'Gcc',
-            count: 1956,
+            type: 'Gcc',
+            size: 1956,
           },
           {
-            name: 'PHP',
-            count: 234,
+            type: 'PHP',
+            size: 234,
           },
           {
-            name: 'C#',
-            count: 989,
+            type: 'C#',
+            size: 989,
           },
           {
-            name: 'Java',
-            count: 1867,
+            type: 'Java',
+            size: 1867,
           },
         ],
       }

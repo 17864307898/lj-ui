@@ -16,12 +16,12 @@
         data: [
           {
             language: 'test1',
-            num: 20,
+            size: 20,
             line: 43,
           },
           {
             language: 'test2',
-            num: 43,
+            size: 43,
             line: 20,
           },
         ],

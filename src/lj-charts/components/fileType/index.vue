@@ -63,12 +63,12 @@
       // 自定义val
       valueKey: {
         type: String,
-        default: () => 'count',
+        default: () => 'size',
       },
       // 自定义name
       nameKey: {
         type: String,
-        default: () => 'name',
+        default: () => 'type',
       },
       // 自定义表格配置
       customColumns: {
@@ -90,11 +90,11 @@
           },
           {
             label: t('fileName'),
-            prop: 'name',
+            prop: this.nameKey,
           },
           {
             label: t('fileSize'),
-            prop: 'count',
+            prop: this.valueKey,
           },
         ]
       }

@@ -50,9 +50,9 @@ export default {
     copyrightChangeCount: '版权篡改',
     licenseRiskDistribution: '许可证风险分布',
     holeRiskDistribution: '漏洞风险分布',
-    licenseFile: '文件',
-    licenseComponent: '组件',
-    licenseSource: '溯源项目',
+    fileDistribute: '文件',
+    packageDistribute: '组件',
+    sourceProjectDistribute: '溯源项目',
     // 以下字段名称待定
     highRiskFile: '高风险文件',
     midRiskFile: '中风险文件',

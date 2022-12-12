@@ -13,8 +13,8 @@ const DEFAULT_COLORS = [
   '#9264AF',
   '#DC83C6',
 ]
-const TYPE_MAP = {
-  1: 'num', // 文件
+export const TYPE_MAP = {
+  1: 'size', // 文件
   2: 'line', // 代码
 }
 

@@ -1,4 +1,4 @@
-import { t } from './handle'
+import { t, TYPE_MAP } from './handle'
 
 export const handleColumns = (type = 1) => {
   const publicColumn = [
@@ -15,12 +15,12 @@ export const handleColumns = (type = 1) => {
   if (type === 1) {
     publicColumn.push({
       label: t('fileCount'),
-      prop: 'num',
+      prop: TYPE_MAP[1],
     })
   } else {
     publicColumn.push({
       label: t('codeCount'),
-      prop: 'line',
+      prop: TYPE_MAP[2],
     })
   }
 

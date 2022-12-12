@@ -45,6 +45,21 @@
         type: [Number, String],
         default: () => 1,
       },
+      // 排序 desc 降序 asc 升序 
+      order: {
+        type: String,
+        default: () => 'desc',
+      },
+      // 自定义val
+      valueKey: {
+        type: String,
+        default: () => 'size',
+      },
+      // 自定义name
+      nameKey: {
+        type: String,
+        default: () => 'type',
+      },
     },
     data(){
       return {
