@@ -1,5 +1,6 @@
 import { deepClone } from "../../../utils"
 import { t } from "../distribute/handle"
+import { RISK_COLORS } from '../licenseRisk/handle'
 
 /**
  * 
@@ -8,8 +9,8 @@ import { t } from "../distribute/handle"
  * @param {*} source 是否开启溯源
  * @returns 
  */
-export const handleOptions = (data, config = [0, 1, 2], source = true) => {
-  const yAxisData = formatYData(data, config, source)
+export const handleOptions = function () {
+  const yAxisData = formatYData.call(this)
 
   const option = {
     tooltip: {
@@ -19,7 +20,6 @@ export const handleOptions = (data, config = [0, 1, 2], source = true) => {
         type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
       }
     },
-    legend: {},
     grid: {
       left: '3%',
       right: '4%',
@@ -31,9 +31,12 @@ export const handleOptions = (data, config = [0, 1, 2], source = true) => {
     },
     yAxis: {
       type: 'category',
-      data: yAxisData.map((x) => t(x))
+      data: yAxisData.map((x) => t(x.name))
     },
-    series: formatXData(data, yAxisData)
+    // tooltip: {
+    //   formatter: handleFormatTooltip
+    // },
+    series: formatXData.call(this, yAxisData)
   }
 
   return option
@@ -56,68 +59,102 @@ const defaultXData = {
 // legend
 const xData = [
   {
+    name: t('vulCritical'),
+    color: RISK_COLORS[0],
+    include: [2],
+  },
+  {
     name: t('highRiskFile'),
-    color: 'rgb(137, 22, 25)',
+    color: RISK_COLORS[1],
+    include: [1, 2],
   },
   {
     name: t('midRiskFile'),
-    color: 'rgb(223, 118, 116)',
+    color: RISK_COLORS[2],
+    include: [1, 2],
   },
   {
     name: t('lowRiskFile'),
-    color: 'rgb(136, 137, 138)',
+    color: RISK_COLORS[3],
+    include: [1, 2],
+  },
+  {
+    name: t('vulUnknown'),
+    color: RISK_COLORS[4],
+    include: [1, 2],
   },
   {
     name: t('noRiskFile'),
-    color: 'rgb(241, 234, 171)',
+    color: RISK_COLORS[5],
+    include: [1],
   },
 ]
 
-const X_KEY_LIST = ['high', 'mid', 'low', 'no']
+const X_KEY_LIST = {
+  1: ['high', 'mid', 'low', 'unknown', 'no'],
+  2: ['critical', 'high', 'mid', 'low', 'unknown'],
+}
 
 const yData = [
   {
-    key: 'sourceProjectDistribute',
+    key: {
+      1: 'sourceProjectDistribute',
+      2: 'sourceProjectVulDistribute',
+    },
+    name: 'sourceProjectDistribute',
     source: true,
   },
   {
-    key: 'packageDistribute',
+    key: {
+      1: 'packageDistribute',
+      2: 'repoVulDistribute',
+    },
+    name: 'packageDistribute',
     source: false,
   },
   {
-    key: 'fileDistribute',
+    key: {
+      1: 'fileDistribute',
+      2: 'fileVulDistribute',
+    },
+    name: 'fileDistribute',
     source: false,
   },
 ]
 
 // x轴数据展示
-function formatXData(data, yList) {
+function formatXData(yList) {
+  const { data, chartType } = this
   const res = deepClone(data)
-  const list = yList.map((x) => res[x])
+  const list = yList.map((x) => res[x.key[chartType]])
   
-  return xData.map((x, i) => {
-    const defaultData = deepClone(defaultXData)
-    const key = X_KEY_LIST[i]
-    defaultData.data = Object.values(list).map((y) => y[key]).filter((y) => y > 0)
+  return xData
+    .filter((x) => x.include.includes(chartType))
+    .map((x, i) => {
+      const defaultData = deepClone(defaultXData)
+      const key = X_KEY_LIST[chartType][i]
+      defaultData.data = Object.values(list)
+        .map((y) => y[key])
+        .filter((y) => y > 0)
 
-    return {
-      ...defaultData,
-      ...x,
-    }
-  })
+      return {
+        ...defaultData,
+        ...x,
+      }
+    })
 }
 
 // y轴数据展示
-function formatYData(data, config, source) {
+function formatYData() {
+  const { data, config, source, chartType = 1 } = this
   const res = deepClone(data)
   const list = yData.filter((x, i) => config.includes(i))
 
   return list.filter((x) => {
-    const { source: configSource, key } = x
+    const { source: configSource, key: map } = x
+    const key = map[chartType]
     const current = res[key]
     
     return current && (configSource ? source : true)
-  }).map((x) => {
-    return x.key
   })
 }

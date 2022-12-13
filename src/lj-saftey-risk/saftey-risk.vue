@@ -59,20 +59,20 @@
         riskData: {
           1: {
             // 漏洞风险文案映射
-            critical: t('severityRisk'),
-            high: t('highRisk'),
-            mid: t('mediumRisk'),
-            low: t('lowRisk'),
+            critical: t('vulCritical'),
+            high: t('vulHigh'),
+            mid: t('vulMid'),
+            low: t('vulLow'),
             unknown: t('noRated'),
             noRisk: t('riskFree'),
           },
           2: {
             // 许可证风险文案映射
-            critical: t('severityRisk'),
+            critical: t('vulCritical'),
             high: t('highStake'),
             mid: t('midRisk'),
             low: t('lowStake'),
-            unknown: t('unknown'),
+            unknown: t('vulUnknown'),
             noRisk: t('riskFree'),
           },
         },
