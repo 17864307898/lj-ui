@@ -51,10 +51,10 @@
       return {
         screenList: [
           { id: '', type: t('all'), num: 0 },
-          { id: 4, type: t('severityRisk'), num: 0 },
-          { id: 3, type: t('highRisk'), num: 0 },
-          { id: 2, type: t('mediumRisk'), num: 0 },
-          { id: 1, type: t('lowRisk'), num: 0 },
+          { id: 4, type: t('vulCritical'), num: 0 },
+          { id: 3, type: t('vulHigh'), num: 0 },
+          { id: 2, type: t('vulMid'), num: 0 },
+          { id: 1, type: t('vulLow'), num: 0 },
           { id: 0, type: t('noRated'), num: 0 },
           { id: -1, type: t('riskFree'), num: 0 },
         ],

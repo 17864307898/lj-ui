@@ -10,6 +10,17 @@ const DEFAULT_SERIES_DATA = {
   data: [],
 }
 
+const TYPE_MAP = {
+  1: {
+    key: 'vulInfoList',
+    list: [],
+  },
+  2: {
+    key: 'licenseInfoList',
+    list: [],
+  },
+}
+
 export const handleOptions = function() {
   // const { data = [] } = this
   const option = {

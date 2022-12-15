@@ -5,12 +5,12 @@ export default {
   empty: '暂无数据',
   details: '查看详情',
   all: '全部',
-  unknown: '未知',
+  vulUnknown: '未知',
   // 风险等级
-  severityRisk: '严重',
-  highRisk: '高危',
-  mediumRisk: '中危',
-  lowRisk: '低危',
+  vulCritical: '严重',
+  vulHigh: '高危',
+  vulMid: '中危',
+  vulLow: '低危',
   noRated: '未评级',
   riskFree: '无风险',
   // LjFilter
@@ -54,10 +54,10 @@ export default {
     packageDistribute: '组件',
     sourceProjectDistribute: '溯源项目',
     // 以下字段名称待定
-    highRiskFile: '高风险文件',
-    midRiskFile: '中风险文件',
-    lowRiskFile: '低风险文件',
-    noRiskFile: '无许可证文件',
+    highRiskFile: '高风险',
+    midRiskFile: '中风险',
+    lowRiskFile: '低风险',
+    noRiskFile: '无许可证',
     /************/
     riskTrend: '风险趋势',
     vulnerabilityRisk: '漏洞风险',

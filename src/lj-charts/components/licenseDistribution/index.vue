@@ -53,7 +53,7 @@
     methods: {
       // 初始化
       handleInitChart() {
-        const option = handleOptions(this.data, this.config, this.source)
+        const option = handleOptions.call(this)
         
         this.handleEcharts(option)
       },

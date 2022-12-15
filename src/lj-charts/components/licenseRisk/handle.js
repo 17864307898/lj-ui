@@ -11,10 +11,10 @@ REVERSE_COLOR.reverse()
 // 风险等级文案
 export const RISK_LABELS = [
   'noRated',
-  'lowRisk',
-  'mediumRisk',
-  'highRisk',
-  'severityRisk',
+  'vulLow',
+  'vulMid',
+  'vulHigh',
+  'vulCritical',
 ]
 
 const TYPE_MAP = {
@@ -42,8 +42,13 @@ const TYPE_MAP = {
   2: {
     map: {
       1: {
-        color: RISK_COLORS,
-        list: RISK_LABELS,
+        list: [
+          'vulCritical',
+          'vulHigh',
+          'vulMid',
+          'vulLow',
+          'vulUnknown',
+        ],
       },
     },
   },
@@ -51,11 +56,11 @@ const TYPE_MAP = {
 
 // 漏洞映射
 const RISK_MAP = {
-  4: t('severityRisk'),
-  3: t('highRisk'),
-  2: t('mediumRisk'),
-  1: t('lowRisk'),
-  0: t('unknown'),
+  4: t('vulCritical'),
+  3: t('vulHigh'),
+  2: t('vulMid'),
+  1: t('vulLow'),
+  0: t('vulUnknown'),
 }
 
 /**
@@ -137,52 +142,44 @@ export function formatData(data = [], config = {}) {
     color,
   } = config
 
-  // data为数组时特殊处理
-  if (Array.isArray(cloneData)) {
-    cloneData.sort((x, y) => y.level - x.level)
-
-    const res = cloneData.map((x) => {
-      const { level, repo } = x
-
-      return {
-        name: t(list[level]),
-        value: repo,
-      }
-    })
-    return {
-      list: res,
-    }
-  } else if (isList) { // 单项为list取值
+  // 单项为list取值
+  if (isList) {
     const res = cloneData[listKey]
-    res.sort((x, y) => y[nameKey] - x[nameKey])
+    res?.sort((x, y) => y[nameKey] - x[nameKey])
 
     const resColor = []
-    const resList = res.map((x) => {
+    const resList = res?.map((x) => {
       resColor.push(color[x[nameKey]])
 
       return {
         name: RISK_MAP[x[nameKey]],
         value: x[valKey],
       }
-    })
+    }) || []
 
     return {
       list: resList,
       color: resColor,
     }
   } else {
-    const res = Object
-      .entries(cloneData)
-      .filter(([key]) => list.includes(key))
-      .map(([key, val]) => {
-        return {
-          name: t(key),
-          value: val,
-        }
-      })
+    const resColor = []
+    const res = []
+    
+    list.forEach((x, i) => {
+      const count = cloneData[x]
+
+      if (count >= 0) {
+        resColor.push(RISK_COLORS[i])
+        res.push({
+          name: t(x),
+          value: count,
+        })
+      }
+    })
     
     return {
       list: res,
+      color: color || resColor,
     }
   }
 }
