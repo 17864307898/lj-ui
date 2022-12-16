@@ -22,7 +22,8 @@ export const handleOptions = function() {
       }
     },
     grid: {
-      bottom: canDrag ? 90 : 20,
+      left: 70,
+      bottom: canDrag ? 80 : 20,
     },
     xAxis: {
       data: formatData(data, valueKey, order).map((x) => x[nameKey]),
