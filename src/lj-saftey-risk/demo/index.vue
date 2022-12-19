@@ -1,5 +1,5 @@
 <template>
-  <lj-saftey-risk :type="1" :risk-list="riskList" :risk-data="riskData" @handelRisk="fnHandelRisk">
+  <lj-saftey-risk :type="2" :risk-list="riskList" @handelRisk="fnHandelRisk">
     <template #detailTarget>
       <i class="el-icon-arrow-right" @click="handelTarget"></i>
     </template>
@@ -16,26 +16,6 @@ export default {
         low: 12,
         mid: 14,
         unknown: 3,
-      },
-      riskData: {
-        1: {
-          // 漏洞风险文案映射
-          critical: '严重',
-          high: '高危',
-          mid: '中危',
-          low: '低危',
-          unknown: '未评级',
-          noRisk: '无风险',
-        },
-        2: {
-          // 许可证风险文案映射
-          critical: '严重',
-          high: '高风险',
-          mid: '中风险',
-          low: '低风险',
-          unknown: '未知',
-          noRisk: '无风险',
-        },
       },
     };
   },

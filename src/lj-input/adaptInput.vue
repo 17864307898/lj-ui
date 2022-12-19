@@ -24,10 +24,6 @@
       AdaptSwitch,
     },
     props: {
-      value: {
-        type: undefined,
-        default: undefined,
-      },
       code: {
         type: [Number, String],
         default: undefined,
@@ -45,13 +41,17 @@
     },
     render(h) {
       const tag = `adapt-${config[this.code] || 'unknow'}`
+      const attrs = this.$attrs
 
       return h(tag, {
-        props: this.$props,
-        attrs: this.$attrs,
+        attrs,
+        props: attrs,
         on: {
           'adapt-change': this.change,
           ...this.$listeners,
+          change: (val) => {
+            this.$emit('change', val, this.code)
+          }
         },
       })
     },

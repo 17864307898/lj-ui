@@ -4,6 +4,20 @@
 
 lj-design 中现有的公共方法介绍以及使用方式
 
+### 目录
+| 方法名 | 说明 |
+|--------|--------|
+| <a href="/#/api#deepclone">deepClone</a> | 深拷贝 | 
+| <a href="/#/api#oncesession">onceSession</a> | 单次缓存,仅在不传入val值时返回当前key值对应的session值,同时清空当前session | 
+| <a href="/#/api#cleanobjectempty">cleanObjectEmpty</a> | 移除对象中为空的属性 |
+| <a href="/#/api#byteconvert">byteConvert</a> | 字节单位转换 |
+| <a href="/#/api#paramobj">paramObj</a> | 将url请求参数转为json格式 |
+| <a href="/#/api#randomnumber">randomNumber</a> | m到n的随机数 |
+| <a href="/#/api#countdown">countDown</a> | 验证码的倒计时 |
+| <a href="/#/api#shi-jian-chu-li">时间处理</a> | 格式化时间、时间戳转换等 |
+| <a href="/#/api#zi-dian-lei-xing-xiao-yan">字典+类型校验</a> |  手机号、名称、邮箱等校验 |
+| <a href="/#/api#lun-xun-chu-li">轮询处理</a> | 轮询的开始、结束、无限轮询 |
+
 ### 引入
   
 ```javascript
@@ -15,17 +29,6 @@ Vue.prototype.$tools = tools
 import { deepClone } from 'lj-design/es/utils'
 ```
 
-## API
-
-<!-- | 方法名 | 说明 | 参数 | 返回值 |
-|--------|------|-----|-------|
-| deepClone | 深拷贝 | `target`_object_ | _object_ |
-| onceSession | 单次缓存,仅在不传入val值时返回当前key值对应的session值,同时清空当前session | `key, val` | _any_ |
-| cleanObjectEmpty | 移除对象中为空的属性 | `target`_object_ | _object_ |
-| byteConvert | 字节单位转换 | `bytes` _number_  _string_ | _string_ |
-| paramObj | 将url请求参数转为json格式 | `url` _string_ | _object_ |
-| randomNumber | m到n的随机数 | `m`_number_ `n`_number_ | _number_ |
-|  countDown|  验证码的倒计时|  `a` this `b`_number_ 倒计时的时长 `c` _String_ 需要倒计时的参数名字|  | -->
 ### deepClone
 
 | 说明 | 参数 | 返回值 | 
@@ -97,7 +100,7 @@ const val_c = cleanObjectEmpty(b) // 1.15 GB
 
 | 说明 | 参数 | 返回值 | 
 |--------|------|-----|-------|-------|-------|
-| m到n之间的随机数 | `m`_number_ `n`_number_ | _number_	
+| m到n之间的随机数 | `m`_number_ `n`_number_ | _number_	|
 #### 示例
 ```javascript
  const a = 2, b = 9
@@ -132,31 +135,28 @@ const val_c = cleanObjectEmpty(b) // 1.15 GB
 | formatDate | 格式化时间 | `dateStr`_string_  _number_ `format` _string_ | 格式化时间_string_ | `format` |  `format`YYYY-MM-DD hh:mm:ss 
 | formatMS | 毫秒转天时分秒 | `mss` _string_ _number_ | _string_ |
 | formatHistoryTime | 毫秒转历史时间（eg: 刚刚） | `time` _string_ _number_ `format` _string_ | _string_ | `format` |  `format`YYYY-MM-DD hh:mm:ss 
-| tenBitTimestamp | 10位时间戳转换 | `time` _string_ _number_ | _string_ |
-| thirteenBitTimestamp | 13位时间戳转换 | `time` _string_ _number_ | _string_ |
+| tensBitTimestamp | 10/13位时间戳转换 | `time` _string_ _number_ | _string_ |
 #### 示例
 ```javascript
     const data1 = 1669191340132,data2=497213,data3=1669191340 format="YYYY-MM-DD hh:mm:ss"
 
     //格式化时间
     const var_a1 = formatDate(data1) //2022-11-23 16:15:40
-    const var_a2 = formatDate(data1, YYYY-MM-DD hh:mm:ss) ///2022-11-22 10:51:32
-    const var_a3 = formatDate(data1, YYYY-MM-DD hh:mm) ///2022-11-22 10:51
+    const var_a2 = formatDate(data1, YYYY-MM-DD hh:mm:ss) //2022-11-22 10:51:32
+    const var_a3 = formatDate(data1, YYYY-MM-DD hh:mm) //2022-11-22 10:51
     //毫秒转天时分秒
     const var2 = formatMS(data2) // 8 分 17 秒
     //秒转历史时间
     const var3 = formatHistoryTime(data1) // 4分钟前
-    //10位时间戳转换
-    const var4 = tenBitTimestamp(data3) //2022年11月23日 16:15:40
-    //13位时间戳转换
-    const var5 = thirteenBitTimestamp(data1) //2022年11月22日 10:51:32
+    //10/13位时间戳转换
+    const var4 = tensBitTimestamp(data3) //2022年11月23日 16:15:40
 ```
 
 ### 字典+类型校验
 
 | 方法名 | 校验类型 | 返回值
 |--------|------|------
-| isName | 中文+大小写字母+数字 | _boolean_ |
+| isName | 中文或大小写字母或数字 | _boolean_ |
 | isUserName | 只能是中文 | _boolean_ |
 | isTrimName | 名称前后空格 | _boolean_ |
 | isSpecialSymbolName | 特殊字符名称 | _boolean_ |

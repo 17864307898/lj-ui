@@ -1,13 +1,16 @@
 <template>
-  <div class="adapt-unknow">不支持的类型</div>
+  <div class="adapt-unknow">{{ translate('unknown') }}</div>
 </template>
 
 <script>
+  import translateMixin from '../../mixins'
+
   export default {
+    mixins: [translateMixin],
     data() {
       return {}
     },
     created() {},
-    methods: {},
+    methods: { },
   }
 </script>

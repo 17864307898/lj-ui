@@ -9,8 +9,10 @@
       <el-radio
         v-for="option in options"
         :key="option[optionValue]"
-        :label="option[optionLabel]"
-      />
+        :label="option[optionValue]"
+      >
+        {{ option[optionLabel] }}
+      </el-radio>
     </el-radio-group>
   </div>
 </template>
@@ -39,10 +41,6 @@
       optionValue: {
         type: String,
         default: 'value',
-      },
-      placeholder: {
-        type: String,
-        default: '请选择',
       },
     },
     data() {

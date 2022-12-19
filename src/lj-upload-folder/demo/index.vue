@@ -1,13 +1,13 @@
 <template>
-  <lj-upload-folder :upload-parmes="uploadParmes" @uploadFolderInfo="fnUploadInfo" />
+  <lj-upload-folder :content="uploadParams.content" :max-size="uploadParams.maxSize" @uploadFolderInfo="fnUploadInfo" />
 </template>
 
 <script>
 export default {
   data() {
     return {
-      uploadParmes: {
-        maxSize: '4294967296',
+      uploadParams: {
+        maxSize: 4294967296,
         content: {
           maxSize: '请选择非空文件夹',
           againUp: `重新上传`,

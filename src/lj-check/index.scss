@@ -1,0 +1,44 @@
+@import "../style/var.scss";
+
+$progress-color: mix($bg-color-primary, white, 80);
+$bg-color: mix($bg-color-primary, white, 10);
+
+.jcnr {
+  .line {
+    display: flex;
+    justify-content: space-between;
+    margin: 22px 0;
+    .title {
+      width: 70px;
+      font-family: 'PingFangSC-Regular';
+      font-size: 14px;
+      color: #333333;
+      font-weight: 400;
+      text-align: right;
+      margin-right: 10px;
+    }
+    .progress {
+      width: calc(100% - 80px);
+      height: 20px;
+      display: flex;
+      justify-content: space-between;
+      text-align: center;
+      color: #fff;
+      line-height: 20px;
+      background: $bg-color;
+      border-radius: 20px;
+      font-size: $font-size-sm;
+      overflow: hidden;
+      cursor: pointer;
+      .fl {
+        background: $progress-color;
+        border-radius: 20px;
+      }
+      .fr {
+        color: $progress-color;
+        // background: $bg-color-hover;
+        border-radius: 20px;
+      }
+    }
+  }
+}

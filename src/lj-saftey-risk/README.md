@@ -1,7 +1,7 @@
 # ljSafteyRisk 漏洞和许可证风险等级
 
 ### 介绍
-LjSafteyRisk是一个展示漏洞或许可证风险等级的组件
+LjSafteyRisk是一个展示漏洞或许可证风险等级的组件（使用了ElementUI下的el-tooltip）
 ### 引入
 
 ```js
@@ -32,3 +32,8 @@ LjSafteyRisk是一个展示漏洞或许可证风险等级的组件
 | name | 说明 | 参数 |
 |------|------|-----|
 | detailTarget | 详情跳转 | - |
+
+### 方法
+| name | 说明 | 参数 |
+|------|------|-----|
+| handelRisk | 每个风险等级的click事件 | 对应等级的英文字段 eg: mid|

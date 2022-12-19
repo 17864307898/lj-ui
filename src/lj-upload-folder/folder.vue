@@ -2,15 +2,18 @@
   <div class="uploadWrap">
     <div id="clonePieLoading" class="el-upload-dragger">
       <div class="labelUplaod">
-        <i class="el-icon-upload fileUpload"></i>
+        <slot name="uploadIcon"><i class="el-icon-upload fileUpload"></i></slot>
         <div class="el-upload__text">
-          <span
-            v-if="file.size"
-            class="waring"
-            v-html="uploadParmes.content?.againUp"
-          ></span>
-          <span v-else v-html="uploadParmes.content?.clickUp"></span>
+          <slot name="uploadText">
+            <span v-if="file.size" class="waring">重新上传</span>
+            <span v-else>点击上传</span>
+          </slot>
           <p class="uploadName">{{ uploadName }}</p>
+        </div>
+        <div slot="tip" class="el-upload__tip">
+          <p>
+            <slot name="uploadTip"></slot>
+          </p>
         </div>
         <input
           ref="upload"
@@ -29,12 +32,18 @@ import Vue from 'vue';
 import JSZip from 'jszip';
 import { Loading, Message } from 'element-ui';
 
-Vue.use(Loading, Message);
+Vue.use(Loading);
 
 export default {
   name: 'lj-upload-folder',
   props: {
-    uploadParmes: {
+    maxSize: {
+      //最大限制大小
+      type: Number,
+      default: 0,
+    },
+    content: {
+      //上传文件夹文案
       type: Object,
       default: () => {
         return {};
@@ -50,7 +59,7 @@ export default {
   methods: {
     beforeUpload(file) {
       if (!file.target.files || file.target.files.length === 0) {
-        this.$message.warning(this.uploadParmes.content.maxSize);
+        Message.warning(this.content.maxSize);
         return;
       }
       this.file = '';
@@ -102,7 +111,7 @@ export default {
 }
 .upload {
   position: absolute;
-  left: 0px;
+  left: 0;
   top: 2px;
   width: 49px;
   cursor: pointer;
@@ -128,6 +137,6 @@ export default {
 .uploadName {
   line-height: 20px;
   margin: 10px;
-  color: $color-primary;
+  color: $font-color-primary;
 }
 </style>

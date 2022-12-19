@@ -90,6 +90,25 @@ export function byteConvert(bytes) {
   return bytes + ' ' + symbols[i];
 }
 
+// /**
+//  * @description 容量
+//  * @param number
+//  * @returns {*}
+//  */
+//  export function capacityNum(num) {
+//   if (num == 0 || !num) return '0 B'
+//   let k = 1024
+//   let sizeStr = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+//   let i = 0
+//   for (let l = 0; l < 7; l++) {
+//     if (num / Math.pow(k, l) < 1) {
+//       break
+//     }
+//     i = l
+//   }
+//   return (num / Math.pow(k, i)).toFixed(2) + ' ' + sizeStr[i]
+// }
+
 /**
  * @description 将url请求参数转为json格式
  * @param url
@@ -221,33 +240,13 @@ export function formatHistoryTime(time, format) {
 }
 
 /**
- * 10位时间戳转换
+ * 10/13位时间戳转换
  * @param {*} time
  * @returns
  */
-export function tenBitTimestamp(time) {
-  const date = new Date(time * 1000);
-  const y = date.getFullYear();
-  let m = date.getMonth() + 1;
-  m = m < 10 ? '' + m : m;
-  let d = date.getDate();
-  d = d < 10 ? '' + d : d;
-  let h = date.getHours();
-  h = h < 10 ? '0' + h : h;
-  let minute = date.getMinutes();
-  let second = date.getSeconds();
-  minute = minute < 10 ? '0' + minute : minute;
-  second = second < 10 ? '0' + second : second;
-  return y + '年' + m + '月' + d + '日 ' + h + ':' + minute + ':' + second; //组合
-}
-
-/**
- * 13位时间戳转换
- * @param {*} time
- * @returns
- */
-export function thirteenBitTimestamp(time) {
-  const date = new Date(time / 1);
+export function tensBitTimestamp(time) {
+  let timeParams = time.length === 10 ? time * 1000 : time / 1
+  const date = new Date(timeParams);
   const y = date.getFullYear();
   let m = date.getMonth() + 1;
   m = m < 10 ? '' + m : m;
@@ -264,7 +263,7 @@ export function thirteenBitTimestamp(time) {
 
 /** ****************** 字典校验 ****************** */
 
-/* 中文+大小写字母+数字 */
+/* 中文、大小写字母或者数字 */
 export function isName(value) {
   const reg = /^[\u4e00-\u9fa5a-zA-Z0-9]+$/;
   return reg.test(value);

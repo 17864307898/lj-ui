@@ -2,39 +2,57 @@
   <div>
     <lj-upload
       ref="ljuploads"
-      :accept="uploadParmes.accept"
-      :action="uploadParmes.accept"
-      :maxSize="uploadParmes.maxSize"
-      :drag="uploadParmes.drag"
-      :content="uploadParmes.content"
-      :limit="uploadParmes.limit"
-      @uploadInfo="fnUploadInfo"
+      :accept="uploadParams.accept"
+      :action="uploadParams.action"
+      :content="uploadParams.content"
+      :data="uploadParams.data"
+      :drag="uploadParams.drag"
+      :limit="uploadParams.limit"
+      :md5-show="uploadParams.md5Show"
+      :max-size="uploadParams.maxSize"
+      :oss-show="uploadParams.ossShow"
+      :oss-upload-path="uploadParams.ossUploadPath"
+      :show-file-list="uploadParams.showFileList"
+      @ossUploadData="fnOssUploadData"
+      @uploadChange="fnUploadInfo"
     />
-    <!-- <ossUpload /> -->
   </div>
 </template>
 
 <script>
-// import ossUpload from './ossUpload.vue';
 export default {
-  // components: { ossUpload },
   data() {
     return {
-      uploadParmes: {
-        accept: '',
-        uploadPath: '/api/file/upload',
-        maxSize: '4294967296',
-        drag: true,
-        content: {
-          maxSize: '请上传小于4G的文件',
-        },
+      uploadParams: {
+          accept: '',
+          action: '',
+          md5Show: true,
+          ossShow: true,
+          ossUploadPath: {
+            fileUrl: 'https://tangram-manage.test.spdx.cn/api/v1/oss/sign',
+            dir: 'category-icon/',
+            token: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo4LCJleHAiOjE2Njk3MDkyODV9.aVevvvPYb3bB6ZSdLoX95WoUh_dXwyWBa9JX8D8CyFI`,
+          },
+          data: {},
+          maxSize: 4294967296,
+          showFileList: true,
+          drag: true,
+          limit: 2,
+          content: {
+            maxSize: '请上传小于4G的文件',
+          },
       },
       uploadData: {},
     };
   },
   methods: {
+    fnOssUploadData(res) {
+      this.uploadParams.action = res.host
+      this.uploadParams.data = res
+    },
     fnUploadInfo(file) {
-      this.uploadData = file;
+      console.log(file)
+      this.uploadData = file
     },
   },
 };
