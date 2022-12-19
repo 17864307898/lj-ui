@@ -9,7 +9,7 @@
     "es"
   ],
   "repository": {
-    "url": "https://github.com/17864307898/lj-ui",
+    "url": "https://code.spdx.cn/lj-front/lj-design",
     "type": "git"
   },
   "license": "MIT",
@@ -20,7 +20,8 @@
     "build": "vant-cli build",
     "release": "vant-cli release",
     "test:coverage": "open test/coverage/index.html",
-    "build-site": "vant-cli build-site && npx gh-pages -d site-dist"
+    "build-site": "vant-cli build-site",
+    "build-design": "vant-cli build-site && scp -r site/* ljuser@172.20.4.15:/opt/7-cai/lj-design/lj-design-web"
   },
   "author": "",
   "husky": {
