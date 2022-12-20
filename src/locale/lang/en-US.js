@@ -17,6 +17,7 @@ export default {
   ljFilter: {
     screen: 'screen',
     screenMethod: 'Method of screening',
+    selected: 'selected',
   },
   // LjInput
   ljInput: {
@@ -26,8 +27,8 @@ export default {
   },
   // ljCharts
   ljCharts: {
-    files: 'File distribution',
-    codes: 'Distribution of code',
+    files: 'File number distribution',
+    codes: 'Line distribution',
     distributeTitle: 'Distribution of language',
     others: 'others',
     switchTable: 'Switch to table',

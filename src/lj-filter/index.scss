@@ -15,6 +15,7 @@
   }
   .filter-choose-left {
     display: flex;
+    align-items: center;
   }
 }
 .form-filter-con {
@@ -33,7 +34,7 @@
 .filter-choose-box {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  // justify-content: space-between;
   width: 100%;
   .reset {
     cursor: pointer;

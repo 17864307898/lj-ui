@@ -38,6 +38,7 @@
       :columns="columns"
       :data="tableList"
       :need-pagination="false"
+      size="mini"
       :style="`height: ${chartHeight}`"
     />
 
@@ -107,7 +108,8 @@
       display: flex;
       justify-content: space-between;
       .title {
-        font-size: 18px;
+        font-size: 14px;
+        margin-bottom: 12px;
         font-weight: 600;
       }
     }

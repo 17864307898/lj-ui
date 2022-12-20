@@ -48,7 +48,7 @@
             (tableSelArr && tableSelArr.length > 0)
           "
         >
-          {{ filterContent.selected }}：{{ tableSelArr.length || '' }}
+          {{ filterContent.selected || translate('selected') }}：{{ tableSelArr.length || '' }}
           <!-- batchRemove批量删除 -->
           <slot
             v-if="tableSelArr && tableSelArr.length > 0"

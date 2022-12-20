@@ -47,7 +47,10 @@ const TYPE_MAP = {
           'vulHigh',
           'vulMid',
           'vulLow',
-          'vulUnknown',
+          {
+            key: 'vulUnknown',
+            t: 'noRated',
+          }
         ],
       },
     },
@@ -92,7 +95,7 @@ export const handleOptions = function () {
     color: config.color,
     legend: {
       orient: 'vertical',
-      bottom: 'center',
+      top: 'top',
       left: 'left',
       itemHeight: 10, //图例的高度
       itemGap: 8, //图例之间的间距
@@ -166,12 +169,13 @@ export function formatData(data = [], config = {}) {
     const res = []
     
     list.forEach((x, i) => {
-      const count = cloneData[x]
+      const key = x?.key || x
+      const count = cloneData[key]
 
       if (count >= 0) {
         resColor.push(RISK_COLORS[i])
         res.push({
-          name: t(x),
+          name: t(x?.t || x),
           value: count,
         })
       }

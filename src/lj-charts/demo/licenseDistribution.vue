@@ -1,7 +1,7 @@
 <template>
   <lj-charts
-    :chart-type="2"
-    :config="[0, 1, 2]"
+    :chart-type="1"
+    :config="[2]"
     :data="data"
     :source="true"
     :type="104"
@@ -18,11 +18,11 @@
       return {
         data: {
           sourceProjectDistribute: {
-            high: 38,
-            mid: 21,
-            low: 55,
-            no: 7,
-            unknown: 19,
+            high: 0,
+            mid: 0,
+            low: 0,
+            no: 1721,
+            unknown: 0,
           },
           packageDistribute: {
             high: 3,
