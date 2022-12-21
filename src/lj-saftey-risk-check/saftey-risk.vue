@@ -1,5 +1,5 @@
 <template>
-  <div class="level-box">
+  <div class="lj-level-box">
     <h1>{{ t('riskGrade') }}</h1>
     <div>
       <span
