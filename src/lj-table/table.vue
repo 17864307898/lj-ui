@@ -52,6 +52,17 @@
               {{ row[col.prop] || row[col.prop] === 0 ? row[col.prop] : '--' }}
             </slot>
           </template>
+          <!-- 扩展类型 -->
+          <template
+            #default="{row}"
+            v-else-if="['selection', 'index', 'expand'].includes(col.type)"
+          >
+            <slot
+              :col="col"
+              :name="col.type"
+              :row="row"
+            />
+          </template>
         </el-table-column>
 
         <!-- 无数据展示 -->
