@@ -12,6 +12,7 @@ const DEFAULT_COLORS = [
   '#EC8A5D',
   '#9264AF',
   '#DC83C6',
+  '#737189',
 ]
 export const TYPE_MAP = {
   1: 'size', // 文件
@@ -25,7 +26,9 @@ export const TYPE_MAP = {
  * @param {*} color 
  * @returns 
  */
-export function handleOptions(data = [], type = 1, color = DEFAULT_COLORS) {
+export function handleOptions() {
+  const { colors: color = DEFAULT_COLORS } = this
+
   const option = {
     title: {
       show: false,
@@ -44,7 +47,7 @@ export function handleOptions(data = [], type = 1, color = DEFAULT_COLORS) {
         center: ['50%', '60%'],
         minAngle: 8,
         avoidLabelOverlap: true,
-        data: formatData(data, type),
+        data: formatData.call(this),
         label: {
           normal: {
             textStyle: {
@@ -66,6 +69,14 @@ export function handleOptions(data = [], type = 1, color = DEFAULT_COLORS) {
   return option
 }
 
+export function formatData(onlySort = false) {
+  const { chartType = 1 } = this
+
+  if (chartType === 1) return formatData1.call(this, onlySort)
+
+  return formatData2.call(this, onlySort)
+}
+
 /**
  * 格式化数据 限制10个
  * @param {*} data 数据集
@@ -73,11 +84,15 @@ export function handleOptions(data = [], type = 1, color = DEFAULT_COLORS) {
  * @param {*} onlySort 仅排序
  * @returns 
  */
-export function formatData(data, type = 1, onlySort = false) {
+export function formatData1(onlySort = false) {
+  const {
+    data: map = {},
+    currentType: type = 1,
+    chartType = 1,
+  } = this
+  const data = map[chartType]
+  
   const res = deepClone(data)
-  const list = []
-  let otherNum = 0
-  const key = TYPE_MAP[type] || 'num'
 
   // 排序
   res.sort((x, y) => {
@@ -85,24 +100,86 @@ export function formatData(data, type = 1, onlySort = false) {
   })
   if (onlySort) return res
 
-  res.forEach((item, idx) => {
-    if (idx < 8) {
-      list.push({
-        value: item[key],
-        name: item.language,
-      })
-    }
-    if (idx >= 8) {
-      otherNum += item[key]
-    }
-  })
+  const key = TYPE_MAP[type] || 'num'
+  let list = []
+  let num = 0
 
-  if (otherNum > 0) {
+  // 长度大于十 其余归为其他类
+  if (res.length > 10) {
+    list = res.slice(0, 9).map(x => ({
+      value: x[key],
+      name: x.language,
+    }))
+
+    num = res.slice(9).reduce((total, x) => {
+      total += +x[key]
+
+      return total
+    }, 0)
+
     list.push({
-      value: otherNum,
+      value: num,
       name: t('others'),
     })
+
+    return list
   }
-    
+
+  list = res.slice(0, 10).map(x => ({
+    value: x[key],
+    name: x.language,
+  }))
+
   return list
+}
+
+export function formatData2(onlySort = false) {
+  const {
+    data: map = {},
+    valueKey,
+    nameKey,
+    chartType = 1,
+    order = 'desc',
+  } = this
+  const data = map[chartType]
+
+  const res = deepClone(data)
+  if (!order) return res
+
+  // 排序
+  res.sort((x, y) => {
+    if (order === 'desc') {
+      return y[valueKey] - x[valueKey]
+    } else if (order === 'asc') {
+      return x[valueKey] - y[valueKey]
+    }
+  })
+  
+  if (onlySort) return res
+
+  // 长度大于十 其余归为其他类
+  if (res.length > 10) {
+    const list = res.slice(0, 9).map(x => ({
+      value: x[valueKey],
+      name: x[nameKey],
+    }))
+
+    const num = res.slice(9).reduce((total, x) => {
+      total += +x[valueKey]
+
+      return total
+    }, 0)
+
+    list.push({
+      value: num,
+      name: t('others'),
+    })
+
+    return list
+  }
+
+  return res.slice(0, 10).map(x => ({
+    value: x[valueKey],
+    name: x[nameKey],
+  }))
 }

@@ -17,7 +17,6 @@ lj-charts 使用配置的方式初始化图表 用简单的方式去开发业务
 | 图表名 | 其他 |
 |--------|-----|
 | <a href="#yu-yan-fen-bu">语言分布</a> |
-| <a href="#wen-jian-lei-xing-fen-bu">文件类型分布</a> |
 | <a href="#feng-xian-tong-ji">风险统计</a> |
 | <a href="#feng-xian-fen-bu">风险分布</a> |
 | <a href="#feng-xian-qu-shi">风险趋势</a> |
@@ -35,24 +34,11 @@ lj-charts 使用配置的方式初始化图表 用简单的方式去开发业务
 | 参数 | 说明 | 类型 |  默认值  |
 |------|------|-----|----------|
 | colors | 自定义颜色列表 | _array_ | `undefined` |
-|  |  |  |  |
-### 文件类型分布
-
-<demo-code>./demo/fileType.vue</demo-code>
-
-#### props
-
-| 参数 | 说明 | 类型 |  默认值  |
-|------|------|-----|----------|
-| canSwitch | 展示右下角切换 | _boolean_ | `true` |
-| canDrag | 图表展示可拖拽栏 | _boolean_ | `true` |
-| color | 自定义颜色 | _string_ | -- |
 | order | 排序方式 `desc 降序 asc 升序 传空不排序` | _string_ | `desc` |
 | valueKey | 自定义value的key值 | _string_ | `count` |
 | nameKey | 自定义name的key值 | _string_ | `name` |
 | customColumns | 自定义表格展示配置 | _array_ | -- |
 |  |  |  |  |
-
 ### 风险统计
 
 <demo-code>./demo/licenseRisk.vue</demo-code>
@@ -64,6 +50,33 @@ lj-charts 使用配置的方式初始化图表 用简单的方式去开发业务
 | chartType | 图表类型 `1 许可证 2 漏洞` | _number_`|`_string_ | `1` |
 |  |  |  |  |
 > chartType：传入1时，`data`为`object`；传入2时，`data`为`array`;
+
+### 风险统计-新
+
+<demo-code>./demo/risk.vue</demo-code>
+
+#### props
+
+| 参数 | 说明 | 类型 |  默认值  |
+|------|------|-----|----------|
+| chartType | 图表类型 `1 许可证 2 漏洞` | _number_`|`_string_ | `1` |
+| config | 右侧展示的信息下标`仅chartType为2时生效` | _array_ | `[0, 1, 2]` |
+| source | 是否开启溯源`仅chartType为2时生效` | _boolean_ | `false` |
+|  |  |  |  |
+
+#### 事件
+
+| 事件名称 | 说明 |  参数  |
+|----------|------|--------|
+| detail | 点击查看详情 | `chartType`当前图表类型 |
+| item-click | 点击右侧统计信息 | `type`具体参考下方说明 |
+
+> chartType为1时:  item-click 返回type 1: 兼容 2 篡改
+
+
+> chartType为2时:  item-click 返回type 1: 组件 2 文件 3 溯源
+
+
 
 ### 风险分布
 

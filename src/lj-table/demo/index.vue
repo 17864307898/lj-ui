@@ -4,7 +4,17 @@
     :columns="columns"
     :data="dataList"
     :pagination="pagination"
-  />
+  >
+    <template #type_expand>
+      <lj-table
+        class="table-wrap"
+        :columns="columns"
+        :data="[]"
+        :need-pagination="false"
+        :pagination="pagination"
+      />
+    </template>
+  </lj-table>
 </template>
 
 <script>

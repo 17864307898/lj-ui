@@ -54,12 +54,13 @@
           </template>
           <!-- 扩展类型 -->
           <template
-            #default="{row}"
+            #default="{ row, column }"
             v-else-if="['selection', 'index', 'expand'].includes(col.type)"
           >
             <slot
               :col="col"
-              :name="col.type"
+              :column="column"
+              :name="`type_${col.type}`"
               :row="row"
             />
           </template>
