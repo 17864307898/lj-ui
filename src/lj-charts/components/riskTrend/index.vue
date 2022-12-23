@@ -4,23 +4,14 @@
       <div class="title">{{ title || t('riskTrend') }}</div>
       <!-- 分布类型 -->
       <div class="fr">
-        <el-button
-          :plain="currentType === 1 ? false : true"
-          size="mini"
-          :type="currentType === 1 ? 'primary' : ''"
-          @click="handleClick(1)"
-        >
-          {{ t('vulnerabilityRisk') }}
-        </el-button>
-
-        <el-button
-          :plain="currentType === 2 ? false : true"
-          size="mini"
-          :type="currentType === 2 ? 'primary' : ''"
-          @click="handleClick(2)"
-        >
-          {{ t('licenseRisk') }}
-        </el-button>
+        <el-switch
+          v-model="currentType"
+          :active-text="t('licenseRisk')"
+          :active-value="2"
+          :inactive-text="t('vulnerabilityRisk')"
+          :inactive-value="1"
+          @change="handleClick"
+        />
       </div>
     </div>
     <div v-if="data" ref="echarts" :style="`height: ${chartHeight}`"></div>
