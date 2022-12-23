@@ -15,7 +15,8 @@ export function parseRecordsLineS() {
       data: data.risk.map((x) => x.name),
     },
     grid: {
-      bottom: '2%',
+      top: '10%',
+      bottom: '10%',
       left: '4%',
       right: '4%',
     },
