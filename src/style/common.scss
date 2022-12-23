@@ -3,29 +3,29 @@
 // 规范化样式
 @import "./normalize.scss";
 
-.v-flex {
+.lj-v-flex {
   display: flex;
   flex-direction: column;
 }
 
-.v-flex-row {
+.lj-v-flex-row {
   display: flex;
   flex-direction: row;
 }
 
-.flex-1 {
+.lj-flex-1 {
   flex: 1;
 }
 
-.fa-center {
+.lj-fa-center {
   align-items: center;
 }
 
-.fj-center {
+.lj-fj-center {
   justify-content: center;
 }
 
-.text-1 {
+.lj-text-1 {
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;

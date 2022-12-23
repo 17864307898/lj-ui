@@ -2,26 +2,27 @@
   <div class="content-wrap">
     <div class="title-wrap">
       <span class="title">{{ title || t('distributeTitle') }}</span>
+    </div>
+    <div class="title-wrap">
+      <el-select v-model="chartType" @change="handleInit">
+        <el-option
+          v-for="(item, index) in chartList"
+          :key="`${item.value}_${index}`"
+          :label="item.label"
+          :value="item.value"
+        />
+      </el-select>
 
       <!-- 分布类型 -->
-      <div class="fr">
-        <el-button
-          :plain="currentType === 1 ? false : true"
-          size="mini"
-          :type="currentType === 1 ? 'primary' : ''"
-          @click="handleClick(1)"
-        >
-          {{ t('files') }}
-        </el-button>
-
-        <el-button
-          :plain="currentType === 2 ? false : true"
-          size="mini"
-          :type="currentType === 2 ? 'primary' : ''"
-          @click="handleClick(2)"
-        >
-          {{ t('codes') }}
-        </el-button>
+      <div v-if="chartType === 1" class="fr">
+        <el-switch
+          v-model="currentType"
+          :active-text="t('files')"
+          :active-value="1"
+          :inactive-text="t('codes')"
+          :inactive-value="2"
+          @change="handleInit"
+        />
       </div>
     </div>
 
@@ -38,6 +39,7 @@
       :columns="columns"
       :data="tableList"
       :need-pagination="false"
+      size="mini"
       :style="`height: ${chartHeight}`"
     />
 
@@ -51,7 +53,7 @@
 </template>
 
 <script>
-  import { handleOptions, formatData } from './handle'
+  import { handleOptions, formatData, t } from './handle'
   import { handleColumns } from './config'
   import mixins from '../../mixins'
 
@@ -65,23 +67,69 @@
         type: Array,
         default: () => undefined,
       },
+      // 排序 desc 降序 asc 升序 
+      order: {
+        type: String,
+        default: () => 'desc',
+      },
+      // 自定义val
+      valueKey: {
+        type: String,
+        default: () => 'size',
+      },
+      // 自定义name
+      nameKey: {
+        type: String,
+        default: () => 'type',
+      },
+      // 自定义表格配置
+      customColumns: {
+        type: Array,
+        default: () => undefined,
+      },
     },
     data(){
       return {
-        currentType: 1,
+        currentType: 2,
+        chartList: [
+          {
+            label: t('languageDistribution'),
+            value: 1,
+          },
+          {
+            label: t('fileTitle'),
+            value: 2,
+          },
+        ],
+        chartType: 1,
       }
     },
     computed: {
       // 表格配置
       columns() {
-        return handleColumns(this.currentType)
+        if (this.chartType === 1) return handleColumns(this.currentType)
+      
+        if (this.customColumns) return this.customColumns
+
+        return [
+          {
+            label: t('index'),
+            type: 'index',
+          },
+          {
+            label: t('fileName'),
+            prop: this.nameKey,
+          },
+          {
+            label: t('fileSize'),
+            prop: this.valueKey,
+          },
+        ]
       },
     },
     methods: {
       // 类型切换
-      handleClick(type = 1) {
-        this.currentType = type
-
+      handleInit() {
         this.handleInitChart()
         this.handleInitTable()
       },
@@ -89,12 +137,12 @@
       handleInitChart() {
         if (!this.isChart) return
 
-        const option = handleOptions(this.data, this.currentType, this.colors)
+        const option = handleOptions.call(this)
         this.handleEcharts(option)
       },
       // 数据处理
       formatData() {
-        return formatData(this.data, this.currentType, true)
+        return formatData.call(this, true)
       },
     },
   }
@@ -107,7 +155,8 @@
       display: flex;
       justify-content: space-between;
       .title {
-        font-size: 18px;
+        font-size: 14px;
+        margin-bottom: 12px;
         font-weight: 600;
       }
     }

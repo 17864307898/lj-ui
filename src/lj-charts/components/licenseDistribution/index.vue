@@ -64,7 +64,8 @@
   .content-wrap {
     width: 100%;
     .title {
-      font-size: 18px;
+      font-size: 14px;
+      margin-bottom: 12px;
       font-weight: 600;
     }
   }

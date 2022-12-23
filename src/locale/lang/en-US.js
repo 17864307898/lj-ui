@@ -17,6 +17,7 @@ export default {
   ljFilter: {
     screen: 'screen',
     screenMethod: 'Method of screening',
+    selected: 'selected',
   },
   // LjInput
   ljInput: {
@@ -26,9 +27,10 @@ export default {
   },
   // ljCharts
   ljCharts: {
-    files: 'File distribution',
-    codes: 'Distribution of code',
-    distributeTitle: 'Distribution of language',
+    files: 'File Capacity distribution (KB)',
+    codes: 'Line distribution (lines)',
+    distributeTitle: 'Material distribution',
+    languageDistribution: 'Language distribution',
     others: 'others',
     switchTable: 'Switch to table',
     switchChart: 'Switch to Chart',
@@ -61,6 +63,9 @@ export default {
     /************/
     riskTrend: 'Trend of risk',
     vulnerabilityRisk: 'Vulnerability risk',
+    vulnerabilityComponent: 'Vulnerability component',
+    buggyFile: 'Buggy file',
+    IncludingTraceability: 'Including vulnerability traceability items',
   },
   // ljCheck
   ljCheck: {

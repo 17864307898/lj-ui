@@ -4,4 +4,5 @@ export default {
   103: 'AdaptLicenseRisk', // 风险统计
   104: 'AdaptLicenseDistribution', // 风险分布
   105: 'AdaptRiskTrend', // 风险趋势
+  106: 'AdaptRiskCharts', // 风险统计-新
 }

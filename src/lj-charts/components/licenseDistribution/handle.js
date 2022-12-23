@@ -2,6 +2,20 @@ import { deepClone } from "../../../utils"
 import { t } from "../distribute/handle"
 import { RISK_COLORS } from '../licenseRisk/handle'
 
+const LENGTH_MAP = {
+  1: {
+    top: '35%',
+    bottom: '35%',
+  },
+  2: {
+    top: '18%',
+    bottom: '18%',
+  },
+  3: {
+    top: '4%',
+    bottom: '4%',
+  },
+}
 /**
  * 
  * @param {*} data 
@@ -11,6 +25,8 @@ import { RISK_COLORS } from '../licenseRisk/handle'
  */
 export const handleOptions = function () {
   const yAxisData = formatYData.call(this)
+  const series = formatXData.call(this, yAxisData)
+  console.log(LENGTH_MAP[yAxisData.length])
 
   const option = {
     tooltip: {
@@ -23,8 +39,8 @@ export const handleOptions = function () {
     grid: {
       left: '3%',
       right: '4%',
-      bottom: '3%',
-      containLabel: true
+      containLabel: true,
+      ...LENGTH_MAP[yAxisData.length],
     },
     xAxis: {
       type: 'value'
@@ -33,10 +49,7 @@ export const handleOptions = function () {
       type: 'category',
       data: yAxisData.map((x) => t(x.name))
     },
-    // tooltip: {
-    //   formatter: handleFormatTooltip
-    // },
-    series: formatXData.call(this, yAxisData)
+    series,
   }
 
   return option
@@ -135,7 +148,7 @@ function formatXData(yList) {
       const key = X_KEY_LIST[chartType][i]
       defaultData.data = Object.values(list)
         .map((y) => y[key])
-        .filter((y) => y > 0)
+        // .filter((y) => y > 0)
 
       return {
         ...defaultData,

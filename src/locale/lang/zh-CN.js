@@ -17,6 +17,7 @@ export default {
   ljFilter: {
     screen: '筛选',
     screenMethod: '筛选方式',
+    selected: '已选择',
   },
   // LjInput
   ljInput: {
@@ -26,9 +27,10 @@ export default {
   },
   // ljCharts
   ljCharts: {
-    files: '文件分布',
-    codes: '代码分布',
-    distributeTitle: '语言分布',
+    files: '文件容量分布(KB)',
+    codes: '代码行分布(行)',
+    distributeTitle: '物料分布',
+    languageDistribution: '语言分布',
     others: '其他',
     switchTable: '切换为表格',
     switchChart: '切换为图表',
@@ -61,6 +63,9 @@ export default {
     /************/
     riskTrend: '风险趋势',
     vulnerabilityRisk: '漏洞风险',
+    vulnerabilityComponent: '含漏洞组件',
+    buggyFile: '含漏洞文件',
+    IncludingTraceability: '含漏洞溯源项目',
   },
   // ljCheck
   ljCheck: {

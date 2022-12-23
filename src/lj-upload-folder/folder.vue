@@ -1,5 +1,5 @@
 <template>
-  <div class="uploadWrap">
+  <div class="lj-upload-wrap">
     <div id="clonePieLoading" class="el-upload-dragger">
       <div class="labelUplaod">
         <slot name="uploadIcon"><i class="el-icon-upload fileUpload"></i></slot>

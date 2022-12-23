@@ -1,28 +1,8 @@
-// import { deepClone } from '../../../utils';
-// import { t } from '../distribute/handle';
-
-import Vue from 'vue'
 import * as echarts from 'echarts'
 import elementResizeDetectorMaker from 'element-resize-detector'
 
-let parseRecordsLineEcharts
-
-export function parseRecordsLineS(id, data) {
-  var legendName = []
-  data.risk.forEach((el) => {
-    legendName.push(el.name)
-  })
-  if (
-    parseRecordsLineEcharts != null &&
-    parseRecordsLineEcharts != '' &&
-    parseRecordsLineEcharts != undefined
-  ) {
-    parseRecordsLineEcharts.dispose() // 销毁
-  }
-  if (!document.getElementById(id)) {
-    return false
-  }
-  parseRecordsLineEcharts = echarts.init(document.getElementById(id))
+export function parseRecordsLineS() {
+  const { parseRecordsLine: data } = this
   let option = {
     title: {
       show: false,
@@ -32,10 +12,13 @@ export function parseRecordsLineS(id, data) {
     },
     legend: {
       show: false,
-      data: legendName,
+      data: data.risk.map((x) => x.name),
     },
     grid: {
-      top: '30px',
+      top: '10%',
+      bottom: '10%',
+      left: '4%',
+      right: '4%',
     },
     xAxis: {
       type: 'category',
@@ -45,23 +28,30 @@ export function parseRecordsLineS(id, data) {
     },
     yAxis: {
       type: 'value',
-      name: 'y',
       minorSplitLine: {
         show: false,
       },
     },
     series: data.riskData,
   }
-  parseRecordsLineEcharts.setOption(option)
-  //随着屏幕大小调节图表
-  window.addEventListener('resize', () => {
-    parseRecordsLineEcharts.resize()
-  })
+
+  const dom = this.$refs.echarts
+  this.chart = echarts.init(dom)
+
+  this.chart.setOption(option)
+
+  const handleEvents = () => {
+    this.chart.resize()
+  }
+  window.addEventListener('resize', handleEvents)
   // 随外层div的大小变化自适应
   let erd = elementResizeDetectorMaker()
-  erd.listenTo(document.getElementById(id), () => {
-    Vue.nextTick(() => {
-      parseRecordsLineEcharts.resize()
-    })
+  erd.listenTo(dom, handleEvents)
+
+  // 移除事件监听及echarts实例
+  this.$once('hook:beforeDestroy', () => {
+    window.removeEventListener('resize', handleEvents)
+    erd.removeListener(dom, handleEvents)
+    this.chart.dispose()
   })
 }

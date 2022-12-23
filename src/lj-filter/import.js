@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue from 'vue'
 import {
   Form,
   FormItem,
@@ -9,14 +9,14 @@ import {
   Button,
   Tag,
   Link,
-} from 'element-ui';
+} from 'element-ui'
 
-Vue.use(Form);
-Vue.use(FormItem);
-Vue.use(Switch);
-Vue.use(Select);
-Vue.use(Popover);
-Vue.use(Option);
-Vue.use(Button);
-Vue.use(Tag);
-Vue.use(Link);
+Vue.use(Form)
+Vue.use(FormItem)
+Vue.use(Switch)
+Vue.use(Select)
+Vue.use(Popover)
+Vue.use(Option)
+Vue.use(Button)
+Vue.use(Tag)
+Vue.use(Link)

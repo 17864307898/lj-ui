@@ -60,6 +60,11 @@
         type: String,
         default: () => 'type',
       },
+      // 是否开源
+      source: {
+        type: Boolean,
+        default: () => false,
+      },
     },
     data(){
       return {
@@ -69,7 +74,7 @@
     computed: {
       // 下拉选项
       options() {
-        return [
+        const list = [
           {
             value: 1,
             label: t('licenseRisk'),
@@ -78,11 +83,14 @@
             value: 2,
             label: t('compatibilityRisk'),
           },
-          {
-            value: 3,
-            label: t('tamperingRisk'),
-          },
         ]
+
+        if (this.source) list.push({
+          value: 3,
+          label: t('tamperingRisk'),
+        })
+
+        return list
       },
       // 默认标题
       defaultTitle() {
@@ -119,7 +127,8 @@
       align-items: flex-start;
     }
     .title {
-      font-size: 18px;
+      font-size: 14px;
+      margin-bottom: 12px;
       font-weight: 600;
     }
 

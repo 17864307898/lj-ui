@@ -4,6 +4,7 @@
   import AdaptLicenseRisk from './components/licenseRisk'
   import AdaptLicenseDistribution from './components/licenseDistribution'
   import AdaptRiskTrend from './components/riskTrend'
+  import AdaptRiskCharts from './components/risk'
   import config from './config'
 
   export default {
@@ -14,6 +15,7 @@
       AdaptLicenseRisk,
       AdaptLicenseDistribution,
       AdaptRiskTrend,
+      AdaptRiskCharts,
     },
     props:{
       type: {

@@ -8,9 +8,20 @@ import { deepClone } from '../../../utils'
  */
 export const handleOptions = function() {
   const { data, canDrag, valueKey, nameKey, color, order } = this
+  const list = formatData(data, valueKey, order)
   const  dataZoom = [
     {
-      type: 'slider'
+      type: 'inside',
+      start: 0,
+      end: list.length > 100 ? 10 : 40,
+    },
+    {
+      type: 'slider',
+      dataBackground: {
+        lineStyle: {
+          width: 2
+        }
+      }
     }
   ]
 
@@ -22,11 +33,12 @@ export const handleOptions = function() {
       }
     },
     grid: {
-      left: 70,
-      bottom: canDrag ? 80 : 20,
+      top: '5%',
+      left: 90,
+      bottom: canDrag ? 70 : 20,
     },
     xAxis: {
-      data: formatData(data, valueKey, order).map((x) => x[nameKey]),
+      data: list.map((x) => x[nameKey]),
       silent: false,
       splitLine: {
         show: false
@@ -44,7 +56,7 @@ export const handleOptions = function() {
       {
         color,
         type: 'bar',
-        data: formatData(data, valueKey, order).map((x) => ({
+        data: list.map((x) => ({
           name: x[nameKey],
           value: x[valueKey],
         })),

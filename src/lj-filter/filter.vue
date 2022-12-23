@@ -1,5 +1,5 @@
 <template>
-  <div class="form-filter-box">
+  <div class="lj-form-filter-box">
     <div class="form-filter-head">
       <!-- query左边输入框内容 -->
       <slot name="left-query"></slot>
@@ -10,7 +10,7 @@
         trigger="click"
         width="400"
       >
-        <div class="form-filter-con">
+        <div class="lj-form-filter-con">
           <h1>{{ translate('screenMethod') }}</h1>
           <!-- filterItems表单筛选项 start -->
           <slot
@@ -48,7 +48,7 @@
             (tableSelArr && tableSelArr.length > 0)
           "
         >
-          {{ filterContent.selected }}：{{ tableSelArr.length || '' }}
+          {{ filterContent.selected || translate('selected') }}：{{ tableSelArr.length || '' }}
           <!-- batchRemove批量删除 -->
           <slot
             v-if="tableSelArr && tableSelArr.length > 0"
