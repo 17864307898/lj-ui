@@ -15,9 +15,9 @@ import "lj-design/es/style/common.css"
 ### 普通样式
 
 ```CSS
-.v-flex /* flex纵向布局 */
-.v-flex-row /* flex横向布局 */
-.flex-1
+.lj-v-flex /* flex纵向布局 */
+.lj-v-flex-row /* flex横向布局 */
+.lj-flex-1
 .text-clamp-1 /* 单行省略 */
 ```
 

@@ -1,12 +1,12 @@
 <template>
   <!-- table简便封装 -->
-  <div class="lj-table v-flex">
+  <div class="lj-table lj-v-flex">
     <!-- 搜索区域 -->
     <el-row>
       <slot name="query"></slot>
     </el-row>
     <!-- 表格区域 -->
-    <el-row class="flex-1">
+    <el-row class="lj-flex-1">
       <el-table
         :ref="`table_${tableKey}`"
         class="table"
@@ -75,7 +75,7 @@
     <el-row>
       <!-- 分页支持自定义 -->
       <slot v-if="needPagination" name="pagination" :pagination="pagination">
-        <div class="v-flex flex-row jc-end pagination-wrap">
+        <div class="lj-v-flex flex-row jc-end pagination-wrap">
           <el-pagination
             :current-page="pagination.pageNo"
             :page-size="pagination.pageSize"
