@@ -14,7 +14,7 @@ export const handleColumns = (type = 1) => {
 
   if (type === 1) {
     publicColumn.push({
-      label: t('fileCount'),
+      label: t('fileSize'),
       prop: TYPE_MAP[1],
     })
   } else {

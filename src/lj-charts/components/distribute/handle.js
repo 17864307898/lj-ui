@@ -27,23 +27,40 @@ export const TYPE_MAP = {
  * @returns 
  */
 export function handleOptions() {
-  const { colors: color = DEFAULT_COLORS } = this
+  const {
+    colors: color = DEFAULT_COLORS,
+    chartType = 1,
+    currentType = 1,
+    nameKey = 'type',
+  } = this
 
   const option = {
-    title: {
-      show: false,
-      subtext: '',
-      left: 'center',
-    },
     tooltip: {
       trigger: 'item',
+      formatter: function({ marker, name, value, data }) {
+        if (data.otherList) {
+          let key = ''
+          if (chartType === 1) {
+            key = TYPE_MAP[currentType]
+          } else {
+            key = 'count'
+          }
+
+          const name = chartType === 1 ? 'language' : nameKey
+          return data.otherList.map((x) => {
+            return `${x[name]} :  ${x[key]}`
+          }).join('<br />')
+        }
+        
+        return `${marker} ${name}   ${value}`
+      }
     },
     series: [
       {
         color,
         type: 'pie',
         top: '0%',
-        radius: '70%',
+        radius: '60%',
         center: ['50%', '60%'],
         minAngle: 8,
         avoidLabelOverlap: true,
@@ -78,10 +95,9 @@ export function formatData(onlySort = false) {
 }
 
 /**
+ * 语言分布
  * 格式化数据 限制10个
- * @param {*} data 数据集
- * @param {*} type 展示类型 1 文件 2 代码
- * @param {*} onlySort 仅排序
+ * @param {Boolean} onlySort 仅排序
  * @returns 
  */
 export function formatData1(onlySort = false) {
@@ -94,45 +110,70 @@ export function formatData1(onlySort = false) {
   
   const res = deepClone(data)
 
+  // 转换KB
+  function translateKb(val) {
+    return type === 1 ? +(val/1024).toFixed(2) : +val
+  }
+
+  const key = TYPE_MAP[type] || 'num'
   // 排序
   res.sort((x, y) => {
     return y[key] - x[key]
   })
-  if (onlySort) return res
 
-  const key = TYPE_MAP[type] || 'num'
+  // 仅排序直接全量返回
+  if (onlySort) {
+    if (chartType === 1 && type === 1) {
+      return res.map((x) => ({
+        ...x,
+        [key]: translateKb(x[key]),
+      }))
+    }
+    
+    return res
+  }
+
   let list = []
-  let num = 0
 
   // 长度大于十 其余归为其他类
   if (res.length > 10) {
+    let num = 0
     list = res.slice(0, 9).map(x => ({
-      value: x[key],
+      value: translateKb(x[key]),
       name: x.language,
     }))
 
-    num = res.slice(9).reduce((total, x) => {
-      total += +x[key]
+    const otherList = res.slice(9).map((x) => {
+      num += translateKb(x[key])
 
-      return total
-    }, 0)
+      return {
+        ...x,
+        [key]: translateKb(x[key]),
+      }
+    })
 
     list.push({
       value: num,
       name: t('others'),
+      otherList,
     })
 
     return list
   }
 
   list = res.slice(0, 10).map(x => ({
-    value: x[key],
+    value: translateKb(x[key]),
     name: x.language,
   }))
 
   return list
 }
 
+/**
+ * 文件类型分布
+ * @param {Boolean} onlySort 仅排序
+ * @returns 
+ */
 export function formatData2(onlySort = false) {
   const {
     data: map = {},
@@ -164,15 +205,20 @@ export function formatData2(onlySort = false) {
       name: x[nameKey],
     }))
 
-    const num = res.slice(9).reduce((total, x) => {
-      total += +x[valueKey]
+    let num = 0
+    const otherList = res.slice(9).map((x) => {
+      num += +x[valueKey]
 
-      return total
-    }, 0)
+      return {
+        ...x,
+        [valueKey]: +x[valueKey],
+      }
+    })
 
     list.push({
       value: num,
       name: t('others'),
+      otherList,
     })
 
     return list

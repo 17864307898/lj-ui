@@ -150,8 +150,13 @@ export function handleRightConfig() {
           },
         ],
         type: 2,
+        isSource: true,
       },
-    ]
+    ].filter((x) => {
+      if (x?.isSource) return source
+
+      return true
+    })
   }
 
   const list = [
