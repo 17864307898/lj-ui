@@ -38,6 +38,7 @@ export function parseRecordsLineS() {
   const dom = this.$refs.echarts
   this.chart = echarts.init(dom)
 
+  console.log(option)
   this.chart.setOption(option)
 
   const handleEvents = () => {

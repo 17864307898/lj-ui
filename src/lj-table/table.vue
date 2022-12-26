@@ -54,10 +54,11 @@
           </template>
           <!-- 扩展类型 -->
           <template
-            #default="{ row, column }"
-            v-else-if="['selection', 'index', 'expand'].includes(col.type)"
+            #default="{ row, column, $index }"
+            v-else-if="['expand'].includes(col.type)"
           >
             <slot
+              :$index="$index"
               :col="col"
               :column="column"
               :name="`type_${col.type}`"
@@ -69,6 +70,11 @@
         <!-- 无数据展示 -->
         <template #empty>
           <slot name="empty" />
+        </template>
+
+        <!-- 插入表格最后一行 -->
+        <template #append>
+          <slot name="append" />
         </template>
       </el-table>
     </el-row>

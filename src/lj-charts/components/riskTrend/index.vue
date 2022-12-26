@@ -83,7 +83,7 @@
               data: [],
             },
             {
-              name: t('vulUnknown'),
+              name: t('noRated'),
               type: 'line',
               data: [],
             },
