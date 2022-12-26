@@ -3,6 +3,7 @@ import elementResizeDetectorMaker from 'element-resize-detector'
 
 export function parseRecordsLineS() {
   const { parseRecordsLine: data } = this
+  this.chart&&this.chart.dispose()
   let option = {
     title: {
       show: false,
@@ -12,12 +13,12 @@ export function parseRecordsLineS() {
     },
     legend: {
       show: false,
-      data: data.risk.map((x) => x.name),
+      data: data.riskData.map((x) => x.name),
     },
     grid: {
       top: '10%',
       bottom: '10%',
-      left: '4%',
+      left: '10%',
       right: '4%',
     },
     xAxis: {
