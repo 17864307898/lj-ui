@@ -46,3 +46,17 @@ lj-table 使用配置的方式初始化表格 用简单的方式去开发业务�
 | empty | 表格数据为空时展示 | - |
 | pagination | 分页组件,needPagination为true时展示 | `{ pagination }` |
 | - | 每一列均有和当前列prop对应的插槽名称 | `{ $index, col, column, row }` |
+
+### 方法
+
+| name | 说明 | 参数 |  返回  |
+|------|------|-----|--------|
+| handleGetRefs | 获取当前el-table实例以调用table方法 | -- | Promise实例，结束时返回当前el-table实例 |
+
+#### 示例
+
+```javascript
+  const elTable = await this.$refs['table'].handleGetRefs()
+  // 选中行
+  elTable.toggleRowSelection()
+```

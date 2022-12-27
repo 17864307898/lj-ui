@@ -38,7 +38,7 @@ export default {
     fileName: '文件名',
     fileCount: '文件数量',
     codeCount: '代码行数',
-    fileTitle: '文件类型分布',
+    fileTitle: '文件类型分布(个)',
     fileSize: '文件容量',
     licenseRiskStatistics: '许可证风险统计',
     holeRiskStatistics: '漏洞风险统计',

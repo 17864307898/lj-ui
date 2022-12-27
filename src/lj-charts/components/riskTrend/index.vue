@@ -83,7 +83,7 @@
               data: [],
             },
             {
-              name: t('vulUnknown'),
+              name: t('noRated'),
               type: 'line',
               data: [],
             },
@@ -121,7 +121,8 @@
         if (this.currentType === 1) {
           this.parseRecordsLine.data = this.data.vulInfoList;
           this.parseRecordsLine.riskData = this.parseRecordsLine.risk;
-          this.parseRecordsLine.data.forEach((el) => {
+          this.parseRecordsLine.data.forEach((el, i) => {
+            el.color = RISK_COLORS[i]
             this.parseRecordsLine.name.push(formatDate(el.time, 'YYYY-MM-DD'));
             this.parseRecordsLine.riskData[0].data.push(el.vulCritical);
             this.parseRecordsLine.riskData[1].data.push(el.vulHigh);
@@ -136,7 +137,8 @@
               return el.name != '严重';
             }
           );
-          this.parseRecordsLine.data.forEach((el) => {
+          this.parseRecordsLine.data.forEach((el, i) => {
+            el.color = RISK_COLORS[i]
             this.parseRecordsLine.name.push(formatDate(el.time, 'YYYY-MM-DD'));
             this.parseRecordsLine.riskData[0].data.push(el.high);
             this.parseRecordsLine.riskData[1].data.push(el.mid);

@@ -75,7 +75,7 @@
       // 自定义val
       valueKey: {
         type: String,
-        default: () => 'size',
+        default: () => 'count',
       },
       // 自定义name
       nameKey: {
@@ -121,7 +121,7 @@
             prop: this.nameKey,
           },
           {
-            label: t('fileSize'),
+            label: t('fileCount'),
             prop: this.valueKey,
           },
         ]
