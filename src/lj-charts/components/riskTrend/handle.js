@@ -38,8 +38,6 @@ export function parseRecordsLineS() {
 
   const dom = this.$refs.echarts
   this.chart = echarts.init(dom)
-
-  console.log(option)
   this.chart.setOption(option)
 
   const handleEvents = () => {
@@ -56,4 +54,9 @@ export function parseRecordsLineS() {
     erd.removeListener(dom, handleEvents)
     this.chart.dispose()
   })
+}
+
+export const NAME_MAP = {
+  1: ['vulCritical', 'vulHigh', 'vulMid', 'vulLow', 'noRated'],
+  2: ['highRiskFile', 'midRiskFile', 'lowRiskFile', 'vulUnknown'],
 }

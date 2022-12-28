@@ -16,9 +16,9 @@ export default {
       data: {
         vulInfoList: [
           {
-            vulCritical: 0,
+            vulCritical: 31,
             vulHigh: 0,
-            vulLow: 0,
+            vulLow: 23,
             vulMid: 0,
             vulUnknown: 0,
             time: 1671430007199,
