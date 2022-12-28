@@ -58,5 +58,5 @@ export function parseRecordsLineS() {
 
 export const NAME_MAP = {
   1: ['vulCritical', 'vulHigh', 'vulMid', 'vulLow', 'noRated'],
-  2: ['highRiskFile', 'midRiskFile', 'lowRiskFile', 'vulUnknown'],
+  2: ['highRiskFile', 'midRiskFile', 'lowRiskFile', 'vulUnknownRisk'],
 }
