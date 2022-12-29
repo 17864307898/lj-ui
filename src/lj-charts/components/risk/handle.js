@@ -105,8 +105,13 @@ export function formatData(config = {}) {
   if (chartType === 1) {
     const list = cloneData?.licenseRiskInfos || []
     list.sort((x, y) => x.riskLevel - y.riskLevel)
+    return LICENSE_LIST.map((x, i) => {
+      const current = list?.find((y) => +y.riskLevel === i)
 
-    return list.map((x) => x.riskLevelCount)
+      if (current) return current.riskLevelCount || 0
+
+      return 0
+    })
   } else {
     return xKey.map((x) => cloneData[x] || 0)
   }

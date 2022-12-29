@@ -30,14 +30,14 @@
               riskLevel: 2,
               riskLevelCount: 15,
             },
-            {
-              riskLevel: 1,
-              riskLevelCount: 7,
-            },
-            {
-              riskLevel: 3,
-              riskLevelCount: 9,
-            },
+            // {
+            //   riskLevel: 1,
+            //   riskLevelCount: 7,
+            // },
+            // {
+            //   riskLevel: 3,
+            //   riskLevelCount: 9,
+            // },
           ],
         },
         // chart-type为2时传入
