@@ -65,6 +65,22 @@
               :row="row"
             />
           </template>
+
+          <!-- 扩展类型 -->
+          <template
+            #default="{ row, column, $index }"
+            v-else-if="['index'].includes(col.type)"
+          >
+            <slot
+              :$index="$index"
+              :col="col"
+              :column="column"
+              :name="`type_${col.type}`"
+              :row="row"
+            >
+              {{ $index + 1 }}
+            </slot>
+          </template>
         </el-table-column>
 
         <!-- 无数据展示 -->
