@@ -20,11 +20,10 @@
 </template>
 
 <script>
-  import { parseRecordsLineS } from './handle'
+  import { parseRecordsLineS, NAME_MAP } from './handle'
   import { formatDate } from '../../../utils'
-  import { translate } from '../../../utils/translate'
-  import { RISK_COLORS } from '../licenseRisk/handle'
-  const t = translate('ljCharts');
+  import t,{ RISK_COLORS } from '../risk/handle'
+
 
   export default {
     name: 'adapt-license-distribution',
@@ -61,33 +60,6 @@
         parseRecordsLine: {
           name: [],
           data: [],
-          risk: [
-            {
-              name: t('vulCritical'),
-              type: 'line',
-              data: [],
-            },
-            {
-              name: t('vulHigh'),
-              type: 'line',
-              data: [],
-            },
-            {
-              name: t('vulMid'),
-              type: 'line',
-              data: [],
-            },
-            {
-              name: t('vulLow'),
-              type: 'line',
-              data: [],
-            },
-            {
-              name: t('noRated'),
-              type: 'line',
-              data: [],
-            },
-          ],
         },
         currentType: 1,
       };
@@ -100,6 +72,18 @@
         if (isNaN(this.height)) return this.height
 
         return this.height + 'px'
+      },
+      // 风险数据配置
+      risk() {
+        const list = NAME_MAP[this.currentType]
+
+        return list.map((x) => {
+          return {
+            name: t(x),
+            type: 'line',
+            data: [],
+          }
+        })
       },
     },
     mounted() {
@@ -114,13 +98,16 @@
         this.currentType = index;
         this.parseRecordsLine.data = [];
         this.parseRecordsLine.name = [];
-        this.parseRecordsLine.risk.forEach((el, i) => {
-          el.data = []
-          el.color = RISK_COLORS[i]
+        this.parseRecordsLine.riskData = this.risk.map((x, i) => {
+          return {
+            ...x,
+            data: [],
+            color: RISK_COLORS[i],
+          }
         })
+
         if (this.currentType === 1) {
           this.parseRecordsLine.data = this.data.vulInfoList;
-          this.parseRecordsLine.riskData = this.parseRecordsLine.risk;
           this.parseRecordsLine.data.forEach((el, i) => {
             el.color = RISK_COLORS[i]
             this.parseRecordsLine.name.push(formatDate(el.time, 'YYYY-MM-DD'));
@@ -132,11 +119,6 @@
           });
         } else {
           this.parseRecordsLine.data = this.data.licenseInfoList;
-          this.parseRecordsLine.riskData = this.parseRecordsLine.risk.filter(
-            (el) => {
-              return el.name != '严重';
-            }
-          );
           this.parseRecordsLine.data.forEach((el, i) => {
             el.color = RISK_COLORS[i]
             this.parseRecordsLine.name.push(formatDate(el.time, 'YYYY-MM-DD'));

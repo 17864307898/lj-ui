@@ -5,7 +5,7 @@ import style from '../../../style/var.scss'
 export default t
 
 // 风险等级颜色配置
-const RISK_COLORS = style['risk-color-list'].split(',')
+export const RISK_COLORS = style['risk-color-list'].split(',')
 const REVERSE_COLOR = deepClone(RISK_COLORS)
 REVERSE_COLOR.reverse()
 
@@ -44,7 +44,7 @@ const TYPE_MAP = {
     ],
   },
 }
-console.log(TYPE_MAP)
+
 /**
  * echarts配置
  * @param {*} data 数据集
@@ -105,8 +105,13 @@ export function formatData(config = {}) {
   if (chartType === 1) {
     const list = cloneData?.licenseRiskInfos || []
     list.sort((x, y) => x.riskLevel - y.riskLevel)
+    return LICENSE_LIST.map((x, i) => {
+      const current = list?.find((y) => +y.riskLevel === i)
 
-    return list.map((x) => x.riskLevelCount)
+      if (current) return current.riskLevelCount || 0
+
+      return 0
+    })
   } else {
     return xKey.map((x) => cloneData[x] || 0)
   }

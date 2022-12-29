@@ -6,6 +6,7 @@ export default {
   details: 'view details',
   all: 'all',
   vulUnknown: 'unknown',
+  vulUnknownRisk: 'Unknown risk',
   // 风险等级
   vulCritical: 'seriousness',
   vulHigh: 'High risk',

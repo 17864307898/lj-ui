@@ -108,7 +108,7 @@ export function formatData1(onlySort = false) {
   } = this
   const data = map[chartType]
   
-  const res = deepClone(data)
+  const res = deepClone(data) || []
 
   // 转换KB
   function translateKb(val) {
@@ -117,7 +117,7 @@ export function formatData1(onlySort = false) {
 
   const key = TYPE_MAP[type] || 'num'
   // 排序
-  res.sort((x, y) => {
+  res?.sort((x, y) => {
     return y[key] - x[key]
   })
 
@@ -184,7 +184,7 @@ export function formatData2(onlySort = false) {
   } = this
   const data = map[chartType]
 
-  const res = deepClone(data)
+  const res = deepClone(data) || []
   if (!order) return res
 
   // 排序
