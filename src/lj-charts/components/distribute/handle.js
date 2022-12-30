@@ -59,7 +59,8 @@ export function handleOptions() {
       {
         color,
         type: 'pie',
-        top: '0%',
+        top: 0,
+        bottom: '3%',
         radius: '60%',
         center: ['50%', '60%'],
         minAngle: 8,

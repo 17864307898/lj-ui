@@ -17,7 +17,7 @@ export function parseRecordsLineS() {
     },
     grid: {
       top: '10%',
-      bottom: '10%',
+      bottom: '12%',
       left: '10%',
       right: '4%',
     },
