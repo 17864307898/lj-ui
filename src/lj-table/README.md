@@ -46,6 +46,10 @@ lj-table 使用配置的方式初始化表格 用简单的方式去开发业务�
 | empty | 表格数据为空时展示 | - |
 | pagination | 分页组件,needPagination为true时展示 | `{ pagination }` |
 | - | 每一列均有和当前列prop对应的插槽名称 | `{ $index, col, column, row }` |
+| type_expand | 展开行插槽 | `{ $index, col, column, row }` |
+| type_index | 序号列插槽 | `{ $index, col, column, row }` |
+| append | 插入最后一行的内容 | -- |
+
 
 ### 方法
 
