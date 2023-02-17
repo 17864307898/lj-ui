@@ -5,14 +5,14 @@ export default {
   clear: 'clear',
   details: 'view details',
   all: 'all',
-  vulUnknown: 'unknown',
+  vulUnknown: 'Not-standard',
   vulUnknownRisk: 'Unknown risk',
   // 风险等级
   vulCritical: 'seriousness',
   vulHigh: 'High risk',
   vulMid: 'Medium risk',
   vulLow: 'Low risk',
-  noRated: 'No rated',
+  noRated: 'Not-standard',
   riskFree: 'risk-free',
   // LjFilter
   ljFilter: {
@@ -86,4 +86,4 @@ export default {
     midRisk: 'Medium risk',
     lowStake: 'Low risk',
   },
-}
+};
