@@ -31,5 +31,5 @@ LjSafteyRisk是一个展示漏洞或许可证风险等级的组件（使用了El
 ### 方法
 | name | 说明 | 参数 |
 |------|------|-----|
-| handleRisk | 每个风险等级的click事件 | 对应等级的英文字段 eg: mid|
-| handleTarget | 跳转click事件 | |
+| @handle-risk | 每个风险等级的click事件 | 对应等级的英文字段 eg: mid|
+| @handle-target | 跳转click事件 | |

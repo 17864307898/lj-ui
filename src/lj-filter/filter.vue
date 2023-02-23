@@ -157,7 +157,6 @@ export default {
     // 筛选按钮
     fnFilter() {
       this.formList.forEach((el) => {
-        console.log('typeof this.form[el.field]', typeof this.form[el.field], this.form[el.field]);
         // 数据处理
         // 多选
         if (typeof this.form[el.field] == 'object') {
@@ -230,7 +229,7 @@ export default {
       return t(path);
     },
     handleChange() {
-      console.log('handleChange', arguments);
+      // console.log('handleChange', arguments);
     },
     handleInput() {
       // console.log('handleInput', arguments);

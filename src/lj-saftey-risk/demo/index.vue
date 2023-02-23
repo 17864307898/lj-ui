@@ -3,8 +3,8 @@
     :type="2"
     :risk-list="riskList"
     :targetShow="true"
-    @handleTarget="fnHandleTarget"
-    @handleRisk="fnHandleRisk"
+    @handle-target="fnHandleTarget"
+    @handle-risk="fnHandleRisk"
   ></lj-saftey-risk>
 </template>
 
@@ -25,7 +25,7 @@ export default {
     fnHandleTarget() {
       console.log('详情跳转');
     },
-    fnHandelRisk(val) {
+    fnHandleRisk(val) {
       console.log('点击哪一个风险等级', val);
     },
   },
