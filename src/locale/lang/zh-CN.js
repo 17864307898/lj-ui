@@ -5,14 +5,14 @@ export default {
   empty: '暂无数据',
   details: '查看详情',
   all: '全部',
-  vulUnknown: '未知',
+  vulUnknown: 'Not-standard',
   vulUnknownRisk: '未知风险',
   // 风险等级
   vulCritical: '严重',
   vulHigh: '高危',
   vulMid: '中危',
   vulLow: '低危',
-  noRated: '未评级',
+  noRated: 'Not-standard',
   riskFree: '无风险',
   // LjFilter
   ljFilter: {
@@ -86,4 +86,4 @@ export default {
     midRisk: '中风险',
     lowStake: '低风险',
   },
-}
+};

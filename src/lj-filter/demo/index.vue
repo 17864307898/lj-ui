@@ -1,71 +1,57 @@
 <template>
   <div>
     <lj-filter
-      :filter-choose-list="filterChooseList"
+      :filter-list="filterChooseList"
       :filter-show="true"
+      :form-list="formList"
       :filter-content="{
         name: '组件',
       }"
-      :table-sel-arr="tableSelArr"
+      @form-data="getformDatas"
+      @tag-close="filterCloseTag"
     >
-      <template #left-query>
-        <div>左边输入框内容</div>
+      <template #left-box>
+        <div>左边内容</div>
       </template>
       <template #reference>
         <i class="el-icon-ice-cream"></i>
       </template>
-      <template #filter-items="props">
+      <!-- <template #filter-items="props">
         <filter-items
           :filter-close="props.filterClose"
           :filter-reset="props.filterReset"
           :filter-sure="props.filterSure"
+          :form-list="formList"
           :public-list-data="publicListData"
           @filterChooseData="fnFilterChooseData"
         />
+      </template> -->
+      <template #right-box>
+        <div>右边内容</div>
       </template>
-      <template #batch-ignore>
-        <batch-ignore
-          :batch-show="1"
-          :operate-name="'组件'"
-          :row-data="tableSelArr"
-          :type="queryForm.status"
-          @batch-operate="fnBatchIgnoreOrNot"
-        />
+      <template #tag-left-box>
+        <div v-if="filterChooseList && filterChooseList.length > 0">
+          筛选tag左边内容：
+        </div>
       </template>
-      <template #right-content>
-        <el-switch
-          v-model="queryForm.status"
-          active-color="#cd4443"
-          :active-text="'已忽略' + '(' + ignoreTotal + ')'"
-          :active-value="1"
-          inactive-color="#409eff"
-          inactive-text="未忽略"
-          :inactive-value="0"
-        />
+      <template #tag-right-box>
+        <div v-if="filterChooseList && filterChooseList.length > 0">
+          筛选tag右边内容
+        </div>
       </template>
     </lj-filter>
-    <lj-table
-      class="table-wrap"
-      :columns="columns"
-      :data="dataList"
-      @selection-change="tableSelectionChange"
-    >
-    </lj-table>
   </div>
 </template>
 
 <script>
 import filterItems from './filterItems.vue';
-import batchIgnore from './batchIgnore.vue';
 
 export default {
   components: {
     filterItems,
-    batchIgnore,
   },
   data() {
     return {
-      ignoreTotal: 0,
       filterChooseList: [],
       publicListData: {
         importList: [
@@ -73,76 +59,63 @@ export default {
           { id: 1, type: '自建库' },
         ],
       },
-      tableSelArr: [],
-      queryForm: {
-        status: 0,
-      },
-      columns: [
+      formList: [
         {
-          type: 'selection',
-          width: 55,
+          code: 101,
+          showWordLimit: true,
+          label: '单行输入',
+          field: 'key1',
         },
         {
-          type: 'index',
-          width: 55,
-          label: '序号',
-        },
-        {
-          label: '姓名',
-          prop: 'name',
-        },
-        {
-          label: '性别',
-          prop: 'sex',
-        },
-        {
-          label: '年龄',
-          prop: 'old',
-        },
-        {
-          label: '操作',
-          prop: 'action',
-          fixed: 'right',
+          code: 103,
+          label: '下拉2',
+          options: [
+            {
+              label: '选项1',
+              value: 1,
+            },
+            {
+              label: '选项2',
+              value: 2,
+            },
+            {
+              label: '选项3',
+              value: 3,
+            },
+          ],
+          filterable: true,
+          multiple: true,
+          field: 'key2',
         },
       ],
-      dataList: [],
     };
   },
-  created() {
-    this.dataList = new Array(3).fill(0).map((item, index) => ({
-      name: `姓名${index + 1}`,
-      sex: '男',
-      old: 11 + index,
-    }));
-  },
+  created() {},
   methods: {
-    fnFilterChooseData(data) {
-      this.filterChooseList = [];
-      this.publicListData.importList.forEach((el) => {
-        if (el.id === data.importType) {
-          this.filterChooseList.push({
-            id: 1,
-            type: '引入方式',
-            item: el.type,
-          });
-        }
-      });
-      this.handleQuery();
+    // tag单个关闭
+    filterCloseTag(tag) {
+      console.log('关闭单个', tag)
     },
-    handleQuery() {
-      this.dataList = new Array(2).fill(0).map((item, index) => ({
-        name: `姓名${index + 1}`,
-        sex: '男',
-        old: 11 + index,
-      }));
+    // 筛选表单数据
+    getformDatas(data) {
+      console.log('取得表单数据', data);
+      this.filterChooseList = []
+      this.filterChooseList = data.filterChooseList || []
     },
-    fnBatchIgnoreOrNot() {
-      console.log('忽略');
-    },
-    // 点击复选框
-    tableSelectionChange(val) {
-      this.tableSelArr = val;
-    },
+    // 插槽使用处理筛选数据方法
+    // fnFilterChooseData(data) {
+    //   console.log(data)
+    //   this.filterChooseList = [];
+    //   this.publicListData.importList.forEach((el) => {
+    //     if (el.id === data.importType) {
+    //       this.filterChooseList.push({
+    //         id: 1,
+    //         type: '引入方式',
+    //         item: el.type,
+    //       });
+    //     }
+    //   });
+    // },
   },
 };
 </script>

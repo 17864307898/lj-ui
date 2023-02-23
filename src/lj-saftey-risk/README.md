@@ -23,17 +23,13 @@ LjSafteyRisk是一个展示漏洞或许可证风险等级的组件（使用了El
 
 | 参数 | 说明 | 类型 |  默认值 |
 |------|------|-----|---------|
-| type | 风险类型 | _number_ | `1：漏洞 2：许可证` |
-| riskList | 风险值 | _object_ | `{"critical": 1,"high": 1,"low": 1,"mid": 1,"unknown": 1}` |
-| riskData | 风险数据 | _arobject_ | `{1: {critical: '严重', high: '高危', mid: '中危',low: '低危',unknown: '未评级',noRisk: '无风险',},2: { critical: '严重',high: '高风险',   mid: '中风险',low: '低风险',unknown: '未知',noRisk: '无风险',}},` |
+| type | 类型 | _number_ | `1：漏洞 2：许可证` |
+| riskList | 传值 | _object_ | `{"critical": 1,"high": 1,"low": 1,"mid": 1,"unknown": 1}` |
+| targetShow | 跳转显示 | _Boolean_ | false |
 
-### slots
-
-| name | 说明 | 参数 |
-|------|------|-----|
-| detailTarget | 详情跳转 | - |
 
 ### 方法
 | name | 说明 | 参数 |
 |------|------|-----|
-| handelRisk | 每个风险等级的click事件 | 对应等级的英文字段 eg: mid|
+| @handle-risk | 每个风险等级的click事件 | 对应等级的英文字段 eg: mid|
+| @handle-target | 跳转click事件 | |
