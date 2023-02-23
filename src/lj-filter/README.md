@@ -1,7 +1,7 @@
 # LjFilter 筛选
 
 ### 介绍
-LjFilter是一个为筛选table数据的组件，展示筛选框以及筛选项。（基于ElementUI下的el-popover）
+LjFilter是一个为筛选table数据的组件，表单使用了LJInput组件，展示筛选框以及筛选项。（基于ElementUI下的el-popover）
 ### 引入
 
 ```js
