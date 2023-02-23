@@ -126,7 +126,7 @@ export default {
   watch: {
     filterList: {
       handler(val) {
-        this.filterChooseList = [...val]
+        this.filterChooseList = [...val];
       },
       immediate: true,
       deep: true,
@@ -151,13 +151,13 @@ export default {
     fnReset() {
       this.filterReset += this.filterReset;
       this.filterChooseList = [];
-      this.$refs.formData ? this.$refs.formData.resetFields() : null
+      this.$refs.formData ? this.$refs.formData.resetFields() : null;
       this.$emit('form-data', {});
     },
     // 筛选按钮
     fnFilter() {
       this.formList.forEach((el) => {
-        console.log('typeof this.form[el.field]', typeof this.form[el.field]);
+        console.log('typeof this.form[el.field]', typeof this.form[el.field], this.form[el.field]);
         // 数据处理
         // 多选
         if (typeof this.form[el.field] == 'object') {
@@ -169,12 +169,14 @@ export default {
               }
             });
           });
-          this.filterChooseList.push({
-            id: el.field,
-            type: el.label,
-            item: riskLevelArr,
-          });
-          riskLevelArr = [];
+          if (this.form[el.field].length > 0) {
+            this.filterChooseList.push({
+              id: el.field,
+              type: el.label,
+              item: riskLevelArr,
+            });
+            riskLevelArr = [];
+          }
         } else {
           // 单选
           if (this.form[el.field] && el.multiple === false) {
@@ -219,29 +221,9 @@ export default {
       this.$emit('tag-close', tag);
       this.filterClose = tag;
     },
-    methods: {
-      initData() {},
-      // 置空
-      fnReset() {
-        this.filterReset += this.filterReset
-      },
-      // 筛选按钮
-      fnFilter() {
-        this.filterSure += this.filterSure
-        this.popoverShow = false
-      },
-      // 关闭哪个
-      fnChooseClose(tag) {
-        this.filterClose = tag
-      },
-      // 清空
-      fnEmpty() {
-        this.fnReset()
-      },
-      // 翻译
-      translate(path) {
-        return t(path)
-      },
+    // 清空
+    fnEmpty() {
+      this.fnReset();
     },
     // 翻译
     translate(path) {
