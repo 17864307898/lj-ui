@@ -3,6 +3,7 @@
     <el-switch
       v-model="localValue"
       v-bind="{ ...$props, ...$attrs }"
+      v-on="$listeners"
       @change="onchange"
     />
   </div>
@@ -10,12 +11,14 @@
 
 <script>
   import Vue from 'vue'
+  import translateMixin from '../../mixins'
   import { Switch } from 'element-ui'
 
   Vue.use(Switch)
 
   export default {
     name: 'adapt-switch',
+    mixins: [translateMixin],
     props: {
       value: {
         type: undefined,

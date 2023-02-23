@@ -2,6 +2,7 @@
   <div class="adapt-select">
     <el-select
       v-model="localValue"
+      :placeholder="(placeholder || translate('select'))"
       v-bind="{ ...$props, ...$attrs }"
       v-on="$listeners"
       @change="onchange"
@@ -21,6 +22,8 @@
 <script>
   import Vue from 'vue'
   import { Select, Option } from 'element-ui'
+  import { translate } from '../../../utils/translate'
+  const t = translate('ljInput')
 
   Vue.use(Select)
   Vue.use(Option)
@@ -46,7 +49,7 @@
       },
       placeholder: {
         type: String,
-        default: '请选择',
+        default: () => '',
       },
       multiple: {
         type: Boolean,
@@ -79,6 +82,9 @@
       onchange(val) {
         this.$emit('adapt-change', val)
       },
+      translate(path) {
+        return t(path)
+      }
     },
   }
 </script>

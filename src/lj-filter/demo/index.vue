@@ -6,12 +6,6 @@
       :form-list="formList"
       :filter-content="{
         name: '组件',
-        empty: '清空',
-        title: '筛选方式',
-        sure: '筛选',
-        cancel: '取消',
-        reset: '重置',
-        selected: '已选择',
       }"
       @form-data="getformDatas"
       @tag-close="filterCloseTag"

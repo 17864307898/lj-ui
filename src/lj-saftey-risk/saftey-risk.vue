@@ -1,5 +1,5 @@
 <template>
-  <div class="riskComponents">
+  <div class="lj-risk-components">
     <div
       v-if="
         riskList.critical >= 1 ||

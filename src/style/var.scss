@@ -71,16 +71,24 @@ $border-radius-lg: 8px !default;
 $border-radius-xl: 24px !default;
 $border-radius-max: 999px !default;
 
-//风险等级颜色
-$superDanger: #92302B; //严重
-$superDangerLight:rgba(146, 48, 43, 0.1);
-$high: #e76949; //高危
-$highLight: rgba(208, 92, 67, 0.1); //高危
-$mid: #EE8F4F; //中危
-$midLight: rgba(238, 143, 79, 0.1); //中危
-$low: #F7DB77; //低危
-$lowLight: rgba(247, 219, 119, 0.2); //低危
-$unknown: #737189; // 未评级
-$unknownLight: rgba(115, 113, 137, 0.1); // 未评级
-$safety: #8CB14A; //安全
-$safetyLight: rgba(140, 177, 74, 0.1); //安全
+// 风险等级颜色
+$super-danger: #92302B !default; //严重
+$high: #e76949 !default; //高危
+$mid: #EE8F4F !default; //中危
+$low: #F7DB77 !default; //低危
+$unknown: #737189 !default; // 未评级
+$safety: #8CB14A !default; //安全
+
+// 风险等级颜色 带透明度
+$super-danger-light:mix($super-danger, white, 10);
+$high-light: mix($high, white, 10); //高危
+$mid-light: mix($mid, white, 10); //中危
+$low-light: mix($low, white, 10); //低危
+$unknown-light: mix($unknown, white, 10); // 未评级
+$safety-light: mix($safety, white, 10); //安全
+
+:export {
+  // 严重----安全颜色列表
+  risk-color-list: ($super-danger, $high, $mid, $low, $unknown, $safety)
+}
+

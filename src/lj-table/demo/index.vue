@@ -4,7 +4,21 @@
     :columns="columns"
     :data="dataList"
     :pagination="pagination"
-  />
+  >
+    <template #type_expand>
+      <lj-table
+        class="table-wrap"
+        :columns="columns"
+        :data="[]"
+        :need-pagination="false"
+        :pagination="pagination"
+      />
+    </template>
+
+    <template #type_index="{ $index }">
+      {{ $index + (pagination.pageNo - 1) * pagination.pageSize + 1 }}
+    </template>
+  </lj-table>
 </template>
 
 <script>

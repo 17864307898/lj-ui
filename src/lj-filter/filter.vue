@@ -1,5 +1,5 @@
 <template>
-  <div class="form-filter-box">
+  <div class="lj-form-filter-box">
     <div class="form-filter-head">
       <div>
         <!-- query左边输入框内容 -->
@@ -219,9 +219,29 @@ export default {
       this.$emit('tag-close', tag);
       this.filterClose = tag;
     },
-    // 清空
-    fnEmpty() {
-      this.fnReset();
+    methods: {
+      initData() {},
+      // 置空
+      fnReset() {
+        this.filterReset += this.filterReset
+      },
+      // 筛选按钮
+      fnFilter() {
+        this.filterSure += this.filterSure
+        this.popoverShow = false
+      },
+      // 关闭哪个
+      fnChooseClose(tag) {
+        this.filterClose = tag
+      },
+      // 清空
+      fnEmpty() {
+        this.fnReset()
+      },
+      // 翻译
+      translate(path) {
+        return t(path)
+      },
     },
     // 翻译
     translate(path) {

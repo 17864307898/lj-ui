@@ -2,23 +2,24 @@
   <div class="adapt-input">
     <el-input
       v-model="localValue"
+      :placeholder="placeholder || translate('placeholder')"
       v-bind="{ ...$props, ...$attrs }"
+      v-on="$listeners"
       @input="oninput"
     />
   </div>
 </template>
 
 <script>
+  import translateMixin from '../../mixins'
+
   export default {
     name: 'adapt-input-textarea',
+    mixins: [translateMixin],
     props: {
       value: {
         type: undefined,
         default: undefined,
-      },
-      placeholder: {
-        type: String,
-        default: '请填写',
       },
       type: {
         type: String,

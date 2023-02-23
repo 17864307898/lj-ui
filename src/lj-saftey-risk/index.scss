@@ -1,7 +1,7 @@
 @import "./style/elementui.scss";
 @import "../style/var.scss";
 
-.riskComponents {
+.lj-risk-components {
   position: relative;
   top: 0px;
   padding: 0 6px;
@@ -26,28 +26,28 @@
     background: 0;
   }
   .risk_critical {
-    background-color: $superDangerLight;
-    border-bottom: 2px solid $superDanger;
+    background-color: $super-danger-light;
+    border-bottom: 2px solid $super-danger;
   }
   .risk_high {
-    background-color: $highLight;
+    background-color: $high-light;
     border-bottom: 2px solid $high;
   }
   .risk_low {
-    background-color: $lowLight;
+    background-color: $low-light;
     border-bottom: 2px solid $low;
   }
   .risk_mid {
-    background-color: $midLight;
+    background-color: $mid-light;
     border-bottom: 2px solid $mid;
   }
   .risk_unknown {
-    background-color: $unknownLight;
+    background-color: $unknown-light;
     border-bottom: 2px solid $unknown;
   }
   .SafetyRisk {
     color: $safety;
-    background-color: $safetyLight;
+    background-color: $safety-light;
     // border-bottom: 2px solid $safety;
     overflow: hidden;
     padding: 2px 4px;

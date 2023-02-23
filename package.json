@@ -1,6 +1,6 @@
 {
   "name": "lj-design",
-  "version": "1.0.1",
+  "version": "1.0.9",
   "description": "",
   "main": "lib/lj-design.js",
   "style": "lib/index.css",
@@ -9,7 +9,7 @@
     "es"
   ],
   "repository": {
-    "url": "https://github.com/17864307898/lj-ui",
+    "url": "https://code.spdx.cn/lj-front/lj-design",
     "type": "git"
   },
   "license": "MIT",
@@ -20,7 +20,8 @@
     "build": "vant-cli build",
     "release": "vant-cli release",
     "test:coverage": "open test/coverage/index.html",
-    "build-site": "vant-cli build-site && npx gh-pages -d site-dist"
+    "build-site": "vant-cli build-site",
+    "build-design": "vant-cli build-site && scp -r site/* ljuser@172.20.4.15:/opt/7-cai/lj-design/lj-design-web"
   },
   "author": "",
   "husky": {
@@ -34,14 +35,15 @@
     "*.{vue,css,less,scss}": "stylelint --fix"
   },
   "peerDependencies": {
+    "axios": "^0.2.0",
     "element-ui": "^2.10.1",
-    "vue": "^2.6.11",
-    "vue-template-compiler": "^2.6.11"
+    "vue": "^2.6.11"
   },
   "devDependencies": {
     "@vant/cli": "^2.0.0",
     "@vue/babel-preset-jsx": "^1.4.0",
     "@vue/cli-plugin-babel": "^5.0.8",
+    "axios": "^1.2.0",
     "babel-plugin-component": "^1.1.1",
     "babel-plugin-import": "^1.13.5",
     "element-ui": "^2.15.10",
@@ -70,7 +72,8 @@
   ],
   "dependencies": {
     "ali-oss": "^6.17.1",
-    "axios": "^1.2.0",
+    "echarts": "^5.4.0",
+    "element-resize-detector": "^1.2.4",
     "jszip": "^3.10.1",
     "spark-md5": "^3.0.2"
   }

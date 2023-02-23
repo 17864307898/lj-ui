@@ -1,7 +1,11 @@
-.van-doc-header__cube {
+:export {
+  risk-color-list: #92302B, #e76949, #EE8F4F, #F7DB77, #737189, #8CB14A;
+}
+
+.lj-van-doc-header__cube {
   border: 0;
 }
 
-.van-doc-header__cube::after {
+.lj-van-doc-header__cube::after {
   display: none;
 }

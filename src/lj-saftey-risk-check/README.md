@@ -23,9 +23,14 @@ ljSafteyRiskCheck组件用于安全风险等级筛选使用
 
 | 参数 | 说明 | 类型 |  默认值 |
 |------|------|-----|---------|
-| labelData | 风险类型 | _object_ | `{'': '全部',4: '严重',3: '高危',2: '中危',1: '低危',0: '未评级','-1': '无风险'},` |
+| labelData | 风险类型 | _object_ | -- |
+| selected | 初始选中值`需根据是否多选传入不同值` | _array_`|`_number_`|`_string_ | -- |
+| multiple | 是否可以多选 | _boolean_ | `true` |
+| countInfo | 初始化数量 | _object_ | -- |
+|  |  |  |  |
+> 注：`countInfo`需根据id返回对应的值 es: `{ 1: 20, 2: 30 }`
 
-### 方法
-| name | 说明 | 参数 |
+### Events
+| name | 说明 | 回调参数 |
 |------|------|-----|
-| handelRisk | 切换风险等级click事件 | _array_ |
+| change | 风险等级切换 | 选中的值 |

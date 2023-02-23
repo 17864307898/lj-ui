@@ -45,6 +45,10 @@ module.exports = {
             path: 'style',
             title: '通用样式',
           },
+          {
+            path: 'locale',
+            title: '国际化',
+          }
         ],
       },
       {
@@ -67,10 +71,6 @@ module.exports = {
       {
         title: '基础组件',
         items: [
-          // {
-          //   path: 'demo-button',
-          //   title: 'DemoButton 按钮',
-          // },
           {
             path: 'lj-table',
             title: 'LjTable 表格',
@@ -103,6 +103,14 @@ module.exports = {
           {
             path: 'lj-saftey-risk-check',
             title: 'LjSafteyRiskCheck 多风险筛选',
+          },
+          {
+            path: 'lj-charts',
+            title: 'LjCharts 图表',
+          },
+          {
+            path: 'lj-check',
+            title: 'LjCheck 内容检测',
           },
         ],
       },

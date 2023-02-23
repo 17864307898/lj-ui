@@ -1,5 +1,5 @@
 <template>
-  <div :class="!listType ? 'uploadWrap' : listType">
+  <div :class="!listType ? 'lj-upload-wrap' : listType">
     <el-upload
       ref="upload"
       :accept="accept"
