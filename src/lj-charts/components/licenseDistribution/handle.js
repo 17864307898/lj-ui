@@ -26,7 +26,6 @@ const LENGTH_MAP = {
 export const handleOptions = function () {
   const yAxisData = formatYData.call(this)
   const series = formatXData.call(this, yAxisData)
-  console.log(LENGTH_MAP[yAxisData.length])
 
   const option = {
     tooltip: {
