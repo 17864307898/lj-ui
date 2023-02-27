@@ -1,7 +1,7 @@
 @import "../style/var.scss";
 
-$progress-color: mix($bg-color-primary, white, 80);
-$bg-color: mix($bg-color-primary, white, 10);
+$progress-color: mix($bg-color-primary, white, 80%);
+$bg-color: mix($bg-color-primary, white, 10%);
 
 .jcnr {
   .line {
