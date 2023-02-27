@@ -38,6 +38,10 @@ module.exports = {
             title: '快速上手',
           },
           {
+            path: 'log',
+            title: '更新日志',
+          },
+          {
             path: 'theme',
             title: '定制主题scss',
           },
