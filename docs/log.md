@@ -2,7 +2,7 @@
 
 ### 介绍
 
-发版规则请参考 [lj-design组件发版规则](https://lengjingqicai.feishu.cn/docs/doccnbpAF9S5kkG3GU4YeJKx6Kh)
+记录发版动态，发版规则请参考 [lj-design组件发版规则](https://lengjingqicai.feishu.cn/docs/doccnbpAF9S5kkG3GU4YeJKx6Kh)
 
 
 ## 更新内容
