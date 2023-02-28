@@ -131,7 +131,7 @@ export default {
       },
     },
     validateFn: {
-      // 自主校验
+      // 自主校验方法
       type: Function,
       default: () => true,
     },
@@ -243,13 +243,13 @@ export default {
       let FileExt = file.name.replace(/.+\./, '');
       let acceptType = this.accept ? this.accept.split(',') : [];
       if (this.accept && !acceptType.includes(FileExt)) {
-        Message.error(`上传文件只能是${this.accept}格式!`);
+        Message.error(this.content.acceptInfo ? this.content.acceptInfo : `上传文件只能是${this.accept}格式!`);
       }
       // 限制文件大小
       let maxSize = this.maxSize ? this.maxSize : 4294967296;
       const isLtSize = file.size < maxSize;
       if (!isLtSize) {
-        Message.error(`请上传小于${formatBytes(maxSize)}的文件!`);
+        Message.error(this.content.sizeInfo ? this.content.sizeInfo : `请上传小于${formatBytes(maxSize)}的文件!`);
       }
       // 如果有文件类型和大小限制，则清空
       if ((this.accept && !acceptType.includes(FileExt)) || !isLtSize) {

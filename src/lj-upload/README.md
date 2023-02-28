@@ -25,7 +25,8 @@ LjUploadFolder组件可用于上传文件，支持oss、md5（基于ElementUI下
 |------|------|-----|---------|---------|
 | max-size | 文件最大值 | _number_ | 4294967296（4G） |
 | validateFn | 自主校验  | _function_ | false  |
-| content | 上传可选的一些文案 |`exceed`: 限制数量; `errorMsg`: 失败 | {exceed: 当前限制选择 ${limit} 个文件,errorMsg: 上传失败！} |
+| retransmission | 单文件重新上传 | _boolean_ | false |
+| content | 上传可选的一些文案 |`exceed`: 限制数量; `errorMsg`: 失败; `acceptInfo`: 格式提示 ; `sizeInfo`: 文件大小提示  | {exceed: 当前限制选择 ${limit} 个文件；errorMsg: 上传失败！ ；acceptInfo: 上传文件只能是${accept}格式! , sizeInfo: 请上传小于${maxSize}的文件! } |
 | uploadFileList | 回显上传文件 | _object_ | `url`, `name` |
 | md5Show | 是否支持md5 | _boolean_ | |
 | ossShow | 是否支持oss上传 | _boolean_ | — |
