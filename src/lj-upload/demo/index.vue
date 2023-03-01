@@ -4,7 +4,6 @@
     :accept="uploadParams.accept"
     :action="uploadParams.action"
     :retransmission="false"
-    list-type="picture-card"
     :headers="uploadParams.headers"
     :md5-show="false"
     :max-size="uploadParams.maxSize"
