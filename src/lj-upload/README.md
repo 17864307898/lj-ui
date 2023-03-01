@@ -25,7 +25,7 @@ LjUploadFolder组件可用于上传文件，支持oss、md5（基于ElementUI下
 |------|------|-----|---------|---------|
 | max-size | 文件最大值 | _number_ | 4294967296（4G） |
 | validateFn | 自主校验  | _function_ | false  |
-| retransmission | 单文件重新上传 | _boolean_ | false |
+| retransmission | 单文件重新上传(limit加入无效) | _boolean_ | false |
 | content | 上传可选的一些文案 |`exceed`: 限制数量; `errorMsg`: 失败; `acceptInfo`: 格式提示 ; `sizeInfo`: 文件大小提示  | {exceed: 当前限制选择 ${limit} 个文件；errorMsg: 上传失败！ ；acceptInfo: 上传文件只能是${accept}格式! , sizeInfo: 请上传小于${maxSize}的文件! } |
 | uploadFileList | 回显上传文件 | _object_ | `url`, `name` |
 | md5Show | 是否支持md5 | _boolean_ | |
@@ -44,8 +44,7 @@ LjUploadFolder组件可用于上传文件，支持oss、md5（基于ElementUI下
 
 | name | 说明 | 类型 | 返回值 |
 |------|------|-----|-----|
-| uploadSuccess | 成功获取上传文件 | _object_ | `res`, `file`, `fileList` |
-| uploadRemove |  删除文件。 | _object_ | `file`, `fileList` |
-| uploadChange |  文件状态改变，上传成功和上传失败时都会被调用 | _object_ | `file`, `fileList`，`md5` |
-| ossUploadData | 读取oss值并传入props里的data | _object_ | `OSSAccessKeyId`,`callback`,`host`,`key`,`policy`,`signature`,`success_action_status`, |
+| uploadSuccess | 成功获取上传文件 | _object_ | `res`, `file`, `fileList`, `md5`, `ossData` |
+| uploadRemove |  删除文件 | _object_ | `file`, `fileList` |
+| uploadChange |  文件状态改变，上传成功和上传失败时都会被调用 | _object_ | `file`, `fileList`, `md5`, `ossData` |
 | clearFiles | 清空上传 | — | — |
