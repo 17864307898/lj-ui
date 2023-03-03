@@ -1,9 +1,11 @@
 <template>
-  <lj-saftey-risk :type="2" :risk-list="riskList" @handelRisk="fnHandelRisk">
-    <template #detailTarget>
-      <i class="el-icon-arrow-right" @click="handelTarget"></i>
-    </template>
-  </lj-saftey-risk>
+  <lj-saftey-risk
+    :type="2"
+    :risk-list="riskList"
+    :targetShow="true"
+    @handle-target="fnHandleTarget"
+    @handle-risk="fnHandleRisk"
+  ></lj-saftey-risk>
 </template>
 
 <script>
@@ -20,12 +22,12 @@ export default {
     };
   },
   methods: {
-    handelTarget() {
-      console.log('跳');
+    fnHandleTarget() {
+      console.log('详情跳转');
     },
-    fnHandelRisk(val) {
-      console.log('点击哪一个风险等级', val)
-    }
+    fnHandleRisk(val) {
+      console.log('点击哪一个风险等级', val);
+    },
   },
 };
 </script>

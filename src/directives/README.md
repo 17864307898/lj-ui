@@ -26,13 +26,37 @@ Vue.use(title)
 import { title } from 'lj-design/es/directives'
 Vue.use(title)
 ```
-
-#### 修饰符
-
-> 输入框类型的展示需加上input修饰符  eg: v-title.input
-
 #### 示例
 
 ```html
 <div v-title="'test文字'"></div>
 ```
+> 输入框类型的展示需加上input修饰符  eg: v-title.input
+
+### v-press 防止短时间内多次点击
+
+#### 引入
+
+```js
+import { press } from 'lj-design/es/directives'
+Vue.use(press)
+```
+
+#### 使用
+
+v-press:[duration`间隔时长`]="function`处理事件`"
+
+#### 示例
+
+```html
+  <div v-press:2000="handleClick">测试点击</div>
+```
+
+### v-trim 输入框失去焦点时自动trim操作
+
+#### 示例
+
+```html
+  <el-input v-trim></el-input>
+```
+> 仅适用于elementui的input组件(包含单行及多行输入)

@@ -6,11 +6,21 @@
   position: relative;
   .form-filter-head {
     display: flex;
+    justify-content: space-between;
     margin-bottom: 10px;
+    > div {
+      display: flex;
+      align-items: center;
+    }
   }
   .filter-choose-left {
+    width: 100%;
     display: flex;
-    align-items: center;
+    justify-content: space-between;
+    > div {
+      display: flex;
+      align-items: center;
+    }
   }
 }
 .lj-form-filter-con {
@@ -29,7 +39,6 @@
 .filter-choose-box {
   display: flex;
   align-items: center;
-  // justify-content: space-between;
   width: 100%;
   .reset {
     cursor: pointer;
