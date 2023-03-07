@@ -26,7 +26,7 @@ export const TYPE_MAP = {
  * @param {*} color 
  * @returns 
  */
-export function handleOptions() {
+export const handleOptions = function () {
   const {
     colors: color = DEFAULT_COLORS,
     chartType = 1,
@@ -83,6 +83,7 @@ export function handleOptions() {
       },
     ],
   }
+  console.log({ 1: 1, option })
 
   return option
 }
