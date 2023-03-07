@@ -1,6 +1,6 @@
 {
   "name": "lj-design",
-  "version": "1.0.9~feat",
+  "version": "1.0.9-alpha1",
   "description": "",
   "main": "lib/lj-design.js",
   "style": "lib/index.css",
