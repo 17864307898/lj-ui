@@ -8,7 +8,7 @@ export default {
   vulUnknown: 'Not-standard',
   vulUnknownRisk: 'Unknown risk',
   // 风险等级
-  vulCritical: 'seriousness',
+  vulCritical: 'critical',
   vulHigh: 'High risk',
   vulMid: 'Medium risk',
   vulLow: 'Low risk',
@@ -79,6 +79,13 @@ export default {
   // lj-saftey-risk-check
   ljSafteyCheck: {
     riskGrade: 'Safety risk level',
+    '严重': 'Critical',
+    '高危': 'High',
+    '中危': 'Mid',
+    '低危': 'Low',
+    '未评级': 'Not-standard',
+    '无风险': 'Risk-free',
+    '全部': 'All'
   },
   // lj-saftey-risk-check
   ljSafteyRisk: {

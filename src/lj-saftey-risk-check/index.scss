@@ -3,112 +3,144 @@
 
 .lj-level-box {
   display: flex;
-  align-items: center;
+  justify-content: space-between;
   margin-bottom: 20px;
+
   h1 {
     white-space: nowrap;
     font-size: $font-size-sm;
     margin: 0;
   }
-  > div {
+
+  >div:nth-of-type(1){
     width: 100%;
     display: flex;
-    margin-left: 10px;
-    span {
-      position: relative;
-      width: 80%;
-      max-width: 144px;
-      height: 66px;
+    align-items: center;
+    margin: 0 20px 0 10px;
+
+    .risk-box {
+      flex: auto;
       display: flex;
       align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      border: 1px solid rgba(227, 230, 239, 1);
-      box-shadow: 0px 0px 12px 0px rgba(241, 245, 248, 1);
-      border-radius: 2px;
-      font-size: $font-size-xs;
-      color: $font-color-primary;
-      margin-right: 10px;
-      cursor: pointer;
-      b {
-        font-size: $font-size-md;
-        margin-bottom: 5px;
+      margin-left: 10px;
+      span {
+        position: relative;
+        width: 80%;
+        max-width: 144px;
+        height: 66px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        border: 1px solid rgba(227, 230, 239, 1);
+        box-shadow: 0px 0px 12px 0px rgba(241, 245, 248, 1);
+        border-radius: 2px;
+        font-size: $font-size-xs;
+        color: $font-color-primary;
+        margin-right: 10px;
+        cursor: pointer;
+
+        b {
+          font-size: $font-size-md;
+          margin-bottom: 5px;
+        }
       }
-    }
-    .isActive {
-      background: #eef2ff;
-    }
-    .isActive::after {
-      content: '';
-      width: 0;
-      height: 0;
-      border: 20px solid transparent;
-      border-right: 20px solid $bd-color-primary;
-      transform: rotate(135deg);
-      position: absolute;
-      top: -20px;
-      right: -20px;
-      font-size: $font-size-lg;
-    }
-    .el-icon-check {
-      position: absolute;
-      top: 2px;
-      right: 1px;
-      font-size: $font-size-sm;
-      color: $white;
-      z-index: 1;
-    }
-    span:hover {
-      background: #eef2ff;
-    }
-    span:nth-of-type(1) {
-      border-left: 5px solid $font-color-grade-2;
-      b {
-        color: $font-color-grade-2;
+
+      .isActive {
+        background: #eef2ff;
       }
-    }
-    span:nth-of-type(2) {
-      border-left: 5px solid $super-danger;
-      b {
-        color: $super-danger;
+
+      .isActive::after {
+        content: '';
+        width: 0;
+        height: 0;
+        border: 20px solid transparent;
+        border-right: 20px solid $bd-color-primary;
+        transform: rotate(135deg);
+        position: absolute;
+        top: -20px;
+        right: -20px;
+        font-size: $font-size-lg;
       }
-    }
-    span:nth-of-type(3) {
-      border-left: 5px solid $high;
-      b {
-        color: $high;
+
+      .el-icon-check {
+        position: absolute;
+        top: 2px;
+        right: 1px;
+        font-size: $font-size-sm;
+        color: $white;
+        z-index: 1;
       }
-    }
-    span:nth-of-type(4) {
-      border-left: 5px solid $mid;
-      b {
-        color: $mid;
+
+      span:hover {
+        background: #eef2ff;
       }
-    }
-    span:nth-of-type(5) {
-      border-left: 5px solid $low;
-      b {
-        color: $low;
+
+      span:nth-of-type(1) {
+        border-left: 5px solid $font-color-grade-2;
+
+        b {
+          color: $font-color-grade-2;
+        }
       }
-    }
-    span:nth-of-type(6) {
-      border-left: 5px solid $unknown;
-      b {
-        color: $unknown;
+
+      span:nth-of-type(2) {
+        border-left: 5px solid $super-danger;
+
+        b {
+          color: $super-danger;
+        }
       }
-    }
-    span:nth-of-type(7) {
-      border-left: 5px solid $safety;
-      b {
-        color: $safety;
+
+      span:nth-of-type(3) {
+        border-left: 5px solid $high;
+
+        b {
+          color: $high;
+        }
       }
-    }
-    .is_disabled {
-      cursor: not-allowed;
-      background-color: $disabled;
-      &:hover {
+
+      span:nth-of-type(4) {
+        border-left: 5px solid $mid;
+
+        b {
+          color: $mid;
+        }
+      }
+
+      span:nth-of-type(5) {
+        border-left: 5px solid $low;
+
+        b {
+          color: $low;
+        }
+      }
+
+      span:nth-of-type(6) {
+        border-left: 5px solid $unknown;
+
+        b {
+          color: $unknown;
+        }
+      }
+
+      span:nth-of-type(7) {
+        border-left: 5px solid $safety;
+
+        b {
+          color: $safety;
+        }
+      }
+
+      .is_disabled {
+        cursor: not-allowed;
         background-color: $disabled;
+
+        &:hover {
+          background-color: $disabled;
+        }
       }
+
     }
   }
 }

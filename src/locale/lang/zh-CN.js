@@ -79,6 +79,13 @@ export default {
   // lj-saftey-risk-check
   ljSafteyCheck: {
     riskGrade: '安全风险等级',
+    '严重': '严重',
+    '高危': '高危',
+    '中危': '中危',
+    '低危': '低危',
+    '未评级': 'Not-standard',
+    '无风险': '无风险',
+    '全部': '全部'
   },
   // lj-saftey-risk-check
   ljSafteyRisk: {

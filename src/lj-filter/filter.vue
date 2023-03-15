@@ -156,6 +156,7 @@ export default {
     },
     // 筛选按钮
     fnFilter() {
+      this.filterChooseList = [];
       this.formList.forEach((el) => {
         // 数据处理
         // 多选
