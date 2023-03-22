@@ -7,8 +7,8 @@
 
 ## 更新内容
 
-### v1.0.9-alpha.1
-`2023-02-24`
+### v1.0.9-alpha.2
+`2023-03-22`
 #### feature
 - Lj-upload文件上传优化
   1. 支持重传，limit传入则不生效
@@ -16,6 +16,11 @@
   3. 提供一个校验文件的prop，供使用者自主校验
   4. 增加文件类型提示限制
   5. ossUploadData方法移除，提取oss数据在成功返回uploadSuccess和uploadChange方法中取得
+
+### v1.0.9-alpha.1
+`2023-03-1`
+#### feature
+-Lj-check修复bug
 
 ### v1.0.9
 `2023-02-24`
