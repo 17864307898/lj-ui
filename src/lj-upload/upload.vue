@@ -12,35 +12,38 @@
           ? 'upload-demo'
           : 'el-upload-dragger'
       "
-      :data="data"
-      :disabled="disabled"
-      :file-list="fileList"
-      :headers="headers"
-      :limit="limit"
-      :list-type="listType"
-      :multiple="multiple"
-      :name="name"
+      :data="uploadData"
+      v-bind="{ ...$props, ...$attrs }"
       :on-change="handleChange"
       :on-error="handleError"
-      :on-exceed="handleExceed"
       :on-remove="handleRemove"
       :on-success="handleSuccess"
+      :on-exceed="handleExceed"
       :show-file-list="showFileList"
-      :with-credentials="withCredentials"
     >
       <slot name="uploadIcon"><i class="el-icon-upload"></i></slot>
       <div class="el-upload__text">
         <slot name="uploadText">
-          <span>
-            将文件拖到此处，或
-            <em>点击上传</em>
-          </span>
+          <div v-if="listType === 'text' || !listType">
+            <span v-if="drag">
+              将文件拖到此处，或
+              <em v-if="retransmission && file.size">重新上传</em>
+              <em v-else>点击上传</em>
+            </span>
+            <span v-else>
+              <em v-if="retransmission && file.size">重新上传</em>
+              <em v-else>点击上传</em>
+            </span>
+          </div>
         </slot>
       </div>
       <div slot="tip" class="el-upload__tip">
-        <p>
-          <slot name="uploadTip">请上传小于4G的文件</slot>
-        </p>
+        <slot name="uploadTip">
+          <p v-if="listType === 'picture-card'">
+            请上传小于{{ formatBytes(maxSize) }}的图片
+          </p>
+          <p v-else>请上传小于{{ formatBytes(maxSize) }}的文件</p>
+        </slot>
       </div>
     </el-upload>
   </div>
@@ -51,7 +54,7 @@ import Vue from 'vue';
 import { Upload, Message } from 'element-ui';
 import OSS from './ossUpload.js';
 import SparkMD5 from 'spark-md5';
-// import axios from 'axios'
+import { formatBytes } from '../utils/index';
 
 Vue.use(Upload);
 
@@ -78,6 +81,11 @@ export default {
       type: String,
       default: '',
     },
+    retransmission: {
+      //是否支持重传
+      type: Boolean,
+      default: false,
+    },
     md5Show: {
       //是否支持md5
       type: Boolean,
@@ -95,11 +103,6 @@ export default {
         return {};
       },
     },
-    multiple: {
-      //是否支持多选文件
-      type: Boolean,
-      default: false,
-    },
     listType: {
       // 文件列表的类型 默认text  text/picture/picture-card
       type: String,
@@ -115,11 +118,6 @@ export default {
       type: Boolean,
       default: false,
     },
-    withCredentials: {
-      //支持发送 cookie 凭证信息
-      type: Boolean,
-      default: false,
-    },
     limit: {
       //最大允许上传个数
       type: Number,
@@ -129,18 +127,6 @@ export default {
       //最大限制大小
       type: Number,
       default: 0,
-    },
-    disabled: {
-      //是否禁用
-      type: Boolean,
-      default: false,
-    },
-    headers: {
-      //设置上传的请求头部
-      type: Object,
-      default: () => {
-        return {};
-      },
     },
     data: {
       //上传时附带的额外参数
@@ -156,12 +142,18 @@ export default {
         return {};
       },
     },
+    validateFn: {
+      // 自主校验方法
+      type: Function,
+      default: () => true,
+    },
   },
   data() {
     return {
       file: '',
       fileList: [],
       uploadHost: '',
+      uploadData: {},
       md5: '',
     };
   },
@@ -188,40 +180,59 @@ export default {
     },
   },
   mounted() {
+    // 上传的地址
     this.uploadHost = this.action ? this.action : '';
   },
   methods: {
+    formatBytes,
+    // 清空
     clearFiles() {
       this.$refs.upload.clearFiles();
     },
+    // 上传状态
     handleChange(file, fileList) {
-      let that = this
-      if(this.md5Show) {
-        var fileReader = new FileReader();
-        var Spark = new SparkMD5.ArrayBuffer();
-        fileReader.readAsArrayBuffer(file.raw);
-        fileReader.onload = function (e) {
-          Spark.append(e.target.result);
-          this.md5 = Spark.end()
-          that.$emit('uploadChange', { file: file, fileList: fileList, md5: this.md5 });
-        }
-      }else{
-        this.$emit('uploadChange', { file: file, fileList: fileList });
+      console.log('lj-handleChange', file, fileList);
+      this.file = file;
+      this.fileList = fileList;
+      let params = {
+        file: file,
+        fileList: fileList,
+      };
+      if (this.md5) {
+        params.md5 = this.md5;
+      }
+      if (this.ossShow) {
+        params.ossData = this.uploadData;
+      }
+      this.$emit('uploadChange', params);
+      // 重传判断
+      if (this.retransmission && fileList.length > 1) {
+        this.ReUpload(file);
       }
     },
+    // 上传成功
     handleSuccess(res, file, fileList) {
-      this.file = 'file';
-      if (!this.limit || this.limit < 2) {
-        this.fileList = [file];
-      } else {
-        this.fileList = fileList;
-      }
-      this.$emit('uploadSuccess', {
+      console.log('lj-handleSuccess', res, file, fileList);
+      this.file = file;
+      this.fileList = fileList;
+      let params = {
         res: res,
         file: file,
         fileList: fileList,
-      });
+      };
+      if (this.md5) {
+        params.md5 = this.md5;
+      }
+      if (this.ossShow) {
+        params.ossData = this.uploadData;
+      }
+      this.$emit('uploadSuccess', params);
+      // 重传判断
+      if (this.retransmission && fileList.length > 1) {
+        this.ReUpload(file);
+      }
     },
+    // 异常错误方法
     handleError() {
       Message({
         message: this.content.errorMsg ? this.content.errorMsg : '上传失败！',
@@ -230,34 +241,93 @@ export default {
         duration: 1500,
       });
     },
+    // 删除方法
     handleRemove(file, fileList) {
       this.$emit('uploadRemove', { file: file, fileList: fileList });
-      this.file = file;
+      this.file = '';
       this.fileList = fileList;
     },
+    // 限制文件个数方法
     handleExceed() {
       Message.warning(
-        this.content.Exceed
-          ? this.content.Exceed
-          : `当前限制选择 ${this.limit} 个文件`
+        this.content.exceed
+          ? this.content.exceed
+          : `当前限制选择 ${this.limit}个${
+              this.listType === 'picture-card' ? '图片' : '文件'
+            }！`
       );
     },
+    // 重新上传清空
+    ReUpload(file) {
+      let uploadFiles = this.$refs.upload.uploadFiles;
+      let index = uploadFiles.indexOf(this.fileList[this.fileList.length - 1]);
+      uploadFiles.splice(index, 1);
+      console.log('ReUpload', uploadFiles)
+      this.handleRemove(file);
+    },
+    // 上传前钩子
     async onBeforeUpload(file) {
+      let that = this;
+      // 限制文件类型
+      let FileExt = file.name.replace(/.+\./, '');
+      let acceptTypeData = this.accept ? this.accept.split(',') : [];
+      let acceptType = []
+      acceptTypeData.forEach(el=>{
+        el = el.replace(/.*\./, '')
+        acceptType.push(el)
+      })
+      if (this.accept && this.accept != '*' && acceptType.indexOf(FileExt) ==-1) {
+        Message.error(
+          this.content.acceptInfo
+            ? this.content.acceptInfo
+            : `上传${this.listType === 'picture-card' ? '图片' : '文件'}只能是${
+                this.accept
+              }格式!`
+        );
+      }
+      // 限制文件大小
       let maxSize = this.maxSize ? this.maxSize : 4294967296;
       const isLtSize = file.size < maxSize;
       if (!isLtSize) {
-        Message.error(this.content.maxSize + '！');
+        Message.error(
+          this.content.sizeInfo
+            ? this.content.sizeInfo
+            : `请上传小于${formatBytes(maxSize)}的${
+                this.listType === 'picture-card' ? '图片' : '文件'
+              }！`
+        );
+      }
+      // 如果有文件类型和大小限制，则清空
+      if ((this.accept  && this.accept != '*' && acceptType.indexOf(FileExt) ==-1) || !isLtSize) {
+        this.ReUpload(file);
         return false;
       }
+      // 自主校验抛出
+      const validate = await this.validateFn(file);
+      if (!validate) {
+        this.ReUpload(file);
+        return false;
+      }
+      // 如果有oss
       if (this.ossShow) {
         const res = await OSS(
           file.name,
           this.ossUploadPath.fileUrl,
-          this.ossUploadPath.dir,
+          this.ossUploadPath.dir ? this.ossUploadPath.dir : undefined,
           this.ossUploadPath.token
-        )
+        );
         this.uploadHost = res.host;
-        this.$emit('ossUploadData', res);
+        this.uploadData = res;
+      }
+      // 如果有md5
+      if (this.md5Show) {
+        var fileReader = new FileReader();
+        var Spark = new SparkMD5.ArrayBuffer();
+        fileReader.readAsArrayBuffer(file);
+        fileReader.onload = function (e) {
+          Spark.append(e.target.result);
+          that.md5 = Spark.end();
+        };
       }
     },
   },

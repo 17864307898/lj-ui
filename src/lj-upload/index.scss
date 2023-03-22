@@ -14,13 +14,16 @@
       font-size: $font-size-xs;
     }
   }
-  .el-upload__text{
+
+  .el-upload__text {
     font-size: $font-size-sm;
+
     em {
       font-style: normal;
       color: $font-color-primary;
     }
   }
+
   .el-icon-upload {
     margin-top: 20px !important;
     font-size: 67px;
@@ -28,10 +31,12 @@
     margin: 40px 0 16px;
     line-height: 50px;
   }
+
   .el-upload-dragger {
     height: auto;
     padding-bottom: 20px;
   }
+
   .upload-demo {
     width: 100%;
     border: 1px dashed #d9d9d9;
@@ -39,17 +44,50 @@
     flex-direction: column;
     align-items: center;
     padding-bottom: 20px;
+
     .el-upload-dragger {
       border: 0;
       padding: 0;
     }
+
     ul {
       width: 100%;
+
       li {
-        text-align: center;
         padding-left: 0;
         margin-left: 0;
       }
+
+      li::before {
+        display: none;
+      }
     }
+  }
+  ul {
+    width: 100%;
+    li {
+      padding-left: 0;
+      margin-left: 0;
+      text-align: left;
+      img {
+        margin: 0;
+      }
+    }
+
+    li::before {
+      display: none;
+    }
+  }
+}
+.van-doc-content--lj-upload {
+  li {
+    padding: 0;
+    img {
+      margin: 0;
+      border-radius: 0;
+    }
+  }
+  li::before {
+    display: none;
   }
 }
