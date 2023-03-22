@@ -262,6 +262,7 @@ export default {
       let uploadFiles = this.$refs.upload.uploadFiles;
       let index = uploadFiles.indexOf(this.fileList[this.fileList.length - 1]);
       uploadFiles.splice(index, 1);
+      console.log('ReUpload', uploadFiles)
       this.handleRemove(file);
     },
     // 上传前钩子
