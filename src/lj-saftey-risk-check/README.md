@@ -23,12 +23,17 @@ ljSafteyRiskCheck组件用于安全风险等级筛选使用
 
 | 参数 | 说明 | 类型 |  默认值 |
 |------|------|-----|---------|
-| labelData | 风险类型 | _object_ | -- |
-| selected | 初始选中值`需根据是否多选传入不同值` | _array_`|`_number_`|`_string_ | -- |
+| labelData | 风险类型 | _Arrary_ | [{label: '严重',value: '4',num: 0}] |
 | multiple | 是否可以多选 | _boolean_ | `true` |
-| countInfo | 初始化数量 | _object_ | -- |
 |  |  |  |  |
-> 注：`countInfo`需根据id返回对应的值 es: `{ 1: 20, 2: 30 }`
+> 注：`labelData`如果默认有选中的，则加上checked字段 eg: [{label: '严重',value: '4',num: 0,checked: true}]
+
+### slot
+
+| name | 说明 | 参数 | 默认值
+|------|------|-----|-----|
+| left-box | 左侧内容 | — | 安全风险等级 |
+| right-box | 右侧内容 | — | — |
 
 ### Events
 | name | 说明 | 回调参数 |

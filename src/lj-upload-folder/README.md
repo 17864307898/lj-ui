@@ -24,7 +24,8 @@ LjUploadFolder组件可用于上传文件夹。
 | 参数 | 说明 | 类型 |  默认值 |
 |------|------|-----|---------|
 | max-size | 文件最大值 | _number_ | — |
-| content | 上传需要的一些文案 |`maxSize`:限制大小; `Exceed`: 限制数量，默认值：当前限制选择 ${limit} 个文件; `errorMsg`: 失败，默认值：上传失败！` | — |
+| validateFn | 自主校验  | _function_ | false  |
+| content | 上传可选的一些文案 |`emptyInfo`: 空文件夹提示; `sizeInfo`: 文件夹不能为空!} | emptyInfo: 请上传小于${maxSize}的文件! ; sizeInfo: 请上传小于${maxSize}的文件!
 
 ### slot
 

@@ -30,6 +30,7 @@
 <script>
 import Vue from 'vue';
 import JSZip from 'jszip';
+import { formatBytes } from '../utils/index';
 import { Loading, Message } from 'element-ui';
 
 Vue.use(Loading);
@@ -49,6 +50,11 @@ export default {
         return {};
       },
     },
+    validateFn: {
+      // 自主校验
+      type: Function,
+      default: () => true,
+    },
   },
   data() {
     return {
@@ -57,10 +63,28 @@ export default {
     };
   },
   methods: {
-    beforeUpload(file) {
+    formatBytes,
+    async beforeUpload(file) {
+      
+      // 限制文件大小
+      let filesSize = 0
+      for(let el in file.target.files) {
+        if(file.target.files[el].size) {
+          filesSize += file.target.files[el].size
+        }
+      }
+      const isLtSize = filesSize < this.maxSize;
       if (!file.target.files || file.target.files.length === 0) {
-        Message.warning(this.content.maxSize);
+        Message.error(this.content.emptyInfo ? this.content.emptyInfo : `文件夹不能为空!`);
         return;
+      }else if (!isLtSize) {
+        Message.error(this.content.sizeInfo ? this.content.sizeInfo : `请上传小于${formatBytes(this.maxSize)}的文件夹!`);
+      }
+      // 自主校验抛出
+      const validate = await this.validateFn(file)
+      if (!validate) {
+        this.ReUpload(file);
+        return false;
       }
       this.file = '';
       this.uploadName = '';

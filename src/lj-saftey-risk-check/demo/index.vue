@@ -1,10 +1,7 @@
 <template>
   <lj-saftey-risk-check
-    :count-info="countInfo"
     :multiple="true"
     :label-data="riskLabel"
-    :risk-label="riskLabel"
-    :selected="selected"
     @change="fnHandelRisk"
   />
 </template>
@@ -13,31 +10,49 @@
 export default {
   data() {
     return {
-      riskLabel: {
-        // '': '全部',
-        // 4: '严重',
-        // 3: '高危',
-        // 2: '中危',
-        // 1: '低危',
-        // 0: '未评级',
-        // '-1': '无风险',
-      },
-      selected: [1, 2, 3],
-      countInfo: {
-        // '': 53,
-        // 4: 0,
-        // 3: 0,
-        // 2: 0,
-        // 1: 1,
-        // 0: 0,
-        // '-1': 1,
-      },
-    }
+      riskLabel: [
+        {
+          label: '全部',
+          value: '',
+          num: 0,
+        },
+        {
+          label: '严重',
+          value: '4',
+          num: 17,
+        },
+        {
+          label: '高危',
+          value: '3',
+          num: 15,
+        },
+        {
+          label: '中危',
+          value: '2',
+          num: 0,
+        },
+        {
+          label: '低危',
+          value: '1',
+          num: 0,
+        },
+        {
+          label: '未评级',
+          value: '0',
+          num: 0,
+        },
+        {
+          label: '无风险',
+          value: '-1',
+          num: 0,
+        },
+      ],
+    };
   },
   methods: {
     fnHandelRisk(val) {
-      console.log(val)
+      console.log(val);
     },
   },
-}
+};
 </script>
