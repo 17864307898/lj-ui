@@ -260,9 +260,13 @@ export default {
     // 重新上传清空
     ReUpload(file) {
       let uploadFiles = this.$refs.upload.uploadFiles;
-      let index = uploadFiles.indexOf(this.fileList[this.fileList.length - 1]);
+      let index = 0
+      if(this.retransmission) {
+        index = uploadFiles.indexOf(this.fileList[0]);
+      }else {
+        index = uploadFiles.indexOf(this.fileList[this.fileList.length - 1]);
+      }
       uploadFiles.splice(index, 1);
-      console.log('ReUpload', uploadFiles)
       this.handleRemove(file);
     },
     // 上传前钩子
