@@ -42,6 +42,19 @@ export default {
       // },
       // chart-type为2时传入
       data: {
+        writeData: {
+          titleMap: {
+            1: '许可证风险',
+            2: '漏洞风险',
+          },
+          rightConfig: {
+            1: ['条件兼容', '不兼容', '许可证篡改', '版权篡改'],
+            2: ['含漏洞组件', '含漏洞文件', '含溯源项目'],
+          },
+          vulData: ['Not-standard', '低危', '中危', '高危', '严重'],
+          LicenseData: ['Not-standard', '中风险', '低风险', '高风险'],
+          changeOver: '查看详情',
+        },
         vulUnknown: 12,
         vulLow: 39,
         vulMid: 27,

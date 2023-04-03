@@ -36,7 +36,7 @@
 
     <div class="last-line">
       <el-button type="text" @click="handleViewDetails">
-        {{ t('details') }}
+        {{ data.writeData['changeOver'] || t('details') }}
       </el-button>
     </div>
   </div>
@@ -72,13 +72,13 @@ export default {
   },
   computed: {
     defaultTitle() {
-      if (this.title) return this.title;
+      let title = this.data.writeData.titleMap
+      if (title[1])  return title[this.chartType || 1];
 
       const titleMap = {
         1: t('licenseRisk'),
         2: t('vulnerabilityRisk'),
       };
-
       return titleMap[this.chartType || 1];
     },
     // 右侧展示配置
