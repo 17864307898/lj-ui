@@ -1,7 +1,7 @@
 <template>
   <div class="content-wrap">
     <div class="title-wrap">
-      <span class="title">{{ title || t('distributeTitle') }}</span>
+      <span class="title">{{ data.writeData.title || t('distributeTitle') }}</span>
     </div>
     <div class="title-wrap">
       <el-select v-model="chartType" @change="handleInit">
@@ -17,9 +17,9 @@
       <div v-if="chartType === 1" class="fr">
         <el-switch
           v-model="currentType"
-          :active-text="t('files')"
+          :active-text="files"
           :active-value="1"
-          :inactive-text="t('codes')"
+          :inactive-text="codes"
           :inactive-value="2"
           @change="handleInit"
         />
@@ -46,7 +46,7 @@
     <!-- 切换按钮 -->
     <div class="last-line">
       <el-button type="text" @click="handleView">
-        {{ switchText }}
+        {{ data.writeData.changeOver || switchText }}
       </el-button>
     </div>
   </div>
@@ -87,6 +87,11 @@
         type: Array,
         default: () => undefined,
       },
+      // data数据
+      data: {
+        type: Object,
+        default: () => {},
+      }
     },
     data(){
       return {
@@ -102,6 +107,8 @@
           },
         ],
         chartType: 1,
+        files: '',
+        codes: '',
       }
     },
     computed: {
@@ -126,6 +133,10 @@
           },
         ]
       },
+    },
+    mounted() {
+      this.files = this.data.writeData.switchList[0] || this.t('files')
+      this.codes = this.data.writeData.switchList[1] || this.t('codes')
     },
     methods: {
       // 类型切换

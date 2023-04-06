@@ -6,7 +6,7 @@ export default {
   details: '查看详情',
   all: '全部',
   vulUnknown: 'Not-standard',
-  vulUnknownRisk: '未知风险',
+  vulUnknownRisk: 'Not-standard',
   // 风险等级
   vulCritical: '严重',
   vulHigh: '高危',

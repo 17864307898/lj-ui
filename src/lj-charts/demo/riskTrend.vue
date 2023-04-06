@@ -1,9 +1,5 @@
 <template>
-  <lj-charts
-    :data="data"
-    :type="105"
-    :height="240"
-  />
+  <lj-charts :data="data" :type="105" :height="240" />
 </template>
 
 <script>
@@ -14,6 +10,13 @@ export default {
   data() {
     return {
       data: {
+        writeData: {
+          1: ['严重', '高危', '中危', '低危', 'Not-standard'],
+          2: ['高风险', '中风险', '低风险', 'Not-standard'],
+          title: '风险趋势',
+          switchList: ['漏洞风险', '许可证风险'],
+          changeOver: '查看详情',
+        },
         vulInfoList: [
           {
             vulCritical: 31,
