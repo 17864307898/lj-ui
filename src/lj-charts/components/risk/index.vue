@@ -36,7 +36,7 @@
 
     <div class="last-line">
       <el-button type="text" @click="handleViewDetails">
-        {{ data.writeData['changeOver'] || t('details') }}
+        {{ data.writeData && data.writeData.changeOver ? data.writeData.changeOver : t('details') }}
       </el-button>
     </div>
   </div>
@@ -66,13 +66,21 @@ export default {
       type: Boolean,
       default: () => true,
     },
+    data: {
+      type: Object,
+      default: () => ({
+        writeData: {
+          titleMap: {}
+        },
+      }),
+    }
   },
   data() {
     return {};
   },
   computed: {
     defaultTitle() {
-      let title = this.data.writeData.titleMap
+      let title = this.data.writeData && this.data.writeData.titleMap ? this.data.writeData.titleMap : {}
       if (title[1])  return title[this.chartType || 1];
 
       const titleMap = {

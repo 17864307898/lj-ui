@@ -48,10 +48,15 @@ const TYPE_MAP = {
  */
 export const handleOptions = function () {
   const { chartType = 1, data } = this;
-  const config = TYPE_MAP[chartType];
+  let config = TYPE_MAP[chartType];
 
-  if (data.writeData.vulData && data.writeData.vulData.length > 0) {
-    config.yMap = chartType === 1 ? data.writeData.licenseData : data.writeData.vulData;
+  if (
+    data.writeData &&
+    data.writeData.vulData &&
+    data.writeData.vulData.length > 0
+  ) {
+    config.yMap =
+      chartType === 1 ? data.writeData.licenseData : data.writeData.vulData;
   } else {
     config = TYPE_MAP[chartType];
   }
@@ -106,7 +111,11 @@ export function formatData(config = {}) {
     const list = cloneData?.licenseRiskInfos || [];
     list.sort((x, y) => x.riskLevel - y.riskLevel);
     let LICENSE_LIST_DATA = null;
-    if (data.writeData.vulData && data.writeData.vulData.length > 0) {
+    if (
+      data.writeData &&
+      data.writeData.vulData &&
+      data.writeData.vulData.length > 0
+    ) {
       LICENSE_LIST_DATA = data.writeData.vulData;
     } else {
       LICENSE_LIST_DATA = LICENSE_LIST;
@@ -125,7 +134,10 @@ export function formatData(config = {}) {
 
 export function handleRightConfig() {
   const { chartType = 1, config, source = false, data } = this;
-  let rightConfigTitle = data.writeData.rightConfig;
+  let rightConfigTitle =
+    data.writeData && data.writeData.rightConfig
+      ? data.writeData.rightConfig
+      : [];
   // 许可证
   if (chartType === 1) {
     return [

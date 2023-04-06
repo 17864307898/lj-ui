@@ -1,14 +1,28 @@
 <template>
   <div class="content-wrap">
     <div class="title-wrap">
-      <div class="title">{{ data.writeData.title || t('riskTrend') }}</div>
+      <div class="title">
+        {{
+          data.writeData && data.writeData.title
+            ? data.writeData.title
+            : t('riskTrend')
+        }}
+      </div>
       <!-- 分布类型 -->
       <div class="fr">
         <el-switch
           v-model="currentType"
-          :active-text="data.writeData.switchList[1] || t('licenseRisk')"
+          :active-text="
+            data.writeData && data.writeData.switchList[1]
+              ? data.writeData.switchList[1]
+              : t('licenseRisk')
+          "
           :active-value="2"
-          :inactive-text="data.writeData.switchList[2] || t('vulnerabilityRisk')"
+          :inactive-text="
+            data.writeData && data.writeData.switchList[2]
+              ? data.writeData.switchList[2]
+              : t('vulnerabilityRisk')
+          "
           :inactive-value="1"
           @change="handleClick"
         />
@@ -41,7 +55,12 @@ export default {
     // 数据集
     data: {
       type: [Array, Object],
-      default: () => undefined,
+      default: () => ({
+        writeData: {
+          title: '',
+          switchList: [],
+        },
+      }),
     },
     // 图表高度
     height: {
@@ -69,7 +88,7 @@ export default {
     },
     // 风险数据配置
     risk() {
-      const writeList = this.data.writeData[this.currentType]
+      const writeList = this.data.writeData && this.data.writeData[this.currentType] ? this.data.writeData[this.currentType] : [];
       if (writeList && writeList.length > 0) {
         return writeList.map((x) => {
           return {
