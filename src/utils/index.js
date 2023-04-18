@@ -71,7 +71,7 @@ export function cleanObjectEmpty(object) {
  * @param number
  * @returns {*}
  */
-export function byteConvert(bytes) {
+export function byteConvert(bytes, down) {
   if (isNaN(bytes)) return '';
 
   const symbols = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
@@ -87,7 +87,11 @@ export function byteConvert(bytes) {
     bytes = bytes.toFixed(2);
   }
 
+  if(down === 'down') {
+    return Math.floor(bytes) + ' ' + symbols[i];
+  }
   return bytes + ' ' + symbols[i];
+  
 }
 
 // /**
