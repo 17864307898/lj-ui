@@ -18,6 +18,7 @@
       :on-error="handleError"
       :on-remove="handleRemove"
       :on-success="handleSuccess"
+      :on-progress="handleProgress"
       :on-exceed="handleExceed"
       :show-file-list="showFileList"
     >
@@ -209,6 +210,12 @@ export default {
       if (this.retransmission && fileList.length > 1) {
         this.ReUpload(file);
       }
+    },
+    handleProgress(e) {
+      if (e.percent === 100) {
+        console.log('fnUploadProgress', e)
+      }
+      e.percent = Math.min(99, e.percent)
     },
     // 上传成功
     handleSuccess(res, file, fileList) {
