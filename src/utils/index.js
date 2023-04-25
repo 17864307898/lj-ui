@@ -454,9 +454,41 @@ export function countDown(e, duration, timeParam) {
   }
 }
 
-// FILESIZE
+/**
+ * 文件大小...
+ */
 export function formatBytes(a, b) {
   if (0 == a) return "0 B"; 
     var c = 1024, d = b || 2, e = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"], f = Math.floor(Math.log(a) / Math.log(c)); 
     return parseFloat((a / Math.pow(c, f)).toFixed(d)) + "" + e[f];
+}
+
+/**
+ * 超出隐藏文字展示...
+ * 默认超过5个字 展示...
+ */
+export function ellipsisText(value, num) {
+  const nums = num || '5' // 设置限定字数,默认为5
+  if (!value) return ''
+  if (value.length > nums) {
+    return value.slice(0, nums) + '...'
+  }
+  return value
+}
+
+/**
+ * 时间段之前*/
+export function FormatDateSlot(time) {
+  var date = new Date().getTime()
+  var last = parseInt((date - time) / 1000)
+  if (last < 60) {
+    last = 1 + ' ' + '分钟'
+  } else if (last > 60 && last / 60 < 60) {
+    last = parseInt(last / 60) + ' ' + '分钟'
+  } else if ((last / 60 > 60 && last / 60) / 60 < 24) {
+    last = parseInt(last / 60 / 60) + ' ' + '小时'
+  } else {
+    last = parseInt(last / 60 / 60 / 24) + ' ' + '天'
+  }
+  return last
 }
