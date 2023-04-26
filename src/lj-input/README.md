@@ -27,6 +27,7 @@ LjInput是一个可根据传入的code值展示不同输入类型的组件（基
 |------|------|-----|---------|
 | code `具体配置参考下面code配置` | 展示类型 | _string_  `|`  _number_ | `` |
 | value(v-model) | 输入框取值 | _any_ `具体需对应不同类型输入框取值` | `undefined` |
+| isButton | 是否展示为按钮形式 `仅复选框类型下生效` | _boolean_  | `false` |
 | 其余参数遵循 [elementui](https://element.eleme.cn/#/zh-CN/component/installation) 配置 | 可通过配置展示不同需求 | -- | -- |
 
 ### code配置
@@ -41,7 +42,9 @@ LjInput是一个可根据传入的code值展示不同输入类型的组件（基
 | 106 | 数字输入 |
 | 107 | 单选按钮组 `需传入options` |
 | 108 | switch 开关 |
+| 109 | checkbox复选框 `需传入options,传入单条options时展示为单复选框，多条时为复选框组` |
 
+> 注意：复选框类型下，多条options配置时，true-label及false-label配置不生效
 ## 其他
 
 ### 初始化方法

@@ -10,7 +10,7 @@
       <el-table
         :ref="`table_${tableKey}`"
         class="table"
-        :data="dataset"
+        :data="data"
         :height="height"
         v-bind="$attrs"
         v-on="$listeners"
@@ -22,7 +22,7 @@
           :key="`${index}_${col.prop}`"
           :column-key="col.prop"
           :selectable="selectable"
-          show-overflow-tooltip
+          :show-overflow-tooltip="handleOverFlow(col)"
         >
           <!-- 允许自定义表头 -->
           <template
@@ -115,7 +115,7 @@
 <script>
   import Vue from 'vue'
   import { Table, TableColumn, Row, Col, Pagination } from 'element-ui'
-  import { deepClone } from '../utils'
+  import { propertyIsExist } from '../utils'
 
   Vue.use(Table)
   Vue.use(TableColumn)
@@ -181,10 +181,10 @@
       }
     },
     computed: {
-      // 深克隆一份data
-      dataset() {
-        return deepClone(this.data)
-      },
+      // // 深克隆一份data
+      // dataset() {
+      //   return deepClone(this.data)
+      // },
       // 分页配置
       paginationConfig() {
         return {
@@ -215,6 +215,21 @@
           })
         })
       },
+
+      // 文案超出隐藏配置
+      handleOverFlow(col) {
+        if (propertyIsExist(col, 'show-overflow-tooltip')) {
+          const res = col['show-overflow-tooltip']
+          return !!res
+        }
+
+        if (propertyIsExist(col, 'showOverflowTooltip')) {
+          const res = col['showOverflowTooltip']
+          return !!res
+        }
+
+        return true
+      }
     },
   }
 </script>

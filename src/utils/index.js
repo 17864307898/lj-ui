@@ -460,3 +460,30 @@ export function formatBytes(a, b) {
     var c = 1024, d = b || 2, e = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"], f = Math.floor(Math.log(a) / Math.log(c)); 
     return parseFloat((a / Math.pow(c, f)).toFixed(d)) + "" + e[f];
 }
+
+/**
+ * 判断是否为对象
+ * @param {} obj 
+ * @returns 
+ */
+export function isObject(obj) {
+  return Object.prototype.toString.call(obj) === '[object Object]'
+}
+
+/**
+ * 判断当前property是否存在指定对象中
+ * @param {Object} obj 
+ * @param {Array | String} keys 
+ * @returns 
+ */
+export function propertyIsExist(obj, key) {
+  if (!obj || !isObject(obj)) {
+    throw new Error('The first argument must be supplied and is an object.')
+  }
+
+  if (isArray(key)) {
+    return key.some(item => Object.prototype.hasOwnProperty.call(obj, item))
+  }
+
+  return Object.prototype.hasOwnProperty.call(obj, key)
+}

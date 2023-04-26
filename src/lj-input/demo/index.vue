@@ -4,7 +4,7 @@
       v-for="(item, index) in list"
       :key="`${item.code}_${index}`"
       label-width="110px"
-      :label="item.label"
+      :label="item.labelText"
       :prop="item.field"
     >
       <lj-input
@@ -33,20 +33,20 @@
             code: 101,
             showWordLimit: true,
             maxlength: 30,
-            label: '单行输入',
+            labelText: '单行输入',
             field: 'key1',
           },
           {
             code: 102,
             maxlength: 30,
             clearable: true,
-            label: '多行输入',
+            labelText: '多行输入',
             resize: 'none',
             field: 'key2',
           },
           {
             code: 103,
-            label: '下拉',
+            labelText: '下拉',
             options: [
               {
                 label: '选项1',
@@ -67,7 +67,7 @@
           },
           {
             code: 104,
-            label: '级联',
+            labelText: '级联',
             showAllLevels: false,
             options: [
               {
@@ -95,7 +95,7 @@
           },
           {
             code: 105,
-            label: '日期选择',
+            labelText: '日期选择',
             pickerOptions: {
               shortcuts: [
                 {
@@ -127,7 +127,7 @@
           },
           {
             code: 106,
-            label: '数字输入',
+            labelText: '数字输入',
             max: 99,
             step: 4,
             controlsPosition: 'right',
@@ -135,7 +135,7 @@
           },
           {
             code: 107,
-            label: '单选按钮',
+            labelText: '单选按钮',
             options: [
               {
                 label: '按钮1',
@@ -150,15 +150,27 @@
           },
           {
             code: 108,
-            label: 'switch开关',
+            labelText: 'switch开关',
             activeText: '打开',
             inactiveText: '关闭',
             field: 'key8',
           },
           {
-            code: 110,
-            label: '未知类型',
+            code: 109,
             field: 'key9',
+            labelText: '复选框',
+            size: 'mini',
+            // isButton: true,
+            options: [
+              { label: '选项1', value: '1', 'true-label': 'haha', 'false-label': 'heihei' },
+              { label: '选项2', value: '2', disabled: true },
+              { label: '选项3', value: '3' },
+            ]
+          },
+          {
+            code: 110,
+            labelText: '未知类型',
+            field: 'key10',
           },
         ],
         form: {},
