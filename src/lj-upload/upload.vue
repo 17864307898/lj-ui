@@ -272,6 +272,7 @@ export default {
     // 上传前钩子
     async onBeforeUpload(file) {
       let that = this;
+      this.$emit('uploadBefore', file);
       // 限制文件类型
       let FileExt = file.name.replace(/.+\./, '');
       let acceptTypeData = this.accept ? this.accept.split(',') : [];
