@@ -46,5 +46,6 @@ LjUploadFolder组件可用于上传文件，支持oss、md5（基于ElementUI下
 |------|------|-----|-----|
 | uploadSuccess | 成功获取上传文件 | _object_ | `res`, `file`, `fileList`, `md5`, `ossData` |
 | uploadRemove |  删除文件 | _object_ | `file`, `fileList` |
+| uploadBefore | 上传前回调  _object_ | `file` |
 | uploadChange |  文件状态改变，上传成功和上传失败时都会被调用 | _object_ | `file`, `fileList`, `md5`, `ossData` |
 | clearFiles | 清空上传 | — | — |
