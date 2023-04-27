@@ -71,10 +71,10 @@ export function cleanObjectEmpty(object) {
  * @param number
  * @returns {*}
  */
-export function byteConvert(bytes) {
+export function byteConvert(bytes, down) {
   if (isNaN(bytes)) return '';
 
-  const symbols = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+  const symbols = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
   let exp = Math.floor(Math.log(bytes) / Math.log(2));
 
   if (exp < 1) {
@@ -86,28 +86,12 @@ export function byteConvert(bytes) {
   if (bytes.toString().length > bytes.toFixed(2).toString().length) {
     bytes = bytes.toFixed(2);
   }
-
+  // 如果传down值，则向下取整
+  if(down === 'down') {
+    return Math.floor(bytes) + ' ' + symbols[i];
+  }
   return bytes + ' ' + symbols[i];
 }
-
-// /**
-//  * @description 容量
-//  * @param number
-//  * @returns {*}
-//  */
-//  export function capacityNum(num) {
-//   if (num == 0 || !num) return '0 B'
-//   let k = 1024
-//   let sizeStr = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
-//   let i = 0
-//   for (let l = 0; l < 7; l++) {
-//     if (num / Math.pow(k, l) < 1) {
-//       break
-//     }
-//     i = l
-//   }
-//   return (num / Math.pow(k, i)).toFixed(2) + ' ' + sizeStr[i]
-// }
 
 /**
  * @description 将url请求参数转为json格式
@@ -448,11 +432,4 @@ export function countDown(e, duration, timeParam) {
     // eslint-disable-next-line no-useless-return
     return;
   }
-}
-
-// FILESIZE
-export function formatBytes(a, b) {
-  if (0 == a) return "0 B"; 
-    var c = 1024, d = b || 2, e = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"], f = Math.floor(Math.log(a) / Math.log(c)); 
-    return parseFloat((a / Math.pow(c, f)).toFixed(d)) + "" + e[f];
 }

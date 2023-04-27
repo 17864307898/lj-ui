@@ -40,9 +40,9 @@
       <div slot="tip" class="el-upload__tip">
         <slot name="uploadTip">
           <p v-if="listType === 'picture-card'">
-            请上传小于{{ formatBytes(maxSize) }}的图片
+            请上传小于{{ byteConvert(maxSize) }}的图片
           </p>
-          <p v-else>请上传小于{{ formatBytes(maxSize) }}的文件</p>
+          <p v-else>请上传小于{{ byteConvert(maxSize) }}的文件</p>
         </slot>
       </div>
     </el-upload>
@@ -54,7 +54,7 @@ import Vue from 'vue';
 import { Upload, Message } from 'element-ui';
 import OSS from './ossUpload.js';
 import SparkMD5 from 'spark-md5';
-import { formatBytes } from '../utils/index';
+import { byteConvert } from '../utils/index';
 
 Vue.use(Upload);
 
@@ -184,7 +184,7 @@ export default {
     this.uploadHost = this.action ? this.action : '';
   },
   methods: {
-    formatBytes,
+    byteConvert,
     // 清空
     clearFiles() {
       this.$refs.upload.clearFiles();
@@ -297,7 +297,7 @@ export default {
         Message.error(
           this.content.sizeInfo
             ? this.content.sizeInfo
-            : `请上传小于${formatBytes(maxSize)}的${
+            : `请上传小于${byteConvert(maxSize)}的${
                 this.listType === 'picture-card' ? '图片' : '文件'
               }！`
         );
