@@ -6,10 +6,18 @@
 
 
 ## 更新内容
+### v1.0.10
+`2023-04-27`
+#### feature
+- 1.表单适配输入项增加Checkbox多选框
+- 2.byteConvert方法将`B`单位改为`bytes`单位,增加向下取整参数
+#### fix
+- 3.修复table名称过长show-overflow-tooltip问题
+- 4.修复table选择selection勾选问题
 
 ### v1.0.9-alpha4
 `2023-04-06`
-#### feature
+#### fix
 - Lj-charts图表文案修复
 
 ### v1.0.9-alpha3
