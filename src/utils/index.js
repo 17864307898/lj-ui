@@ -277,7 +277,7 @@ export function tensBitTimestamp(time) {
       break;
   }
 
-  return last;
+  return last + '前';
 }
 
 /** ****************** 字典校验 ****************** */

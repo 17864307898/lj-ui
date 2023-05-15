@@ -147,7 +147,7 @@ const val_c = cleanObjectEmpty(b, 'down') // 1GB
 | formatMS | 毫秒转天时分秒 | `mss` _string_ _number_ | _string_ |
 | formatHistoryTime | 毫秒转历史时间（eg: 刚刚） | `time` _string_ _number_ `format` _string_ | _string_ | `format` |  `format`YYYY-MM-DD hh:mm:ss 
 | tensBitTimestamp | 10/13位时间戳转换 | `time` _string_ _number_ | _string_ |
-| FormatDateSlot | 时间段 | `time` _string_ _number_ | _string_ | 
+| FormatDateSlot | 时间段 | `time` _string_ _number_ `unit`_string_ | _string_ | `unit` | `day`, `hour`, `minute`, `second`|
 #### 示例
 ```javascript
     const data1 = 1669191340132,data2=497213,data3=1669191340 format="YYYY-MM-DD hh:mm:ss"
