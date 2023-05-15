@@ -78,7 +78,7 @@ const val = cleanObjectEmpty(a) // { Football: '足球' } 移除没有值的字�
 
 | 说明 | 参数 | 返回值 | 
 |--------|------|-----|-------|-------|-------|
-| 容量字节单位转换 `B, KB, MB, GB, TB, PB, EB, ZB, YB` | `bytes` _number_  _string_ | _string_ |
+| 容量字节单位转换 `B, KB, MB, GB, TB, PB, EB, ZB, YB` | `bytes` _number_  _string_ `down` _string_  | _string_ |
 > 1KB=1024B 1MB=1024KB 1G＝1024MB 1T=1024G
 #### 示例
 ```javascript
@@ -86,6 +86,7 @@ const a = 666666, b = 88888888, c = 1234567890
 const val_a = cleanObjectEmpty(a) // 651.04 KB 取小数点后两位
 const val_b = cleanObjectEmpty(b) // 84.77 MB
 const val_c = cleanObjectEmpty(b) // 1.15 GB
+const val_c = cleanObjectEmpty(b, 'down') // 1GB
 ```
 ### paramObj
 

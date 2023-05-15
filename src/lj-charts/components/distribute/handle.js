@@ -83,7 +83,6 @@ export const handleOptions = function () {
       },
     ],
   }
-  console.log({ 1: 1, option })
 
   return option
 }

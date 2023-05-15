@@ -8,6 +8,7 @@ export default {
   104: 'cascader', // 级联
   105: 'date-picker', // 日期选择
   106: 'input-number', // 数字输入
-  107: 'radio', // 数字输入
+  107: 'radio', // 单选
   108: 'switch', // switch开关
+  109: 'checkbox', // 复选框
 }

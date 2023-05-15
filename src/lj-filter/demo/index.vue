@@ -16,16 +16,6 @@
       <template #reference>
         <i class="el-icon-ice-cream"></i>
       </template>
-      <!-- <template #filter-items="props">
-        <filter-items
-          :filter-close="props.filterClose"
-          :filter-reset="props.filterReset"
-          :filter-sure="props.filterSure"
-          :form-list="formList"
-          :public-list-data="publicListData"
-          @filterChooseData="fnFilterChooseData"
-        />
-      </template> -->
       <template #right-box>
         <div>右边内容</div>
       </template>
@@ -102,20 +92,6 @@ export default {
       this.filterChooseList = []
       this.filterChooseList = data.filterChooseList || []
     },
-    // 插槽使用处理筛选数据方法
-    // fnFilterChooseData(data) {
-    //   console.log(data)
-    //   this.filterChooseList = [];
-    //   this.publicListData.importList.forEach((el) => {
-    //     if (el.id === data.importType) {
-    //       this.filterChooseList.push({
-    //         id: 1,
-    //         type: '引入方式',
-    //         item: el.type,
-    //       });
-    //     }
-    //   });
-    // },
   },
 };
 </script>

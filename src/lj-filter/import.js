@@ -9,6 +9,9 @@ import {
   Button,
   Tag,
   Link,
+  Checkbox,
+  CheckboxGroup,
+  CheckboxButton
 } from 'element-ui'
 
 Vue.use(Form)
@@ -20,3 +23,6 @@ Vue.use(Option)
 Vue.use(Button)
 Vue.use(Tag)
 Vue.use(Link)
+Vue.use(Checkbox)
+Vue.use(CheckboxGroup)
+Vue.use(CheckboxButton)

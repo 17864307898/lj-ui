@@ -9,6 +9,7 @@
   import AdaptInputNumber from './components/number'
   import AdaptRadio from './components/radio'
   import AdaptSwitch from './components/switch'
+  import AdaptCheckbox from './components/checkbox'
 
   export default {
     name: 'lj-input',
@@ -22,6 +23,7 @@
       AdaptInputNumber,
       AdaptRadio,
       AdaptSwitch,
+      AdaptCheckbox
     },
     props: {
       code: {

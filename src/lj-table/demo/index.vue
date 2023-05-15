@@ -9,7 +9,7 @@
       <lj-table
         class="table-wrap"
         :columns="columns"
-        :data="[]"
+        :data="dataList.slice(0, 10)"
         :need-pagination="false"
         :pagination="pagination"
       />
@@ -46,6 +46,7 @@
           {
             label: '性别',
             prop: 'sex',
+            showOverflowTooltip: false
           },
           {
             label: '年龄',
@@ -68,7 +69,7 @@
     created() {
       this.dataList = new Array(20).fill(0).map((item, index) => ({
         name: `姓名${index + 1}`,
-        sex: '男',
+        sex: '测试性别测试性别测试性别测试性别测试性别测试性别测试性别测试性别',
         old: 11 + index,
       }))
     },
@@ -77,6 +78,6 @@
 
 <style lang="scss" scoped>
  .table-wrap {
-  height: 300px;
+  height: 400px;
  }
 </style>
