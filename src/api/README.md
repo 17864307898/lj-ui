@@ -162,6 +162,9 @@ const val_c = cleanObjectEmpty(b, 'down') // 1GB
     const var3 = formatHistoryTime(data1) // 4分钟前
     //10/13位时间戳转换
     const var4 = tensBitTimestamp(data3) //2022年11月23日 16:15:40
+    //10/13位时间戳转换-时间段前-
+    const var5 = tensBitTimestamp(data3, 'minute') // 4分钟前
+    
 ```
 
 ### 字典+类型校验
