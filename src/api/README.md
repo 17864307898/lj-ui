@@ -145,9 +145,8 @@ const val_c = cleanObjectEmpty(b, 'down') // 1GB
 |--------|------|-----|-------|-----|-------|
 | formatDate | 格式化时间 | `dateStr`_string_  _number_ `format` _string_ | 格式化时间_string_ | `format` |  `format`YYYY-MM-DD hh:mm:ss 
 | formatMS | 毫秒转天时分秒 | `mss` _string_ _number_ | _string_ |
-| formatHistoryTime | 毫秒转历史时间（eg: 刚刚） | `time` _string_ _number_ `format` _string_ | _string_ | `format` |  `format`YYYY-MM-DD hh:mm:ss 
 | tensBitTimestamp | 10/13位时间戳转换 | `time` _string_ _number_ | _string_ |
-| FormatDateSlot | 时间段 | `time` _string_ _number_ `unit`_string_ | _string_ | `unit` | `day`, `hour`, `minute`, `second`|
+| FormatHistoryDate | 时间段 | `time` _string_ _number_ `unit`_string_ | _string_ | `unit` | `year` ,`day`, `hour`, `minute`, `second`|
 #### 示例
 ```javascript
     const data1 = 1669191340132,data2=497213,data3=1669191340 format="YYYY-MM-DD hh:mm:ss"
@@ -156,14 +155,12 @@ const val_c = cleanObjectEmpty(b, 'down') // 1GB
     const var_a1 = formatDate(data1) //2022-11-23 16:15:40
     const var_a2 = formatDate(data1, YYYY-MM-DD hh:mm:ss) //2022-11-22 10:51:32
     const var_a3 = formatDate(data1, YYYY-MM-DD hh:mm) //2022-11-22 10:51
-    //毫秒转天时分秒
+    //毫秒=>XXX天时分秒
     const var2 = formatMS(data2) // 8 分 17 秒
-    //秒转历史时间
-    const var3 = formatHistoryTime(data1) // 4分钟前
     //10/13位时间戳转换
-    const var4 = tensBitTimestamp(data3) //2022年11月23日 16:15:40
-    //10/13位时间戳转换-时间段前-
-    const var5 = tensBitTimestamp(data3, 'minute') // 4分钟前
+    const var3 = tensBitTimestamp(data3) //2022年11月23日 16:15:40
+    //10/13位时间戳=>XXX时间段前
+    const var4 = FormatHistoryDate(data3, 'minute') // 4分钟前
     
 ```
 

@@ -155,11 +155,17 @@ export function formatDate(dateStr, format = 'YYYY-MM-DD hh:mm:ss') {
 }
 
 /**
- * 毫秒转天时分秒
+ * 毫秒转历史时间天时分秒
  * @param {*} mss
  * @returns
  */
 export function formatMS(mss) {
+  if(!mss) {
+    return '—'
+  }
+  if(mss < 1000) {
+    return `${mss / 1000} 秒`
+  }
   const daySeconds = 1000 * 60 * 60 * 24;
   const days = mss >= daySeconds ? parseInt(mss / daySeconds, 10) : 0;
   const hours = parseInt((mss % daySeconds) / (1000 * 60 * 60), 10);
@@ -246,7 +252,7 @@ export function tensBitTimestamp(time) {
 
 /**
  * 10/13位，时间段之前*/
- export function FormatDateSlot(time, formatUnit) {
+ export function FormatHistoryDate(time, formatUnit) {
   var date = new Date().getTime();
   var last = parseInt(
     (date - (String(time).length === 10 ? time * 1000 : time / 1)) / 1000
