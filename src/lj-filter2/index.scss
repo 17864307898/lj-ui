@@ -1,0 +1,81 @@
+@import "../style/var.scss";
+
+.lj-form-filter2-box {
+  position: relative;
+  height: auto;
+  transition: 0.3s;
+  .filter-btn {
+    color: $font-color-primary;
+    cursor: pointer;
+  }
+  .lj-form-filter-con {
+    border: 1px solid #e4e7ed;
+    background: #f6f7f9;
+    padding: 10px 0;
+    .el-form {
+      .adapt-input {
+        width: 240px !important;
+      }
+      > div {
+        display: inline-block;
+      }
+    }
+    .collapse-head-box {
+      .el-form-item {
+        margin-bottom: 10px !important;
+      }
+    }
+    .collapse-box {
+      width: 100%;
+      height: 180px;
+      overflow-y: auto;
+      border-top: 1px solid #e4e7ed;
+      padding: 10px 0 0 0;
+      .el-form-item {
+        margin-bottom: 10px !important;
+      }
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+      background-color: #f5f5f5;
+    }
+    ::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 6px $font-color-placeholder;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      box-shadow: inset 0 0 6px $font-color-placeholder;
+      background-color: #e4e7ed;
+    }
+    .item-filter-icon {
+      .adapt-unknow {
+        display: none;
+      }
+    }
+    .item-filter-icon,
+    .item-no-title {
+      .el-form-item__label {
+        display: none;
+      }
+      .el-form-item__content {
+        margin-left: 20px !important;
+      }
+    }
+    .el-form-item {
+      display: inline-block;
+    }
+    .el-select {
+      width: 240px;
+    }
+    .el-radio-group,
+    .el-checkbox-group {
+      width: 100%;
+    }
+  }
+  .closeFilter {
+    cursor: pointer;
+    color: $font-color-primary;
+  }
+}

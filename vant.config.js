@@ -101,6 +101,10 @@ module.exports = {
             title: 'LjFilter 筛选',
           },
           {
+            path: 'lj-filter2',
+            title: 'LjFilter2 筛选',
+          },
+          {
             path: 'lj-saftey-risk',
             title: 'LjSafteyRisk 风险等级',
           },

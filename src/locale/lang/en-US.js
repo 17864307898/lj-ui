@@ -19,6 +19,8 @@ export default {
     screen: 'screen',
     screenMethod: 'Method of screening',
     selected: 'selected',
+    search: 'Query',
+    moreFilter: 'More filtering',
   },
   // LjInput
   ljInput: {
