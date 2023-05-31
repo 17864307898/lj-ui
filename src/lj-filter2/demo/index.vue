@@ -64,19 +64,13 @@ export default {
           field: 'key3',
           className: 'no-title',
         },
-        // {
-        //   code: 110,
-        //   labelText: '未知类型',
-        //   field: 'key4',
-        //   className: 'filter-icon',
-        // },
         {
           code: 103,
           label: '利用成熟度',
           options: VUL_RISK_LEVEL_LIST,
           filterable: true,
           multiple: true,
-          field: 'key7',
+          field: 'key4',
         },
         {
           code: 103,
@@ -100,7 +94,7 @@ export default {
           options: VUL_RISK_LEVEL_LIST,
           filterable: true,
           multiple: true,
-          field: 'key8',
+          field: 'key7',
           width: '100%',
         },
         {
@@ -109,7 +103,7 @@ export default {
           options: VUL_RISK_LEVEL_LIST,
           filterable: true,
           multiple: true,
-          field: 'key9',
+          field: 'key8',
           width: '100%',
         },
         {
@@ -117,7 +111,7 @@ export default {
           labelText: 'switch开关',
           activeText: '打开',
           inactiveText: '关闭',
-          field: 'key10',
+          field: 'key9',
         },
       ],
     };
