@@ -12,6 +12,7 @@
         :key="`${item[optionValue]}_${index}`"
         :label="item[optionLabel]"
         :value="item[optionValue]"
+        v-bind="item"
       >
         {{ item[optionLabel] }}
       </el-option>

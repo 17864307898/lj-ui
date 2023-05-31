@@ -10,6 +10,7 @@
         v-for="option in options"
         :key="option[optionValue]"
         :label="option[optionValue]"
+        v-bind="option"
       >
         {{ option[optionLabel] }}
       </el-radio>

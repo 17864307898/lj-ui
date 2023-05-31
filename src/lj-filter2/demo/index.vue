@@ -1,10 +1,7 @@
 <template>
   <lj-filter2
-    :filter-content="{
-      name: '组件',
-    }"
-    :filter-show="true"
     :form-list="formList"
+    :head-num="3"
     @form-data="fnGetformDatas"
   />
 </template>
@@ -67,12 +64,12 @@ export default {
           field: 'key3',
           className: 'no-title',
         },
-        {
-          code: 110,
-          labelText: '未知类型',
-          field: 'key4',
-          className: 'filter-icon',
-        },
+        // {
+        //   code: 110,
+        //   labelText: '未知类型',
+        //   field: 'key4',
+        //   className: 'filter-icon',
+        // },
         {
           code: 103,
           label: '利用成熟度',

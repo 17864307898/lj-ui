@@ -1,65 +1,60 @@
 <template>
   <el-card class="lj-form-filter2-box">
-    <el-collapse-transition>
-      <div class="lj-form-filter-con">
-        <!-- 表单筛选项 start -->
-        <slot name="filter-items">
-          <el-form ref="formData" :model="form">
-            <div class="collapse-head-box">
-              <el-form-item
-                v-for="(item, index) in formListTop"
-                :key="`${item.code}_${index}`"
-                :class="fnFormItemClass(item)"
-                :label="item.label"
-                :label-width="labelWidth"
-                :prop="item.field"
-                :style="{ width: item.width }"
-              >
-                <span
-                  class="filter-btn"
-                  v-if="item.className === 'filter-icon'"
-                  @click="handleFilter"
-                >
-                  <slot name="reference">
-                    <i class="el-icon-ice-cream"></i>
-                  </slot>
-                </span>
-
-                <lj-input
-                  v-else
-                  v-model="form[item.field]"
-                  v-bind="item"
-                  @blur="handleBlur"
-                  @change="handleChange"
-                  @input="handleInput"
-                />
-              </el-form-item>
-            </div>
-            <el-collapse-transition v-if="filterVisble">
-              <div class="collapse-box">
-                <el-form-item
-                  v-for="(item, index) in formListContent"
-                  :key="`${item.code}_${index}`"
-                  :class="fnFormItemClass(item)"
-                  :label="item.label"
-                  label-width="110px"
-                  :prop="item.field"
-                  :style="{ width: item.width }"
-                >
-                  <lj-input
-                    v-model="form[item.field]"
-                    v-bind="item"
-                    @blur="handleBlur"
-                    @change="handleChange"
-                    @input="handleInput"
-                  />
-                </el-form-item>
-              </div>
-            </el-collapse-transition>
-          </el-form>
-        </slot>
-        <!-- 表单筛选项 end -->
-        <div class="box-bottom">
+    <div class="lj-form-filter-con">
+      <!-- 表单筛选项 start -->
+      <el-form ref="formData" :model="form">
+        <div class="collapse-head-box">
+          <!-- 筛选头部左侧其它内容 -->
+          <slot name="head-left"></slot>
+          <el-form-item
+            v-for="(item, index) in formListTop"
+            :key="`${item.code}_${index}`"
+            :class="fnFormItemClass(item)"
+            :label="item.label"
+            :label-width="labelWidth"
+            :prop="item.field"
+            :style="{ width: item.width }"
+          >
+            <lj-input
+              v-model="form[item.field]"
+              v-bind="item"
+              @blur="handleBlur"
+              @change="handleChange"
+              @input="handleInput"
+            />
+          </el-form-item>
+          <!-- 筛选头部右侧按钮 -->
+          <slot name="reference">
+            <span class="filter-btn" @click="handleFilter">
+              <i class="el-icon-s-unfold"></i>
+            </span>
+          </slot>
+        </div>
+        <el-collapse-transition v-if="filterVisble">
+          <div class="collapse-box">
+            <el-form-item
+              v-for="(item, index) in formListContent"
+              :key="`${item.code}_${index}`"
+              :class="fnFormItemClass(item)"
+              :label="item.label"
+              label-width="110px"
+              :prop="item.field"
+              :style="{ width: item.width }"
+            >
+              <lj-input
+                v-model="form[item.field]"
+                v-bind="item"
+                @blur="handleBlur"
+                @change="handleChange"
+                @input="handleInput"
+              />
+            </el-form-item>
+          </div>
+        </el-collapse-transition>
+      </el-form>
+      <!-- 表单筛选项 end -->
+      <div class="box-bottom">
+        <slot name="bottom-left">
           <div>
             <el-button size="mini" @click="fnReset()">
               {{ translate('reset') }}
@@ -68,15 +63,18 @@
               {{ translate('search') }}
             </el-button>
           </div>
+        </slot>
+
+        <slot name="bottom-right">
           <p class="closeFilter" @click="handleFilter">
-           {{ translate('moreFilter')}}
+            {{ translate('moreFilter') }}
             <i
               :class="filterVisble ? 'el-icon-arrow-up' : 'el-icon-arrow-down'"
             ></i>
           </p>
-        </div>
+        </slot>
       </div>
-    </el-collapse-transition>
+    </div>
   </el-card>
 </template>
 <script>
@@ -86,6 +84,10 @@ const t = translate('ljFilter');
 export default {
   name: 'LjFilter2',
   props: {
+    headNum: {
+      type: Number,
+      default: 0,
+    },
     labelWidth: {
       type: String,
       default: '110px',
@@ -96,10 +98,6 @@ export default {
       default: () => {
         return [];
       },
-    },
-    filterHeadNum: {
-      type: Number,
-      default: 0,
     },
   },
   data() {
@@ -115,17 +113,11 @@ export default {
   },
   methods: {
     initData() {
-      let filterIndex = 0;
-      this.formList.forEach((el, index) => {
-        if (el.className === 'filter-icon') {
-          filterIndex = index;
-        }
-      });
       this.formListTop = this.formList.filter((el, index) => {
-        return index < filterIndex + 1;
+        return index < this.headNum;
       });
       this.formListContent = this.formList.filter((el, index) => {
-        return index >= filterIndex + 1;
+        return index >= this.headNum;
       });
     },
     // 表单内单个class
@@ -175,6 +167,4 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
