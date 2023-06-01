@@ -1,5 +1,5 @@
 <template>
-  <el-card :class="{ 'lj-pb0': !filterVisble }" class="lj-form-filter2-box">
+  <el-card class="lj-form-filter2-box">
     <div class="lj-form-filter-con">
       <!-- 表单筛选项 start -->
       <el-form ref="formData" :model="form">

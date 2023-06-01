@@ -1,16 +1,11 @@
 @import "../style/var.scss";
-.lj-pb0 {
-  .el-card__body {
-    padding-bottom: 0 !important;
-  }
-}
 .lj-form-filter2-box {
   position: relative;
   height: auto;
   transition: 0.3s;
 
   .el-card__body {
-    padding: 10px 0;
+    padding: 10px 0 0 0;
     background: #f5f7f9;
   }
 
