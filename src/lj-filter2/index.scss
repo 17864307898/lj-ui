@@ -1,5 +1,9 @@
 @import "../style/var.scss";
-
+.lj-pb0 {
+  .el-card__body {
+    padding-bottom: 0 !important;
+  }
+}
 .lj-form-filter2-box {
   position: relative;
   height: auto;
