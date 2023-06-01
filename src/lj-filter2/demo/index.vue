@@ -48,9 +48,10 @@ export default {
         },
         {
           code: 101,
-          showWordLimit: true,
+          showWordLimit: false,
           maxlength: 30,
           label: '漏洞编号',
+          clearable: true,
           placeholder: '请输入漏洞编号',
           field: 'key2',
           className: 'no-title',
@@ -107,11 +108,20 @@ export default {
           width: '100%',
         },
         {
+          code: 109,
+          label: '其它等级',
+          options: VUL_RISK_LEVEL_LIST,
+          filterable: true,
+          multiple: true,
+          field: 'key9',
+          width: '100%',
+        },
+        {
           code: 108,
           labelText: 'switch开关',
           activeText: '打开',
           inactiveText: '关闭',
-          field: 'key9',
+          field: 'key10',
         },
       ],
     };

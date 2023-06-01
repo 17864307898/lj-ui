@@ -21,6 +21,7 @@ export default {
     selected: '已选择',
     search: '查询',
     moreFilter: '更多筛选',
+    retract: '收起',
   },
   // LjInput
   ljInput: {

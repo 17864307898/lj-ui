@@ -15,20 +15,39 @@
             :prop="item.field"
             :style="{ width: item.width }"
           >
+            <slot v-if="item.code === 110" :name="item.field"></slot>
             <lj-input
+              v-else
               v-model="form[item.field]"
               v-bind="item"
               @blur="handleBlur"
               @change="handleChange"
               @input="handleInput"
+              @keyup.enter.native="handleEnter()"
             />
           </el-form-item>
           <!-- 筛选头部右侧按钮 -->
-          <slot name="reference">
-            <span class="filter-btn" @click="handleFilter">
-              <i class="el-icon-s-unfold"></i>
-            </span>
-          </slot>
+
+          <div class="head-right">
+            <p @click="handleFilter">
+              <slot name="reference">
+                <span class="closeFilter">
+                  {{ filterVisble ? translate('retract') : translate('moreFilter') }}
+                  <i
+                    :class="
+                      filterVisble ? 'el-icon-arrow-up' : 'el-icon-arrow-down'
+                    "
+                  ></i>
+                </span>
+              </slot>
+            </p>
+            <el-button size="mini" @click="fnReset()">
+              {{ filterContent.reset || translate('reset') }}
+            </el-button>
+            <el-button size="mini" type="primary" @click="fnFilter()">
+              {{ filterContent.search || translate('search') }}
+            </el-button>
+          </div>
         </div>
         <el-collapse-transition v-if="filterVisble">
           <div class="collapse-box">
@@ -41,7 +60,9 @@
               :prop="item.field"
               :style="{ width: item.width }"
             >
+              <slot v-if="item.code === 110" :name="item.field"></slot>
               <lj-input
+                v-else
                 v-model="form[item.field]"
                 v-bind="item"
                 @blur="handleBlur"
@@ -53,27 +74,6 @@
         </el-collapse-transition>
       </el-form>
       <!-- 表单筛选项 end -->
-      <div class="box-bottom">
-        <slot name="bottom-left">
-          <div>
-            <el-button size="mini" @click="fnReset()">
-              {{ translate('reset') }}
-            </el-button>
-            <el-button size="mini" type="primary" @click="fnFilter()">
-              {{ translate('search') }}
-            </el-button>
-          </div>
-        </slot>
-
-        <slot name="bottom-right">
-          <p class="closeFilter" @click="handleFilter">
-            {{ translate('moreFilter') }}
-            <i
-              :class="filterVisble ? 'el-icon-arrow-up' : 'el-icon-arrow-down'"
-            ></i>
-          </p>
-        </slot>
-      </div>
     </div>
   </el-card>
 </template>
@@ -84,6 +84,13 @@ const t = translate('ljFilter');
 export default {
   name: 'LjFilter2',
   props: {
+    filterContent: {
+      type: Object,
+      default: {
+        reset: '',
+        search: '',
+      }
+    },
     headNum: {
       type: Number,
       default: 0,
@@ -158,12 +165,18 @@ export default {
       return t(path);
     },
     handleChange() {
-      // console.log('handleChange', arguments);
+      // console.log('handleInput', arguments);
+      this.$emit('handleFormChange', this.form);
     },
     handleInput() {
-      // console.log('handleInput', arguments);
+      this.$emit('handleFormInput', this.form);
     },
-    handleBlur() {},
+    handleBlur() {
+      this.$emit('handleFormBlur', this.form);
+    },
+    handleEnter() {
+      this.$emit('handleFormEnter', this.form);
+    },
   },
 };
 </script>

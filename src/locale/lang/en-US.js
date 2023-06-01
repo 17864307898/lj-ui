@@ -21,6 +21,7 @@ export default {
     selected: 'selected',
     search: 'Query',
     moreFilter: 'More filtering',
+    retract: 'Retract',
   },
   // LjInput
   ljInput: {

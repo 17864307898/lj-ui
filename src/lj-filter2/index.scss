@@ -5,6 +5,11 @@
   height: auto;
   transition: 0.3s;
 
+  .el-card__body {
+    padding: 10px 0;
+    background: #f5f7f9;
+  }
+
   .filter-btn {
     color: $font-color-primary;
     cursor: pointer;
@@ -12,10 +17,6 @@
   }
 
   .lj-form-filter-con {
-    border: 1px solid #e4e7ed;
-    background: #f6f7f9;
-    padding: 10px 0;
-
     .el-form {
       .collapse-head-box {
         .adapt-input {
@@ -30,6 +31,15 @@
     .collapse-head-box {
       .el-form-item {
         margin-bottom: 10px !important;
+      }
+      .head-right {
+        padding-right: 15px;
+        float: right;
+        display: flex !important;
+        align-items: center;
+        p {
+          line-height: 36px;
+        }
       }
     }
 
@@ -87,6 +97,10 @@
       width: 240px;
     }
 
+    .el-form-item__label, .el-form-item__content {
+      line-height: 36px;
+    }
+
     .el-radio-group,
     .el-checkbox-group {
       width: 100%;
@@ -96,5 +110,6 @@
   .closeFilter {
     cursor: pointer;
     color: $font-color-primary;
+    margin-right: 10px;
   }
 }
