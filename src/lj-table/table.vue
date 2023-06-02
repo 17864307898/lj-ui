@@ -49,7 +49,7 @@
               :name="col.prop"
               :row="row"
             >
-              {{ row[col.prop] || row[col.prop] === 0 ? row[col.prop] : '—' }}
+              {{ row[col.prop] || row[col.prop] === 0 ? row[col.prop] : '--' }}
             </slot>
           </template>
           <!-- 扩展类型 -->
