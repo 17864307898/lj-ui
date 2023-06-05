@@ -3,9 +3,8 @@
     <div class="lj-form-filter-con">
       <!-- 表单筛选项 start -->
       <el-form ref="formData" :model="form">
+        <!-- 表单头部  start -->
         <div class="collapse-head-box">
-          <!-- 筛选头部左侧其它内容 -->
-          <slot name="head-left"></slot>
           <el-form-item
             v-for="(item, index) in formListTop"
             :key="`${item.code}_${index}`"
@@ -13,9 +12,8 @@
             :label="item.label"
             :label-width="labelWidth"
             :prop="item.field"
-            :style="{ width: item.width }"
           >
-            <slot v-if="item.code === 110" :name="item.field"></slot>
+            <slot v-if="item.ljSlotSwitch" :name="item.field"></slot>
             <lj-input
               v-else
               v-model="form[item.field]"
@@ -26,8 +24,7 @@
               @keyup.enter.native="handleEnter()"
             />
           </el-form-item>
-          <!-- 筛选头部右侧按钮 -->
-
+          <!-- 头部右侧筛选按钮 -->
           <div class="head-right">
             <p @click="handleFilter">
               <slot name="reference">
@@ -53,29 +50,34 @@
             </el-button>
           </div>
         </div>
+        <!-- 表单头部  end -->
+        <!-- 表单筛选底部  start -->
         <el-collapse-transition v-if="filterVisble">
           <div class="collapse-box">
-            <el-form-item
-              v-for="(item, index) in formListContent"
-              :key="`${item.code}_${index}`"
-              :class="fnFormItemClass(item)"
-              :label="item.label"
-              label-width="110px"
-              :prop="item.field"
-              :style="{ width: item.width }"
-            >
-              <slot v-if="item.code === 110" :name="item.field"></slot>
-              <lj-input
-                v-else
-                v-model="form[item.field]"
-                v-bind="item"
-                @blur="handleBlur"
-                @change="handleChange"
-                @input="handleInput"
-              />
-            </el-form-item>
+            <el-row>
+              <el-col v-for="(item, index) in formListContent"  :key="`${item.code}_${index}`" :span="item.ljColNum">
+                <el-form-item
+                  :key="`${item.code}_${index}`"
+                  :class="fnFormItemClass(item)"
+                  :label="item.label"
+                  :label-width="labelWidth"
+                  :prop="item.field"
+                >
+                  <slot v-if="item.ljSlotSwitch" :name="item.field"></slot>
+                  <lj-input
+                    v-else
+                    v-model="form[item.field]"
+                    v-bind="item"
+                    @blur="handleBlur"
+                    @change="handleChange"
+                    @input="handleInput"
+                  />
+                </el-form-item>
+              </el-col>
+            </el-row>
           </div>
         </el-collapse-transition>
+        <!-- 表单筛选底部  end -->
       </el-form>
       <!-- 表单筛选项 end -->
     </div>
@@ -97,7 +99,7 @@ export default {
     },
     headNum: {
       type: Number,
-      default: 0,
+      default: 1,
     },
     labelWidth: {
       type: String,

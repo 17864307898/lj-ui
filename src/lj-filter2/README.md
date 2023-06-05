@@ -25,7 +25,8 @@ Vue.use(LjFilter2);
 
 | 参数          | 说明             | 类型     | 默认值                   |
 | ------------- | ---------------- | -------- | ------------------------ |
-| formList      | 表单列表         | _object_ | `{}`                     |
+| formList      | 表单列表         | _object_ | `{ljColNum: 24, ljSlotSwitch: false, ...(更多请查看lj-input参数)}`                     |
+| headNum       | 表单头部显示个数 | _number_ | `1`                     |
 | labelWidth    | 表单内容标签宽度 | _string_ | `110px`                  |
 | filterContent | 表单文案         | _object_ | {reset: '', search: '',} |
 
@@ -33,7 +34,6 @@ Vue.use(LjFilter2);
 
 | name      | 说明                            | 参数                          |
 | --------- | ------------------------------- | ----------------------------- |
-| head-left | 顶部左侧搜索栏                  | -                             |
 | reference | 筛选按钮 Icon                   | -                             |
 | key`N`    | 筛选表单数据 code 为 110 的内容 | - N 为每条 item 的 field 数值 |
 

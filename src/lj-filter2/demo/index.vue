@@ -1,37 +1,19 @@
 <template>
   <lj-filter2
     :form-list="formList"
-    :head-num="3"
+    :head-num="2"
     @form-data="fnGetformDatas"
-  />
+  >
+    <template #key9>
+      <el-input placeholder="其它内容"></el-input>
+    </template>
+  </lj-filter2>
 </template>
 
 <script>
+import {VUL_RISK_LEVEL_LIST, LIST} from './const'
 export default {
   data() {
-    var VUL_RISK_LEVEL_LIST = [
-      {
-        label: '严重',
-        value: 4,
-        disabled: true
-      },
-      {
-        label: '高危',
-        value: 3,
-      },
-      {
-        label: '中危',
-        value: 2,
-      },
-      {
-        label: '低危',
-        value: 1,
-      },
-      {
-        label: 'Not-standard',
-        value: 0,
-      },
-    ];
     return {
       // 筛选表单数据
       formList: [
@@ -57,21 +39,13 @@ export default {
           className: 'no-title',
         },
         {
-          code: 101,
-          showWordLimit: true,
-          maxlength: 30,
-          label: '版本',
-          placeholder: '请输入版本',
-          field: 'key3',
-          className: 'no-title',
-        },
-        {
           code: 103,
           label: '利用成熟度',
           options: VUL_RISK_LEVEL_LIST,
           filterable: true,
           multiple: true,
-          field: 'key4',
+          field: 'key3',
+          ljColNum: 8,
         },
         {
           code: 103,
@@ -79,7 +53,8 @@ export default {
           options: VUL_RISK_LEVEL_LIST,
           filterable: true,
           multiple: true,
-          field: 'key5',
+          field: 'key4',
+          ljColNum: 8,
         },
         {
           code: 103,
@@ -87,7 +62,8 @@ export default {
           options: VUL_RISK_LEVEL_LIST,
           filterable: true,
           multiple: true,
-          field: 'key6',
+          field: 'key5',
+          ljColNum: 8,
         },
         {
           code: 107,
@@ -95,33 +71,41 @@ export default {
           options: VUL_RISK_LEVEL_LIST,
           filterable: true,
           multiple: true,
-          field: 'key7',
-          width: '100%',
+          field: 'key6',
+          ljWidth: '100%',
         },
         {
           code: 109,
           label: '许可证等级',
-          options: VUL_RISK_LEVEL_LIST,
+          options: LIST,
           filterable: true,
           multiple: true,
-          field: 'key8',
-          width: '100%',
+          field: 'key7',
+          ljWidth: '50%',
+          ljColNum: 12,
         },
         {
           code: 109,
-          label: '其它等级',
-          options: VUL_RISK_LEVEL_LIST,
+          label: '许可证等级',
+          options: LIST,
           filterable: true,
           multiple: true,
-          field: 'key9',
-          width: '100%',
+          field: 'key7',
+          ljWidth: '50%',
+          ljColNum: 12,
         },
         {
           code: 108,
-          labelText: 'switch开关',
+          label: 'switch开关',
           activeText: '打开',
           inactiveText: '关闭',
-          field: 'key10',
+          field: 'key8'
+        },
+        {
+          code: 110,
+          ljSlotSwitch: true,
+          field: 'key9',
+          className: 'no-title',
         },
       ],
     };
