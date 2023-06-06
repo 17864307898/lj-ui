@@ -2,7 +2,7 @@
 
 ### 介绍
 
-LjCollapseFilter 是一个为筛选 table 数据的组件，表单使用了 LJInput 组件，展示筛选框以及筛选项。（基于 ElementUI 下的 el-popover）
+LjCollapseFilter 是一个为折叠筛选 table 数据的组件，表单使用了 LjInput 组件，展示筛选项。（基于 ElementUI 下的 el-row、el-form、el-collapse-transition）
 
 ### 引入
 
