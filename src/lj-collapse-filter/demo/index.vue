@@ -2,7 +2,6 @@
   <lj-collapse-filter
     :form-list="formList"
     :head-num="2"
-    :relations="relations"
     @form-data="fnGetformDatas"
     @handleFormChange="fnFormChange"
   >
@@ -25,7 +24,6 @@ export default {
   data() {
     return {
       value: 2,
-      relations: 'key2',
       // 筛选表单数据
       formList: [
         {
