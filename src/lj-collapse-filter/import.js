@@ -15,6 +15,7 @@ import {
   CheckboxGroup,
   CheckboxButton,
   Card,
+  Rate,
 } from 'element-ui';
 import CollapseTransition from 'element-ui/lib/transitions/collapse-transition';
 
@@ -31,4 +32,5 @@ Vue.use(Checkbox);
 Vue.use(CheckboxGroup);
 Vue.use(CheckboxButton);
 Vue.use(Card);
+Vue.use(Rate);
 Vue.component(CollapseTransition.name, CollapseTransition)

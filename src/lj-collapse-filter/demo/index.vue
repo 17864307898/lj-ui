@@ -1,42 +1,57 @@
 <template>
-  <lj-filter2
+  <lj-collapse-filter
     :form-list="formList"
     :head-num="2"
+    :relations="relations"
     @form-data="fnGetformDatas"
+    @handleFormChange="fnFormChange"
   >
     <template #key9>
-      <el-input placeholder="其它内容"></el-input>
+      <el-rate
+        v-model="value"
+        disabled
+        show-score
+        text-color="#ff9900"
+        score-template="{value}"
+      >
+      </el-rate>
     </template>
-  </lj-filter2>
+  </lj-collapse-filter>
 </template>
 
 <script>
-import {VUL_RISK_LEVEL_LIST, LIST} from './const'
+import { VUL_RISK_LEVEL_LIST, LIST } from './const';
 export default {
   data() {
     return {
+      value: 2,
+      relations: 'key2',
       // 筛选表单数据
       formList: [
         {
-          code: 104,
+          code: 103,
           label: '分组',
           options: [
             { label: '漏洞', type: '漏洞', value: 2 },
             { label: '组件', type: '组件', value: 0 },
           ],
           filterable: true,
-          multiple: true,
+          clearable: true,
+          multiple: false,
           field: 'key1',
+          ljFormItem: {
+            labelWidth: '50px',
+          },
         },
         {
           code: 101,
           showWordLimit: false,
           maxlength: 30,
-          label: '漏洞编号',
+          label: '',
           clearable: true,
           placeholder: '请输入漏洞编号',
           field: 'key2',
-          className: 'no-title',
+          size: 'mini',
         },
         {
           code: 103,
@@ -45,7 +60,7 @@ export default {
           filterable: true,
           multiple: true,
           field: 'key3',
-          ljColNum: 8,
+          ljItemSpan: 8,
         },
         {
           code: 103,
@@ -54,7 +69,7 @@ export default {
           filterable: true,
           multiple: true,
           field: 'key4',
-          ljColNum: 8,
+          ljItemSpan: 8,
         },
         {
           code: 103,
@@ -63,7 +78,7 @@ export default {
           filterable: true,
           multiple: true,
           field: 'key5',
-          ljColNum: 8,
+          ljItemSpan: 8,
         },
         {
           code: 107,
@@ -72,7 +87,6 @@ export default {
           filterable: true,
           multiple: true,
           field: 'key6',
-          ljWidth: '100%',
         },
         {
           code: 109,
@@ -81,8 +95,7 @@ export default {
           filterable: true,
           multiple: true,
           field: 'key7',
-          ljWidth: '50%',
-          ljColNum: 12,
+          ljItemSpan: 12,
         },
         {
           code: 109,
@@ -91,21 +104,17 @@ export default {
           filterable: true,
           multiple: true,
           field: 'key7',
-          ljWidth: '50%',
-          ljColNum: 12,
+          ljItemSpan: 12,
         },
         {
           code: 108,
           label: 'switch开关',
           activeText: '打开',
           inactiveText: '关闭',
-          field: 'key8'
+          field: 'key8',
         },
         {
-          code: 110,
-          ljSlotSwitch: true,
           field: 'key9',
-          className: 'no-title',
         },
       ],
     };
@@ -115,6 +124,9 @@ export default {
     // 筛选表单数据
     fnGetformDatas(data) {
       console.log('取得表单数据', data);
+    },
+    fnFormChange(index, data, forms) {
+      console.log('取得单个表单内容', index, data, forms);
     },
   },
 };

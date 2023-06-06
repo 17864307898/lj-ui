@@ -10,7 +10,7 @@
 ### v1.1.1
 `2023-06-07`
 #### feature
-- 1.增加下拉表单筛选lj-filter2
+- 1.增加下拉表单筛选lj-collapse-filter
 #### fix
 - 2.修复lj-input没有对子项的属性进行绑定 （如：每个列表的disabled）
 

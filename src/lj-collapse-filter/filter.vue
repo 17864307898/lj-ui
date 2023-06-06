@@ -2,27 +2,27 @@
   <el-card class="lj-form-filter2-box">
     <div class="lj-form-filter-con">
       <!-- 表单筛选项 start -->
-      <el-form ref="formData" :model="form">
+      <el-form ref="formData" :model="form" v-bind="ljForm">
         <!-- 表单头部  start -->
         <div class="collapse-head-box">
           <el-form-item
             v-for="(item, index) in formListTop"
             :key="`${item.code}_${index}`"
-            :class="fnFormItemClass(item)"
+            :class="item.label ? '' : 'no-title'"
             :label="item.label"
-            :label-width="labelWidth"
             :prop="item.field"
+            v-bind="item.ljFormItem"
           >
-            <slot v-if="item.ljSlotSwitch" :name="item.field"></slot>
-            <lj-input
-              v-else
-              v-model="form[item.field]"
-              v-bind="item"
-              @blur="handleBlur"
-              @change="handleChange"
-              @input="handleInput"
-              @keyup.enter.native="handleEnter()"
-            />
+            <slot :name="item.field">
+              <lj-input
+                v-model="form[item.field]"
+                v-bind="item"
+                @blur="handleBlur($event, item.field)"
+                @change="handleChange($event, item.field)"
+                @input="handleInput($event, item.field)"
+                @keyup.enter.native="handleEnter($event, item.field)"
+              />
+            </slot>
           </el-form-item>
           <!-- 头部右侧筛选按钮 -->
           <div class="head-right">
@@ -54,24 +54,29 @@
         <!-- 表单筛选底部  start -->
         <el-collapse-transition v-if="filterVisble">
           <div class="collapse-box">
-            <el-row>
-              <el-col v-for="(item, index) in formListContent"  :key="`${item.code}_${index}`" :span="item.ljColNum">
+            <el-row v-bind="ljRow">
+              <el-col
+                v-for="(item, index) in formListContent"
+                :key="`${item.code}_${index}`"
+                v-bind="item.ljCol"
+                :span="item.ljItemSpan || ljSpan || null"
+              >
                 <el-form-item
                   :key="`${item.code}_${index}`"
-                  :class="fnFormItemClass(item)"
+                  :class="item.label ? '' : 'no-title'"
                   :label="item.label"
-                  :label-width="labelWidth"
                   :prop="item.field"
+                  v-bind="item.ljFormItem"
                 >
-                  <slot v-if="item.ljSlotSwitch" :name="item.field"></slot>
-                  <lj-input
-                    v-else
-                    v-model="form[item.field]"
-                    v-bind="item"
-                    @blur="handleBlur"
-                    @change="handleChange"
-                    @input="handleInput"
-                  />
+                  <slot :name="item.field">
+                    <lj-input
+                      v-model="form[item.field]"
+                      v-bind="item"
+                      @blur="handleBlur($event, item.field)"
+                      @change="handleChange($event, item.field)"
+                      @input="handleInput($event, item.field)"
+                    />
+                  </slot>
                 </el-form-item>
               </el-col>
             </el-row>
@@ -88,22 +93,43 @@ import './import';
 import { translate } from '../utils/translate';
 const t = translate('ljFilter');
 export default {
-  name: 'LjFilter2',
+  name: 'LjCollapseFilter',
   props: {
-    filterContent: {
+    // 表单筛选内容一行显示几个
+    ljSpan: {
+      type: [Number, String],
+      default: '',
+    },
+    // 表单筛选el-row属性
+    ljRow: {
       type: Object,
-      default: {
-        reset: '',
-        search: '',
+      default: () => {
+        return {};
       },
     },
+    // 表单筛选el-form属性
+    ljForm: {
+      type: Object,
+      default: () => {
+        return {
+          labelWidth: '100px',
+        };
+      },
+    },
+    // 表单筛选按钮文案
+    filterContent: {
+      type: Object,
+      default: () => {
+        return {
+          reset: '',
+          search: '',
+        };
+      },
+    },
+    // 表单头部左侧显示个数
     headNum: {
       type: Number,
       default: 1,
-    },
-    labelWidth: {
-      type: String,
-      default: '110px',
     },
     formList: {
       // table选择项
@@ -112,42 +138,41 @@ export default {
         return [];
       },
     },
+    // 关联
+    relations: {
+      type: String,
+      default: () => {
+        return '';
+      },
+    },
   },
   data() {
     return {
       form: {},
-      filterVisble: true,
+      filterVisble: false,
       formListTop: [],
       formListContent: [],
     };
+  },
+  watch: {
+    relations: {
+      handler(val) {
+        this.form[val] = typeof(this.form[val]) === 'string' ? '' : []
+      }
+    }
   },
   mounted() {
     this.initData();
   },
   methods: {
     initData() {
+      // 将表单列表分为头部和底部内容
       this.formListTop = this.formList.filter((el, index) => {
         return index < this.headNum;
       });
       this.formListContent = this.formList.filter((el, index) => {
         return index >= this.headNum;
       });
-    },
-    // 表单内单个class
-    fnFormItemClass(item) {
-      let data = '';
-      switch (item.className) {
-        case 'filter-icon':
-          data = 'item-filter-icon';
-          break;
-        case 'no-title':
-          data = 'item-no-title';
-          break;
-        default:
-          data = '';
-          break;
-      }
-      return data;
     },
     // 置空
     fnReset() {
@@ -170,18 +195,17 @@ export default {
     translate(path) {
       return t(path);
     },
-    handleChange() {
-      // console.log('handleInput', arguments);
-      this.$emit('handleFormChange', this.form);
+    handleChange(val, item) {
+      this.$emit('handleFormChange', item, this.form[item], this.form);
     },
-    handleInput() {
-      this.$emit('handleFormInput', this.form);
+    handleInput(val, item) {
+      this.$emit('handleFormInput', item, this.form[item], this.form);
     },
-    handleBlur() {
-      this.$emit('handleFormBlur', this.form);
+    handleBlur(val, item) {
+      this.$emit('handleFormBlur', item, this.form[item], this.form);
     },
-    handleEnter() {
-      this.$emit('handleFormEnter', this.form);
+    handleEnter(val, item) {
+      this.$emit('handleFormEnter', item, this.form[item], this.form);
     },
   },
 };

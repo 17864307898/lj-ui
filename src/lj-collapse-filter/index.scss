@@ -3,10 +3,10 @@
   position: relative;
   height: auto;
   transition: 0.3s;
+  background: #f5f7f9;
 
   .el-card__body {
     padding: 10px 0 0 0;
-    background: #f5f7f9;
   }
 
   .filter-btn {
@@ -70,15 +70,8 @@
       box-shadow: inset 0 0 6px $font-color-placeholder;
       background-color: #e4e7ed;
     }
-
-    .item-filter-icon {
-      .adapt-unknow {
-        display: none;
-      }
-    }
-
-    .item-filter-icon,
-    .item-no-title {
+    
+    .no-title {
       .el-form-item__label {
         display: none;
       }
