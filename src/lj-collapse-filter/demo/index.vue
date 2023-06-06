@@ -37,6 +37,7 @@ export default {
           clearable: true,
           multiple: false,
           field: 'key1',
+          ljRelations: 'key2',
           ljFormItem: {
             labelWidth: '50px',
           },
@@ -50,6 +51,7 @@ export default {
           placeholder: '请输入漏洞编号',
           field: 'key2',
           size: 'mini',
+          ljRelations: 'key3',
         },
         {
           code: 103,

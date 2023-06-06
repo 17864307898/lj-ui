@@ -17,10 +17,10 @@
               <lj-input
                 v-model="form[item.field]"
                 v-bind="item"
-                @blur="handleBlur($event, item.field)"
-                @change="handleChange($event, item.field)"
-                @input="handleInput($event, item.field)"
-                @keyup.enter.native="handleEnter($event, item.field)"
+                @blur="handleBlur($event, item)"
+                @change="handleChange($event, item)"
+                @input="handleInput($event, item)"
+                @keyup.enter.native="handleEnter($event, item)"
               />
             </slot>
           </el-form-item>
@@ -72,9 +72,9 @@
                     <lj-input
                       v-model="form[item.field]"
                       v-bind="item"
-                      @blur="handleBlur($event, item.field)"
-                      @change="handleChange($event, item.field)"
-                      @input="handleInput($event, item.field)"
+                      @blur="handleBlur($event, item)"
+                      @change="handleChange($event, item)"
+                      @input="handleInput($event, item)"
                     />
                   </slot>
                 </el-form-item>
@@ -138,13 +138,6 @@ export default {
         return [];
       },
     },
-    // 关联
-    relations: {
-      type: String,
-      default: () => {
-        return '';
-      },
-    },
   },
   data() {
     return {
@@ -153,13 +146,6 @@ export default {
       formListTop: [],
       formListContent: [],
     };
-  },
-  watch: {
-    relations: {
-      handler(val) {
-        this.form[val] = typeof(this.form[val]) === 'string' ? '' : []
-      }
-    }
   },
   mounted() {
     this.initData();
@@ -195,17 +181,46 @@ export default {
     translate(path) {
       return t(path);
     },
+    // 关联处理
+    fnRelations(item) {
+      if (item.ljRelations) {
+        this.$set(this.form, item.ljRelations, undefined);
+      }
+    },
     handleChange(val, item) {
-      this.$emit('handleFormChange', item, this.form[item], this.form);
+      this.fnRelations(item);
+      this.$emit(
+        'handleFormChange',
+        item.field,
+        this.form[item.field],
+        this.form
+      );
     },
     handleInput(val, item) {
-      this.$emit('handleFormInput', item, this.form[item], this.form);
+      this.$emit(
+        'handleFormInput',
+        item.field,
+        this.form[item.field],
+        this.form
+      );
     },
     handleBlur(val, item) {
-      this.$emit('handleFormBlur', item, this.form[item], this.form);
+      this.fnRelations(item);
+      this.$emit(
+        'handleFormBlur',
+        item.field,
+        this.form[item.field],
+        this.form
+      );
     },
     handleEnter(val, item) {
-      this.$emit('handleFormEnter', item, this.form[item], this.form);
+      this.fnRelations(item);
+      this.$emit(
+        'handleFormEnter',
+        item.field,
+        this.form[item.field],
+        this.form
+      );
     },
   },
 };
