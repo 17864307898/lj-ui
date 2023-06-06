@@ -44,3 +44,7 @@ Vue.use(LjCollapseFilter);
 | name       | 说明             | 参数                |
 | ---------- | ---------------- | ------------------- |
 | @form-data | 返回筛选完的数据 | _object_ {表单数据} |
+| @form-change | 返回筛选完的数据 | _object_ {表单数据} |
+| @form-input | 返回筛选完的数据 | _object_ {表单数据} |
+| @form-blur | 返回筛选完的数据 | _object_ {表单数据} |
+| @form-enter | 返回筛选完的数据 | _object_ {表单数据} |

@@ -190,7 +190,7 @@ export default {
     handleChange(val, item) {
       this.fnRelations(item);
       this.$emit(
-        'handleFormChange',
+        'form-change',
         item.field,
         this.form[item.field],
         this.form
@@ -198,7 +198,7 @@ export default {
     },
     handleInput(val, item) {
       this.$emit(
-        'handleFormInput',
+        'form-input',
         item.field,
         this.form[item.field],
         this.form
@@ -207,7 +207,7 @@ export default {
     handleBlur(val, item) {
       this.fnRelations(item);
       this.$emit(
-        'handleFormBlur',
+        'form-blur',
         item.field,
         this.form[item.field],
         this.form
@@ -216,7 +216,7 @@ export default {
     handleEnter(val, item) {
       this.fnRelations(item);
       this.$emit(
-        'handleFormEnter',
+        'form-enter',
         item.field,
         this.form[item.field],
         this.form

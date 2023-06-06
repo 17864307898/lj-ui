@@ -3,7 +3,7 @@
     :form-list="formList"
     :head-num="2"
     @form-data="fnGetformDatas"
-    @handleFormChange="fnFormChange"
+    @form-change="fnFormChange"
   >
     <template #key9>
       <el-rate
