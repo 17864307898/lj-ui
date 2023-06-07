@@ -25,7 +25,7 @@
             </slot>
           </el-form-item>
           <!-- 头部右侧筛选按钮 -->
-          <div class="head-right">
+          <div class="head-right" v-if="(formList && formList.length) > headNum">
             <p @click="handleFilter">
               <slot name="reference">
                 <span class="closeFilter">
@@ -42,10 +42,10 @@
                 </span>
               </slot>
             </p>
-            <el-button size="mini" @click="fnReset()">
+            <el-button size="mini" @click="handleReset()">
               {{ filterContent.reset || translate('reset') }}
             </el-button>
-            <el-button size="mini" type="primary" @click="fnFilter()">
+            <el-button size="mini" type="primary" @click="handleFilter()">
               {{ filterContent.search || translate('search') }}
             </el-button>
           </div>
@@ -161,21 +161,17 @@ export default {
       });
     },
     // 置空
-    fnReset() {
+    handleReset() {
       this.$refs.formData ? this.$refs.formData.resetFields() : null;
       this.$emit('form-data', {});
     },
     // 筛选按钮
-    fnFilter() {
+    handleFilter() {
       this.$emit('form-data', this.form);
     },
     // 更多筛选
     handleFilter() {
       this.filterVisble = !this.filterVisble;
-    },
-    // 清空
-    fnEmpty() {
-      this.fnReset();
     },
     // 翻译
     translate(path) {
