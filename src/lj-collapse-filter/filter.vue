@@ -13,7 +13,7 @@
             :prop="item.field"
             v-bind="item.ljFormItem"
           >
-            <slot :name="item.field">
+            <slot :name="item.field" :form="form" :item="item" :index="index">
               <lj-input
                 v-model="form[item.field]"
                 v-bind="item"
@@ -68,7 +68,7 @@
                   :prop="item.field"
                   v-bind="item.ljFormItem"
                 >
-                  <slot :name="item.field">
+                  <slot :name="item.field"  :form="form" :item="item" :index="index">
                     <lj-input
                       v-model="form[item.field]"
                       v-bind="item"
