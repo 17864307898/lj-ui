@@ -44,6 +44,7 @@
     render(h) {
       const tag = `adapt-${config[this.code] || 'unknow'}`
       const attrs = this.$attrs
+      const slots = Object.values(this.$slots).map((node) => node)
 
       return h(tag, {
         attrs,
@@ -55,7 +56,7 @@
             this.$emit('change', val, this.code)
           }
         },
-      })
+      }, slots)
     },
   }
 </script>
