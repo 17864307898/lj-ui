@@ -166,7 +166,7 @@ export default {
     // 更改form值
     value: {
       handler(val) {
-        this.form = val
+        this.form = val || {}
       },
       immediate: true,
       deep: true,
