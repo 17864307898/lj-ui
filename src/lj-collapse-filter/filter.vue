@@ -166,7 +166,6 @@ export default {
     // 更改form值
     value: {
       handler(val) {
-        console.log(val)
         this.form = val
       },
       immediate: true,
