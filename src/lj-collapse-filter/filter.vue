@@ -27,7 +27,7 @@
           <!-- 头部右侧筛选按钮 -->
           <div class="head-right">
             <span
-              @click="handleFilter"
+              @click="handleMore"
               v-if="(formList && formList.length) > headNum"
             >
               <slot name="reference">
@@ -155,8 +155,14 @@ export default {
       formListContent: [],
     };
   },
-  mounted() {
-    this.initData();
+  watch: {
+    formList: {
+      handler() {
+        this.initData();
+      },
+      immediate: true,
+      deep: true,
+    },
   },
   methods: {
     initData() {
@@ -178,7 +184,7 @@ export default {
       this.$emit('form-data', this.form);
     },
     // 更多筛选
-    handleFilter() {
+    handleMore() {
       this.filterVisble = !this.filterVisble;
     },
     // 翻译
@@ -188,7 +194,13 @@ export default {
     // 关联处理
     fnRelations(item) {
       if (item.ljRelations) {
-        this.$set(this.form, item.ljRelations, undefined);
+        let data =
+          typeof item.ljRelations === 'string'
+            ? item.ljRelations.split(',')
+            : item.ljRelations;
+        data.forEach((el) => {
+          this.$set(this.form, el, undefined);
+        });
       }
     },
     handleChange(val, item) {
