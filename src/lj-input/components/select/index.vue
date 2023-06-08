@@ -14,7 +14,9 @@
         :value="item[optionValue]"
         v-bind="item"
       >
-        {{ item[optionLabel] }}
+        <slot :item="item">
+          {{ item[optionLabel] }}
+        </slot>
       </el-option>
     </el-select>
   </div>
