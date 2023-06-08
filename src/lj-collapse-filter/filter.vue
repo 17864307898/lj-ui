@@ -25,8 +25,11 @@
             </slot>
           </el-form-item>
           <!-- 头部右侧筛选按钮 -->
-          <div class="head-right" v-if="(formList && formList.length) > headNum">
-            <p @click="handleFilter">
+          <div class="head-right">
+            <p
+              @click="handleFilter"
+              v-if="(formList && formList.length) > headNum"
+            >
               <slot name="reference">
                 <span class="closeFilter">
                   {{
@@ -68,7 +71,12 @@
                   :prop="item.field"
                   v-bind="item.ljFormItem"
                 >
-                  <slot :name="item.field"  :form="form" :item="item" :index="index">
+                  <slot
+                    :name="item.field"
+                    :form="form"
+                    :item="item"
+                    :index="index"
+                  >
                     <lj-input
                       v-model="form[item.field]"
                       v-bind="item"
@@ -185,38 +193,18 @@ export default {
     },
     handleChange(val, item) {
       this.fnRelations(item);
-      this.$emit(
-        'form-change',
-        item.field,
-        this.form[item.field],
-        this.form
-      );
+      this.$emit('form-change', item.field, this.form[item.field], this.form);
     },
     handleInput(val, item) {
-      this.$emit(
-        'form-input',
-        item.field,
-        this.form[item.field],
-        this.form
-      );
+      this.$emit('form-input', item.field, this.form[item.field], this.form);
     },
     handleBlur(val, item) {
       this.fnRelations(item);
-      this.$emit(
-        'form-blur',
-        item.field,
-        this.form[item.field],
-        this.form
-      );
+      this.$emit('form-blur', item.field, this.form[item.field], this.form);
     },
     handleEnter(val, item) {
       this.fnRelations(item);
-      this.$emit(
-        'form-enter',
-        item.field,
-        this.form[item.field],
-        this.form
-      );
+      this.$emit('form-enter', item.field, this.form[item.field], this.form);
     },
   },
 };
