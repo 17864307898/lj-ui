@@ -150,7 +150,7 @@ export default {
       // form值
       type: Object,
       default: () => {
-        return [];
+        return {};
       },
     },
   },
