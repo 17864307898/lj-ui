@@ -140,8 +140,15 @@ export default {
       default: 1,
     },
     formList: {
-      // table选择项
+      // form列表
       type: Array,
+      default: () => {
+        return [];
+      },
+    },
+    value: {
+      // form值
+      type: Object,
       default: () => {
         return [];
       },
@@ -156,6 +163,24 @@ export default {
     };
   },
   watch: {
+    // 更改form值
+    value: {
+      handler(val) {
+        console.log(val)
+        this.form = val
+      },
+      immediate: true,
+      deep: true,
+    },
+    // 监听form值
+    form: {
+      handler(val) {
+        this.$emit('input', val)
+      },
+      immediate: true,
+      deep: true,
+    },
+    // 监听form列表
     formList: {
       handler() {
         this.initData();

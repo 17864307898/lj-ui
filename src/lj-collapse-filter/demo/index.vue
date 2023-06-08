@@ -2,13 +2,14 @@
   <lj-collapse-filter
     :form-list="formList"
     :head-num="2"
+    :value="form"
+    v-model="form"
     @form-data="fnGetformDatas"
     @form-change="fnFormChange"
   >
     <template #key9>
       <el-rate
         v-model="value"
-        disabled
         show-score
         text-color="#ff9900"
         score-template="{value}"
@@ -23,6 +24,7 @@ import { VUL_RISK_LEVEL_LIST, LIST } from './const';
 export default {
   data() {
     return {
+      form: {},
       value: 2,
       // 筛选表单数据
       formList: [
