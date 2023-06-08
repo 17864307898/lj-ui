@@ -26,7 +26,7 @@
           </el-form-item>
           <!-- 头部右侧筛选按钮 -->
           <div class="head-right">
-            <p
+            <span
               @click="handleFilter"
               v-if="(formList && formList.length) > headNum"
             >
@@ -44,7 +44,7 @@
                   ></i>
                 </span>
               </slot>
-            </p>
+            </span>
             <el-button size="mini" @click="handleReset()">
               {{ filterContent.reset || translate('reset') }}
             </el-button>
