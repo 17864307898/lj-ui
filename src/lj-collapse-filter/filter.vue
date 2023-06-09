@@ -55,8 +55,8 @@
         </div>
         <!-- 表单头部  end -->
         <!-- 表单筛选底部  start -->
-        <el-collapse-transition v-if="filterVisble">
-          <div class="collapse-box">
+        <el-collapse-transition>
+          <div class="collapse-box"  v-if="filterVisble">
             <el-row v-bind="ljRow">
               <el-col
                 v-for="(item, index) in formListContent"
