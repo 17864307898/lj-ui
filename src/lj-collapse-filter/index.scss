@@ -19,7 +19,7 @@
     .el-form {
       .collapse-head-box {
         .adapt-input {
-          width: 240px !important;
+          width: 240px;
         }
         >div {
           display: inline-block;
@@ -81,6 +81,7 @@
 
     .el-form-item {
       display: inline-block;
+      min-width: 300px;
     }
 
     .el-select {

@@ -25,7 +25,7 @@ Vue.use(LjCollapseFilter);
 
 | 参数            | 说明                   | 类型     | 默认值                                                                                                                                                        |
 | --------------- | ---------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| formList        | 表单列表               | _object_ | `{ljItemSpan: 24,//表单筛选一行个数，ljCol: {},//表单筛选框el-col属性，ljFormItem：{}//表单item属性，ljRelations： 关联子集清空 ...(更多请查看lj-input参数)}` |
+| formList        | 表单列表               | _object_ | `{ljItemSpan: 24,//表单筛选一行个数，ljCol: {},//表单筛选框el-col属性，ljFormItem：{}//表单item属性，ljRelations：[] 关联子集清空 ...(更多请查看lj-input参数)}` |
 | headNum         | 表单头部显示个数       | _number_ | `1`                                                                                                                                                           |
 | ljSpan          | 表单筛选一行个数       | _number_ | `null`                                                                                                                                                        |
 | ljRow           | 表单筛选框 el-row 属性 | _object_ | `{}`                                                                                                                                                          |
