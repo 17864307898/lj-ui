@@ -56,7 +56,7 @@
         <!-- 表单头部  end -->
         <!-- 表单筛选底部  start -->
         <el-collapse-transition>
-          <div class="collapse-box"  v-if="filterVisble">
+          <div class="collapse-box" v-if="filterVisble">
             <el-row v-bind="ljRow">
               <el-col
                 v-for="(item, index) in formListContent"
@@ -166,7 +166,7 @@ export default {
     // 更改form值
     value: {
       handler(val) {
-        this.form = val || {}
+        this.form = val || {};
       },
       immediate: true,
       deep: true,
@@ -174,7 +174,7 @@ export default {
     // 监听form值
     form: {
       handler(val) {
-        this.$emit('input', val)
+        this.$emit('input', val);
       },
       immediate: true,
       deep: true,
@@ -182,8 +182,8 @@ export default {
     // 监听form列表
     formList: {
       handler() {
-        if((this.formList && this.formList.length) > this.headNum) {
-          this.filterVisble = false
+        if ((this.formList && this.formList.length) > this.headNum) {
+          this.filterVisble = false;
         }
         this.initData();
       },
@@ -210,9 +210,16 @@ export default {
     handleFilter() {
       this.$emit('form-data', this.form);
     },
-    // 更多筛选
+    // 更多筛选/收起
     handleMore() {
-      this.filterVisble = !this.filterVisble;
+      console.log(
+        'filterVisble',
+        this.filterVisble,
+        typeof(this.filterVisble)
+      );
+      this.$nextTick(() => {
+        this.filterVisble = !this.filterVisble;
+      });
     },
     // 翻译
     translate(path) {
