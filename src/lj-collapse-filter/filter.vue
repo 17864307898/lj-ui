@@ -163,6 +163,15 @@ export default {
     };
   },
   watch: {
+    headNum: {
+      handler() {
+        if ((this.formList && this.formList.length) > this.headNum) {
+          this.filterVisble = false;
+        }
+      },
+      immediate: true,
+      deep: true,
+    },
     // 更改form值
     value: {
       handler(val) {
@@ -182,9 +191,6 @@ export default {
     // 监听form列表
     formList: {
       handler() {
-        if ((this.formList && this.formList.length) > this.headNum) {
-          this.filterVisble = false;
-        }
         this.initData();
       },
       immediate: true,
