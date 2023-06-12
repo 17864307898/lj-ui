@@ -21,6 +21,7 @@
                 @change="handleChange($event, item)"
                 @input="handleInput($event, item)"
                 @keyup.enter.native="handleEnter($event, item)"
+                @clear="handleClear($event, item)"
               />
             </slot>
           </el-form-item>
@@ -254,6 +255,10 @@ export default {
     handleEnter(val, item) {
       this.fnRelations(item);
       this.$emit('form-enter', item.field, this.form[item.field], this.form);
+    },
+    handleClear(val, item) {
+      this.fnRelations(item);
+      this.$emit('form-clear', item.field, this.form[item.field], this.form);
     },
   },
 };

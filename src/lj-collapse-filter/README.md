@@ -49,6 +49,7 @@ Vue.use(LjCollapseFilter);
 | @form-input  | 返回筛选完的数据 | _object_ {表单数据} |
 | @form-blur   | 返回筛选完的数据 | _object_ {表单数据} |
 | @form-enter  | 返回筛选完的数据 | _object_ {表单数据} |
+| @form-clear  | 返回筛选完的数据 | _object_ {表单数据} |
 
 ### 方法
 
