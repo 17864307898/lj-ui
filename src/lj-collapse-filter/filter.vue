@@ -7,7 +7,7 @@
         <div class="collapse-head-box">
           <el-form-item
             v-for="(item, index) in formListTop"
-            :key="`${item.field}`"
+            :key="`${item.field}`+`${index}`"
             :class="item.label ? '' : 'no-title'"
             :label="item.label"
             :prop="item.field"
@@ -56,11 +56,11 @@
         <!-- 表单头部  end -->
         <!-- 表单筛选底部  start -->
         <el-collapse-transition>
-          <div class="collapse-box" v-if="filterVisble">
+          <div class="collapse-box" v-show="filterVisble">
             <el-row v-bind="ljRow">
               <el-col
                 v-for="(item, index) in formListContent"
-                :key="`${item.field}`"
+                :key="`${item.field}`+`${formListTop.length} + ${index}`"
                 v-bind="item.ljCol"
                 :span="item.ljItemSpan || ljSpan || null"
               >
@@ -220,7 +220,6 @@ export default {
     },
     // 更多筛选/收起
     handleMore() {
-      console.log('filterVisble', this.filterVisble, typeof this.filterVisble);
       this.$nextTick(() => {
         this.filterVisble = !this.filterVisble;
       });

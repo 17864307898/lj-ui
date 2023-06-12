@@ -7,7 +7,7 @@
     @form-data="fnGetformDatas"
     @form-change="fnFormChange"
   >
-    <template #key9>
+    <template #key10>
       <el-rate
         v-model="value"
         show-score
@@ -105,7 +105,7 @@ export default {
           options: LIST,
           filterable: true,
           multiple: true,
-          field: 'key7',
+          field: 'key8',
           ljItemSpan: 12,
         },
         {
@@ -113,10 +113,10 @@ export default {
           label: 'switch开关',
           activeText: '打开',
           inactiveText: '关闭',
-          field: 'key8',
+          field: 'key9',
         },
         {
-          field: 'key9',
+          field: 'key10',
         },
       ],
     };
