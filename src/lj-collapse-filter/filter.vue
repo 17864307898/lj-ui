@@ -7,7 +7,7 @@
         <div class="collapse-head-box">
           <el-form-item
             v-for="(item, index) in formListTop"
-            :key="`${item.code}_${index}`"
+            :key="`${item.field}`"
             :class="item.label ? '' : 'no-title'"
             :label="item.label"
             :prop="item.field"
@@ -60,7 +60,7 @@
             <el-row v-bind="ljRow">
               <el-col
                 v-for="(item, index) in formListContent"
-                :key="`${item.code}_${index}`"
+                :key="`${item.field}`"
                 v-bind="item.ljCol"
                 :span="item.ljItemSpan || ljSpan || null"
               >
@@ -209,8 +209,10 @@ export default {
     },
     // 置空
     handleReset() {
-      this.$refs.formData ? this.$refs.formData.resetFields() : null;
-      this.$emit('form-data', {});
+      this.$nextTick(() => {
+        this.$refs.formData ? this.$refs.formData.resetFields() : null;
+        this.$emit('form-data', {});
+      });
     },
     // 筛选按钮
     handleFilter() {
@@ -218,11 +220,7 @@ export default {
     },
     // 更多筛选/收起
     handleMore() {
-      console.log(
-        'filterVisble',
-        this.filterVisble,
-        typeof(this.filterVisble)
-      );
+      console.log('filterVisble', this.filterVisble, typeof this.filterVisble);
       this.$nextTick(() => {
         this.filterVisble = !this.filterVisble;
       });
