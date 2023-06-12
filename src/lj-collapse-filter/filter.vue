@@ -2,7 +2,7 @@
   <el-card class="lj-form-filter2-box">
     <div class="lj-form-filter-con">
       <!-- 表单筛选项 start -->
-      <el-form ref="formData" :model="form" v-bind="ljForm">
+      <el-form ref="formData" :model="form" v-bind="ljForm" @submit.native.prevent>
         <!-- 表单头部  start -->
         <div class="collapse-head-box">
           <el-form-item
@@ -252,6 +252,7 @@ export default {
       this.$emit('form-blur', item.field, this.form[item.field], this.form);
     },
     handleEnter(val, item) {
+      console.log('handleEnter', item)
       this.fnRelations(item);
       this.$emit('form-enter', item.field, this.form[item.field], this.form);
     },
