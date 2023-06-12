@@ -62,7 +62,7 @@ export default {
           filterable: true,
           multiple: true,
           field: 'key3',
-          ljItemSpan: 8,
+          // ljItemSpan: 8,
         },
         {
           code: 103,
@@ -71,7 +71,7 @@ export default {
           filterable: true,
           multiple: true,
           field: 'key4',
-          ljItemSpan: 8,
+          // ljItemSpan: 8,
         },
         {
           code: 103,
@@ -80,7 +80,7 @@ export default {
           filterable: true,
           multiple: true,
           field: 'key5',
-          ljItemSpan: 8,
+          // ljItemSpan: 8,
         },
         {
           code: 107,

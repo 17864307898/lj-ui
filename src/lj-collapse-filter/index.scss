@@ -4,6 +4,9 @@
   height: auto;
   transition: 0.3s;
   background: #f5f7f9;
+  .el-col {
+    display: inline-block;
+  }
 
   .el-card__body {
     padding: 10px 0 0 0 !important;
