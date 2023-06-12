@@ -252,7 +252,6 @@ export default {
       this.$emit('form-blur', item.field, this.form[item.field], this.form);
     },
     handleEnter(val, item) {
-      console.log('handleEnter', item)
       this.fnRelations(item);
       this.$emit('form-enter', item.field, this.form[item.field], this.form);
     },
