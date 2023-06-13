@@ -213,6 +213,7 @@ export default {
       this.$nextTick(() => {
         this.$refs.formData ? this.$refs.formData.resetFields() : null;
         this.$emit('form-data', {});
+        this.form = {}
       });
     },
     // 筛选按钮
