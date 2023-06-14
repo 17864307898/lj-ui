@@ -12,7 +12,12 @@
 #### feature
 - 1.增加下拉表单筛选lj-collapse-filter
 #### fix
-- 2.修复lj-input没有对子项的属性进行绑定 （如：每个列表的disabled）
+- 1.修复lj-input没有对子项的属性进行绑定 （如：每个列表的disabled）
+- 2.增加ellipsisText方法（超出隐藏文字展示）
+- 3.增加时间段处理：eg：XXX之前
+- 4.判断是否为合法的富文本内容
+#### fix
+- 5.formatMS(毫秒转历史时间天时分秒=>1秒内有bug)
 
 ### v1.1.0
 `2023-04-27`
