@@ -211,9 +211,11 @@ export default {
     // 置空
     handleReset() {
       this.$nextTick(() => {
-        this.$refs.formData ? this.$refs.formData.resetFields() : null;
-        this.$emit('form-data', {});
-        this.form = {}
+        for(var i in this.form) {
+          this.form[i] = undefined
+        }
+        this.$emit('form-data', this.form);
+        this.$refs.formData ? this.$refs.formData.clearValidate() : null;
       });
     },
     // 筛选按钮
