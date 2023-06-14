@@ -86,11 +86,10 @@ export function byteConvert(bytes, down) {
   if (bytes.toString().length > bytes.toFixed(2).toString().length) {
     bytes = bytes.toFixed(2);
   }
-  if(down === 'down') {
+  if (down === 'down') {
     return Math.floor(bytes) + ' ' + symbols[i];
   }
   return bytes + ' ' + symbols[i];
-  
 }
 
 /**
@@ -156,11 +155,17 @@ export function formatDate(dateStr, format = 'YYYY-MM-DD hh:mm:ss') {
 }
 
 /**
- * 毫秒转天时分秒
+ * 毫秒转历史时间天时分秒
  * @param {*} mss
  * @returns
  */
 export function formatMS(mss) {
+  if(!mss) {
+    return '--'
+  }
+  if(mss < 1000) {
+    return `${mss / 1000} 秒`
+  }
   const daySeconds = 1000 * 60 * 60 * 24;
   const days = mss >= daySeconds ? parseInt(mss / daySeconds, 10) : 0;
   const hours = parseInt((mss % daySeconds) / (1000 * 60 * 60), 10);
@@ -229,7 +234,7 @@ export function formatHistoryTime(time, format) {
  * @returns
  */
 export function tensBitTimestamp(time) {
-  let timeParams = time.length === 10 ? time * 1000 : time / 1
+  let timeParams = String(time).length === 10 ? time * 1000 : time / 1;
   const date = new Date(timeParams);
   const y = date.getFullYear();
   let m = date.getMonth() + 1;
@@ -243,6 +248,42 @@ export function tensBitTimestamp(time) {
   minute = minute < 10 ? '0' + minute : minute;
   second = second < 10 ? '0' + second : second;
   return y + '年' + m + '月' + d + '日 ' + h + ':' + minute + ':' + second; //组合
+}
+
+/**
+ * 10/13位，时间段之前*/
+ export function FormatHistoryDate(time, formatUnit) {
+  var date = new Date().getTime();
+  var last = parseInt(
+    (date - (String(time).length === 10 ? time * 1000 : time / 1)) / 1000
+  )
+  switch (formatUnit) {
+    case 'day':
+      last = parseInt(last / 60 / 60 / 24) + ' ' + '天';
+      break;
+    case 'hour':
+      last = parseInt(last / 60 / 60) + ' ' + '小时';
+      break;
+    case 'minute':
+      last = parseInt(last / 60) + ' ' + '分钟';
+      break;
+    case 'second':
+      last = parseInt(last) + ' ' + '秒';
+      break;
+    default:
+      if (last < 60) {
+        last = 1 + ' ' + '分钟';
+      } else if (last > 60 && last / 60 < 60) {
+        last = parseInt(last / 60) + ' ' + '分钟';
+      } else if ((last / 60 > 60 && last / 60) / 60 < 24) {
+        last = parseInt(last / 60 / 60) + ' ' + '小时';
+      } else {
+        last = parseInt(last / 60 / 60 / 24) + ' ' + '天';
+      }
+      break;
+  }
+
+  return last + '前';
 }
 
 /** ****************** 字典校验 ****************** */
@@ -433,30 +474,80 @@ export function countDown(e, duration, timeParam) {
     return;
   }
 }
-
-/**
+/*
  * 判断是否为对象
- * @param {} obj 
- * @returns 
+ * @param {} obj
+ * @returns
  */
 export function isObject(obj) {
-  return Object.prototype.toString.call(obj) === '[object Object]'
+  return Object.prototype.toString.call(obj) === '[object Object]';
 }
 
 /**
  * 判断当前property是否存在指定对象中
- * @param {Object} obj 
- * @param {Array | String} keys 
- * @returns 
+ * @param {Object} obj
+ * @param {Array | String} keys
+ * @returns
  */
 export function propertyIsExist(obj, key) {
   if (!obj || !isObject(obj)) {
-    throw new Error('The first argument must be supplied and is an object.')
+    throw new Error('The first argument must be supplied and is an object.');
   }
 
   if (isArray(key)) {
-    return key.some(item => Object.prototype.hasOwnProperty.call(obj, item))
+    return key.some((item) => Object.prototype.hasOwnProperty.call(obj, item));
   }
 
-  return Object.prototype.hasOwnProperty.call(obj, key)
+  return Object.prototype.hasOwnProperty.call(obj, key);
+}
+
+/**
+ * 超出隐藏文字展示...
+ * 默认超过5个字 展示...
+ */
+export function ellipsisText(value, num) {
+  const nums = num || '5'; // 设置限定字数,默认为5
+  if (!value) return '';
+  if (value.length > nums) {
+    return value.slice(0, nums) + '...';
+  }
+  return value;
+}
+
+/**
+ * @description 判断是否为合法的富文本内容
+ * @param value
+ * @returns {boolean}
+ */
+export function isEditorContent(value, length = 1000, imgCount = 10) {
+  let result = value?.replaceAll(/<[^>]+>/g, '');
+  // eslint-disable-next-line
+  var imgReg = /<img.*?src=[\"|\']?([^\'\"]*)[\"|\']?\s.*?\/>/gi;
+  let imgArr = value?.match(imgReg) || [];
+  // 图片异常路径列表 图片路径只能是当前访问域名下的图片
+  let exceptionPathList = imgArr.filter((v) => {
+    var srcReg = /src=['"]?([^'"]*)['"]?/i;
+    var src = v.match(srcReg)[1];
+    return (
+      !src.startsWith('/files/') && !src.startsWith(window.location.origin)
+    );
+  });
+  if (exceptionPathList.length) {
+    return 'EXCEPTION_PATH';
+  }
+  if (
+    result?.replaceAll('&nbsp;', ' ')?.replaceAll('<p><br /></p>', '')?.trim?.()
+      ?.length === 0 &&
+    !imgArr?.length
+  ) {
+    return 'CONTENT_EMPTY';
+  }
+
+  if (result?.replaceAll('&nbsp;', ' ')?.length > length) {
+    return 'CONTENT_OVERLENGTH';
+  }
+  if (imgArr?.length > imgCount) {
+    return 'IMG_OVERLENGTH';
+  }
+  return true;
 }

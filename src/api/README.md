@@ -14,6 +14,7 @@ lj-design 中现有的公共方法介绍以及使用方式
 | <a href="/#/api#paramobj">paramObj</a> | 将url请求参数转为json格式 |
 | <a href="/#/api#randomnumber">randomNumber</a> | m到n的随机数 |
 | <a href="/#/api#countdown">countDown</a> | 验证码的倒计时 |
+| <a href="/#/api#ellipsisText">ellipsisText</a> | 超出隐藏文字展示 |
 | <a href="/#/api#shi-jian-chu-li">时间处理</a> | 格式化时间、时间戳转换等 |
 | <a href="/#/api#zi-dian-lei-xing-xiao-yan">字典+类型校验</a> |  手机号、名称、邮箱等校验 |
 | <a href="/#/api#lun-xun-chu-li">轮询处理</a> | 轮询的开始、结束、无限轮询 |
@@ -129,14 +130,23 @@ const val_c = cleanObjectEmpty(b, 'down') // 1GB
         },
     }
 ```
+### ellipsisText
+
+| 说明 | 参数 | 返回值 | 
+|--------|------|-----|-------|-------|-------|
+|  超出隐藏文字展示|  `value`_String_ 文字内容 `num`_number_ 设置限定字数 |  _String_  |
+#### 示例
+```template
+    <div>{{ellipsisText(value, 10)}}</div>
+```
 ### 时间处理
 
 | 方法名 | 说明 | 参数 | 返回值 | 可选值 | 默认值 |
 |--------|------|-----|-------|-----|-------|
 | formatDate | 格式化时间 | `dateStr`_string_  _number_ `format` _string_ | 格式化时间_string_ | `format` |  `format`YYYY-MM-DD hh:mm:ss 
 | formatMS | 毫秒转天时分秒 | `mss` _string_ _number_ | _string_ |
-| formatHistoryTime | 毫秒转历史时间（eg: 刚刚） | `time` _string_ _number_ `format` _string_ | _string_ | `format` |  `format`YYYY-MM-DD hh:mm:ss 
 | tensBitTimestamp | 10/13位时间戳转换 | `time` _string_ _number_ | _string_ |
+| FormatHistoryDate | 时间段 | `time` _string_ _number_ `unit`_string_ | _string_ | `unit` | `year` ,`day`, `hour`, `minute`, `second`|
 #### 示例
 ```javascript
     const data1 = 1669191340132,data2=497213,data3=1669191340 format="YYYY-MM-DD hh:mm:ss"
@@ -145,12 +155,13 @@ const val_c = cleanObjectEmpty(b, 'down') // 1GB
     const var_a1 = formatDate(data1) //2022-11-23 16:15:40
     const var_a2 = formatDate(data1, YYYY-MM-DD hh:mm:ss) //2022-11-22 10:51:32
     const var_a3 = formatDate(data1, YYYY-MM-DD hh:mm) //2022-11-22 10:51
-    //毫秒转天时分秒
+    //毫秒=>XXX天时分秒
     const var2 = formatMS(data2) // 8 分 17 秒
-    //秒转历史时间
-    const var3 = formatHistoryTime(data1) // 4分钟前
     //10/13位时间戳转换
-    const var4 = tensBitTimestamp(data3) //2022年11月23日 16:15:40
+    const var3 = tensBitTimestamp(data3) //2022年11月23日 16:15:40
+    //10/13位时间戳=>XXX时间段前
+    const var4 = FormatHistoryDate(data3, 'minute') // 4分钟前
+    
 ```
 
 ### 字典+类型校验

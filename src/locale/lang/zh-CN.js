@@ -19,6 +19,9 @@ export default {
     screen: '筛选',
     screenMethod: '筛选方式',
     selected: '已选择',
+    search: '查询',
+    moreFilter: '更多筛选',
+    retract: '收起',
   },
   // LjInput
   ljInput: {

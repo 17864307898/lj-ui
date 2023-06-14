@@ -101,6 +101,10 @@ module.exports = {
             title: 'LjFilter 筛选',
           },
           {
+            path: 'lj-collapse-filter',
+            title: 'LjCollapseFilter 筛选',
+          },
+          {
             path: 'lj-saftey-risk',
             title: 'LjSafteyRisk 风险等级',
           },
