@@ -1,9 +1,13 @@
 @import "../style/var.scss";
+
 .lj-form-filter2-box {
   position: relative;
   height: auto;
   transition: 0.3s;
-  background: #f5f7f9;
+  background: inherit;
+  box-shadow: inherit !important;
+  border: 0 !important;
+
   .el-col {
     display: inline-block;
   }
@@ -18,12 +22,21 @@
     margin-left: 20px;
   }
 
+  .filter-caret-btn {
+    transform: rotateZ(180deg);
+    transition: transform .3s;
+  }
+  .is-reverse {
+    transform: rotateZ(0);
+  }
+
   .lj-form-filter-con {
     .el-form {
       .collapse-head-box {
         .adapt-input {
           width: 240px;
         }
+
         >div {
           display: inline-block;
         }
@@ -33,9 +46,17 @@
     .collapse-head-box {
       .el-form-item {
         margin-bottom: 10px !important;
+        display: inline-flex !important;
+        align-items: center;
+        .el-form-item__label {
+          padding: 0;
+        }
+        .el-form-item__content {
+          margin-left: 20px !important;
+        }
       }
+
       .head-right {
-        padding-right: 15px;
         float: right;
         display: flex !important;
         align-items: center;
@@ -47,11 +68,15 @@
       width: 100%;
       height: auto;
       overflow-y: auto;
-      border-top: 1px solid #e4e7ed;
-      padding: 10px 0 0 0;
+      padding: 10px 0 !important;
+      border: inherit !important;
+      box-shadow: 1px 2px 4px rgba(0, 0, 0, .12), 1px 0 6px rgba(0, 0, 0, .06) !important;
+      margin-top: 10px;
+      background: $bg-color-gray;
+
 
       .el-form-item {
-        margin-bottom: 10px !important;
+        margin: 0 0 10px 20px !important;
       }
     }
 
@@ -71,27 +96,34 @@
       box-shadow: inset 0 0 6px $font-color-placeholder;
       background-color: #e4e7ed;
     }
-    
+
     .no-title {
       .el-form-item__label {
         display: none;
-      }
-
+      }      
       .el-form-item__content {
         margin-left: 20px !important;
       }
     }
 
+    .no-title:nth-of-type(1) {
+      .el-form-item__content {
+        margin-left: 0 !important;
+      }
+    }
+
+
     .el-form-item {
       display: inline-block;
-      min-width: 300px;
+      min-width: 240px;
     }
 
     .el-select {
       width: 240px;
     }
 
-    .el-form-item__label, .el-form-item__content {
+    .el-form-item__label,
+    .el-form-item__content {
       line-height: 36px;
     }
 

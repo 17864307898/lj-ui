@@ -5,6 +5,7 @@
       <el-form ref="formData" :model="form" v-bind="ljForm" @submit.native.prevent>
         <!-- 表单头部  start -->
         <div class="collapse-head-box">
+          <slot name="head-left"></slot>
           <el-form-item
             v-for="(item, index) in formListTop"
             :key="`${item.field}`+`${index}`"
@@ -27,9 +28,10 @@
           </el-form-item>
           <!-- 头部右侧筛选按钮 -->
           <div class="head-right">
+            <slot name="head-filter-left"></slot>
             <span
               @click="handleMore"
-              v-if="(formList && formList.length) > headNum"
+              v-if="(formList && formList.length) > headNum && filterShow"
             >
               <slot name="reference">
                 <span class="closeFilter">
@@ -39,8 +41,9 @@
                       : translate('moreFilter')
                   }}
                   <i
+                    class="filter-caret-btn el-icon-arrow-up"
                     :class="
-                      filterVisble ? 'el-icon-arrow-up' : 'el-icon-arrow-down'
+                      filterVisble ? 'is-reverse' : ''
                     "
                   ></i>
                 </span>
@@ -52,6 +55,7 @@
             <el-button size="mini" type="primary" @click="handleFilter()">
               {{ filterContent.search || translate('search') }}
             </el-button>
+            <slot name="head-filter-right"></slot>
           </div>
         </div>
         <!-- 表单头部  end -->
@@ -154,6 +158,16 @@ export default {
         return {};
       },
     },
+    // 筛选收起/展开
+    filterSwitcher: {
+      type: Boolean,
+      default: false,
+    },
+    // 筛选开关
+    filterShow: {
+      type: Boolean,
+      default: true,
+    }
   },
   data() {
     return {
@@ -197,6 +211,15 @@ export default {
       immediate: true,
       deep: true,
     },
+    // 监听form是否下拉
+    filterSwitcher: {
+      handler(val) {
+        if(!val) return;
+        this.filterVisble = this.filterSwitcher
+      },
+      immediate: true,
+      deep: true,
+    }
   },
   methods: {
     initData() {

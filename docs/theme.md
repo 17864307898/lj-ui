@@ -29,7 +29,7 @@ $font-color-warning: #ffba00 !default;
 $font-color-placeholder: $font-color-gray !default;
 
 //背景颜色
-$bg-color-gray: #D3D3D3 !default;
+$bg-color-gray: #f5f7f9 !default;
 $bg-color-primary: #3F91F5 !default;
 $bg-color-danger: #ff4d4f !default;
 $bg-color-success: #13ce66 !default;
@@ -37,7 +37,7 @@ $bg-color-hover: #f9f9f9 !default;
 $bg-color-warning: #ffba00 !default;
 
 //border颜色
-$border-color-gray: #D3D3D3 !default;
+$border-color-gray: #f5f7f9 !default;
 $border-color-primary: #3F91F5 !default;
 $border-color-danger: #ff4d4f !default;
 $border-color-success: #13ce66 !default;
@@ -45,7 +45,7 @@ $border-color-hover: #f9f9f9 !default;
 $border-color-warning: #ffba00 !default;
 
 // 渐变
-$gradient-gray: linear-gradient(227deg, #D3D3D3 0%, #D3D3D3 100%) !default;
+$gradient-gray: linear-gradient(227deg, #f5f7f9 0%, #f5f7f9 100%) !default;
 $gradient-primary: linear-gradient(227deg, #4e9af8 0%, #3F91F5 100%) !default;
 $gradient-danger: linear-gradient(227deg, #fa6f72 0%, #ff4d4f 100%) !default;
 $gradient-success: linear-gradient(227deg, #4fd38b 0%, #13ce66 100%) !default;
