@@ -4,6 +4,7 @@
     :head-num="2"
     :value="form"
     v-model="form"
+    :lj-form="{ 'labelPosition': 'top' }"
     @form-data="fnGetformDatas"
     @form-change="fnFormChange"
   >
@@ -89,6 +90,7 @@ export default {
           filterable: true,
           multiple: true,
           field: 'key6',
+          ljItemSpan: 24,
         },
         {
           code: 109,
@@ -97,26 +99,18 @@ export default {
           filterable: true,
           multiple: true,
           field: 'key7',
-          ljItemSpan: 12,
-        },
-        {
-          code: 109,
-          label: '许可证等级',
-          options: LIST,
-          filterable: true,
-          multiple: true,
-          field: 'key8',
-          ljItemSpan: 12,
+          ljItemSpan: 24,
         },
         {
           code: 108,
-          label: 'switch开关',
           activeText: '打开',
           inactiveText: '关闭',
           field: 'key9',
+          ljItemSpan: 24,
         },
         {
           field: 'key10',
+          ljItemSpan: 24,
         },
       ],
     };
