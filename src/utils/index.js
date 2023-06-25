@@ -161,7 +161,7 @@ export function formatDate(dateStr, format = 'YYYY-MM-DD hh:mm:ss') {
  */
 export function formatMS(mss) {
   if(!mss) {
-    return '—'
+    return '--'
   }
   if(mss < 1000) {
     return `${mss / 1000} 秒`
