@@ -2,7 +2,6 @@
   <lj-collapse-filter
     :form-list="formList"
     :head-num="2"
-    :value="form"
     v-model="form"
     :lj-form="{ 'labelPosition': 'top' }"
     @form-data="fnGetformDatas"
@@ -25,7 +24,9 @@ import { VUL_RISK_LEVEL_LIST, LIST } from './const';
 export default {
   data() {
     return {
-      form: {},
+      form: {
+        key1: 2,
+      },
       value: 2,
       // 筛选表单数据
       formList: [

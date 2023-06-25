@@ -2,13 +2,18 @@
   <el-card class="lj-form-filter2-box">
     <div class="lj-form-filter-con">
       <!-- 表单筛选项 start -->
-      <el-form ref="formData" :model="form" v-bind="ljForm" @submit.native.prevent>
+      <el-form
+        ref="formData"
+        :model="form"
+        v-bind="ljForm"
+        @submit.native.prevent
+      >
         <!-- 表单头部  start -->
         <div class="collapse-head-box">
           <slot name="head-left"></slot>
           <el-form-item
             v-for="(item, index) in formListTop"
-            :key="`${item.field}`+`${index}`"
+            :key="`${item.field}` + `${index}`"
             :class="item.label ? '' : 'no-title'"
             :label="item.label"
             :prop="item.field"
@@ -42,9 +47,7 @@
                   }}
                   <i
                     class="filter-caret-btn el-icon-arrow-up"
-                    :class="
-                      filterVisble ? 'is-reverse' : ''
-                    "
+                    :class="filterVisble ? 'is-reverse' : ''"
                   ></i>
                 </span>
               </slot>
@@ -65,7 +68,7 @@
             <el-row v-bind="ljRow">
               <el-col
                 v-for="(item, index) in formListContent"
-                :key="`${item.field}`+`${formListTop.length} + ${index}`"
+                :key="`${item.field}` + `${formListTop.length} + ${index}`"
                 v-bind="item.ljCol"
                 :span="item.ljItemSpan || ljSpan || null"
               >
@@ -104,6 +107,7 @@
 <script>
 import './import';
 import { translate } from '../utils/translate';
+import { deepClone } from '../utils';
 const t = translate('ljFilter');
 export default {
   name: 'LjCollapseFilter',
@@ -155,7 +159,7 @@ export default {
       // form值
       type: Object,
       default: () => {
-        return {};
+        return null;
       },
     },
     // 筛选收起/展开
@@ -167,7 +171,7 @@ export default {
     filterShow: {
       type: Boolean,
       default: true,
-    }
+    },
   },
   data() {
     return {
@@ -175,6 +179,7 @@ export default {
       filterVisble: false,
       formListTop: [],
       formListContent: [],
+      resetForm: null,
     };
   },
   watch: {
@@ -214,12 +219,15 @@ export default {
     // 监听form是否下拉
     filterSwitcher: {
       handler(val) {
-        if(!val) return;
-        this.filterVisble = this.filterSwitcher
+        if (!val) return;
+        this.filterVisble = this.filterSwitcher;
       },
       immediate: true,
       deep: true,
-    }
+    },
+  },
+  created() {
+    this.resetForm = this.value ? deepClone(this.value) : null;
   },
   methods: {
     initData() {
@@ -234,8 +242,12 @@ export default {
     // 置空
     handleReset() {
       this.$nextTick(() => {
-        for(var i in this.form) {
-          this.form[i] = undefined
+        for (var i in this.form) {
+          if(this.resetForm && this.resetForm[i] !== undefined) {
+            this.form[i] = this.resetForm[i]
+          }else{ 
+            this.form[i] = undefined;
+          }
         }
         this.$emit('form-data', this.form);
         this.$refs.formData ? this.$refs.formData.clearValidate() : null;
