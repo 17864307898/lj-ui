@@ -91,6 +91,10 @@ module.exports = {
             path: 'lj-upload-folder',
             title: 'LjUploadFolder 上传文件夹',
           },
+          {
+            path: 'lj-collapse-filter',
+            title: 'LjCollapseFilter 筛选',
+          },
         ],
       },
       {
@@ -99,10 +103,6 @@ module.exports = {
           {
             path: 'lj-filter',
             title: 'LjFilter 筛选',
-          },
-          {
-            path: 'lj-collapse-filter',
-            title: 'LjCollapseFilter 筛选',
           },
           {
             path: 'lj-saftey-risk',
