@@ -64,38 +64,40 @@
         <!-- 表单头部  end -->
         <!-- 表单筛选底部  start -->
         <el-collapse-transition>
-          <div class="collapse-box" v-show="filterVisble">
-            <el-row v-bind="ljRow">
-              <el-col
-                v-for="(item, index) in formListContent"
-                :key="`${item.field}` + `${formListTop.length} + ${index}`"
-                v-bind="item.ljCol"
-                :span="item.ljItemSpan || ljSpan || null"
-              >
-                <el-form-item
-                  :key="`${item.code}_${index}`"
-                  :class="item.label ? '' : 'no-title'"
-                  :label="item.label"
-                  :prop="item.field"
-                  v-bind="item.ljFormItem"
+          <div v-show="filterVisble">
+            <div class="collapse-box">
+              <el-row v-bind="ljRow">
+                <el-col
+                  v-for="(item, index) in formListContent"
+                  :key="`${item.field}` + `${formListTop.length} + ${index}`"
+                  v-bind="item.ljCol"
+                  :span="item.ljItemSpan || ljSpan || null"
                 >
-                  <slot
-                    :name="item.field"
-                    :form="form"
-                    :item="item"
-                    :index="index"
+                  <el-form-item
+                    :key="`${item.code}_${index}`"
+                    :class="item.label ? '' : 'no-title'"
+                    :label="item.label"
+                    :prop="item.field"
+                    v-bind="item.ljFormItem"
                   >
-                    <lj-input
-                      v-model="form[item.field]"
-                      v-bind="item"
-                      @blur="handleBlur($event, item)"
-                      @change="handleChange($event, item)"
-                      @input="handleInput($event, item)"
-                    />
-                  </slot>
-                </el-form-item>
-              </el-col>
-            </el-row>
+                    <slot
+                      :name="item.field"
+                      :form="form"
+                      :item="item"
+                      :index="index"
+                    >
+                      <lj-input
+                        v-model="form[item.field]"
+                        v-bind="item"
+                        @blur="handleBlur($event, item)"
+                        @change="handleChange($event, item)"
+                        @input="handleInput($event, item)"
+                      />
+                    </slot>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+            </div>
           </div>
         </el-collapse-transition>
         <!-- 表单筛选底部  end -->
@@ -243,9 +245,9 @@ export default {
     handleReset() {
       this.$nextTick(() => {
         for (var i in this.form) {
-          if(this.resetForm && this.resetForm[i] !== undefined) {
-            this.form[i] = this.resetForm[i]
-          }else{ 
+          if (this.resetForm && this.resetForm[i] !== undefined) {
+            this.form[i] = this.resetForm[i];
+          } else {
             this.form[i] = undefined;
           }
         }
