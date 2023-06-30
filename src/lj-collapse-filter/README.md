@@ -33,7 +33,7 @@ Vue.use(LjCollapseFilter);
 | filterContent   | 表单文案               | _object_  | {reset: '', search: '',}                                                                                                                                        |
 | value / v-model | 绑定值                 | _object_  | `{}`                                                                                                                                                            |
 | filterSwitcher  | 筛选收起/展开          | _Boolean_ | `false`                                                                                                                                                         |
-| filterShow      | 筛选开关               | _Boolean_ | `true`                                                                                                                                                          |
+| filterShow/searchShow/resetShow      | 筛选/搜索/重置开关               | _Boolean_ | `true`                                                                                                                                                          |
 
 ### slots
 
@@ -42,8 +42,10 @@ Vue.use(LjCollapseFilter);
 | reference | 筛选按钮 Icon        | -                             |
 | key`N`    | 筛选表单数据插槽内容 | - N 为每条 item 的 field 数值 |
 | head-left    | 筛选表单头部左侧插槽内容 | -  |
-| head-filter-left    | 筛选表单头部右侧左边插槽内容 | - |
-| head-filter-right    | 筛选表单头部右侧右边插槽内容 | - |
+| filter-icon-left    | 筛选按钮左侧内容 | - |
+| filter-icon-left    | 筛选按钮右侧内容 | - |
+| head-filter-right    | 筛选表单头部左侧筛选后边插槽内容 | - |
+| head-right    | 筛选表单头部右侧插槽内容 | - |
 
 ### 事件
 

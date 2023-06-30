@@ -5,40 +5,40 @@ $white: #fff !default;
 $disabled: #ececec !default;
 
 //字体颜色
-$font-color-grade-1: #333 !default;
-$font-color-grade-2: #666 !default;
-$font-color-grade-3: #999 !default;
+$font-color-grade-1: #191919 !default;
+$font-color-grade-2: #5a5a5a !default;
+$font-color-grade-3: #7b7b7b !default;
 $font-color-gray: #D7D7D7 !default;
-$font-color-primary: #3F91F5 !default;
-$font-color-danger: #a02725 !default;
+$font-color-primary: #0055cf !default;
+$font-color-danger: #ff4d4f !default;
 $font-color-success: #3da200 !default;
-$font-color-hover: #f9f9f9 !default;
-$font-color-warning: #fbdc64 !default;
+$font-color-hover: #f2f6fc !default;
+$font-color-warning: #ffba00 !default;
 $font-color-placeholder: $font-color-gray !default;
 
 //背景颜色
 $bg-color-gray: #f5f7f9 !default;
-$bg-color-primary: #3F91F5 !default;
+$bg-color-primary: #0055cf !default;
 $bg-color-danger: #ff4d4f !default;
 $bg-color-success: #13ce66 !default;
-$bg-color-hover: #f9f9f9 !default;
-$bg-color-warning: #fbdc64 !default;
+$bg-color-hover: #f2f6fc !default;
+$bg-color-warning: #ffba00 !default;
 
 //border颜色
 $bd-color-gray: #f5f7f9 !default;
-$bd-color-primary: #3F91F5 !default;
-$bd-color-danger: #a02725 !default;
+$bd-color-primary: #0055cf !default;
+$bd-color-danger: #ff4d4f !default;
 $bd-color-success: #3da200 !default;
-$bd-color-hover: #f9f9f9 !default;
-$bd-color-warning: #fbdc64 !default;
+$bd-color-hover: #f2f6fc !default;
+$bd-color-warning: #ffba00 !default;
 
 // 渐变
 $gradient-gray: linear-gradient(227deg, #f5f7f9 0%, #f5f7f9 100%) !default;
-$gradient-primary: linear-gradient(227deg, #4e9af8 0%, #3F91F5 100%) !default;
+$gradient-primary: linear-gradient(227deg, #4e9af8 0%, #0055cf 100%) !default;
 $gradient-danger: linear-gradient(227deg, #fa6f72 0%, #ff4d4f 100%) !default;
 $gradient-success: linear-gradient(227deg, #4fd38b 0%, #13ce66 100%) !default;
-$bd-color-hover: linear-gradient(227deg, #c3bebe 0%, #f9f9f9 100%) !default;
-$gradient-warning: linear-gradient(227deg, #fad879 0%, #fbdc64 100%) !default;
+$bd-color-hover: linear-gradient(227deg, #c3bebe 0%, #f2f6fc 100%) !default;
+$gradient-warning: linear-gradient(227deg, #fad879 0%, #ffba00 100%) !default;
 
 // Font 字体大小
 $font-size-xs: 12px;

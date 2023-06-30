@@ -12,7 +12,7 @@
           ? 'upload-demo'
           : 'el-upload-dragger'
       "
-      :data="uploadData"
+      :data="{ ...uploadData, ...data }"
       v-bind="{ ...$props, ...$attrs }"
       :on-change="handleChange"
       :on-error="handleError"

@@ -1,7 +1,7 @@
 <template>
   <lj-collapse-filter
     :form-list="formList"
-    :head-num="2"
+    :head-num="1"
     v-model="form"
     :lj-form="{ 'labelPosition': 'top' }"
     @form-data="fnGetformDatas"
@@ -50,11 +50,10 @@ export default {
           code: 101,
           showWordLimit: false,
           maxlength: 30,
-          label: '',
+          label: '漏洞编号',
           clearable: true,
           placeholder: '请输入漏洞编号',
           field: 'key2',
-          size: 'mini',
           ljRelations: ['key3'],
         },
         {

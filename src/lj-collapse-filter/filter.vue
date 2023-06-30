@@ -1,5 +1,5 @@
 <template>
-  <el-card class="lj-form-filter2-box">
+  <div class="lj-form-filter2-box">
     <div class="lj-form-filter-con">
       <!-- 表单筛选项 start -->
       <el-form
@@ -10,101 +10,111 @@
       >
         <!-- 表单头部  start -->
         <div class="collapse-head-box">
-          <slot name="head-left"></slot>
-          <el-form-item
-            v-for="(item, index) in formListTop"
-            :key="`${item.field}` + `${index}`"
-            :class="item.label ? '' : 'no-title'"
-            :label="item.label"
-            :prop="item.field"
-            v-bind="item.ljFormItem"
-          >
-            <slot :name="item.field" :form="form" :item="item" :index="index">
-              <lj-input
-                v-model="form[item.field]"
-                v-bind="item"
-                @blur="handleBlur($event, item)"
-                @change="handleChange($event, item)"
-                @input="handleInput($event, item)"
-                @keyup.enter.native="handleEnter($event, item)"
-                @clear="handleClear($event, item)"
-              />
-            </slot>
-          </el-form-item>
+          <div class="head-left">
+            <slot name="head-left"></slot>
+            <el-form-item
+              v-for="(item, index) in formListTop"
+              :key="`${item.field}` + `${index}`"
+              :class="item.label ? '' : 'no-title'"
+              :label="item.label"
+              :prop="item.field"
+              v-bind="item.ljFormItem"
+            >
+              <slot :name="item.field" :form="form" :item="item" :index="index">
+                <lj-input
+                  v-model="form[item.field]"
+                  v-bind="item"
+                  @blur="handleBlur($event, item)"
+                  @change="handleChange($event, item)"
+                  @input="handleInput($event, item)"
+                  @keyup.enter.native="handleEnter($event, item)"
+                  @clear="handleClear($event, item)"
+                />
+              </slot>
+            </el-form-item>
+            <div class="head-filter">
+              <span
+                class="filter-caret"
+                @click="handleMore"
+                v-if="(formList && formList.length) > headNum && filterShow"
+              >
+                <slot name="filter-icon-left">{{
+                  translate('moreFilter')
+                }}</slot>
+                <slot name="filter-icon-right"
+                  ><el-button type="text">
+                    <i
+                      class="filter-caret-btn el-icon-arrow-up"
+                      :class="filterVisble ? 'is-reverse' : ''"
+                    ></i> </el-button
+                ></slot>
+              </span>
+              <el-button v-if="resetShow" size="mini" @click="handleReset()">
+                {{ filterContent.reset || translate('reset') }}
+              </el-button>
+              <el-button
+                v-if="searchShow"
+                size="mini"
+                type="primary"
+                @click="handleFilter()"
+              >
+                {{ filterContent.search || translate('search') }}
+              </el-button>
+              <slot name="head-filter-right"></slot>
+            </div>
+          </div>
           <!-- 头部右侧筛选按钮 -->
           <div class="head-right">
-            <slot name="head-filter-left"></slot>
-            <span
-              @click="handleMore"
-              v-if="(formList && formList.length) > headNum && filterShow"
-            >
-              <slot name="reference">
-                <span class="closeFilter">
-                  {{
-                    filterVisble
-                      ? translate('retract')
-                      : translate('moreFilter')
-                  }}
-                  <i
-                    class="filter-caret-btn el-icon-arrow-up"
-                    :class="filterVisble ? 'is-reverse' : ''"
-                  ></i>
-                </span>
-              </slot>
-            </span>
-            <el-button size="mini" @click="handleReset()">
-              {{ filterContent.reset || translate('reset') }}
-            </el-button>
-            <el-button size="mini" type="primary" @click="handleFilter()">
-              {{ filterContent.search || translate('search') }}
-            </el-button>
-            <slot name="head-filter-right"></slot>
+            <slot name="head-right"></slot>
           </div>
         </div>
         <!-- 表单头部  end -->
         <!-- 表单筛选底部  start -->
-        <el-collapse-transition>
-          <div v-show="filterVisble">
-            <div class="collapse-box">
-              <el-row v-bind="ljRow">
-                <el-col
-                  v-for="(item, index) in formListContent"
-                  :key="`${item.field}` + `${formListTop.length} + ${index}`"
-                  v-bind="item.ljCol"
-                  :span="item.ljItemSpan || ljSpan || null"
-                >
-                  <el-form-item
-                    :key="`${item.code}_${index}`"
-                    :class="item.label ? '' : 'no-title'"
-                    :label="item.label"
-                    :prop="item.field"
-                    v-bind="item.ljFormItem"
+        <div :class="filterVisble ? 'm-t15' : 'm-t0'">
+          <el-collapse-transition>
+            <div class="collapse-box-bg" v-show="filterVisble">
+              <div class="collapse-box">
+                <el-row v-bind="ljRow">
+                  <el-col
+                    v-for="(item, index) in formListContent"
+                    :key="`${item.field}` + `${formListTop.length} + ${index}`"
+                    v-bind="item.ljCol"
+                    :span="item.ljItemSpan || ljSpan || null"
                   >
-                    <slot
-                      :name="item.field"
-                      :form="form"
-                      :item="item"
-                      :index="index"
+                    <el-form-item
+                      :key="`${item.code}_${index}`"
+                      :class="item.label ? '' : 'no-title'"
+                      :label="item.label"
+                      :prop="item.field"
+                      v-bind="item.ljFormItem"
                     >
-                      <lj-input
-                        v-model="form[item.field]"
-                        v-bind="item"
-                        @blur="handleBlur($event, item)"
-                        @change="handleChange($event, item)"
-                        @input="handleInput($event, item)"
-                      />
-                    </slot>
-                  </el-form-item>
-                </el-col>
-              </el-row>
+                      <slot
+                        :name="item.field"
+                        :form="form"
+                        :item="item"
+                        :index="index"
+                      >
+                        <lj-input
+                          v-model="form[item.field]"
+                          v-bind="item"
+                          @blur="handleBlur($event, item)"
+                          @change="handleChange($event, item)"
+                          @input="handleInput($event, item)"
+                        />
+                      </slot>
+                    </el-form-item>
+                  </el-col>
+                </el-row>
+              </div>
             </div>
-          </div>
-        </el-collapse-transition>
+          </el-collapse-transition>
+        </div>
+
         <!-- 表单筛选底部  end -->
       </el-form>
       <!-- 表单筛选项 end -->
     </div>
-  </el-card>
+  </div>
 </template>
 <script>
 import './import';
@@ -171,6 +181,16 @@ export default {
     },
     // 筛选开关
     filterShow: {
+      type: Boolean,
+      default: true,
+    },
+    // 搜索开关
+    searchShow: {
+      type: Boolean,
+      default: true,
+    },
+    // 重置开关
+    resetShow: {
       type: Boolean,
       default: true,
     },
@@ -244,11 +264,12 @@ export default {
     // 置空
     handleReset() {
       this.$nextTick(() => {
+        // 还原默认数据
         for (var i in this.form) {
           if (this.resetForm && this.resetForm[i] !== undefined) {
             this.form[i] = this.resetForm[i];
           } else {
-            this.form[i] = undefined;
+            this.$set(this.form, i, undefined);
           }
         }
         this.$emit('form-data', this.form);

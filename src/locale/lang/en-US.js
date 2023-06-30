@@ -20,7 +20,7 @@ export default {
     screenMethod: 'Method of screening',
     selected: 'selected',
     search: 'Query',
-    moreFilter: 'More filtering',
+    moreFilter: 'Filter',
     retract: 'Retract',
   },
   // LjInput
