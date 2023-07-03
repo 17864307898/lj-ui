@@ -2,11 +2,7 @@
 @import "../style/var.scss";
 
 .lj-upload-wrap {
-  width: 400px;
-  margin: 20px auto;
-  display: flex;
-  justify-content: center;
-
+  display: inline-block;
   .el-upload__tip {
     p {
       color: $font-color-grade-2;
@@ -24,7 +20,7 @@
     }
   }
 
-  .el-icon-upload {
+  .lj-upload-icon {
     margin-top: 20px !important;
     font-size: 67px;
     color: #c0c4cc;
@@ -38,13 +34,6 @@
   }
 
   .upload-demo {
-    width: 100%;
-    border: 1px dashed #d9d9d9;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: 20px;
-
     .el-upload-dragger {
       border: 0;
       padding: 0;

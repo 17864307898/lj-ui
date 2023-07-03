@@ -1,17 +1,10 @@
 <template>
-  <div :class="!listType ? 'lj-upload-wrap' : listType">
+  <div :class="!listType ? 'lj-upload-wrap' : ''">
     <el-upload
-      ref="upload"
-      :accept="accept"
+      :ref="`upload_${uploadKey}`"
+      :accept="uploadAccept"
       :action="uploadHost"
       :before-upload="onBeforeUpload"
-      :class="
-        listType === 'picture-card'
-          ? ''
-          : drag && (listType === 'text' || !listType)
-          ? 'upload-demo'
-          : 'el-upload-dragger'
-      "
       :data="{ ...uploadData, ...data }"
       v-bind="{ ...$props, ...$attrs }"
       :on-change="handleChange"
@@ -20,11 +13,14 @@
       :on-success="handleSuccess"
       :on-progress="handleProgress"
       :on-exceed="handleExceed"
-      :show-file-list="showFileList"
     >
-      <slot name="uploadIcon"><i class="el-icon-upload"></i></slot>
-      <div class="el-upload__text">
-        <slot name="uploadText">
+      <!-- icon -->
+      <slot name="uploadIcon"
+        ><i class="el-icon-upload lj-upload-icon"></i
+      ></slot>
+      <!-- icon文案 -->
+      <slot name="uploadText">
+        <div class="el-upload__text">
           <div v-if="listType === 'text' || !listType">
             <span v-if="drag">
               将文件拖到此处，或
@@ -36,16 +32,21 @@
               <em v-else>点击上传</em>
             </span>
           </div>
-        </slot>
-      </div>
+        </div>
+      </slot>
+      <!-- 上传Slot -->
       <div slot="tip" class="el-upload__tip">
         <slot name="uploadTip">
-          <p v-if="listType === 'picture-card'">
-            请上传小于{{ byteConvert(maxSize) }}的图片
+          <p>
+            请上传小于{{ byteConvert(maxSize) }}的{{
+              listType === 'picture-card' ? '图片' : '文件'
+            }}
           </p>
-          <p v-else>请上传小于{{ byteConvert(maxSize) }}的文件</p>
         </slot>
       </div>
+      <template slot="trigger">
+        <slot name="uploadTrigger"></slot>
+      </template>
     </el-upload>
   </div>
 </template>
@@ -62,15 +63,15 @@ Vue.use(Upload);
 export default {
   name: 'LjUpload',
   props: {
+    // upload-key  多个upload时需传入
+    uploadKey: {
+      type: String,
+      default: () => 'ref',
+    },
     uploadFileList: {
       // 回显上传文件
       type: Object,
       default: () => ({}),
-    },
-    name: {
-      // 文件名称
-      type: String,
-      default: 'file',
     },
     accept: {
       //接受上传的文件类型
@@ -114,11 +115,6 @@ export default {
       type: Boolean,
       default: false,
     },
-    showFileList: {
-      //是否显示已上传文件列表 默认 false
-      type: Boolean,
-      default: false,
-    },
     limit: {
       //最大允许上传个数
       type: Number,
@@ -153,6 +149,7 @@ export default {
     return {
       file: '',
       fileList: [],
+      uploadAccept: '',
       uploadHost: '',
       uploadData: {},
       md5: '',
@@ -182,10 +179,22 @@ export default {
   },
   mounted() {
     // 上传的地址
-    this.uploadHost = this.action ? this.action : '';
+    this.uploadHost = this.action || '';
+    // 接受上传的文件类型
+    this.uploadAccept = this.accept || '';
   },
   methods: {
     byteConvert,
+    // 获取当前ref实例
+    handleGetRefs() {
+      return new Promise((resovle) => {
+        this.$nextTick(() => {
+          const ref = this.$refs[`upload_${this.uploadKey}`];
+
+          resovle(ref);
+        });
+      });
+    },
     // 清空
     clearFiles() {
       this.$refs.upload.clearFiles();
@@ -213,9 +222,9 @@ export default {
     },
     handleProgress(e) {
       if (e.percent === 100) {
-        console.log('fnUploadProgress', e)
+        console.log('fnUploadProgress', e);
       }
-      e.percent = Math.min(99, e.percent)
+      e.percent = Math.min(99, e.percent);
     },
     // 上传成功
     handleSuccess(res, file, fileList) {
@@ -267,10 +276,10 @@ export default {
     // 重新上传清空
     ReUpload(file) {
       let uploadFiles = this.$refs.upload.uploadFiles;
-      let index = 0
-      if(this.retransmission) {
+      let index = 0;
+      if (this.retransmission) {
         index = uploadFiles.indexOf(this.fileList[0]);
-      }else {
+      } else {
         index = uploadFiles.indexOf(this.fileList[this.fileList.length - 1]);
       }
       uploadFiles.splice(index, 1);
@@ -282,18 +291,24 @@ export default {
       this.$emit('uploadBefore', file);
       // 限制文件类型
       let FileExt = file.name.replace(/.+\./, '');
-      let acceptTypeData = this.accept ? this.accept.split(',') : [];
-      let acceptType = []
-      acceptTypeData.forEach(el=>{
-        el = el.replace(/.*\./, '')
-        acceptType.push(el)
-      })
-      if (this.accept && this.accept != '*' && acceptType.indexOf(FileExt) ==-1) {
+      let acceptTypeData = this.uploadAccept
+        ? this.uploadAccept.split(',')
+        : [];
+      let acceptType = [];
+      acceptTypeData.forEach((el) => {
+        el = el.replace(/.*\./, '');
+        acceptType.push(el);
+      });
+      if (
+        this.uploadAccept &&
+        this.uploadAccept != '*' &&
+        acceptType.indexOf(FileExt) == -1
+      ) {
         Message.error(
           this.content.acceptInfo
             ? this.content.acceptInfo
             : `上传${this.listType === 'picture-card' ? '图片' : '文件'}只能是${
-                this.accept
+                this.uploadAccept
               }格式!`
         );
       }
@@ -310,7 +325,12 @@ export default {
         );
       }
       // 如果有文件类型和大小限制，则清空
-      if ((this.accept  && this.accept != '*' && acceptType.indexOf(FileExt) ==-1) || !isLtSize) {
+      if (
+        (this.uploadAccept &&
+          this.uploadAccept != '*' &&
+          acceptType.indexOf(FileExt) == -1) ||
+        !isLtSize
+      ) {
         this.ReUpload(file);
         return false;
       }
