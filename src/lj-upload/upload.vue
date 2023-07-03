@@ -170,9 +170,7 @@ export default {
       immediate: true,
     },
     data: {
-      handler(newVal) {
-        console.log(newVal);
-      },
+      handler() {},
       deep: true, // 深度监听
       immediate: true,
     },
@@ -197,7 +195,7 @@ export default {
     },
     // 清空
     clearFiles() {
-      this.$refs.upload.clearFiles();
+      this.$refs[`upload_${this.uploadKey}`].clearFiles();
     },
     // 上传状态
     handleChange(file, fileList) {
@@ -221,9 +219,6 @@ export default {
       }
     },
     handleProgress(e) {
-      if (e.percent === 100) {
-        console.log('fnUploadProgress', e);
-      }
       e.percent = Math.min(99, e.percent);
     },
     // 上传成功
@@ -275,7 +270,7 @@ export default {
     },
     // 重新上传清空
     ReUpload(file) {
-      let uploadFiles = this.$refs.upload.uploadFiles;
+      let uploadFiles = this.$refs[`upload_${this.uploadKey}`].uploadFiles;
       let index = 0;
       if (this.retransmission) {
         index = uploadFiles.indexOf(this.fileList[0]);

@@ -1,7 +1,7 @@
 <template>
   <lj-upload
     ref="ljuploads"
-    :class="upload - demo"
+    :class="'upload-demo'"
     :drag="true"
     :accept="uploadParams.accept"
     :action="uploadParams.action"
