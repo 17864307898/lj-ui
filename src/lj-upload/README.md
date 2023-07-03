@@ -37,9 +37,8 @@ LjUploadFolder组件可用于上传文件，支持oss、md5（基于ElementUI下
 
 | name | 说明 | 参数 | 默认值
 |------|------|-----|-----|
-| uploadIcon | 上传文件icon | — | el-icon-upload |
-| uploadText | 上传文件文案 | — | 将文件拖到此处，或点击上传 |
-| uploadTip | 上传文件提示 | — | — |
+| uploadText | 上传文件icon/文案 | — | [elementui](https://element.eleme.cn/#/zh-CN/component/upload)拖拽上传的文案 |
+| uploadTip | 上传文件提示 | — | 请上传小于--的图片/文案 |
 ### events
 
 | name | 说明 | 类型 | 返回值 |

@@ -14,12 +14,9 @@
       :on-progress="handleProgress"
       :on-exceed="handleExceed"
     >
-      <!-- icon -->
-      <slot name="uploadIcon"
-        ><i class="el-icon-upload lj-upload-icon"></i
-      ></slot>
       <!-- icon文案 -->
       <slot name="uploadText">
+        <i class="el-icon-upload lj-upload-icon"></i>
         <div class="el-upload__text">
           <div v-if="listType === 'text' || !listType">
             <span v-if="drag">
