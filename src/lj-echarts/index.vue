@@ -3,9 +3,10 @@
 </template>
 
 <script>
+  import * as echarts from 'echarts'
   // echarts默认的loading配置项
   const DEFAULT_LOADING_OPTION = {
-    text: '加载中',
+    text: 'Loading',
     effect: 'whirling',
     maskColor: 'rgba(0, 0, 0, 0)',
     textColor: '#fff',
@@ -105,12 +106,13 @@
           // 仅初始化一次
           const dom = this.$refs[this.echartsRef]
           // 初始化实例
-          this.chart = this.$echarts.init(dom)
-          this.$emit('on-listen', this.chart)
+          this.chart = echarts.init(dom)
+          this.$emit('on-init', this.chart)
 
           // 设置option
           this.chart.setOption(options)
           this.chart.hideLoading()
+          this.$emit('on-options', this.chart)
 
           // 添加监听事件
           const handleResize = () => {
@@ -121,8 +123,8 @@
           // 及时销毁事件监听及echarts实例
           this.$once('hook:beforeDestroy', () => {
             window.removeEventListener('resize', handleResize)
-            this.$emit('off-listen', this.chart)
-            this.chart.dispose()
+            this.$emit('on-destroy', this.chart)
+            this.chart?.dispose()
             this.chart = null
           })
         })

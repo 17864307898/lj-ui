@@ -31,6 +31,6 @@ Vue.use(LjEcharts);
 
 | name | 说明 |  返回  |
 |------|------|--------|
-| on-listen | echarts实例初始化完成，仅一次 | `echartsInstance`(echarts实例) |
-| off-listen | echarts销毁时触发，仅一次 | `echartsInstance`(echarts实例) |
+| on-init | echarts实例初始化完成，仅一次 | `echartsInstance`(echarts实例) |
+| on-destroy | echarts销毁时触发，仅一次 | `echartsInstance`(echarts实例) |
 |  |  |  |
