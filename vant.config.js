@@ -97,7 +97,7 @@ module.exports = {
           },
           {
             path: 'lj-echarts',
-            title: 'LjEcharts',
+            title: 'LjEcharts 容器',
           },
         ],
       },
