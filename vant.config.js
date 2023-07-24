@@ -95,6 +95,10 @@ module.exports = {
             path: 'lj-collapse-filter',
             title: 'LjCollapseFilter 筛选',
           },
+          {
+            path: 'lj-echarts',
+            title: 'LjEcharts 容器',
+          },
         ],
       },
       {

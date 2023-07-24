@@ -49,17 +49,21 @@
                     ></i> </el-button
                 ></slot>
               </span>
-              <el-button v-if="resetShow" size="mini" @click="handleReset()">
-                {{ filterContent.reset || translate('reset') }}
-              </el-button>
-              <el-button
-                v-if="searchShow"
-                size="mini"
-                type="primary"
-                @click="handleFilter()"
-              >
-                {{ filterContent.search || translate('search') }}
-              </el-button>
+              <span v-if="resetShow" @click="handleReset()">
+                <slot name="reset-btn"
+                  ><el-button size="mini">{{
+                    filterContent.reset || translate('reset')
+                  }}</el-button></slot
+                >
+              </span>
+
+              <span v-if="searchShow" @click="handleFilter()">
+                <slot name="search-btn">
+                  <el-button size="mini" type="primary">{{
+                    filterContent.search || translate('search')
+                  }}</el-button></slot
+                >
+              </span>
               <slot name="head-filter-right"></slot>
             </div>
           </div>

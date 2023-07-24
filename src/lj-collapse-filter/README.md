@@ -39,11 +39,12 @@ Vue.use(LjCollapseFilter);
 
 | name      | 说明                 | 参数                          |
 | --------- | -------------------- | ----------------------------- |
-| reference | 筛选按钮 Icon        | -                             |
 | key`N`    | 筛选表单数据插槽内容 | - N 为每条 item 的 field 数值 |
 | head-left    | 筛选表单头部左侧插槽内容 | -  |
 | filter-icon-left    | 筛选按钮左侧内容 | - |
 | filter-icon-left    | 筛选按钮右侧内容 | - |
+| reset-btn | 重置按钮 | - |
+| search-btn | 重置按钮 | - |
 | head-filter-right    | 筛选表单头部左侧筛选后边插槽内容 | - |
 | head-right    | 筛选表单头部右侧插槽内容 | - |
 
