@@ -85,6 +85,7 @@ export default {
         return;
       }else if (!isLtSize) {
         Message.error(this.content.sizeInfo ? this.content.sizeInfo : `请上传小于${byteConvert(this.maxSize)}的文件夹!`);
+        return;
       }
       // 自主校验抛出
       const validate = await this.validateFn(file)
