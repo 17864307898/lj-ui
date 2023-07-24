@@ -5,8 +5,8 @@
         <slot name="uploadIcon"><i class="el-icon-upload fileUpload"></i></slot>
         <div class="el-upload__text">
           <slot name="uploadText">
-            <span v-if="file.size" class="waring">重新上传</span>
-            <span v-else>点击上传</span>
+            <span v-if="file.size" class="waring">{{translate('重新上传')}}</span>
+            <span v-else>{{ translate('点击上传文件夹') }}</span>
           </slot>
           <p class="uploadName">{{ uploadName }}</p>
         </div>
@@ -32,6 +32,8 @@ import Vue from 'vue';
 import JSZip from 'jszip';
 import { byteConvert } from '../utils/index';
 import { Loading, Message } from 'element-ui';
+import { translate } from '../utils/translate';
+const t = translate('ljFilter');
 
 Vue.use(Loading);
 
@@ -64,6 +66,10 @@ export default {
   },
   methods: {
     byteConvert,
+    // 翻译
+    translate(path) {
+      return t(path);
+    },
     async beforeUpload(file) {
       
       // 限制文件大小
@@ -120,7 +126,6 @@ export default {
             lastModified: Date.now(),
           });
           this.$emit('uploadFolderInfo', this.file);
-          // saveAs(content, `${FileName}.zip`)
         });
     },
   },

@@ -7,6 +7,8 @@ export default {
   all: 'all',
   vulUnknown: 'Not-standard',
   vulUnknownRisk: 'Not-standard',
+  '重新上传': 're-upload',
+  '点击上传文件夹': 'click to folder',
   // 风险等级
   vulCritical: 'critical',
   vulHigh: 'High risk',
