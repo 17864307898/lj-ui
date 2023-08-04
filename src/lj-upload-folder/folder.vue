@@ -5,7 +5,9 @@
         <slot name="uploadIcon"><i class="el-icon-upload fileUpload"></i></slot>
         <div class="el-upload__text">
           <slot name="uploadText">
-            <span v-if="file.size" class="waring">{{translate('重新上传')}}</span>
+            <span v-if="file.size" class="waring">{{
+              translate('重新上传')
+            }}</span>
             <span v-else>{{ translate('点击上传文件夹') }}</span>
           </slot>
           <p class="uploadName">{{ uploadName }}</p>
@@ -16,6 +18,7 @@
           </p>
         </div>
         <input
+          v-if="uplodFlag"
           ref="upload"
           class="upload"
           type="file"
@@ -62,6 +65,7 @@ export default {
     return {
       file: '',
       uploadName: '',
+      uplodFlag: true, // 重置上传input事件
     };
   },
   methods: {
@@ -71,30 +75,36 @@ export default {
       return t(path);
     },
     async beforeUpload(file) {
-      
       // 限制文件大小
-      let filesSize = 0
-      for(let el in file.target.files) {
-        if(file.target.files[el].size) {
-          filesSize += file.target.files[el].size
+      let filesSize = 0;
+      for (let el in file.target.files) {
+        if (file.target.files[el].size) {
+          filesSize += file.target.files[el].size;
         }
       }
       const isLtSize = filesSize < this.maxSize;
       if (!file.target.files || file.target.files.length === 0) {
-        Message.error(this.content.emptyInfo ? this.content.emptyInfo : `文件夹不能为空!`);
+        Message.error(
+          this.content.emptyInfo ? this.content.emptyInfo : `文件夹不能为空!`
+        );
         return;
-      }else if (!isLtSize) {
-        Message.error(this.content.sizeInfo ? this.content.sizeInfo : `请上传小于${byteConvert(this.maxSize)}的文件夹!`);
+      } else if (!isLtSize) {
+        Message.error(
+          this.content.sizeInfo
+            ? this.content.sizeInfo
+            : `请上传小于${byteConvert(this.maxSize)}的文件夹!`
+        );
         return;
       }
       // 自主校验抛出
-      const validate = await this.validateFn(file)
+      const validate = await this.validateFn(file);
       if (!validate) {
         this.ReUpload(file);
         return false;
       }
       this.file = '';
       this.uploadName = '';
+      this.resetUploadStatus();
       this.$emit('uploadFolderInfo', {});
       const zip = new JSZip();
       const { files } = file.target;
@@ -113,6 +123,12 @@ export default {
         zip.file(files[i].webkitRelativePath, files[i]);
       }
 
+       // 原因：上传相同文件夹生成的MD5值不一样，因为date字段的是获取当前时间
+        // 解决方案：把文件上传的时间改成一个固定的时间
+        Object.keys(zip.files).forEach((file) => {
+          zip.files[file].date = new Date(1690943274502)
+        })
+
       zip
         .generateAsync({
           type: 'blob',
@@ -128,6 +144,20 @@ export default {
           });
           this.$emit('uploadFolderInfo', this.file);
         });
+    },
+    // 重置上传文件、按钮状态
+    resetUploadStatus() {
+      this.file = '';
+      this.uploadName = '';
+    },
+    // 重置上传input开关 解决二次上传同文件 无法触发input change事件问题
+    resetUploadFlag() {
+      this.uplodFlag = false;
+
+      // 延时100毫秒 防止无法触发input事件问题
+      setTimeout(() => {
+        this.uplodFlag = true;
+      }, 100);
     },
   },
 };
