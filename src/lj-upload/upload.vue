@@ -210,10 +210,6 @@ export default {
         params.ossData = this.uploadData;
       }
       this.$emit('uploadChange', params);
-      // 重传判断
-      if (this.retransmission && fileList.length > 1) {
-        this.ReUpload(file);
-      }
     },
     handleProgress(e) {
       e.percent = Math.min(99, e.percent);
@@ -280,6 +276,10 @@ export default {
     // 上传前钩子
     async onBeforeUpload(file) {
       let that = this;
+      // 重传判断
+      if (this.retransmission && this.fileList.length > 1) {
+        this.ReUpload(file);
+      }
       this.$emit('uploadBefore', file);
       // 限制文件类型
       let FileExt = file.name.replace(/.+\./, '');
