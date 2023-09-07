@@ -36,7 +36,6 @@ import JSZip from 'jszip';
 import { byteConvert } from '../utils/index';
 import { Loading, Message } from 'element-ui';
 import { translate } from '../utils/translate';
-const t = translate('ljFilter');
 
 Vue.use(Loading);
 
@@ -70,10 +69,6 @@ export default {
   },
   methods: {
     byteConvert,
-    // 翻译
-    translate(path) {
-      return t(path);
-    },
     async beforeUpload(file) {
       // 限制文件大小
       let filesSize = 0;
@@ -85,7 +80,7 @@ export default {
       const isLtSize = filesSize < this.maxSize;
       if (!file.target.files || file.target.files.length === 0) {
         Message.error(
-          this.content.emptyInfo ? this.content.emptyInfo : t('文件夹不能为空')
+          this.content.emptyInfo ? this.content.emptyInfo : translate('文件夹不能为空')
         );
         return;
       } else if (!isLtSize) {
