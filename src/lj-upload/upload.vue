@@ -20,13 +20,13 @@
         <div class="el-upload__text">
           <div v-if="listType === 'text' || !listType">
             <span v-if="drag">
-              将文件拖到此处，或
-              <em v-if="retransmission && file.size">重新上传</em>
-              <em v-else>点击上传</em>
+              {{ translate('将文件拖到此处，或') }}
+              <em v-if="retransmission && file.size">{{ translate('重新上传') }}</em>
+              <em v-else>{{ translate('点击上传') }}</em>
             </span>
             <span v-else>
-              <em v-if="retransmission && file.size">重新上传</em>
-              <em v-else>点击上传</em>
+              <em v-if="retransmission && file.size">{{ translate('重新上传') }}</em>
+              <em v-else>{{ translate('点击上传') }}</em>
             </span>
           </div>
         </div>
@@ -54,6 +54,8 @@ import { Upload, Message } from 'element-ui';
 import OSS from './ossUpload.js';
 import SparkMD5 from 'spark-md5';
 import { byteConvert } from '../utils/index';
+import { translate } from '../utils/translate';
+const t = translate('ljFilter');
 
 Vue.use(Upload);
 
@@ -180,6 +182,10 @@ export default {
   },
   methods: {
     byteConvert,
+    // 翻译
+    translate(path) {
+      return t(path);
+    },
     // 获取当前ref实例
     handleGetRefs() {
       return new Promise((resovle) => {

@@ -85,7 +85,7 @@ export default {
       const isLtSize = filesSize < this.maxSize;
       if (!file.target.files || file.target.files.length === 0) {
         Message.error(
-          this.content.emptyInfo ? this.content.emptyInfo : `文件夹不能为空!`
+          this.content.emptyInfo ? this.content.emptyInfo : t('文件夹不能为空')
         );
         return;
       } else if (!isLtSize) {
