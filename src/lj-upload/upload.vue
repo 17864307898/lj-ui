@@ -55,7 +55,6 @@ import OSS from './ossUpload.js';
 import SparkMD5 from 'spark-md5';
 import { byteConvert } from '../utils/index';
 import { translate } from '../utils/translate';
-const t = translate('ljFilter');
 
 Vue.use(Upload);
 
@@ -182,10 +181,6 @@ export default {
   },
   methods: {
     byteConvert,
-    // 翻译
-    translate(path) {
-      return t(path);
-    },
     // 获取当前ref实例
     handleGetRefs() {
       return new Promise((resovle) => {
@@ -245,7 +240,7 @@ export default {
     // 异常错误方法
     handleError() {
       Message({
-        message: this.content.errorMsg ? this.content.errorMsg : '上传失败！',
+        message: this.content.errorMsg ? this.content.errorMsg : translate('上传失败'),
         type: 'error',
         center: true,
         duration: 1500,
