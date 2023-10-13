@@ -2,14 +2,7 @@ import SparkMD5 from 'spark-md5'
 import axios from 'axios'
 import { INIT_OPTIONS } from './utils/config'
 
-import { getUploadCheck, postUploadMerge } from '@/api/upload'
-
-// import * as config from '@/config'
-// 执行分片上传
-const baseURL =
-  process.env.NODE_ENV === 'development'
-    ? process.env.APP_PROXY_HOST
-    : window.location.origin
+const { CancelToken } = axios
 
 export default class Upload {
   constructor(file, options) {
@@ -21,24 +14,29 @@ export default class Upload {
 
     // 合并处理参数
     const finalOption = Object.assign({}, INIT_OPTIONS, options)
-    const { requestMode, requestInstance } = finalOption
+    const { uploadMode, requestInstance, onUploadProgress, requestOptions } = finalOption
 
     // 初始化请求实例 支持自定义传入
     this.requestInstance = requestInstance || axios
+    // 进度回调
+    this.onUploadProgress = onUploadProgress
+    // 请求参数
+    this.requestOptions = requestOptions
 
     // 根据上传模式处理参数
-    switch (requestMode) {
+    switch (uploadMode) {
       case 'singel':
         break
       case 'multi':
-        this.initShardingOptions(finalOption.shardingOptions)
+        this._initShardingOptions(finalOption)
         break
     }
   }
 
   // 分片上传参数初始化
-  initShardingOptions(options) {
-    const { shardingSize,  } = options
+  _initShardingOptions({ shardingOptions = {}, concurrenceCount }) {
+    this.shardingOptions = shardingOptions
+    const { shardingSize } = shardingOptions
 
     // 每个分片的大小
     this.shardingSize = shardingSize
@@ -46,58 +44,92 @@ export default class Upload {
     this.shardingCount = Math.ceil(this.size / shardingSize)
     // 当前分片页数
     this.currentSharding = 0
+    // 当前请求任务数
+    this.currentTask = 0
     // 已经上传的分片列表
     this.sliceFileNames = []
     // 当前上传进度
     this.percent = -1
+    // 并发数量
+    this.concurrenceCount = concurrenceCount
+    // 任务队列
+    this.taskQueue = new Map()
+    // 完成任务队列
+    this.doneQueue = []
+    // 整体需要返回promise
+    this.promise = new Promise((resolve, reject) => {
+      this.resolve = resolve
+      this.reject = reject
+    })
+
+    console.log(this.promise)
   }
 
   // 单文件上传配置
-  initSingleOptions() {}
+  initSingleOptions() { }
 
   // 初始化 分片 MD5
-  init(file) {
+  startSharding() {
     return new Promise((resolve) => {
-      var fileReader = new FileReader()
-      var blobSlice =
+      this.fileReader = new FileReader()
+      // 切割方法
+      this.blobSlice =
         File.prototype.mozSlice ||
         File.prototype.webkitSlice ||
         File.prototype.slice
-      var spark = new SparkMD5()
-      fileReader.onload = (e) => {
+      const spark = new SparkMD5()
+
+      this.fileReader.onload = (e) => {
         // append binary string
         spark.appendBinary(e.target.result)
         this.currentSharding++
+
+        // 分片未完成
         if (this.currentSharding < this.shardingCount) {
-          this.loadNext(file, fileReader, blobSlice)
+          this.loadNext()
         } else {
+          // 分片完成
           this.md5Str = spark.end()
+          this.currentSharding = 0
           resolve()
         }
       }
-      this.loadNext(file, fileReader, blobSlice)
+
+      this.loadNext()
     })
   }
 
-  loadNext(file, fileReader, blobSlice) {
-    var start = this.currentSharding * this.shardingSize
-    var end =
+  // 分割加载下一片
+  loadNext() {
+    const { fileReader, blobSlice } = this
+
+    const start = this.currentSharding * this.shardingSize
+    const end =
       start + this.shardingSize >= this.size ? this.size : start + this.shardingSize
+
     console.log('read:', start, end)
-    fileReader.readAsBinaryString(blobSlice.call(file.raw, start, end))
+    fileReader.readAsBinaryString(blobSlice.call(this.file.raw || this.file, start, end))
   }
 
-  async check() {
+  // 断点续传 检测是否有已经上传的文件
+  async breakpointResume() {
+    // 配置
+    const { uploadedListKey, uploadedFileKey } = this.shardingOptions
+
+    // 请求
     const params = {
       md5: this.md5Str,
       fileName: this.name,
     }
+    const getUploadCheck = () => { }
     const res = await getUploadCheck(params)
-    if (res.code === 200) {
-      if (res.data.filePath != null && res.data.filePath.size > 0) {
+
+    if (res?.code === 200) {
+      if (res?.data[uploadedFileKey] != null && res?.data[uploadedFileKey].size > 0) {
         return res.data
       }
-      this.sliceFileNames = res.data.sliceFileNames || []
+
+      this.sliceFileNames = res.data[uploadedListKey] || []
       // 总片数减去 已经上传的
       this.shardingCount = this.shardingCount - this.sliceFileNames.length
       return res
@@ -105,71 +137,144 @@ export default class Upload {
       return res
     }
   }
+
   async merge() {
     const params = {
       md5: this.md5Str,
       newFileName: this.name,
       size: this.size,
     }
+    const postUploadMerge = () => { }
     const { data } = await postUploadMerge(params)
     return data
   }
 
-  PostFile(callback) {
+  // 开始分片上传
+  uploadShardingFile() {
     const _self = this
-    return new Promise((resolve, reject) => {
-      if (_self.currentSharding >= _self.shardingCount) {
-        _self.currentSharding++
-        resolve()
-        return
-      }
-      if (_self.sliceFileNames.includes(_self.currentSharding + 1 + '')) {
-        _self.currentSharding++
-        resolve()
-        return
-      }
-      // 文件总大小，第一次，分片大小
-      var start = _self.currentSharding * _self.shardingSize
-      var end = start + _self.shardingSize
-      var packet = _self.file.raw.slice(start, end) // 将文件进行切片
-      /*  构建form表单进行提交  */
-      var form = new FormData()
-      form.append('md5', _self.md5Str) // 前端生成md5
-      form.append('file', packet) // slice方法用于切出文件的一部分
-      form.append('fileName', _self.name)
-      form.append('totalSize', _self.size)
-      form.append('total', _self.shardingCount) // 总片数
-      form.append('index', _self.currentSharding + 1) // 当前是第几片
+
+    // 断点续传
+    if (_self.sliceFileNames.includes(_self.currentTask + 1 + '')) {
+      _self.currentTask++
+      return this.uploadShardingFile()
+    }
+
+    // 文件总大小，第一次，分片大小
+    var start = _self.currentTask * _self.shardingSize
+    var end = start + _self.shardingSize
+    // 将文件进行切片
+    const file = _self.file?.raw || _self.file
+    var packet = file.slice(start, end)
+
+    /*  构建form表单进行提交  */
+    var form = new FormData()
+    form.append('md5', _self.md5Str) // 前端生成md5
+    form.append('file', packet)
+    form.append('fileName', _self.name)
+    form.append('totalSize', _self.size)
+    form.append('total', _self.shardingCount) // 总片数
+    form.append('index', _self.currentTask + 1) // 当前是第几片
+
+    _self.requestTask(packet, form)
+
+    return _self.promise
+  }
+
+  // 请求任务
+  requestTask(packet, form) {
+    const _self = this
+
+    new Promise(() => {
+      // 取消方法
+      let cancel
 
       // 发出请求
-      this.requestInstance({
-        url: baseURL + '/upload_database/sliceFile',
+      const res = _self.requestInstance({
+        ..._self.requestOptions,
+        url: '/upload_database/sliceFile',
         method: 'post',
-        // headers: {
-        //     Authorization: '',
-        //     'Content-Type': 'multipart/form-data'
-        // },
-        onUploadProgress: (progressEvent) => {
+        onUploadProgress: ({ lengthComputable, loaded, total }) => {
           // 原生获取上传进度的事件
-          if (progressEvent.lengthComputable) {
-            // 属性lengthComputable主要表明总共需要完成的工作量和已经完成的工作是否可以被测量
-            // 如果lengthComputable为false，就获取不到progressEvent.total和progressEvent.loaded
-            var loaded = progressEvent.loaded // 已经上传大小情况
-            var total = progressEvent.total // 附件总大小
-            var percent = Math.floor((100 * loaded) / total) // 已经上传的百分比
-            _self.percent += percent / _self.shardingCount
-            callback(percent)
+          if (lengthComputable) {
+            // 已经上传的百分比
+            const percent = (100 * loaded / total).toFixed(2) 
+
+            _self.taskQueue.set(packet, { percent: percent })
+
+            // 当前总分片的进度
+            const shardingPercent = _self.doneQueue.length / _self.shardingCount
+            // 平均进度
+            const perPercent = 100 / _self.shardingCount
+
+            // 计算进行中的任务总进度
+            const percentList = [..._self.taskQueue.values()]
+            const result = percentList.reduce((total, x) => {
+              return total += x * perPercent / 100
+            }, 0)
+
+            // 总进度
+            const finalPercent = ((shardingPercent + result) * 100).toFixed(2)
+            _self.percent = finalPercent
+
+            // 返回最终进度
+            if (typeof _self.onUploadProgress === 'function') {
+              _self.onUploadProgress(finalPercent)
+            }
           }
         },
         data: form,
-      })
-        .then(() => {
-          _self.currentSharding++
-          resolve()
+        cancelToken: new CancelToken((c) => {
+          cancel = c
         })
-        .then((error) => {
-          reject(error)
+      })
+
+      // 添加到任务队列
+      _self.taskQueue.set(packet, {
+        percent: 0,
+        cancel,
+      })
+
+      _self.currentTask++
+
+      // 未超过最大并发 或者 所有分片任务分配完毕
+      if (_self.taskQueue.size < _self.concurrenceCount && _self.currentTask < _self.shardingCount) {
+        _self.uploadShardingFile()
+      }
+
+      res.then(() => {
+        // 已完成队列
+        _self.doneQueue.push(_self.currentTask)
+        next()
+      })
+        .catch(() => {
+          next()
         })
     })
+
+    // 下一条任务
+    function next() {
+      // 任务队列剔除
+      _self.taskQueue.delete(packet)
+
+      // 未超过最大并发
+      if (_self.taskQueue.size < _self.concurrenceCount && _self.currentTask < _self.shardingCount) {
+        _self.uploadShardingFile()
+      }
+
+      // 待执行任务为空
+      if (_self.taskQueue.size === 0 && _self.currentTask >= _self.shardingCount ) {
+        _self.resolve()
+      }
+    }
+  }
+
+  // 取消上传
+  cancelRequest() {
+    debugger
+    this.taskQueue.values().forEach(({cancel}) => {
+      cancel
+    })
+
+    this.taskQueue.clear()
   }
 }

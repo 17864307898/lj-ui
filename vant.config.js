@@ -70,6 +70,10 @@ module.exports = {
             path: 'directives',
             title: '自定义指令',
           },
+          {
+            path: 'lj-upload-api',
+            title: 'test',
+          }
         ],
       },
       {
