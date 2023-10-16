@@ -22,9 +22,10 @@ export default {
       try {
         // 分片  获取MD5
         await instance.startSharding();
-        instance.uploadShardingFile();
+        await instance.startUpload();
+        // debugger
         console.log({ instance });
-        instance.cancelRequest()
+        // instance.cancelRequest()
       } catch (e) {
         console.log({ instance });
       }

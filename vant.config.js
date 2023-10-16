@@ -71,8 +71,8 @@ module.exports = {
             title: '自定义指令',
           },
           {
-            path: 'lj-upload-api',
-            title: 'test',
+            path: 'lj-multi-upload',
+            title: '分片上传api',
           }
         ],
       },
