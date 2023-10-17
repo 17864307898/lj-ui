@@ -37,7 +37,7 @@
           <p>
             请上传小于{{ byteConvert(maxSize) }}的{{
               listType === 'picture-card' ? '图片' : '文件'
-            }}
+            }}！
           </p>
         </slot>
       </div>
