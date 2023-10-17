@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Upload from '../index';
+import LjMultiUpload from '../index';
 
 export default {
   name: '',
@@ -17,15 +17,13 @@ export default {
   methods: {
     async handleUpload(e) {
       const file = e.target.files[0];
-      const instance = new Upload(file);
+      const instance = new LjMultiUpload(file);
 
       try {
-        // 分片  获取MD5
-        await instance.startSharding();
-        await instance.startUpload();
-        // debugger
-        console.log({ instance });
-        // instance.cancelRequest()
+        // 需要断点续传时使用
+        // await instance.resumeUpload(/**请求方法 */ /**请求参数 */)
+
+        await instance.multipartUpload();
       } catch (e) {
         console.log({ instance });
       }
