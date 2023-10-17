@@ -72,7 +72,7 @@ module.exports = {
           },
           {
             path: 'lj-multi-upload',
-            title: '分片上传api',
+            title: 'LjMultiUpload 分片上传api',
           }
         ],
       },

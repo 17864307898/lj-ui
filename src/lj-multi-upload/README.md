@@ -1,14 +1,14 @@
-# LjUploadApi 上传封装
+# LjMultiUpload 分片上传api
 
 ### 介绍
-LjUploadFApi可用于上传文件
+LjMultiUpload 用于大文件分片上传
 ### 引入
 
 ```js
   import Vue from 'vue';
-  import { Upload } from 'lj-design';
+  import { LjMultiUpload } from 'lj-design';
   
-  Vue.use(Upload);
+  const instance = new LjMultiUpload(file, options)
 ```
 
 ## 代码演示
