@@ -64,6 +64,8 @@
           this.$nextTick(() => {
             if (!oVal && nVal) {
               this.chart?.showLoading(this.finalOption)
+            } else if (oVal && !nVal) {
+              this.chart?.hideLoading()
             }
           })
         },
