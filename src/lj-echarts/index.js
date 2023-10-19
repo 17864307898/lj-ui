@@ -1,7 +1,3 @@
-import LjEcharts from './index.vue'
-
-LjEcharts.install = (Vue) => {
-  Vue.component(LjEcharts.name, LjEcharts)
-}
+import LjEcharts from './echarts.vue'
 
 export default LjEcharts
