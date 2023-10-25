@@ -311,17 +311,19 @@ export default {
         );
       }
       // 限制文件大小
-      let maxSize = this.maxSize ? this.maxSize : 4294967296;
-      const isLtSize = file.size < maxSize;
-      if (!isLtSize) {
-        Message.error(
-          this.content.sizeInfo
-            ? this.content.sizeInfo
-            : `请上传小于${byteConvert(maxSize)}的${
-                this.listType === 'picture-card' ? '图片' : '文件'
-              }！`
-        );
+      if(this.maxSize) {
+        const isLtSize = file.size < this.maxSize;
+        if (!isLtSize) {
+          Message.error(
+            this.content.sizeInfo
+              ? this.content.sizeInfo
+              : `请上传小于${byteConvert(this.maxSize)}的${
+                  this.listType === 'picture-card' ? '图片' : '文件'
+                }！`
+          );
+        }
       }
+      
       // 如果有文件类型和大小限制，则清空
       if (
         (this.uploadAccept &&
