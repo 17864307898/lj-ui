@@ -34,7 +34,7 @@
       <!-- 上传Slot -->
       <div slot="tip" class="el-upload__tip">
         <slot name="uploadTip">
-          <p>
+          <p v-if="maxSize > 0">
             请上传小于{{ byteConvert(maxSize) }}的{{
               listType === 'picture-card' ? '图片' : '文件'
             }}！
@@ -122,7 +122,7 @@ export default {
     maxSize: {
       //最大限制大小
       type: Number,
-      default: 0,
+      default: undefined,
     },
     data: {
       //上传时附带的额外参数
@@ -311,17 +311,18 @@ export default {
         );
       }
       // 限制文件大小
-      if(this.maxSize) {
-        const isLtSize = file.size < this.maxSize;
-        if (!isLtSize) {
-          Message.error(
-            this.content.sizeInfo
-              ? this.content.sizeInfo
-              : `请上传小于${byteConvert(this.maxSize)}的${
-                  this.listType === 'picture-card' ? '图片' : '文件'
-                }！`
-          );
-        }
+      let isLtSize = file.size < this.maxSize;
+      if(!this.maxSize) {
+        isLtSize = true
+      }
+      if (!isLtSize) {
+        Message.error(
+          this.content.sizeInfo
+            ? this.content.sizeInfo
+            : `请上传小于${byteConvert(this.maxSize)}的${
+                this.listType === 'picture-card' ? '图片' : '文件'
+              }！`
+        );
       }
       
       // 如果有文件类型和大小限制，则清空
