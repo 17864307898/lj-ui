@@ -66,6 +66,11 @@ export default class MultipartUpload {
     this.concurrenceCount = concurrenceCount
     // 合并文件配置项
     this.mergeOptions = Object.assign({}, MERGE_OPTIONS, mergeOptions)
+    // 参数校验
+    const { api } = this.mergeOptions
+    if (!api) throw new Error('The mergeOptions option must be passed in and must carry the api')
+    if (typeof api !== 'function') throw new Error('The mergeOptions api methods must be functions')
+
     // 取消回调
     this.cancelFn = cancelFn
     // 任务队列
@@ -166,16 +171,6 @@ export default class MultipartUpload {
   async appendFile() {
     const { api, extra } = this.mergeOptions
 
-    if (!api) {
-      console.error('The mergeOptions option must be passed in and must carry the api')
-      return
-    }
-
-    if (typeof api !== 'function') {
-      console.error('api methods must be functions')
-      return
-    }
-
     try {
       const params = {
         md5: this.md5Str,
@@ -221,6 +216,8 @@ export default class MultipartUpload {
   // 分片上传
   _uploadPart() {
     const _self = this
+
+    if (_self[taskStatus] === CANCEL) return
 
     // 断点续传
     if (_self.sliceFileNames.includes(_self.currentTask + 1 + '')) {
@@ -290,13 +287,14 @@ export default class MultipartUpload {
         if (isCancel(err)) {
           console.error('The request has been cancelled')
 
-          
+
           _self[taskQueue].delete(packet)
 
           // 将promise状态置为resolve
-          if (_self[taskQueue].size === 0) _self.resolve()
+          // if (_self[taskQueue].size === 0) _self.resolve()
         } else {
-          next()
+          // 失败后取消掉所有请求
+          _self.abortMultipartUpload('inside')
         }
       })
 
@@ -362,14 +360,22 @@ export default class MultipartUpload {
     }
   }
 
-  // 分片取消上传
-  abortMultipartUpload() {
+  // 分片取消上传 mode 取消模式 inside 内部取消 不抛出取消事件
+  abortMultipartUpload(mode) {
     this[taskQueue].forEach(({ cancel }) => {
       cancel('Active cancellation request')
     })
 
     this[taskQueue].clear()
     this[taskStatus] = CANCEL
+
+    // 内部取消
+    if (mode === 'inside') {
+      this.reject(new Error('Request failed'))
+      return
+    }
+
     this.cancelFn && typeof this.cancelFn === 'function' && this.cancelFn()
+    this.reject(new Error('Request cancellation'))
   }
 }

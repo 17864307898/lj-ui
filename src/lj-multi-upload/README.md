@@ -80,3 +80,13 @@ LjMultiUpload 用于大文件分片上传
 ```
 
 > 调用开始上传会返回一个promise, 会在分片上传完毕并且合并文件后自动结束
+
+### 取消上传 abortMultipartUpload
+
+##### 示例
+
+```js
+  instance.abortMultipartUpload()
+```
+
+> 调用结束触发取消回调
