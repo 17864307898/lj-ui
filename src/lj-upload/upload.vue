@@ -1,17 +1,10 @@
 <template>
-  <div :class="!listType ? 'lj-upload-wrap' : listType">
+  <div :class="!listType ? 'lj-upload-wrap' : ''">
     <el-upload
-      ref="upload"
-      :accept="accept"
+      :ref="`upload_${uploadKey}`"
+      :accept="uploadAccept"
       :action="uploadHost"
       :before-upload="onBeforeUpload"
-      :class="
-        listType === 'picture-card'
-          ? ''
-          : drag && (listType === 'text' || !listType)
-          ? 'upload-demo'
-          : 'el-upload-dragger'
-      "
       :data="{ ...uploadData, ...data }"
       v-bind="{ ...$props, ...$attrs }"
       :on-change="handleChange"
@@ -20,32 +13,37 @@
       :on-success="handleSuccess"
       :on-progress="handleProgress"
       :on-exceed="handleExceed"
-      :show-file-list="showFileList"
     >
-      <slot name="uploadIcon"><i class="el-icon-upload"></i></slot>
-      <div class="el-upload__text">
-        <slot name="uploadText">
+      <!-- icon文案 -->
+      <slot name="uploadText">
+        <i class="el-icon-upload lj-upload-icon"></i>
+        <div class="el-upload__text">
           <div v-if="listType === 'text' || !listType">
             <span v-if="drag">
-              将文件拖到此处，或
-              <em v-if="retransmission && file.size">重新上传</em>
-              <em v-else>点击上传</em>
+              {{ translate('将文件拖到此处，或') }}
+              <em v-if="retransmission && file.size">{{ translate('重新上传') }}</em>
+              <em v-else>{{ translate('点击上传') }}</em>
             </span>
             <span v-else>
-              <em v-if="retransmission && file.size">重新上传</em>
-              <em v-else>点击上传</em>
+              <em v-if="retransmission && file.size">{{ translate('重新上传') }}</em>
+              <em v-else>{{ translate('点击上传') }}</em>
             </span>
           </div>
-        </slot>
-      </div>
+        </div>
+      </slot>
+      <!-- 上传Slot -->
       <div slot="tip" class="el-upload__tip">
         <slot name="uploadTip">
-          <p v-if="listType === 'picture-card'">
-            请上传小于{{ byteConvert(maxSize) }}的图片
+          <p v-if="maxSize > 0">
+            请上传小于{{ byteConvert(maxSize) }}的{{
+              listType === 'picture-card' ? '图片' : '文件'
+            }}！
           </p>
-          <p v-else>请上传小于{{ byteConvert(maxSize) }}的文件</p>
         </slot>
       </div>
+      <template slot="trigger">
+        <slot name="uploadTrigger"></slot>
+      </template>
     </el-upload>
   </div>
 </template>
@@ -56,21 +54,23 @@ import { Upload, Message } from 'element-ui';
 import OSS from './ossUpload.js';
 import SparkMD5 from 'spark-md5';
 import { byteConvert } from '../utils/index';
+import { translate } from '../utils/translate';
+const t = translate('ljUpload');
 
 Vue.use(Upload);
 
 export default {
   name: 'LjUpload',
   props: {
+    // upload-key  多个upload时需传入
+    uploadKey: {
+      type: String,
+      default: () => 'ref',
+    },
     uploadFileList: {
       // 回显上传文件
       type: Object,
       default: () => ({}),
-    },
-    name: {
-      // 文件名称
-      type: String,
-      default: 'file',
     },
     accept: {
       //接受上传的文件类型
@@ -114,11 +114,6 @@ export default {
       type: Boolean,
       default: false,
     },
-    showFileList: {
-      //是否显示已上传文件列表 默认 false
-      type: Boolean,
-      default: false,
-    },
     limit: {
       //最大允许上传个数
       type: Number,
@@ -127,7 +122,7 @@ export default {
     maxSize: {
       //最大限制大小
       type: Number,
-      default: 0,
+      default: undefined,
     },
     data: {
       //上传时附带的额外参数
@@ -153,6 +148,7 @@ export default {
     return {
       file: '',
       fileList: [],
+      uploadAccept: '',
       uploadHost: '',
       uploadData: {},
       md5: '',
@@ -173,22 +169,36 @@ export default {
       immediate: true,
     },
     data: {
-      handler(newVal) {
-        console.log(newVal);
-      },
+      handler() {},
       deep: true, // 深度监听
       immediate: true,
     },
   },
   mounted() {
     // 上传的地址
-    this.uploadHost = this.action ? this.action : '';
+    this.uploadHost = this.action || '';
+    // 接受上传的文件类型
+    this.uploadAccept = this.accept || '';
   },
   methods: {
     byteConvert,
+    // 翻译
+    translate(path) {
+      return t(path);
+    },
+    // 获取当前ref实例
+    handleGetRefs() {
+      return new Promise((resovle) => {
+        this.$nextTick(() => {
+          const ref = this.$refs[`upload_${this.uploadKey}`];
+
+          resovle(ref);
+        });
+      });
+    },
     // 清空
     clearFiles() {
-      this.$refs.upload.clearFiles();
+      this.$refs[`upload_${this.uploadKey}`].clearFiles();
     },
     // 上传状态
     handleChange(file, fileList) {
@@ -206,16 +216,9 @@ export default {
         params.ossData = this.uploadData;
       }
       this.$emit('uploadChange', params);
-      // 重传判断
-      if (this.retransmission && fileList.length > 1) {
-        this.ReUpload(file);
-      }
     },
     handleProgress(e) {
-      if (e.percent === 100) {
-        console.log('fnUploadProgress', e)
-      }
-      e.percent = Math.min(99, e.percent)
+      e.percent = Math.min(99, e.percent);
     },
     // 上传成功
     handleSuccess(res, file, fileList) {
@@ -242,7 +245,7 @@ export default {
     // 异常错误方法
     handleError() {
       Message({
-        message: this.content.errorMsg ? this.content.errorMsg : '上传失败！',
+        message: this.content.errorMsg ? this.content.errorMsg : t('上传失败'),
         type: 'error',
         center: true,
         duration: 1500,
@@ -266,11 +269,11 @@ export default {
     },
     // 重新上传清空
     ReUpload(file) {
-      let uploadFiles = this.$refs.upload.uploadFiles;
-      let index = 0
-      if(this.retransmission) {
+      let uploadFiles = this.$refs[`upload_${this.uploadKey}`].uploadFiles;
+      let index = 0;
+      if (this.retransmission) {
         index = uploadFiles.indexOf(this.fileList[0]);
-      }else {
+      } else {
         index = uploadFiles.indexOf(this.fileList[this.fileList.length - 1]);
       }
       uploadFiles.splice(index, 1);
@@ -279,38 +282,56 @@ export default {
     // 上传前钩子
     async onBeforeUpload(file) {
       let that = this;
+      // 重传判断
+      if (this.retransmission && this.fileList.length > 1) {
+        this.ReUpload(file);
+      }
       this.$emit('uploadBefore', file);
       // 限制文件类型
       let FileExt = file.name.replace(/.+\./, '');
-      let acceptTypeData = this.accept ? this.accept.split(',') : [];
-      let acceptType = []
-      acceptTypeData.forEach(el=>{
-        el = el.replace(/.*\./, '')
-        acceptType.push(el)
-      })
-      if (this.accept && this.accept != '*' && acceptType.indexOf(FileExt) ==-1) {
+      let acceptTypeData = this.uploadAccept
+        ? this.uploadAccept.split(',')
+        : [];
+      let acceptType = [];
+      acceptTypeData.forEach((el) => {
+        el = el.replace(/.*\./, '');
+        acceptType.push(el);
+      });
+      if (
+        this.uploadAccept &&
+        this.uploadAccept != '*' &&
+        acceptType.indexOf(FileExt) == -1
+      ) {
         Message.error(
           this.content.acceptInfo
             ? this.content.acceptInfo
             : `上传${this.listType === 'picture-card' ? '图片' : '文件'}只能是${
-                this.accept
+                this.uploadAccept
               }格式!`
         );
       }
       // 限制文件大小
-      let maxSize = this.maxSize ? this.maxSize : 4294967296;
-      const isLtSize = file.size < maxSize;
+      let isLtSize = file.size < this.maxSize;
+      if(!this.maxSize) {
+        isLtSize = true
+      }
       if (!isLtSize) {
         Message.error(
           this.content.sizeInfo
             ? this.content.sizeInfo
-            : `请上传小于${byteConvert(maxSize)}的${
+            : `请上传小于${byteConvert(this.maxSize)}的${
                 this.listType === 'picture-card' ? '图片' : '文件'
               }！`
         );
       }
+      
       // 如果有文件类型和大小限制，则清空
-      if ((this.accept  && this.accept != '*' && acceptType.indexOf(FileExt) ==-1) || !isLtSize) {
+      if (
+        (this.uploadAccept &&
+          this.uploadAccept != '*' &&
+          acceptType.indexOf(FileExt) == -1) ||
+        !isLtSize
+      ) {
         this.ReUpload(file);
         return false;
       }

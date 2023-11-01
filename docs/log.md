@@ -7,6 +7,28 @@
 
 ## 更新内容
 
+### v1.1.2-alpha7
+`2023-10-25`
+#### feature
+- 1.更改upload默认限制
+#### fix
+- 1.修复table兼容高度
+
+### v1.1.2-alpha4
+`2023-10-19`
+#### fix
+- 1.修复echarts的loading问题
+- 2.修复echarts文件命名问题
+
+### v1.1.2-alpha1
+`2023-10-17`
+#### feature
+- 1.风险等级文案适配自传
+#### fix
+- 1.修复上传同一文件夹MD5值不同
+- 2.upload重传顺序修改
+- 3.upload中className自定义
+
 ### v1.1.1
 `2023-07-19`
 #### feature

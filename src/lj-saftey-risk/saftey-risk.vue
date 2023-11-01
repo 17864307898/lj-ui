@@ -59,19 +59,30 @@ export default {
     targetShow: {
       type: Boolean,
       default: false,
+    },
+    customConfig: {
+      type: Object,
+      default: () => {
+        return {}
+      },
     }
   },
-  data() {
-    return {
+  computed: {
+    riskData() {
+      let data = []
+      for(var el in this.customConfig) {
+        data.push(el)
+      }
+      if (data.length) return this.customConfig
+      return {
       // 文案类型映射 1 漏洞 2 许可证
-      riskData: {
         1: {
           // 漏洞风险文案映射
           critical: t('vulCritical'),
           high: t('vulHigh'),
           mid: t('vulMid'),
           low: t('vulLow'),
-          unknown: t('noRated'),
+          unknown:t('noRated'),
           noRisk: t('riskFree'),
         },
         2: {
@@ -80,11 +91,11 @@ export default {
           high: t('highStake'),
           mid: t('midRisk'),
           low: t('lowStake'),
-          unknown: t('vulUnknown'),
+          unknown:t('vulUnknown'),
           noRisk: t('riskFree'),
         },
-      },
-    };
+      }
+    }
   },
   methods: {
     // 等级点击方法

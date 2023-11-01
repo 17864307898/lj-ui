@@ -14,6 +14,14 @@ export default {
   vulLow: '低危',
   noRated: 'Not-standard',
   riskFree: '无风险',
+  ljUpload: {
+    '重新上传': '重新上传',
+    '点击上传': '点击上传',
+    '点击上传文件夹': '点击上传文件夹',
+    '文件夹不能为空': '文件夹不能为空',
+    '将文件拖到此处，或': '将文件拖到此处，或',
+    '上传失败': '上传失败!',
+  },
   // LjFilter
   ljFilter: {
     screen: '筛选',

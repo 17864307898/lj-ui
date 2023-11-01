@@ -1,7 +1,7 @@
 export default {
-  reset: 'reset',
-  cancel: 'cancel',
-  empty: 'no data',
+  reset: 'Reset',
+  cancel: 'Cancel',
+  empty: 'No data',
   clear: 'clear',
   details: 'view details',
   all: 'all',
@@ -14,6 +14,14 @@ export default {
   vulLow: 'Low risk',
   noRated: 'Not-standard',
   riskFree: 'risk-free',
+  ljUpload: {
+    '重新上传': 'Re-upload',
+    '点击上传': 'Click to upload',
+    '点击上传文件夹': 'click to folder',
+    '文件夹不能为空': 'folder cannot be empty',
+    '将文件拖到此处，或': 'Drag files here, or ',
+    '上传失败': 'Upload failed !',
+  },
   // LjFilter
   ljFilter: {
     screen: 'screen',
