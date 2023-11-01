@@ -80,18 +80,22 @@ export default {
       }else if (!isLtSize) {
         Message.error(this.content.sizeInfo ? this.content.sizeInfo : `请上传小于${byteConvert(this.maxSize)}的文件夹!`);
       }
-      // 自主校验抛出
-      const validate = await this.validateFn(file)
-      if (!validate) {
-        this.ReUpload(file);
-        return false;
+      try {
+        // 自主校验抛出
+        const validate = await this.validateFn(file)
+        if (!validate) {
+          this.ReUpload(file);
+          return false;
+        }
+        this.file = '';
+        this.uploadName = '';
+        this.$emit('uploadFolderInfo', {});
+        const zip = new JSZip();
+        const { files } = file.target;
+        this.readDir(zip, files);
+      } catch(err) {
+        Message.error(err?.message || err)
       }
-      this.file = '';
-      this.uploadName = '';
-      this.$emit('uploadFolderInfo', {});
-      const zip = new JSZip();
-      const { files } = file.target;
-      this.readDir(zip, files);
     },
     readDir(zip, files) {
       const loading = this.$loading({
