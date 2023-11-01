@@ -13,13 +13,24 @@ export const INIT_OPTIONS = Object.freeze({
   getFileName: undefined,
   // 获取下载链接的方法 需自定义处理时传入
   getFileLink: undefined,
+  // 下载文件类型 default: application/pdf;charset-UTF-8 || zip: application/zip
+  fileType: 'default',
+  // 额外的文件类型 有特殊类型时传入 格式 类型key: 类型
+  expandFileMap: null,
+})
+
+// 文件类型映射
+export const FILE_TYPE_MAP = Object.freeze({
+  'default': 'application/pdf;charset-UTF-8',
+  'zip': 'application/zip',
 })
 
 // 下载请求默认配置
 export const DEFAULT_REQUEST_OPTIONS = {
   method: 'post',
   url: '',
-  timeout: 30 * 60 * 1000
+  timeout: 30 * 60 * 1000,
+  responseType: 'blob',
 }
 
 // loading信息默认配置
@@ -30,7 +41,7 @@ export const DEFAULT_LOADING_OPTIONS = {
 
 // 导出请求默认配置
 export const DEFAULT_EXPORT_REQUEST = {
-  method: 'get',
+  method: 'post',
   url: '',
   responseType: 'blob',
   timeout: 5 * 60 * 1000,

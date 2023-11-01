@@ -23,14 +23,15 @@ export default {
       const params = {};
 
       const options = {
-        requestOptions: '/testurl',
+        requestOptions: {
+          url: '/testurl'
+        },
         data: params,
       };
 
-      const instance = new LjFileDownload(options);
 
       try {
-        await instance.downLoadFile();
+        await LjFileDownload(options);
       } catch (err) {
         console.error(err);
       }
@@ -46,7 +47,6 @@ export default {
 
       const options = {
         requestOptions: {
-          method: 'post',
           url: 'https://sec.dev.spdx.cn/api/v1/report/exportData',
           data: params,
           headers: {
@@ -56,10 +56,10 @@ export default {
         },
       };
 
-      const instance = new LjFileDownload(options);
+      // const instance = new LjFileDownload(options);
 
       try {
-        await instance.downLoadFile();
+        await LjFileDownload(options);
       } catch (err) {
         console.error(err);
       }
