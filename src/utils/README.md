@@ -52,6 +52,7 @@ removeCookie('language') // undefined
 | setSessionstorage   | 设置 sessionStorage 值  | `key, value, expiretime` | --                           |
 | getSessionstorage   | 获取 sessionStorage 值  | `key`                    | key 对应的 sessionStorage 值 |
 | clearSessionStorage | 清除所有 sessionStorage | --                       | --                           |
+| removeSessionStorage | 清除指定 sessionStorage | `key`                   | --                           |
 
 #### 示例
 

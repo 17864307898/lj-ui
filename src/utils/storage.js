@@ -4,7 +4,7 @@ import Cookies from 'js-cookie'
 /**
  * 清除cookie
  */
- function removeCookie(key) {
+function removeCookie(key) {
   const domain = location.hostname.substring(location.hostname.indexOf('.'))
   try {
     Cookies.remove(key, { domain })
@@ -36,7 +36,7 @@ function setCookie(key, value, expires, domain) {
 function getCookie(key) {
   try {
     if (Cookies.get(key) === 'undefined') return ''
-    
+
     return Cookies.get(key)
   } catch (e) {
     window.console.log('获取Cookie失败###')
@@ -91,6 +91,16 @@ function getSessionstorage(key) {
   return returnvalue
 }
 
+/**
+ * 清除指定sessionStorage
+ */
+function removeSessionStorage(key) {
+  try {
+    sessionStorage.removeItem(key)
+  } catch (e) {
+    window.console.log('清除指定sessionStoragee失败###')
+  }
+}
 
 /**
  * 设置localstorage
@@ -163,6 +173,7 @@ export {
   getLocalstorage,
   setSessionstorage,
   getSessionstorage,
+  removeSessionStorage,
   setCookie,
   getCookie,
   removeCookie,

@@ -70,6 +70,18 @@ module.exports = {
             path: 'directives',
             title: '自定义指令',
           },
+          {
+            path: 'lj-single-upload',
+            title: 'LjSingleUpload 单文件上传api',
+          },
+          {
+            path: 'lj-multi-upload',
+            title: 'LjMultiUpload 分片上传api',
+          },
+          {
+            path: 'lj-file-download',
+            title: 'LjFileDownload 文件下载/导出api',
+          },
         ],
       },
       {

@@ -70,8 +70,8 @@ export default {
   },
   methods: {
     byteConvert,
-     // 翻译
-     translate(path) {
+    // 翻译
+    translate(path) {
       return t(path);
     },
     async beforeUpload(file) {
@@ -96,19 +96,23 @@ export default {
         );
         return;
       }
-      // 自主校验抛出
-      const validate = await this.validateFn(file);
-      if (!validate) {
-        this.ReUpload(file);
-        return false;
+      try {
+        // 自主校验抛出
+        const validate = await this.validateFn(file);
+        if (!validate) {
+          this.ReUpload(file);
+          return false;
+        }
+        this.file = '';
+        this.uploadName = '';
+        this.resetUploadStatus();
+        this.$emit('uploadFolderInfo', {});
+        const zip = new JSZip();
+        const { files } = file.target;
+        this.readDir(zip, files);
+      } catch (err) {
+        Message.error(err?.message || err);
       }
-      this.file = '';
-      this.uploadName = '';
-      this.resetUploadStatus();
-      this.$emit('uploadFolderInfo', {});
-      const zip = new JSZip();
-      const { files } = file.target;
-      this.readDir(zip, files);
     },
     readDir(zip, files) {
       const loading = this.$loading({
@@ -123,11 +127,11 @@ export default {
         zip.file(files[i].webkitRelativePath, files[i]);
       }
 
-       // 原因：上传相同文件夹生成的MD5值不一样，因为date字段的是获取当前时间
-        // 解决方案：把文件上传的时间改成一个固定的时间
-        Object.keys(zip.files).forEach((file) => {
-          zip.files[file].date = new Date(1690943274502)
-        })
+      // 原因：上传相同文件夹生成的MD5值不一样，因为date字段的是获取当前时间
+      // 解决方案：把文件上传的时间改成一个固定的时间
+      Object.keys(zip.files).forEach((file) => {
+        zip.files[file].date = new Date(1690943274502);
+      });
 
       zip
         .generateAsync({
