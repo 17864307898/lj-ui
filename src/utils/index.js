@@ -105,12 +105,12 @@ export function paramObj(url) {
 
   return JSON.parse(
     '{"' +
-      decodeURIComponent(search)
-        .replace(/"/g, '\\"')
-        .replace(/&/g, '","')
-        .replace(/=/g, '":"')
-        .replace(/\+/g, ' ') +
-      '"}'
+    decodeURIComponent(search)
+      .replace(/"/g, '\\"')
+      .replace(/&/g, '","')
+      .replace(/=/g, '":"')
+      .replace(/\+/g, ' ') +
+    '"}'
   );
 }
 
@@ -160,10 +160,10 @@ export function formatDate(dateStr, format = 'YYYY-MM-DD hh:mm:ss') {
  * @returns
  */
 export function formatMS(mss) {
-  if(!mss) {
+  if (!mss) {
     return '--'
   }
-  if(mss < 1000) {
+  if (mss < 1000) {
     return `${mss / 1000} 秒`
   }
   const daySeconds = 1000 * 60 * 60 * 24;
@@ -252,7 +252,7 @@ export function tensBitTimestamp(time) {
 
 /**
  * 10/13位，时间段之前*/
- export function FormatHistoryDate(time, formatUnit) {
+export function FormatHistoryDate(time, formatUnit) {
   var date = new Date().getTime();
   var last = parseInt(
     (date - (String(time).length === 10 ? time * 1000 : time / 1)) / 1000
@@ -394,13 +394,13 @@ export function Thread(config) {
  */
 Thread.prototype.init = function (config) {
   const params = config || {
-    start() {},
-    stop() {},
+    start() { },
+    stop() { },
     number: 0,
     time: 300,
   };
-  params.start = params.start ? params.start : function () {};
-  params.stop = params.stop ? params.stop : function () {};
+  params.start = params.start ? params.start : function () { };
+  params.stop = params.stop ? params.stop : function () { };
   params.number = params.number ? Math.abs(parseInt(params.number)) : 0;
   params.time = params.time ? Math.abs(parseInt(params.time)) : 300;
   this.time = params.time;
@@ -550,4 +550,34 @@ export function isEditorContent(value, length = 1000, imgCount = 10) {
     return 'IMG_OVERLENGTH';
   }
   return true;
+}
+
+/**
+ * getBoundingClientRect兼容写法
+ * @param {*} dom 
+ * @returns 
+ */
+export function getBoundingClientRect(dom) {
+  if (!dom) return {}
+
+  const xy = dom?.getBoundingClientRect() || {};
+  //document.documentElement.clientTop 在IE67中始终为2，其他高级点的浏览器为0
+  const top = xy.top - document.documentElement.clientTop + document.documentElement.scrollTop
+  const bottom = xy.bottom
+  //document.documentElement.clientLeft 在IE67中始终为2，其他高级点的浏览器为0
+  const left = xy.left - document.documentElement.clientLeft + document.documentElement.scrollLeft
+  const right = xy.right
+  //IE67不存在width 使用right - left获得
+  const width = xy.width || right - left
+  const height = xy.height || bottom - top
+
+  return {
+    ...xy,
+    top: top,
+    right: right,
+    bottom: bottom,
+    left: left,
+    width: width,
+    height: height
+  }
 }

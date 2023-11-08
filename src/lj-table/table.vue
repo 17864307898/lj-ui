@@ -1,17 +1,17 @@
 <template>
   <!-- table简便封装 -->
-  <div class="lj-table lj-v-flex">
+  <div class="lj-table lj-v-flex" :style="containerHeight">
     <!-- 搜索区域 -->
     <el-row>
       <slot name="query"></slot>
     </el-row>
     <!-- 表格区域 -->
-    <el-row class="lj-flex-1">
+    <el-row :ref="`container_${tableKey}`" class="lj-flex-1" :style="tableStyle">
       <el-table
         :ref="`table_${tableKey}`"
         class="table"
         :data="data"
-        :height="height"
+        :height="finalHeight"
         v-bind="$attrs"
         v-on="$listeners"
       >
@@ -94,7 +94,7 @@
         </template>
       </el-table>
     </el-row>
-    <el-row>
+    <el-row :ref="`pagination_${tableKey}`">
       <!-- 分页支持自定义 -->
       <slot v-if="needPagination" name="pagination" :pagination="pagination">
         <div class="lj-v-flex flex-row jc-end pagination-wrap">
@@ -113,123 +113,246 @@
 </template>
 
 <script>
-  import Vue from 'vue'
-  import { Table, TableColumn, Row, Col, Pagination } from 'element-ui'
-  import { propertyIsExist } from '../utils'
+import Vue from 'vue';
+import { Table, TableColumn, Row, Col, Pagination } from 'element-ui';
+import { propertyIsExist, getBoundingClientRect } from '../utils';
+import { DEFAULT_CONFIG } from './config';
 
-  Vue.use(Table)
-  Vue.use(TableColumn)
-  Vue.use(Row)
-  Vue.use(Col)
-  Vue.use(Pagination)
+Vue.use(Table);
+Vue.use(TableColumn);
+Vue.use(Row);
+Vue.use(Col);
+Vue.use(Pagination);
 
-  export default {
-    name: 'lj-table',
-    props: {
-      // table-key  多个table时需传入
-      tableKey: {
-        type: String,
-        default: () => 'ref',
-      },
-      // 表头配置
-      columns: {
-        type: Array,
-        default: () => [],
-      },
-      // 数据集
-      data: {
-        type: Array,
-        default: () => [],
-      },
-      // 分页信息
-      pagination: {
-        type: Object,
-        default: () => ({
-          pageNo: 1,
-          pageSize: 10,
-          total: 0,
-        }),
-      },
-      // 自定义分页信息
-      customPagination: {
-        type: Object,
-        default: () => null,
-      },
-      // 是否需要分页信息
-      needPagination: {
-        type: Boolean,
-        default: () => true,
-      },
-      // 当前行是否可选
-      selectable: {
-        type: Function,
-        default: () => true,
-      },
-      // 表格高度 默认100%
-      height: {
-        type: [Number, String],
-        default: () => '100%',
-      },
+export default {
+  name: 'lj-table',
+  props: {
+    // table-key  多个table时需传入
+    tableKey: {
+      type: String,
+      default: () => Date.now() + '',
     },
-    data() {
+    // 表头配置
+    columns: {
+      type: Array,
+      default: () => [],
+    },
+    // 数据集
+    data: {
+      type: Array,
+      default: () => [],
+    },
+    // 分页信息
+    pagination: {
+      type: Object,
+      default: () => ({
+        pageNo: 1,
+        pageSize: 10,
+        total: 0,
+      }),
+    },
+    // 自定义分页信息
+    customPagination: {
+      type: Object,
+      default: () => null,
+    },
+    // 是否需要分页信息
+    needPagination: {
+      type: Boolean,
+      default: () => true,
+    },
+    // 当前行是否可选
+    selectable: {
+      type: Function,
+      default: () => true,
+    },
+    // 表格高度 默认100%
+    height: {
+      type: [Number, String],
+      default: () => '100%',
+    },
+    // 撑满容器
+    fullContainer: {
+      type: Boolean,
+      default: () => true,
+    },
+    // 撑满高度配置项
+    fullOptions: {
+      type: Object,
+      default: () => null,
+    },
+  },
+  data() {
+    return {
+      // 默认分页信息
+      defaultPagination: {
+        background: true,
+        layout: 'total, sizes, prev, pager, next, jumper',
+      },
+      // 表格高度
+      tableHeight: undefined,
+      // 表格内容高度
+      contentHeight: 0,
+      // 表格表头高度
+      headerHeight: 45,
+    };
+  },
+  computed: {
+    // 分页配置
+    paginationConfig() {
       return {
-        // 默认分页信息
-        defaultPagination: {
-          background: true,
-          layout: 'total, sizes, prev, pager, next, jumper',
-        },
+        ...this.defaultPagination,
+        ...this.customPagination,
+      };
+    },
+
+    // 表格样式
+    tableStyle() {
+      const { tableHeight: h, finalHeight: height } = this;
+
+      if (!h) return '';
+
+      const prefixH = height ? 'height' : 'min-height';
+
+      return `${prefixH}: ${h?.toFixed(2)}px; flex: none;`;
+    },
+
+    // 容器样式
+    containerHeight() {
+      const { tableHeight: h } = this;
+
+      if (!h) return '';
+
+      return `height: fit-content;`;
+    },
+
+    // 最终配置
+    finalFullOptions() {
+      if (!this.fullOptions) return DEFAULT_CONFIG;
+
+      return Object.assign({}, DEFAULT_CONFIG, this.fullOptions);
+    },
+
+    // 最终高度
+    finalHeight() {
+      const {
+        height,
+        fullContainer,
+        contentHeight,
+        tableHeight,
+        headerHeight,
+      } = this;
+
+      if (!height && fullContainer) {
+        if (contentHeight >= tableHeight - headerHeight) return null;
+
+        return '100%';
       }
+
+      return height;
     },
-    computed: {
-      // // 深克隆一份data
-      // dataset() {
-      //   return deepClone(this.data)
-      // },
-      // 分页配置
-      paginationConfig() {
-        return {
-          ...this.defaultPagination,
-          ...this.customPagination,
-        }
+  },
+  watch: {
+    data: {
+      handler() {
+        const { tableKey } = this
+
+        this.$nextTick(() => {
+          // 表格内容
+          const content = this.$refs[`container_${tableKey}`]?.$el?.querySelector(
+            'table.el-table__body'
+          );
+
+          setTimeout(() => {
+            this.contentHeight = content?.offsetHeight || 0;
+          });
+        });
       },
+      immediate: true,
+      deep: true,
     },
-    watch: {},
-    created() {},
-    mounted() {},
-    methods: {
-      // 页码改变
-      handlePageChange(page) {
-        this.$emit('page-change', page)
-      },
-      // 每页条数改变
-      handleSizeChange(size) {
-        this.$emit('size-change', size)
-      },
-      // 获取当前ref实例
-      handleGetRefs() {
-        return new Promise((resovle) => {
-          this.$nextTick(() => {
-            const ref = this.$refs[`table_${this.tableKey}`]
+  },
+  created() {
+    this.headerHeight = 45;
+  },
+  mounted() {
+    // 计算当前表格高度
+    this.handleCalculateHeight();
+  },
+  methods: {
+    // 页码改变
+    handlePageChange(page) {
+      this.$emit('page-change', page);
+    },
 
-            resovle(ref)
-          })
-        })
-      },
+    // 每页条数改变
+    handleSizeChange(size) {
+      this.$emit('size-change', size);
+    },
 
-      // 文案超出隐藏配置
-      handleOverFlow(col) {
-        if (propertyIsExist(col, 'show-overflow-tooltip')) {
-          const res = col['show-overflow-tooltip']
-          return !!res
-        }
+    // 获取当前ref实例
+    handleGetRefs() {
+      return new Promise((resovle) => {
+        this.$nextTick(() => {
+          const ref = this.$refs[`table_${this.tableKey}`];
 
-        if (propertyIsExist(col, 'showOverflowTooltip')) {
-          const res = col['showOverflowTooltip']
-          return !!res
-        }
+          resovle(ref);
+        });
+      });
+    },
 
-        return true
+    // 文案超出隐藏配置
+    handleOverFlow(col) {
+      if (propertyIsExist(col, 'show-overflow-tooltip')) {
+        const res = col['show-overflow-tooltip'];
+        return !!res;
       }
+
+      if (propertyIsExist(col, 'showOverflowTooltip')) {
+        const res = col['showOverflowTooltip'];
+        return !!res;
+      }
+
+      return true;
     },
-  }
+
+    // 计算表格高度
+    handleCalculateHeight() {
+      if (!this.fullContainer) return;
+
+      this.$nextTick(() => {
+        const { tableKey } = this
+        const { minHeight, bottomPadding } = this.finalFullOptions;
+
+        // 表格容器
+        const container = this.$refs[`container_${tableKey}`]?.$el;
+        // 分页容器
+        const pagination = this.$refs[`pagination_${tableKey}`]?.$el;
+        // 表头容器
+        const header = this.$refs[`container_${tableKey}`]?.$el?.querySelector(
+          'table.el-table__header'
+        );
+        // 表头高度
+        this.headerHeight = header?.offsetHeight || 45;
+        // 表格容器距顶部高度
+        const { top } = getBoundingClientRect(container);
+        // 分页高度
+        const pHeight = pagination?.offsetHeight || 0;
+        // 可视区域高度
+        const cHeight = window.innerHeight;
+        // 最终高度
+        const fHiehgt = cHeight - top - pHeight - bottomPadding;
+
+        // 元素超出了初始化时的可视区域
+        if (top >= cHeight) {
+          this.tableHeight = undefined;
+          return;
+        }
+
+        const h = Math.max(minHeight, fHiehgt);
+        this.tableHeight = h;
+      });
+    },
+  },
+};
 </script>

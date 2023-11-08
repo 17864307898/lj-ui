@@ -1,9 +1,7 @@
 # LjTable 表格
 
 ### 介绍
-
 lj-table 使用配置的方式初始化表格 用简单的方式去开发业务（基于ElementUI下的el-table）
-
 ### 引入
 
 ```js
